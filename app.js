@@ -212,6 +212,7 @@
       DISCLAIMER +
       '<label class="remember"><input type="checkbox" id="remember"' + (remember ? ' checked' : '') + '> לזכור את הנתונים שלי במכשיר הזה, כדי שלא אצטרך להזין שוב</label>' +
       '<p class="small muted">🔒 פרטיות: כל החישוב נעשה בדפדפן שלך ושום נתון לא נשלח לשרת. אם בחרת לזכור, הנתונים נשמרים רק בדפדפן הזה, ואפשר למחוק אותם בכל רגע בכפתור "מחיקת הנתונים" למעלה. במחשב משותף עדיף לא לסמן.</p>' +
+      '<div class="guidelink"><button type="button" id="guideOpen">📖 מדריך: שינה, תזונה ולחץ <span class="small muted">(בלי להזין נתונים)</span></button></div>' +
       '<div class="nav">' + (returning ? '<button id="edit">עדכון הנתונים</button><button class="primary" id="next">לתוצאה שלי</button>'
         : '<span></span><button class="primary" id="next">בואו נתחיל</button>') + '</div></div>';
     document.getElementById('remember').onchange = function () {
@@ -220,6 +221,7 @@
       save();
     };
     document.getElementById('next').onclick = function () { step = returning ? STEPS.length + 1 : 1; render(); };
+    document.getElementById('guideOpen').onclick = function () { step = 'guide'; render(); };
     if (returning) document.getElementById('edit').onclick = function () { step = 1; render(); };
   }
 
@@ -576,10 +578,11 @@
 
   function guideHTML(inp, r) {
     if (typeof GUIDE === 'undefined') return '';
-    var gain = {}; improvements(inp, r).forEach(function (x) { gain[x.id] = x.gain; });
+    var standalone = !inp; // דף המדריך העצמאי: בלי נתונים אישיים
+    var gain = {}; if (!standalone) improvements(inp, r).forEach(function (x) { gain[x.id] = x.gain; });
     var sleepLbl = { short: 'פחות מ-6 שעות', normal: '6 עד 9 שעות', long: 'מעל 9 שעות' };
     // שורה אישית לכל נושא, ודירוג: מה שרלוונטי לתשובות של המשתמש קודם
-    var personal = {
+    var personal = standalone ? {} : {
       sleep: !inp.sleep ? { rank: 1, text: 'לא הזנת שעות שינה, ולכן הנושא הזה לא נכלל בהערכה שלך.' }
         : gain.sleep ? { rank: 2, text: 'דיווחת על שינה של ' + sleepLbl[inp.sleep] + '. לפי החישוב, שינה של 6 עד 9 שעות שווה כ-<b class="pos" dir="ltr">' + signed(gain.sleep) + '</b> שנים.' }
         : { rank: 0, text: 'דיווחת על שינה של ' + sleepLbl[inp.sleep] + ', בטווח שהחישוב מניח.' },
@@ -591,8 +594,8 @@
     var topics = GUIDE.map(function (g, i) { return { g: g, i: i, rank: (personal[g.id] || { rank: 1 }).rank }; })
       .sort(function (a, b) { return b.rank - a.rank || a.i - b.i; });
 
-    return '<h3>מדריך: שינה, תזונה ולחץ</h3>' +
-      '<p class="small muted">מידע כללי על שלושה נושאים שמשפיעים על הבריאות, עם מקורות לקריאה. זה אינו ייעוץ רפואי. הנושאים שרלוונטיים לתשובות שלך מופיעים קודם.</p>' +
+    return (standalone ? '' : '<h3>מדריך: שינה, תזונה ולחץ</h3>') +
+      '<p class="small muted">מידע כללי על שלושה נושאים שמשפיעים על הבריאות, עם מקורות לקריאה. זה אינו ייעוץ רפואי.' + (standalone ? '' : ' הנושאים שרלוונטיים לתשובות שלך מופיעים קודם.') + '</p>' +
       topics.map(function (t, k) {
         var g = t.g, p = personal[g.id];
         return '<details class="gtopic"' + (k === 0 ? ' open' : '') + '><summary>' + esc(g.title) +
@@ -836,9 +839,20 @@
     '<b>בדיקת סבירות לשילוב הגורמים:</b> Li Y. et al. Impact of Healthy Lifestyle Factors on Life Expectancies in the US Population. <i>Circulation</i> 2018;138:345–55.'
   ];
 
+  function renderGuide() {
+    var hasData = num(data.age) !== undefined && !!data.sex;
+    app.innerHTML = '<div class="card"><h1 style="font-size:clamp(26px,5vw,36px)">שינה, תזונה ולחץ</h1>' +
+      '<p class="muted">שלושה נושאים שאפשר לשפר, עם צעדים מעשיים ומקורות. אפשר לקרוא בלי להזין שום נתון.</p>' +
+      guideHTML() +
+      '<div class="nav"><button id="gback">חזרה</button><button class="primary" id="gcalc">' + (hasData ? 'לתוצאה שלי, עם התאמה אישית' : 'לחישוב תוחלת החיים שלי') + '</button></div></div>';
+    document.getElementById('gback').onclick = function () { step = 0; render(); };
+    document.getElementById('gcalc').onclick = function () { step = hasData ? STEPS.length + 1 : 1; render(); };
+  }
+
   function render() {
     save();
-    if (step <= 0) renderIntro();
+    if (step === 'guide') renderGuide();
+    else if (step <= 0) renderIntro();
     else if (step <= STEPS.length) renderStep();
     else renderResult();
     window.scrollTo(0, 0);
@@ -846,6 +860,7 @@
 
   app.addEventListener('input', saveSoon);
   app.addEventListener('change', saveSoon);
+  document.getElementById('guideNav').onclick = function () { step = 'guide'; render(); };
   document.getElementById('wipe').onclick = function () {
     if (!window.confirm('למחוק את כל הנתונים שהוזנו ונשמרו במכשיר הזה?')) return;
     wipe(); step = 0; render();
