@@ -572,6 +572,43 @@
     return c.filter(function (x) { return x.gain >= 0.1; }).sort(function (a, b) { return b.gain - a.gain; });
   }
 
+  // ---------- מדריך: שינה, תזונה ולחץ ----------
+
+  function guideHTML(inp, r) {
+    if (typeof GUIDE === 'undefined') return '';
+    var gain = {}; improvements(inp, r).forEach(function (x) { gain[x.id] = x.gain; });
+    var sleepLbl = { short: 'פחות מ-6 שעות', normal: '6 עד 9 שעות', long: 'מעל 9 שעות' };
+    // שורה אישית לכל נושא, ודירוג: מה שרלוונטי לתשובות של המשתמש קודם
+    var personal = {
+      sleep: !inp.sleep ? { rank: 1, text: 'לא הזנת שעות שינה, ולכן הנושא הזה לא נכלל בהערכה שלך.' }
+        : gain.sleep ? { rank: 2, text: 'דיווחת על שינה של ' + sleepLbl[inp.sleep] + '. לפי החישוב, שינה של 6 עד 9 שעות שווה כ-<b class="pos" dir="ltr">' + signed(gain.sleep) + '</b> שנים.' }
+        : { rank: 0, text: 'דיווחת על שינה של ' + sleepLbl[inp.sleep] + ', בטווח שהחישוב מניח.' },
+      nutrition: inp.fruitveg === undefined ? { rank: 1, text: 'לא הזנת צריכת ירקות ופירות, ולכן הנושא הזה לא נכלל בהערכה שלך.' }
+        : gain.fruitveg ? { rank: 2, text: 'דיווחת על ' + inp.fruitveg + ' מנות ירקות ופירות ביום. הגעה לחמש מנות שווה לפי החישוב כ-<b class="pos" dir="ltr">' + signed(gain.fruitveg) + '</b> שנים.' }
+        : { rank: 0, text: 'דיווחת על חמש מנות ירקות ופירות ביום או יותר, וזה כבר המקסימום שהחישוב מביא בחשבון.' },
+      stress: { rank: 1, text: 'הנושא הזה לא נכלל בחישוב, ולכן אין כאן הערכה בשנים.' }
+    };
+    var topics = GUIDE.map(function (g, i) { return { g: g, i: i, rank: (personal[g.id] || { rank: 1 }).rank }; })
+      .sort(function (a, b) { return b.rank - a.rank || a.i - b.i; });
+
+    return '<h3>מדריך: שינה, תזונה ולחץ</h3>' +
+      '<p class="small muted">מידע כללי על שלושה נושאים שמשפיעים על הבריאות, עם מקורות לקריאה. זה אינו ייעוץ רפואי. הנושאים שרלוונטיים לתשובות שלך מופיעים קודם.</p>' +
+      topics.map(function (t, k) {
+        var g = t.g, p = personal[g.id];
+        return '<details class="gtopic"' + (k === 0 ? ' open' : '') + '><summary>' + esc(g.title) +
+          (p && p.rank === 2 ? ' <span class="chip">כדאי לשים לב</span>' : '') + '</summary>' +
+          (p ? '<div class="gpersonal">' + p.text + '</div>' : '') +
+          '<p>' + esc(g.lead) + '</p>' +
+          '<p class="small muted">' + esc(g.model) + '</p>' +
+          '<ol class="gacts">' + g.actions.map(function (a) {
+            return '<li><b>' + esc(a.t) + '</b><div>' + esc(a.h) + '</div></li>';
+          }).join('') + '</ol>' +
+          '<div class="small"><b>מקורות לקריאה</b> (נפתחים בלשונית חדשה, ויוצאים מהאפליקציה):<ul class="gsrc">' +
+          g.sources.map(function (s) { return '<li><a href="' + esc(s.u) + '" target="_blank" rel="noopener noreferrer">' + esc(s.l) + '</a></li>'; }).join('') +
+          '</ul></div></details>';
+      }).join('');
+  }
+
   function improveHTML(inp, r) {
     var list = improvements(inp, r);
     var head = '<h3>איך אפשר לשפר את ההערכה</h3>';
@@ -754,6 +791,7 @@
 
       improveHTML(inp, r) +
       simHTML(inp, r) +
+      guideHTML(inp, r) +
 
       '<h3>איך זה מחושב</h3>' +
       '<details><summary>השיטה בקצרה</summary><p class="small" style="margin-top:8px">נקודת הבסיס היא לוח התמותה של ארגון הבריאות העולמי לשנת ' + LIFE_TABLE_YEAR + ' (השנה האחרונה לפני הקורונה), לפי מדינה ומין. כל גורם סיכון מתורגם ליחס סיכונים (Hazard Ratio) מתוך מחקר מפורסם, מנורמל לממוצע האוכלוסייה, ומכפיל את קצב התמותה בכל גיל. יחסי הסיכון נחלשים בגיל מבוגר, כפי שנמצא במחקרים. מכיוון שגורמי הסיכון מתואמים זה עם זה, הגורם החזק ביותר נספר במלואו והאחרים במשקל מופחת, והיחס המשולב מוגבל לטווח 0.4–5.</p>' +
