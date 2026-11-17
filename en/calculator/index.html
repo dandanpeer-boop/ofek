@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Life expectancy calculator — Ofek</title>
+<meta name="description" content="A research-based life expectancy calculator: the World Health Organization life table and dozens of risk factors. The whole calculation runs in your browser.">
+<link rel="canonical" href="https://dandanpeer-boop.github.io/ofek/en/calculator/">
+<link rel="alternate" hreflang="he" href="https://dandanpeer-boop.github.io/ofek/calculator/">
+<link rel="alternate" hreflang="en" href="https://dandanpeer-boop.github.io/ofek/en/calculator/">
+<link rel="alternate" hreflang="es" href="https://dandanpeer-boop.github.io/ofek/es/calculator/">
+<link rel="alternate" hreflang="fr" href="https://dandanpeer-boop.github.io/ofek/fr/calculator/">
+<link rel="alternate" hreflang="x-default" href="https://dandanpeer-boop.github.io/ofek/en/calculator/">
+<meta property="og:title" content="Life expectancy calculator — Ofek">
+<meta property="og:description" content="A research-based life expectancy calculator: the World Health Organization life table and dozens of risk factors. The whole calculation runs in your browser.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://dandanpeer-boop.github.io/ofek/en/calculator/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;700&family=Rubik:wght@500;600;700&display=swap">
+<link rel="stylesheet" href="../../styles.css">
+<link rel="manifest" href="../../manifest.webmanifest">
+<meta name="theme-color" content="#0e6b68">
+<link rel="icon" href="../../icons/icon-192.png">
+<link rel="apple-touch-icon" href="../../icons/icon-180.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Ofek">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+</head>
+<body data-page="calc">
+<header class="site-top">
+  <div class="site-top-in">
+    <a class="logo" href="../../en/" aria-label="Ofek">
+      <svg viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="19" r="8" fill="var(--sun2)"/><path d="M2 21c5-2.5 9-2 14-.5s9 2 14-.5V30H2z" fill="var(--accent)"/></svg>
+      <span>Ofek</span>
+    </a>
+    <nav class="mainnav" aria-label="Main navigation">
+      <a href="../../en/">Home</a>
+      <a href="../../en/#topics">Guides</a>
+      <a href="../../en/about/">How it works</a>
+    </nav>
+    <a class="btn primary sm navcalc" href="../../en/calculator/" class="on" aria-current="page">The calculator</a>
+    <nav class="langs" aria-label="Language"><a href="../../calculator/" hreflang="he" lang="he">עברית</a><a href="../../en/calculator/" hreflang="en" lang="en" class="on" aria-current="true">English</a><a href="../../es/calculator/" hreflang="es" lang="es">Español</a><a href="../../fr/calculator/" hreflang="fr" lang="fr">Français</a></nav>
+    <select class="langsel" aria-label="Language" onchange="location.href=this.value"><option value="../../calculator/">עברית</option><option value="../../en/calculator/" selected>English</option><option value="../../es/calculator/">Español</option><option value="../../fr/calculator/">Français</option></select>
+  </div>
+</header>
+<div id="site" hidden></div>
+<div class="wrap" id="calcWrap">
+  <main id="app"></main>
+</div>
+<footer class="site-foot">
+  <div class="site-foot-in">
+    <div>
+      <div class="logo foot-logo"><span>Ofek</span></div>
+      <p>Research-based guides and a calculator for a longer, healthier life.</p>
+      <p class="small">🔒 No sign-up. No personal data is sent to any server.</p>
+    </div>
+    <div>
+      <p class="foot-h">Guides</p>
+      <ul class="foot-links"><li><a href="../../en/sleep/">Sleep</a></li><li><a href="../../en/nutrition/">Nutrition</a></li><li><a href="../../en/fasting/">Intermittent fasting</a></li><li><a href="../../en/sugar/">Sugar</a></li><li><a href="../../en/movement/">Movement and fitness</a></li><li><a href="../../en/stress/">Stress and mind</a></li><li><a href="../../en/social/">Social ties</a></li><li><a href="../../en/habits/">Smoking and alcohol</a></li><li><a href="../../en/numbers/">Your numbers</a></li></ul>
+    </div>
+    <div>
+      <p class="foot-h">The site</p>
+      <ul class="foot-links"><li><a href="../../en/calculator/">The calculator</a></li><li><a href="../../en/about/">How it works and privacy</a></li></ul>
+      <p class="foot-btns"><button type="button" id="install" hidden>Install as an app</button><button type="button" id="wipe">Delete my data</button></p>
+    </div>
+  </div>
+  <p class="foot-disc">The information on this site is general and research-based. It is not medical advice and not a substitute for a doctor. The calculator's estimates are statistical and describe averages of large groups.</p>
+</footer>
+<script>var ROOT = '../../';</script>
+<script src="../../i18n.js"></script>
+<script src="../../i18n/en.js"></script>
+<script src="../../data.js"></script>
+<script src="../../model.js"></script>
+<script src="../../labs.js"></script>
+<script src="../../garmin.js"></script>
+<script src="../../guide.js"></script>
+<script src="../../content.js"></script>
+<script src="../../app.js"></script>
+<script src="../../site.js"></script>
+<script>
+(function () {
+  // מחיקת כל מה שנשמר במכשיר (נתוני המחשבון וסימוני המדריכים)
+  document.getElementById('wipe').onclick = function () {
+    if (!window.confirm(L('למחוק את כל הנתונים שהוזנו ונשמרו במכשיר הזה?'))) return;
+    try { localStorage.removeItem('ofek-data-v1'); localStorage.removeItem('ofek-checks'); } catch (e) { /* */ }
+    location.reload();
+  };
+  // התקנה כאפליקציה ועבודה בלי אינטרנט (רק בכתובת http/https)
+  if (!('serviceWorker' in navigator) || !/^https?:$/.test(location.protocol)) return;
+  navigator.serviceWorker.register(ROOT + 'sw.js').catch(function () { /* האתר עובד גם בלי זה */ });
+  var btn = document.getElementById('install'), deferred = null;
+  window.addEventListener('beforeinstallprompt', function (e) { e.preventDefault(); deferred = e; btn.hidden = false; });
+  btn.onclick = function () { if (!deferred) return; deferred.prompt(); deferred = null; btn.hidden = true; };
+  window.addEventListener('appinstalled', function () { btn.hidden = true; });
+})();
+</script>
+</body>
+</html>

@@ -1,3 +1,4 @@
+var L = (typeof L !== 'undefined') ? L : function (s) { return s; }; // תרגום (i18n.js); בלעדיו — עברית
 /*
  * שליפת ערכי בדיקות דם מתוך מסמך — הכול בדפדפן. הקובץ נקרא מקומית ואינו נשלח לשום מקום.
  *
@@ -10,34 +11,34 @@ var LabParser = (function () {
   // סדר הבדיקות חשוב: HDL ו-LDL נבדקים לפני "כולסטרול" הכללי.
   // min/max = טווח סביר ביחידות היעד; alt = המרה מיחידות חלופיות (מכפיל ליחידות היעד).
   var TESTS = [
-    { id: 'lpa', label: 'Lp(a)', unit: 'מ"ג/ד"ל', re: /lipoprotein\s*\(?\s*a\b\s*\)?|lp\s*\(\s*a\s*\)|\blpa\b/i, min: 0, max: 400,
+    { id: 'lpa', label: 'Lp(a)', unit: L('מ"ג/ד"ל'), re: /lipoprotein\s*\(?\s*a\b\s*\)?|lp\s*\(\s*a\s*\)|\blpa\b/i, min: 0, max: 400,
       alt: { re: /nmol/i, k: 1 / 2.1, min: 0, max: 900, explicit: true } },
-    { id: 'acr', label: 'אלבומין/קריאטינין בשתן', unit: 'מ"ג/ג', re: /albumin\s*\/\s*creat|alb\w*\.?\s*\/\s*cr|\bacr\b|microalb\w*\s*\/|אלבומין\s*\/\s*קריאטינין/i, min: 0, max: 5000,
+    { id: 'acr', label: L('אלבומין/קריאטינין בשתן'), unit: L('מ"ג/ג'), re: /albumin\s*\/\s*creat|alb\w*\.?\s*\/\s*cr|\bacr\b|microalb\w*\s*\/|אלבומין\s*\/\s*קריאטינין/i, min: 0, max: 5000,
       alt: { re: /mg\s*\/\s*mmol/i, k: 8.84, min: 0, max: 600, explicit: true } },
-    { id: 'tg', label: 'טריגליצרידים', unit: 'מ"ג/ד"ל', re: /triglycerid|טריגליצריד|\btrig\b|\btg\b/i, min: 20, max: 2000,
+    { id: 'tg', label: L('טריגליצרידים'), unit: L('מ"ג/ד"ל'), re: /triglycerid|טריגליצריד|\btrig\b|\btg\b/i, min: 20, max: 2000,
       alt: { re: /mmol/i, k: 88.57, min: 0.2, max: 19.9 } },
     { id: 'ggt', label: 'GGT', unit: 'U/L', re: /\bggt\b|\bg-?gt\b|gamma[\s-]*g/i, min: 3, max: 2000 },
-    { id: 'hdl', label: 'HDL', unit: 'מ"ג/ד"ל', re: /\bhdl\b/i, not: /non|ratio|יחס|chol\w*\s*\/\s*hdl|ldl\s*\/\s*hdl/i, min: 10, max: 150,
+    { id: 'hdl', label: 'HDL', unit: L('מ"ג/ד"ל'), re: /\bhdl\b/i, not: /non|ratio|יחס|chol\w*\s*\/\s*hdl|ldl\s*\/\s*hdl/i, min: 10, max: 150,
       alt: { re: /mmol/i, k: 38.67, min: 0.3, max: 4 } },
-    { id: 'ldl', label: 'LDL', unit: 'מ"ג/ד"ל', re: /\bldl\b/i, not: /vldl|ratio|יחס|ldl\s*\/\s*hdl/i, min: 20, max: 400,
+    { id: 'ldl', label: 'LDL', unit: L('מ"ג/ד"ל'), re: /\bldl\b/i, not: /vldl|ratio|יחס|ldl\s*\/\s*hdl/i, min: 20, max: 400,
       alt: { re: /mmol/i, k: 38.67, min: 0.5, max: 10 } },
-    { id: 'tc', label: 'כולסטרול כללי', unit: 'מ"ג/ד"ל', re: /cholesterol|כולסטרול|\bchol\b/i, not: /hdl|ldl|non|ratio|יחס/i, min: 80, max: 500,
+    { id: 'tc', label: L('כולסטרול כללי'), unit: L('מ"ג/ד"ל'), re: /cholesterol|כולסטרול|\bchol\b/i, not: /hdl|ldl|non|ratio|יחס/i, min: 80, max: 500,
       alt: { re: /mmol/i, k: 38.67, min: 2, max: 13 } },
     { id: 'hba1c', label: 'HbA1c', unit: '%', re: /hba1c|hb\s*a1c|\ba1c\b|glycated|glycosylated|המוגלובין\s*מסוכרר|מסוכרר\s*המוגלובין/i, min: 3, max: 18 },
-    { id: 'glucose', label: 'גלוקוז', unit: 'מ"ג/ד"ל', re: /glucose|גלוקוז|\bgluc?\b|סוכר בצום/i, not: /urine|שתן|a1c|מסוכרר|tolerance|העמסה|estimated|ממוצע/i, min: 40, max: 500,
+    { id: 'glucose', label: L('גלוקוז'), unit: L('מ"ג/ד"ל'), re: /glucose|גלוקוז|\bgluc?\b|סוכר בצום/i, not: /urine|שתן|a1c|מסוכרר|tolerance|העמסה|estimated|ממוצע/i, min: 40, max: 500,
       alt: { re: /mmol/i, k: 18.016, min: 2.2, max: 28 } },
-    { id: 'creatinine', label: 'קריאטינין', unit: 'מ"ג/ד"ל', re: /creatinine|קריאטינין|\bcreat?\b/i, not: /urine|שתן|ratio|יחס|clearance|פינוי|albumin|אלבומין|protein|חלבון/i, min: 0.2, max: 15,
+    { id: 'creatinine', label: L('קריאטינין'), unit: L('מ"ג/ד"ל'), re: /creatinine|קריאטינין|\bcreat?\b/i, not: /urine|שתן|ratio|יחס|clearance|פינוי|albumin|אלבומין|protein|חלבון/i, min: 0.2, max: 15,
       alt: { re: /[µμu]mol/i, k: 1 / 88.4, min: 20, max: 1300 } },
-    { id: 'crp', label: 'CRP', unit: 'מ"ג/ליטר', re: /\bcrp\b|c[\s-]?reactive/i, min: 0, max: 200,
+    { id: 'crp', label: 'CRP', unit: L('מ"ג/ליטר'), re: /\bcrp\b|c[\s-]?reactive/i, min: 0, max: 200,
       alt: { re: /mg\s*\/\s*dl|מ"?ג\s*\/\s*ד"?ל/i, k: 10, min: 0, max: 20, explicit: true } },
     // הערכים הנוספים לגיל הביולוגי
-    { id: 'albumin', label: 'אלבומין', unit: 'ג/ד"ל', re: /albumin|אלבומין|\balb\b/i, not: /micro|urine|שתן|ratio|יחס|globulin|גלובולין|creat|קריאט|a\/g/i, min: 1.5, max: 6.5,
+    { id: 'albumin', label: L('אלבומין'), unit: L('ג/ד"ל'), re: /albumin|אלבומין|\balb\b/i, not: /micro|urine|שתן|ratio|יחס|globulin|גלובולין|creat|קריאט|a\/g/i, min: 1.5, max: 6.5,
       alt: { re: /g\s*\/\s*l\b/i, k: 0.1, min: 15, max: 65 } },
-    { id: 'lymph', label: 'לימפוציטים', unit: '%', re: /lymp|לימפוציט/i, not: /abs|#|atyp|אבסולוט|מוחלט/i, min: 5, max: 80 },
+    { id: 'lymph', label: L('לימפוציטים'), unit: '%', re: /lymp|לימפוציט/i, not: /abs|#|atyp|אבסולוט|מוחלט/i, min: 5, max: 80 },
     { id: 'mcv', label: 'MCV', unit: 'fL', re: /\bmcv\b/i, min: 50, max: 130 },
     { id: 'rdw', label: 'RDW', unit: '%', re: /\brdw\b/i, not: /rdw\s*-?\s*sd/i, min: 9, max: 25 },
-    { id: 'alp', label: 'פוספטאזה בסיסית', unit: 'U/L', re: /alk\w*\.?\s*phos|\balp\b|\balk\.?\s*p\b|פוספטאז/i, min: 10, max: 1000 },
-    { id: 'wbc', label: 'תאים לבנים (WBC)', unit: 'אלפים/מק"ל', re: /\bwbc\b|leu[ck]ocytes|תאים\s*לבנים|לויקוציטים/i, not: /urine|שתן|esterase|hpf/i, min: 0.5, max: 50,
+    { id: 'alp', label: L('פוספטאזה בסיסית'), unit: 'U/L', re: /alk\w*\.?\s*phos|\balp\b|\balk\.?\s*p\b|פוספטאז/i, min: 10, max: 1000 },
+    { id: 'wbc', label: L('תאים לבנים (WBC)'), unit: L('אלפים/מק"ל'), re: /\bwbc\b|leu[ck]ocytes|תאים\s*לבנים|לויקוציטים/i, not: /urine|שתן|esterase|hpf/i, min: 0.5, max: 50,
       alt: { re: /a^/, k: 0.001, min: 500, max: 50000 } }
   ];
 
@@ -186,8 +187,8 @@ var LabParser = (function () {
       var task = window.pdfjsLib.getDocument({ data: buf });
       // קובץ מוגן בסיסמה (קופות החולים נוהגות להגן במספר תעודת הזהות): מבקשים אותה מהמשתמש. היא לא נשמרת ולא נשלחת.
       task.onPassword = function (update, reason) {
-        var pw = window.prompt(reason === 2 ? 'הסיסמה שגויה. נסו שוב:' :
-          'הקובץ "' + file.name + '" מוגן בסיסמה (בדרך כלל מספר תעודת הזהות). הקלידו אותה כדי לפתוח את הקובץ. הסיסמה נשארת במכשיר ואינה נשמרת.');
+        var pw = window.prompt(reason === 2 ? L('הסיסמה שגויה. נסו שוב:') :
+          L('הקובץ "') + file.name + L('" מוגן בסיסמה (בדרך כלל מספר תעודת הזהות). הקלידו אותה כדי לפתוח את הקובץ. הסיסמה נשארת במכשיר ואינה נשמרת.'));
         if (pw === null || pw === '') { var e = new Error('cancelled'); e.name = 'PasswordCancelled'; task.destroy(); throw e; }
         update(pw);
       };

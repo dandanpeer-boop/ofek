@@ -1,20 +1,22 @@
 /*
- * האתר: עמוד בית, עמודי נושא, "על השיטה", וניתוב בין העמודים לבין המחשבון (app.js).
- * ניתוב לפי hash, כדי שהאתר יעבוד גם באירוח סטטי וגם בפתיחה ישירה של הקובץ:
- *   #/            עמוד הבית          #/topics      עמוד הבית, גלילה לנושאים
- *   #/topic/<id>  עמוד נושא          #/calc        המחשבון
- *   #/about       על השיטה והפרטיות
+ * האתר: עמוד בית, עמודי נושא ו"איך זה עובד". כל עמוד הוא קובץ HTML אמיתי בכתובת משלו
+ * (למשל en/sleep/), שנבנה מראש ב-build-site.js, כדי שמנועי חיפוש יוכלו לקרוא אותו.
+ * בדפדפן, הקובץ הזה מצייר את העמוד מחדש (אותו תוכן) ומחבר את החלקים האינטראקטיביים.
+ * SiteRender — פונקציות טהורות שמחזירות HTML, משמשות גם את build-site.js ב-Node.
  */
-(function () {
+var SiteRender = (function () {
   'use strict';
-  var site = document.getElementById('site');
-  var calcWrap = document.getElementById('calcWrap');
-  var CHECKS = 'ofek-checks';
 
   function esc(s) {
     return String(s).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; });
   }
   function byId(id) { for (var i = 0; i < TOPICS.length; i++) if (TOPICS[i].id === id) return TOPICS[i]; return null; }
+  function hasData() {
+    if (typeof window === 'undefined') return false;
+    if (window.Calc) return window.Calc.hasData();
+    try { var d = JSON.parse(localStorage.getItem('ofek-data-v1') || 'null'); return !!(d && d.age && d.sex); } catch (e) { return false; }
+  }
+  var FWD = function () { return LANGS[LANG].dir === 'rtl' ? '←' : '→'; };
 
   /* אייקונים בקו, 24x24, בצבע הטקסט */
   var ICONS = {
@@ -40,10 +42,6 @@
     return '<svg class="ic ' + (cls || '') + '" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' + (ICONS[name] || '') + '</svg>';
   }
 
-  /* סימון צעדים בעמודי הנושא, נשמר רק בדפדפן הזה */
-  function loadChecks() { try { return JSON.parse(localStorage.getItem(CHECKS) || '{}') || {}; } catch (e) { return {}; } }
-  function saveChecks(c) { try { localStorage.setItem(CHECKS, JSON.stringify(c)); } catch (e) { /* חסום, מצב פרטי */ } }
-
   var HERO_ART =
     '<svg class="hero-art" viewBox="0 0 520 360" aria-hidden="true">' +
     '<defs><linearGradient id="sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="var(--sky1)"/><stop offset="1" stop-color="var(--sky2)"/></linearGradient>' +
@@ -58,115 +56,103 @@
     '<path d="M70 92 q14 -10 28 0 q14 -10 28 0"/><path d="M118 62 q10 -7 20 0 q10 -7 20 0"/></g>' +
     '</svg>';
 
-  /* ---------- כותרת וניווט ---------- */
-  function setActive(route) {
-    document.querySelectorAll('[data-nav]').forEach(function (a) {
-      var on = a.getAttribute('data-nav') === route;
-      a.classList.toggle('on', on);
-      if (on) a.setAttribute('aria-current', 'page'); else a.removeAttribute('aria-current');
-    });
-  }
-
   /* ---------- עמוד הבית ---------- */
   function topicCard(t) {
-    return '<a class="tcard" href="#/topic/' + t.id + '" style="--h:' + t.hue + '">' +
+    return '<a class="tcard" href="' + SiteURL('topic', t.id) + '" style="--h:' + t.hue + '">' +
       '<span class="tcard-ic">' + icon(t.icon) + '</span>' +
       '<span class="tcard-title">' + esc(t.title) + '</span>' +
       '<span class="tcard-text">' + esc(t.short) + '</span>' +
-      '<span class="tcard-meta">' + t.mins + ' דקות קריאה ' + icon('arrow', 'sm') + '</span></a>';
+      '<span class="tcard-meta">' + t.mins + ' ' + L('דקות קריאה') + ' ' + icon('arrow', 'sm fwd') + '</span></a>';
   }
 
-  var WEEK = [
-    { d: 'ראשון', t: 'שעת קימה קבועה לכל השבוע', topic: 'sleep' },
-    { d: 'שני', t: 'להחליף משקה ממותק אחד במים', topic: 'sugar' },
-    { d: 'שלישי', t: 'הליכה מהירה של 30 דקות', topic: 'movement' },
-    { d: 'רביעי', t: 'ירק בכל ארוחה', topic: 'nutrition' },
-    { d: 'חמישי', t: 'שיחה עם אדם קרוב', topic: 'social' },
-    { d: 'שישי', t: 'למדוד לחץ דם ולרשום', topic: 'numbers' },
-    { d: 'שבת', t: 'שלוש דקות של קרקוע ונשימה', topic: 'stress' }
-  ];
+  function week() {
+    return [
+      { d: L('יום ראשון'), t: L('שעת קימה קבועה לכל השבוע'), topic: 'sleep' },
+      { d: L('יום שני'), t: L('להחליף משקה ממותק אחד במים'), topic: 'sugar' },
+      { d: L('יום שלישי'), t: L('הליכה מהירה של 30 דקות'), topic: 'movement' },
+      { d: L('יום רביעי'), t: L('ירק בכל ארוחה'), topic: 'nutrition' },
+      { d: L('יום חמישי'), t: L('שיחה עם אדם קרוב'), topic: 'social' },
+      { d: L('יום שישי'), t: L('למדוד לחץ דם ולרשום'), topic: 'numbers' },
+      { d: L('שבת'), t: L('שלוש דקות של קרקוע ונשימה'), topic: 'stress' }
+    ];
+  }
 
-  function homeHTML() {
-    var hasData = window.Calc && Calc.hasData();
+  function calcLabel(fresh) { return hasData() ? L('לתוצאה שלי') : fresh; }
+
+  function home() {
     var myths = [];
     TOPICS.forEach(function (t) { if (t.myths && t.myths[0]) myths.push({ t: t, m: t.myths[0] }); });
     myths = myths.slice(0, 6);
 
     return '' +
-      // גיבור
       '<section class="hero"><div class="hero-in">' +
         '<div class="hero-text">' +
-          '<p class="eyebrow">מדע פשוט לחיים ארוכים</p>' +
-          '<h1>לחיות יותר שנים,<br>ויותר שנים טובות.</h1>' +
-          '<p class="hero-lead">מדריכים מבוססי מחקר על שינה, תזונה, צום, סוכר, תנועה וקשרים, ומחשבון שמראה מה משפיע על תוחלת החיים <b>שלך</b> ומה אפשר לשנות.</p>' +
-          '<div class="cta-row"><a class="btn primary" href="#/calc">' + icon('calc') + (hasData ? 'לתוצאה שלי' : 'לחשב את תוחלת החיים שלי') + '</a>' +
-          '<a class="btn ghost" href="#/topics">' + icon('book') + 'למדריכים</a></div>' +
-          '<ul class="trust"><li>' + icon('lock', 'sm') + 'בלי הרשמה, הנתונים נשארים במכשיר</li><li>' + icon('check', 'sm') + 'כל מספר עם מקור מחקרי</li></ul>' +
+          '<p class="eyebrow">' + L('מדע פשוט לחיים ארוכים') + '</p>' +
+          '<h1>' + L('לחיות יותר שנים,') + '<br>' + L('ויותר שנים טובות.') + '</h1>' +
+          '<p class="hero-lead">' + L('מדריכים מבוססי מחקר על שינה, תזונה, צום, סוכר, תנועה וקשרים, ומחשבון שמראה מה משפיע על תוחלת החיים שלך ומה אפשר לשנות.') + '</p>' +
+          '<div class="cta-row"><a class="btn primary" href="' + SiteURL('calc') + '" data-calc-cta>' + icon('calc') + '<span>' + calcLabel(L('לחשב את תוחלת החיים שלי')) + '</span></a>' +
+          '<a class="btn ghost" href="' + SiteURL('topics') + '">' + icon('book') + L('למדריכים') + '</a></div>' +
+          '<ul class="trust"><li>' + icon('lock', 'sm') + L('בלי הרשמה, הנתונים נשארים במכשיר') + '</li><li>' + icon('check', 'sm') + L('כל מספר עם מקור מחקרי') + '</li></ul>' +
         '</div>' + HERO_ART +
       '</div></section>' +
 
-      // 14 שנים וחמשת ההרגלים
       '<section class="band"><div class="band-in">' +
-        '<div class="bignum"><b>14</b><span>שנים</span></div>' +
-        '<div class="band-text"><h2>חמישה הרגלים, יותר מעשור של חיים</h2>' +
-          '<p>במחקר של אוניברסיטת הרווארד שעקב אחרי יותר מ-120 אלף איש עד 34 שנים, נשים בגיל 50 שאימצו את כל חמשת ההרגלים צפויות לחיות 14 שנים יותר מאלה שלא אימצו אף אחד. אצל גברים: 12.2 שנים.</p>' +
+        '<div class="bignum"><b>14</b><span>' + L('שנים') + '</span></div>' +
+        '<div class="band-text"><h2>' + L('חמישה הרגלים, יותר מעשור של חיים') + '</h2>' +
+          '<p>' + L('במחקר של אוניברסיטת הרווארד שעקב אחרי יותר מ-120 אלף איש עד 34 שנים, נשים בגיל 50 שאימצו את כל חמשת ההרגלים צפויות לחיות 14 שנים יותר מאלה שלא אימצו אף אחד. אצל גברים: 12.2 שנים.') + '</p>' +
           '<ol class="habits">' + FIVE_HABITS.items.map(function (h, i) {
             var t = byId(h.topic);
-            return '<li><a href="#/topic/' + h.topic + '" style="--h:' + t.hue + '"><i>' + (i + 1) + '</i>' + esc(h.t) + '</a></li>';
+            return '<li><a href="' + SiteURL('topic', h.topic) + '" style="--h:' + t.hue + '"><i>' + (i + 1) + '</i>' + esc(h.t) + '</a></li>';
           }).join('') + '</ol>' +
-          '<p class="src">מקור: <a href="' + FIVE_HABITS.source.u + '" target="_blank" rel="noopener">' + esc(FIVE_HABITS.source.l) + '</a></p>' +
+          '<p class="src">' + L('מקור:') + ' <a href="' + FIVE_HABITS.source.u + '" target="_blank" rel="noopener">' + esc(FIVE_HABITS.source.l) + '</a></p>' +
         '</div>' +
       '</div></section>' +
 
-      // נושאים
-      '<section class="sec" id="topics"><div class="sec-head"><p class="eyebrow">המדריכים</p><h2>מה משפיע על אורך החיים, ומה עושים עם זה</h2>' +
-        '<p class="muted">כל מדריך: מה המחקר מצא, צעדים מעשיים שאפשר לסמן, מיתוסים נפוצים, ומקורות.</p></div>' +
+      '<section class="sec" id="topics"><div class="sec-head"><p class="eyebrow">' + L('המדריכים') + '</p><h2>' + L('מה משפיע על אורך החיים, ומה עושים עם זה') + '</h2>' +
+        '<p class="muted">' + L('כל מדריך: מה המחקר מצא, צעדים מעשיים שאפשר לסמן, מיתוסים נפוצים, ומקורות.') + '</p></div>' +
         '<div class="tgrid">' + TOPICS.map(topicCard).join('') + '</div></section>' +
 
-      // המחשבון
       '<section class="sec calc-promo"><div class="promo">' +
-        '<div class="promo-text"><p class="eyebrow">הכלי המרכזי</p><h2>מחשבון תוחלת חיים אישי</h2>' +
-          '<p>מתחיל מלוח התמותה של ארגון הבריאות העולמי לפי גיל, מין ומדינה, ומתקן אותו לפי עשרות גורמים מתוך מחקרים גדולים. התוצאה היא טווח, לא תאריך, עם פירוט של מה מוסיף ומה מוריד שנים.</p>' +
+        '<div class="promo-text"><p class="eyebrow">' + L('הכלי המרכזי') + '</p><h2>' + L('מחשבון תוחלת חיים אישי') + '</h2>' +
+          '<p>' + L('מתחיל מלוח התמותה של ארגון הבריאות העולמי לפי גיל, מין ומדינה, ומתקן אותו לפי עשרות גורמים מתוך מחקרים גדולים. התוצאה היא טווח, לא תאריך, עם פירוט של מה מוסיף ומה מוריד שנים.') + '</p>' +
           '<ul class="feat">' +
-            '<li>' + icon('doc') + '<div><b>בדיקות דם מקובץ</b><span>מעלים PDF של תוצאות, והערכים מתמלאים לבד</span></div></li>' +
-            '<li>' + icon('watch') + '<div><b>ייבוא משעון Garmin</b><span>דופק במנוחה ו-VO2max מהקובץ של השעון</span></div></li>' +
-            '<li>' + icon('sliders') + '<div><b>סימולטור "מה אם"</b><span>מזיזים סרגל ורואים כמה שנים שינוי מסוים שווה</span></div></li>' +
-            '<li>' + icon('lock') + '<div><b>פרטי לגמרי</b><span>החישוב כולו בדפדפן, שום נתון לא נשלח לשרת</span></div></li>' +
+            '<li>' + icon('doc') + '<div><b>' + L('בדיקות דם מקובץ') + '</b><span>' + L('מעלים PDF של תוצאות, והערכים מתמלאים לבד') + '</span></div></li>' +
+            '<li>' + icon('watch') + '<div><b>' + L('ייבוא משעון Garmin') + '</b><span>' + L('דופק במנוחה ו-VO2max מהקובץ של השעון') + '</span></div></li>' +
+            '<li>' + icon('sliders') + '<div><b>' + L('סימולטור "מה אם"') + '</b><span>' + L('מזיזים סרגל ורואים כמה שנים שינוי מסוים שווה') + '</span></div></li>' +
+            '<li>' + icon('lock') + '<div><b>' + L('פרטי לגמרי') + '</b><span>' + L('החישוב כולו בדפדפן, שום נתון לא נשלח לשרת') + '</span></div></li>' +
           '</ul>' +
-          '<a class="btn primary" href="#/calc">' + icon('calc') + (hasData ? 'לתוצאה שלי' : 'בואו נתחיל, כ-3 דקות') + '</a>' +
+          '<a class="btn primary" href="' + SiteURL('calc') + '" data-calc-cta>' + icon('calc') + '<span>' + calcLabel(L('בואו נתחיל, כ-3 דקות')) + '</span></a>' +
         '</div>' +
         '<div class="mock" aria-hidden="true"><div class="mock-card">' +
-          '<span class="mock-tag">דוגמה להמחשה</span>' +
-          '<div class="mock-k">הגיל המשוער</div><div class="mock-big">86</div>' +
+          '<span class="mock-tag">' + L('דוגמה להמחשה') + '</span>' +
+          '<div class="mock-k">' + L('הגיל המשוער') + '</div><div class="mock-big">86</div>' +
           '<div class="mock-range"><i class="w"></i><i class="n"></i><b></b></div>' +
           '<div class="mock-legend"><span>78</span><span>94</span></div>' +
-          '<div class="mock-row pos"><span>פעילות גופנית</span><em>+2.1</em><i style="width:62%"></i></div>' +
-          '<div class="mock-row pos"><span>לא מעשן/ת</span><em>+1.4</em><i style="width:42%"></i></div>' +
-          '<div class="mock-row neg"><span>לחץ דם</span><em>−0.9</em><i style="width:28%"></i></div>' +
-          '<div class="mock-row neg"><span>שינה</span><em>−0.5</em><i style="width:16%"></i></div>' +
+          '<div class="mock-row pos"><span>' + L('פעילות גופנית') + '</span><em>+2.1</em><i style="width:62%"></i></div>' +
+          '<div class="mock-row pos"><span>' + L('לא מעשן/ת') + '</span><em>+1.4</em><i style="width:42%"></i></div>' +
+          '<div class="mock-row neg"><span>' + L('לחץ דם') + '</span><em>−0.9</em><i style="width:28%"></i></div>' +
+          '<div class="mock-row neg"><span>' + L('שינה') + '</span><em>−0.5</em><i style="width:16%"></i></div>' +
         '</div></div>' +
       '</div></section>' +
 
-      // שבוע ראשון
-      '<section class="sec"><div class="sec-head"><p class="eyebrow">להתחיל השבוע</p><h2>שבעה צעדים קטנים לשבוע הקרוב</h2>' +
-        '<p class="muted">צעד אחד ביום. כל אחד מהם מוביל למדריך המלא.</p></div>' +
-        '<ol class="week">' + WEEK.map(function (w) {
+      '<section class="sec"><div class="sec-head"><p class="eyebrow">' + L('להתחיל השבוע') + '</p><h2>' + L('שבעה צעדים קטנים לשבוע הקרוב') + '</h2>' +
+        '<p class="muted">' + L('צעד אחד ביום. כל אחד מהם מוביל למדריך המלא.') + '</p></div>' +
+        '<ol class="week">' + week().map(function (w) {
           var t = byId(w.topic);
-          return '<li style="--h:' + t.hue + '"><a href="#/topic/' + t.id + '"><span class="day">יום ' + w.d + '</span><span class="wt">' + esc(w.t) + '</span><span class="wtopic">' + icon(t.icon, 'sm') + esc(t.title) + '</span></a></li>';
+          return '<li style="--h:' + t.hue + '"><a href="' + SiteURL('topic', t.id) + '"><span class="day">' + w.d + '</span><span class="wt">' + esc(w.t) + '</span><span class="wtopic">' + icon(t.icon, 'sm') + esc(t.title) + '</span></a></li>';
         }).join('') + '</ol></section>' +
 
-      // מיתוסים
-      '<section class="sec"><div class="sec-head"><p class="eyebrow">מיתוס או עובדה</p><h2>מה שכולם יודעים, ומה המחקר באמת מצא</h2>' +
-        '<p class="muted">לחצו על כרטיס כדי לראות את התשובה.</p></div>' +
+      '<section class="sec"><div class="sec-head"><p class="eyebrow">' + L('מיתוס או עובדה') + '</p><h2>' + L('מה שכולם יודעים, ומה המחקר באמת מצא') + '</h2>' +
+        '<p class="muted">' + L('לחצו על כרטיס כדי לראות את התשובה.') + '</p></div>' +
         '<div class="myths">' + myths.map(function (x) {
-          return '<details class="myth" style="--h:' + x.t.hue + '"><summary><span class="myth-tag">' + esc(x.t.title) + '</span><span class="myth-m">"' + esc(x.m.m) + '"</span><span class="myth-cta">מה ידוע?</span></summary>' +
-            '<p>' + esc(x.m.f) + '</p><a href="#/topic/' + x.t.id + '">למדריך ' + esc(x.t.title) + ' ←</a></details>';
+          return '<details class="myth" style="--h:' + x.t.hue + '"><summary><span class="myth-tag">' + esc(x.t.title) + '</span><span class="myth-m">"' + esc(x.m.m) + '"</span><span class="myth-cta">' + L('מה ידוע?') + '</span></summary>' +
+            '<p><b class="known">' + L('מה ידוע:') + '</b> ' + esc(x.m.f) + '</p><a href="' + SiteURL('topic', x.t.id) + '">' + L('למדריך') + ' ' + esc(x.t.title) + ' ' + FWD() + '</a></details>';
         }).join('') + '</div></section>';
   }
 
   /* ---------- עמוד נושא ---------- */
-  function topicHTML(t) {
-    var checks = loadChecks()[t.id] || [];
+  function topic(t, checks) {
+    checks = checks || [];
     var idx = TOPICS.indexOf(t);
     var related = [TOPICS[(idx + 1) % TOPICS.length], TOPICS[(idx + 2) % TOPICS.length], TOPICS[(idx + 3) % TOPICS.length]];
 
@@ -177,10 +163,10 @@
 
     return '<article class="topic" style="--h:' + t.hue + '">' +
       '<header class="topic-hero"><div class="topic-hero-in">' +
-        '<a class="crumb" href="#/topics">' + icon('arrow', 'sm flip') + 'כל המדריכים</a>' +
+        '<a class="crumb" href="' + SiteURL('topics') + '">' + icon('arrow', 'sm back') + L('כל המדריכים') + '</a>' +
         '<div class="topic-title"><span class="topic-ic">' + icon(t.icon) + '</span><h1>' + esc(t.title) + '</h1></div>' +
         '<p class="topic-lead">' + esc(t.lead) + '</p>' +
-        '<p class="topic-meta">' + t.mins + ' דקות קריאה · ' + t.sources.length + ' מקורות</p>' +
+        '<p class="topic-meta">' + t.mins + ' ' + L('דקות קריאה') + ' · ' + t.sources.length + ' ' + L('מקורות') + '</p>' +
       '</div></header>' +
 
       '<div class="topic-body">' +
@@ -190,38 +176,80 @@
 
         '<div class="topic-cols"><div class="topic-main">' +
           t.sections.map(function (s) { return '<section><h2>' + esc(s.h) + '</h2>' + s.p.map(function (p) { return '<p>' + esc(p) + '</p>'; }).join('') + '</section>'; }).join('') +
-          (t.myths && t.myths.length ? '<section><h2>מיתוס או עובדה</h2><div class="myths one">' + t.myths.map(function (m) {
-            return '<details class="myth"><summary><span class="myth-m">"' + esc(m.m) + '"</span><span class="myth-cta">מה ידוע?</span></summary><p>' + esc(m.f) + '</p></details>';
+          (t.myths && t.myths.length ? '<section><h2>' + L('מיתוס או עובדה') + '</h2><div class="myths one">' + t.myths.map(function (m) {
+            return '<details class="myth"><summary><span class="myth-m">"' + esc(m.m) + '"</span><span class="myth-cta">' + L('מה ידוע?') + '</span></summary><p><b class="known">' + L('מה ידוע:') + '</b> ' + esc(m.f) + '</p></details>';
           }).join('') + '</div></section>' : '') +
-          '<section><h2>מקורות</h2><ol class="srcs">' + t.sources.map(function (s) {
+          '<section><h2>' + L('המקורות') + '</h2><ol class="srcs">' + t.sources.map(function (s) {
             return '<li><a href="' + esc(s.u) + '" target="_blank" rel="noopener">' + esc(s.l) + '</a></li>';
           }).join('') + '</ol></section>' +
         '</div>' +
 
         '<aside class="topic-side">' +
-          '<div class="todo"><h2>מה עושים מחר בבוקר</h2>' +
+          '<div class="todo"><h2>' + L('מה עושים מחר בבוקר') + '</h2>' +
             '<p class="todo-prog" id="todoProg"></p>' +
             '<ul>' + t.actions.map(function (a, i) {
               var on = checks.indexOf(i) >= 0;
               return '<li><label><input type="checkbox" data-i="' + i + '"' + (on ? ' checked' : '') + '><span class="box">' + icon('check', 'sm') + '</span><span><b>' + esc(a.t) + '</b><em>' + esc(a.h) + '</em></span></label></li>';
             }).join('') + '</ul>' +
-            '<p class="small muted">הסימון נשמר רק בדפדפן הזה.</p>' +
+            '<p class="small muted">' + L('הסימון נשמר רק בדפדפן הזה.') + '</p>' +
           '</div>' +
-          '<div class="inmodel"><h3>' + icon('calc', 'sm') + 'במחשבון</h3><p>' + esc(t.model) + '</p><a class="btn primary sm" href="#/calc">לחשב את שלי</a></div>' +
+          '<div class="inmodel"><h3>' + icon('calc', 'sm') + L('במחשבון') + '</h3><p>' + esc(t.model) + '</p><a class="btn primary sm" href="' + SiteURL('calc') + '">' + L('לחשב את שלי') + '</a></div>' +
         '</aside></div>' +
 
-        '<p class="disclaimer">מידע כללי מבוסס מחקר, לא ייעוץ רפואי ולא תחליף לרופא/ה. לפני שינוי משמעותי, במיוחד עם מחלה או תרופות, כדאי להתייעץ.</p>' +
+        '<p class="disclaimer">' + L('מידע כללי מבוסס מחקר, לא ייעוץ רפואי ולא תחליף לרופא/ה. לפני שינוי משמעותי, במיוחד עם מחלה או תרופות, כדאי להתייעץ.') + '</p>' +
 
-        '<section class="related"><h2>להמשיך לקרוא</h2><div class="tgrid three">' + related.map(topicCard).join('') + '</div></section>' +
+        '<section class="related"><h2>' + L('להמשיך לקרוא') + '</h2><div class="tgrid three">' + related.map(topicCard).join('') + '</div></section>' +
       '</div></article>';
   }
 
-  function wireTopic(t) {
-    function prog() {
+  /* ---------- איך זה עובד ---------- */
+  function about() {
+    return '<article class="page"><p class="eyebrow">' + L('על האתר') + '</p><h1>' + L('איך זה עובד') + '</h1>' +
+      '<section><h2>' + L('המדריכים') + '</h2><p>' + L('כל מדריך נשען על מחקרים שפורסמו בכתבי עת רפואיים ועל הנחיות של גופים כמו ארגון הבריאות העולמי. כל מספר באתר מופיע עם קישור למקור, והמספרים נבדקו מול תקצירי המחקרים עצמם. כשמחקר הוא תצפיתי, כלומר מראה קשר ולא בהכרח סיבה, זה כתוב.') + '</p></section>' +
+      '<section><h2>' + L('המחשבון') + '</h2><p>' + L('נקודת הבסיס היא לוח התמותה של ארגון הבריאות העולמי לפי מדינה, גיל ומין. כל גורם סיכון מתורגם ליחס סיכונים מתוך מחקר גדול, ומכפיל את קצב התמותה בכל גיל. ההשפעה נחלשת בגיל מבוגר, וגורמים קשורים נספרים במשקל מופחת כדי לא לספור אותו דבר פעמיים. התוצאה מוצגת כטווח, כי אף אחד לא יכול לדעת תאריך.') + '</p></section>' +
+      '<section><h2>' + L('פרטיות') + '</h2><p>' + L('שום נתון לא נשלח לשרת. החישוב, קריאת קובצי בדיקות הדם וקובצי השעון נעשים כולם בדפדפן. אם בחרת לזכור את הנתונים, הם נשמרים רק בדפדפן הזה, ואפשר למחוק אותם בכל רגע בכפתור "מחיקת הנתונים" בתחתית העמוד.') + '</p></section>' +
+      '<section><h2>' + L('מה זה לא') + '</h2><p>' + L('זו לא אבחנה ולא ייעוץ רפואי. המחקרים מתארים ממוצעים של קבוצות גדולות, לא את העתיד של אדם מסוים. בכל שאלה על הבריאות שלך, הכתובת היא רופא/ת המשפחה.') + '</p></section>' +
+      '<div class="cta-row"><a class="btn primary" href="' + SiteURL('calc') + '">' + icon('calc') + L('למחשבון') + '</a><a class="btn ghost" href="' + SiteURL('topics') + '">' + icon('book') + L('למדריכים') + '</a></div>' +
+      '</article>';
+  }
+
+  return { home: home, topic: topic, about: about, byId: byId, esc: esc };
+})();
+
+/* ---------- בדפדפן: ציור העמוד וחיבור הסימונים ---------- */
+(function () {
+  if (typeof document === 'undefined') return;
+  var site = document.getElementById('site');
+  if (!site) return;
+  var CHECKS = 'ofek-checks';
+  function loadChecks() { try { return JSON.parse(localStorage.getItem(CHECKS) || '{}') || {}; } catch (e) { return {}; } }
+  function saveChecks(c) { try { localStorage.setItem(CHECKS, JSON.stringify(c)); } catch (e) { /* חסום, מצב פרטי */ } }
+
+  // קישורים ישנים מהגרסה הקודמת (#/topic/sleep וכו')
+  var h = location.hash;
+  if (/^#\//.test(h)) {
+    var m;
+    if (/^#\/calc/.test(h)) { location.replace(SiteURL('calc')); return; }
+    if (/^#\/about/.test(h)) { location.replace(SiteURL('about')); return; }
+    if ((m = h.match(/^#\/topic\/([\w-]+)/)) && SiteRender.byId(m[1])) { location.replace(SiteURL('topic', m[1])); return; }
+    if (/^#\/topics/.test(h)) { history.replaceState(null, '', '#topics'); }
+    else history.replaceState(null, '', location.pathname);
+  }
+
+  var page = document.body.getAttribute('data-page');
+  if (page === 'calc') {
+    if (window.Calc) window.Calc.open(0);
+    return;
+  }
+  if (page === 'topic') {
+    var t = SiteRender.byId(document.body.getAttribute('data-topic'));
+    if (!t) return;
+    site.innerHTML = SiteRender.topic(t, loadChecks()[t.id]);
+    var prog = function () {
       var n = site.querySelectorAll('.todo input:checked').length;
       document.getElementById('todoProg').innerHTML = '<span class="bar"><i style="width:' + Math.round(100 * n / t.actions.length) + '%"></i></span>' +
-        (n ? 'סימנת ' + n + ' מתוך ' + t.actions.length : t.actions.length + ' צעדים קטנים. מסמנים מה שעשית.');
-    }
+        (n ? L('סימנת') + ' ' + n + ' ' + L('מתוך') + ' ' + t.actions.length : t.actions.length + ' ' + L('צעדים קטנים. מסמנים מה שעשית.'));
+    };
     site.querySelectorAll('.todo input').forEach(function (cb) {
       cb.onchange = function () {
         var all = loadChecks();
@@ -230,52 +258,9 @@
       };
     });
     prog();
+  } else if (page === 'home') {
+    // הכפתורים "לתוצאה שלי" תלויים בנתונים השמורים, ולכן מצוירים מחדש בדפדפן
+    site.innerHTML = SiteRender.home();
+    if (location.hash === '#topics') { var el = document.getElementById('topics'); if (el) el.scrollIntoView(); }
   }
-
-  /* ---------- על השיטה ---------- */
-  function aboutHTML() {
-    return '<article class="page"><p class="eyebrow">על האתר</p><h1>איך זה עובד</h1>' +
-      '<section><h2>המדריכים</h2><p>כל מדריך נשען על מחקרים שפורסמו בכתבי עת רפואיים ועל הנחיות של גופים כמו ארגון הבריאות העולמי. כל מספר באתר מופיע עם קישור למקור, והמספרים נבדקו מול תקצירי המחקרים עצמם. כשמחקר הוא תצפיתי, כלומר מראה קשר ולא בהכרח סיבה, זה כתוב.</p></section>' +
-      '<section><h2>המחשבון</h2><p>נקודת הבסיס היא לוח התמותה של ארגון הבריאות העולמי לפי מדינה, גיל ומין. כל גורם סיכון מתורגם ליחס סיכונים מתוך מחקר גדול, ומכפיל את קצב התמותה בכל גיל. ההשפעה נחלשת בגיל מבוגר, וגורמים קשורים נספרים במשקל מופחת כדי לא לספור אותו דבר פעמיים. התוצאה מוצגת כטווח, כי אף אחד לא יכול לדעת תאריך.</p></section>' +
-      '<section><h2>פרטיות</h2><p>שום נתון לא נשלח לשרת. החישוב, קריאת קובצי בדיקות הדם וקובצי השעון נעשים כולם בדפדפן. אם בחרת לזכור את הנתונים, הם נשמרים רק בדפדפן הזה, ואפשר למחוק אותם בכל רגע בכפתור "מחיקת הנתונים" בתחתית העמוד.</p></section>' +
-      '<section><h2>מה זה לא</h2><p>זו לא אבחנה ולא ייעוץ רפואי. המחקרים מתארים ממוצעים של קבוצות גדולות, לא את העתיד של אדם מסוים. בכל שאלה על הבריאות שלך, הכתובת היא רופא/ת המשפחה.</p></section>' +
-      '<div class="cta-row"><a class="btn primary" href="#/calc">' + icon('calc') + 'למחשבון</a><a class="btn ghost" href="#/topics">' + icon('book') + 'למדריכים</a></div>' +
-      '</article>';
-  }
-
-  /* ---------- ניתוב ---------- */
-  var BASE_TITLE = 'אופק';
-  function route() {
-    var h = location.hash || '#/';
-    var m;
-    if (/^#\/calc/.test(h)) {
-      site.hidden = true; calcWrap.hidden = false;
-      document.title = 'המחשבון — ' + BASE_TITLE;
-      setActive('calc');
-      if (window.Calc) Calc.open();
-      return;
-    }
-    calcWrap.hidden = true; site.hidden = false;
-    if ((m = h.match(/^#\/topic\/([\w-]+)/)) && byId(m[1])) {
-      var t = byId(m[1]);
-      site.innerHTML = topicHTML(t); wireTopic(t);
-      document.title = t.title + ' — ' + BASE_TITLE;
-      setActive('topics');
-      window.scrollTo(0, 0);
-    } else if (/^#\/about/.test(h)) {
-      site.innerHTML = aboutHTML();
-      document.title = 'איך זה עובד — ' + BASE_TITLE;
-      setActive('about');
-      window.scrollTo(0, 0);
-    } else {
-      site.innerHTML = homeHTML();
-      document.title = BASE_TITLE + ' — לחיות יותר שנים, ויותר שנים טובות';
-      var toTopics = /^#\/topics/.test(h);
-      setActive(toTopics ? 'topics' : 'home');
-      if (toTopics) { var el = document.getElementById('topics'); if (el) el.scrollIntoView(); } else window.scrollTo(0, 0);
-    }
-  }
-
-  window.addEventListener('hashchange', route);
-  route();
 })();
