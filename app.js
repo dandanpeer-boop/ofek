@@ -800,7 +800,7 @@
       '<h3>איך זה מחושב</h3>' +
       '<details><summary>השיטה בקצרה</summary><p class="small" style="margin-top:8px">נקודת הבסיס היא לוח התמותה של ארגון הבריאות העולמי לשנת ' + LIFE_TABLE_YEAR + ' (השנה האחרונה לפני הקורונה), לפי מדינה ומין. כל גורם סיכון מתורגם ליחס סיכונים (Hazard Ratio) מתוך מחקר מפורסם, מנורמל לממוצע האוכלוסייה, ומכפיל את קצב התמותה בכל גיל. יחסי הסיכון נחלשים בגיל מבוגר, כפי שנמצא במחקרים. מכיוון שגורמי הסיכון מתואמים זה עם זה, הגורם החזק ביותר נספר במלואו והאחרים במשקל מופחת, והיחס המשולב מוגבל לטווח 0.4–5.</p>' +
       '<p class="small"><b>מגבלות:</b> המחקרים הם תצפיתיים ומראים קשר סטטיסטי, לא בהכרח סיבתיות. המודל אינו מכיר מחלות קיימות, תרופות, גנטיקה אישית או תאונות, ואינו מביא בחשבון שיפורים עתידיים ברפואה. לוח התמותה משקף את התמותה של היום, ולכן לצעירים ההערכה נוטה להיות שמרנית.</p></details>' +
-      '<details><summary>המקורות</summary><ol>' + SOURCES.map(function (s) { return '<li>' + s + '</li>'; }).join('') + '</ol></details>' +
+      '<details><summary>המקורות ויחסי הסיכון ששימשו</summary><p class="small muted" style="margin-top:8px">ליד כל מקור מופיע יחס הסיכון (HR) ששימש במודל. מעל 1 פירושו סיכון גבוה יותר, ומתחת ל-1 נמוך יותר. אלה הערכים מהמחקר, לפני הנרמול לממוצע האוכלוסייה ולפני ההיחלשות בגיל מבוגר.</p><ol>' + SOURCES.map(function (s) { return '<li>' + s + '</li>'; }).join('') + '</ol></details>' +
 
       '<div class="nav"><button id="back">עריכת הנתונים</button><button class="primary" id="print">הדפסה / שמירה כ-PDF</button></div></div>';
 
@@ -811,32 +811,32 @@
 
   var SOURCES = [
     '<b>בסיס:</b> WHO Global Health Observatory, Life tables by country, 2019 (nqx, ex).',
-    '<b>עישון:</b> Jha P. et al. 21st-Century Hazards of Smoking and Benefits of Cessation in the United States. <i>NEJM</i> 2013;368:341–50.',
-    '<b>BMI:</b> Global BMI Mortality Collaboration. Body-mass index and all-cause mortality: individual-participant-data meta-analysis of 239 prospective studies. <i>Lancet</i> 2016;388:776–86.',
-    '<b>פעילות גופנית:</b> Arem H. et al. Leisure Time Physical Activity and Mortality. <i>JAMA Intern Med</i> 2015;175:959–67.',
-    '<b>אלכוהול:</b> Wood A.M. et al. Risk thresholds for alcohol consumption. <i>Lancet</i> 2018;391:1513–23.',
-    '<b>שינה:</b> Cappuccio F.P. et al. Sleep Duration and All-Cause Mortality. <i>Sleep</i> 2010;33:585–92.',
-    '<b>פירות וירקות:</b> Wang X. et al. Fruit and vegetable consumption and mortality. <i>BMJ</i> 2014;349:g4490.',
-    '<b>בדידות:</b> Holt-Lunstad J. et al. Loneliness and Social Isolation as Risk Factors for Mortality. <i>Perspect Psychol Sci</i> 2015;10:227–37.',
-    '<b>השכלה:</b> IHME-CHAIN Collaborators. Effects of education on adult mortality. <i>Lancet Public Health</i> 2024;9:e155–65.',
-    '<b>סוכרת:</b> Emerging Risk Factors Collaboration. Diabetes Mellitus, Fasting Glucose, and Risk of Cause-Specific Death. <i>NEJM</i> 2011;364:829–41.',
-    '<b>לחץ דם:</b> Prospective Studies Collaboration. Age-specific relevance of usual blood pressure to vascular mortality. <i>Lancet</i> 2002;360:1903–13.',
-    '<b>כולסטרול:</b> Prospective Studies Collaboration. Blood cholesterol and vascular mortality by age, sex, and blood pressure. <i>Lancet</i> 2007;370:1829–39.',
-    '<b>כליות:</b> CKD Prognosis Consortium. Association of eGFR and albuminuria with all-cause and cardiovascular mortality. <i>Lancet</i> 2010;375:2073–81. חישוב eGFR: Inker L.A. et al. <i>NEJM</i> 2021;385:1737–49 (CKD-EPI 2021).',
-    '<b>CRP:</b> Emerging Risk Factors Collaboration. C-reactive protein concentration and risk of coronary heart disease, stroke, and mortality. <i>Lancet</i> 2010;375:132–40.',
-    '<b>אריכות ימים של ההורים:</b> Atkins J.L. et al. Longer-Lived Parents and Cardiovascular Outcomes. <i>JACC</i> 2016;68:874–5.',
-    '<b>מחלת לב מוקדמת במשפחה:</b> Lloyd-Jones D.M. et al. Parental Cardiovascular Disease as a Risk Factor for Cardiovascular Disease in Middle-aged Adults. <i>JAMA</i> 2004;291:2204–11.',
-    '<b>גיל ביולוגי:</b> Levine M.E. et al. An epigenetic biomarker of aging for lifespan and healthspan. <i>Aging</i> 2018;10:573–91; Liu Z. et al. A new aging measure captures morbidity and mortality risk across diverse subpopulations from NHANES IV. <i>PLoS Med</i> 2018;15:e1002718 (והתיקון לנוסחה, 2019).',
-    '<b>הערכה עצמית של הבריאות:</b> DeSalvo K.B. et al. Mortality Prediction with a Single General Self-Rated Health Question. <i>J Gen Intern Med</i> 2006;21:267–75.',
-    '<b>התקף לב, שבץ וסוכרת יחד:</b> Emerging Risk Factors Collaboration. Association of Cardiometabolic Multimorbidity With Mortality. <i>JAMA</i> 2015;314:52–60.',
-    '<b>דופק במנוחה:</b> Zhang D. et al. Resting heart rate and all-cause and cardiovascular mortality in the general population. <i>CMAJ</i> 2016;188:E53–63.',
-    '<b>היקף מותניים:</b> Cerhan J.R. et al. A Pooled Analysis of Waist Circumference and Mortality in 650,000 Adults. <i>Mayo Clin Proc</i> 2014;89:335–45.',
-    '<b>כושר אירובי:</b> Kodama S. et al. Cardiorespiratory Fitness as a Quantitative Predictor of All-Cause Mortality. <i>JAMA</i> 2009;301:2024–35. ערכי ייחוס: Kaminsky L.A. et al. (FRIEND Registry). <i>Mayo Clin Proc</i> 2015;90:1515–23.',
-    '<b>ישיבה:</b> Chau J.Y. et al. Daily Sitting Time and All-Cause Mortality: A Meta-Analysis. <i>PLoS One</i> 2013;8:e80000.',
-    '<b>מצב משפחתי:</b> Wang Y. et al. Sex differences in the association between marital status and the risk of cardiovascular, cancer, and all-cause mortality. <i>Glob Health Res Policy</i> 2020;5:4.',
-    '<b>טריגליצרידים:</b> Liu J. et al. Effects of blood triglycerides on cardiovascular and all-cause mortality. <i>Lipids Health Dis</i> 2013;12:159.',
-    '<b>Lp(a):</b> Langsted A. et al. High lipoprotein(a) and high risk of mortality. <i>Eur Heart J</i> 2019;40:2760–70.',
-    '<b>GGT:</b> Kunutsor S.K. et al. Liver enzymes and risk of all-cause mortality in general populations. <i>Int J Epidemiol</i> 2014;43:187–201.',
+    '<b>עישון:</b> Jha P. et al. 21st-Century Hazards of Smoking and Benefits of Cessation in the United States. <i>NEJM</i> 2013;368:341–50. <span class="hrnote">במודל: מעשן/ת: 2.8 בגברים, 3.0 בנשים. הפסקת עישון: 1.0 בגיל 25–34, 1.2 ב-35–44, 1.5 ב-45–54, 1.7 ב-55–64; מעל 65: 1.9 (הנחה)</span>',
+    '<b>BMI:</b> Global BMI Mortality Collaboration. Body-mass index and all-cause mortality: individual-participant-data meta-analysis of 239 prospective studies. <i>Lancet</i> 2016;388:776–86. <span class="hrnote">במודל: מתחת ל-18.5: 1.51 · 18.5–20: 1.13 · 25–27.5: 1.07 · 27.5–30: 1.20 · 30–35: 1.45 · 35–40: 1.94 · 40+: 2.76 (ייחוס: 20–25)</span>',
+    '<b>פעילות גופנית:</b> Arem H. et al. Leisure Time Physical Activity and Mortality. <i>JAMA Intern Med</i> 2015;175:959–67. <span class="hrnote">במודל: פחות מ-150 דק׳ בשבוע: 0.80 · 150–300: 0.69 · 300–450: 0.63 · מעל 450: 0.61 (ייחוס: ללא פעילות)</span>',
+    '<b>אלכוהול:</b> Wood A.M. et al. Risk thresholds for alcohol consumption. <i>Lancet</i> 2018;391:1513–23. <span class="hrnote">במודל: 8–14 מנות בשבוע: 1.05 · 15–25: 1.16 · מעל 25: 1.57 (נגזר מהפרשי תוחלת החיים במחקר)</span>',
+    '<b>שינה:</b> Cappuccio F.P. et al. Sleep Duration and All-Cause Mortality. <i>Sleep</i> 2010;33:585–92. <span class="hrnote">במודל: פחות מ-6 שעות: 1.12 · מעל 9 שעות: 1.30</span>',
+    '<b>פירות וירקות:</b> Wang X. et al. Fruit and vegetable consumption and mortality. <i>BMJ</i> 2014;349:g4490. <span class="hrnote">במודל: 0.95 לכל מנה ביום, עד 5 מנות</span>',
+    '<b>בדידות:</b> Holt-Lunstad J. et al. Loneliness and Social Isolation as Risk Factors for Mortality. <i>Perspect Psychol Sci</i> 2015;10:227–37. <span class="hrnote">במודל: בדידות תכופה: 1.26</span>',
+    '<b>השכלה:</b> IHME-CHAIN Collaborators. Effects of education on adult mortality. <i>Lancet Public Health</i> 2024;9:e155–65. <span class="hrnote">במודל: לכל שנת לימוד: 2.9% פחות סיכון עד גיל 50, 1.9% בגיל 50–69, 0.8% מגיל 70</span>',
+    '<b>סוכרת:</b> Emerging Risk Factors Collaboration. Diabetes Mellitus, Fasting Glucose, and Risk of Cause-Specific Death. <i>NEJM</i> 2011;364:829–41. <span class="hrnote">במודל: סוכרת: 1.80. בלי סוכרת: 1.10 לכל 18 מ"ג/ד"ל גלוקוז בצום מעל 100</span>',
+    '<b>לחץ דם:</b> Prospective Studies Collaboration. Age-specific relevance of usual blood pressure to vascular mortality. <i>Lancet</i> 2002;360:1903–13. <span class="hrnote">במודל: פי 2 בתמותה ממחלות לב וכלי דם לכל 20 ממ"כ סיסטולי (או 10 דיאסטולי), מוחל על 30% מהתמותה</span>',
+    '<b>כולסטרול:</b> Prospective Studies Collaboration. Blood cholesterol and vascular mortality by age, sex, and blood pressure. <i>Lancet</i> 2007;370:1829–39. <span class="hrnote">במודל: לכל 1 mmol/L (כ-39 מ"ג/ד"ל): 2.27 עד גיל 50, 1.52 בגיל 50–69, 1.20 מגיל 70, לתמותה ממחלת לב איסכמית, מוחל על 15% מהתמותה</span>',
+    '<b>כליות:</b> CKD Prognosis Consortium. Association of eGFR and albuminuria with all-cause and cardiovascular mortality. <i>Lancet</i> 2010;375:2073–81. חישוב eGFR: Inker L.A. et al. <i>NEJM</i> 2021;385:1737–49 (CKD-EPI 2021). <span class="hrnote">במודל: eGFR 60: 1.18 · 45: 1.57 · 15: 3.14 (ייחוס: 75 ומעלה). חלבון בשתן (ACR) 10: 1.20 · 30: 1.63 · 300: 2.22 (ייחוס: 5)</span>',
+    '<b>CRP:</b> Emerging Risk Factors Collaboration. C-reactive protein concentration and risk of coronary heart disease, stroke, and mortality. <i>Lancet</i> 2010;375:132–40. <span class="hrnote">במודל: 1.34 לכל עלייה של פי 3 בערך</span>',
+    '<b>אריכות ימים של ההורים:</b> Atkins J.L. et al. Longer-Lived Parents and Cardiovascular Outcomes. <i>JACC</i> 2016;68:874–5. <span class="hrnote">במודל: 0.83 לכל עשור שהורה חי מעבר לגיל 80. סבים וסבתות: חצי מזה (הנחה)</span>',
+    '<b>מחלת לב מוקדמת במשפחה:</b> Lloyd-Jones D.M. et al. Parental Cardiovascular Disease as a Risk Factor for Cardiovascular Disease in Middle-aged Adults. <i>JAMA</i> 2004;291:2204–11. <span class="hrnote">במודל: 2.0 בגברים, 1.7 בנשים לאירועי לב וכלי דם, מוחל על 30% מהתמותה (כ-1.25 לתמותה הכוללת)</span>',
+    '<b>גיל ביולוגי:</b> Levine M.E. et al. An epigenetic biomarker of aging for lifespan and healthspan. <i>Aging</i> 2018;10:573–91; Liu Z. et al. A new aging measure captures morbidity and mortality risk across diverse subpopulations from NHANES IV. <i>PLoS Med</i> 2018;15:e1002718 (והתיקון לנוסחה, 2019). <span class="hrnote">במודל: 1.09 לכל שנה של גיל ביולוגי מעל הגיל בפועל</span>',
+    '<b>הערכה עצמית של הבריאות:</b> DeSalvo K.B. et al. Mortality Prediction with a Single General Self-Rated Health Question. <i>J Gen Intern Med</i> 2006;21:267–75. <span class="hrnote">במודל: טובה: 1.23 · בינונית: 1.44 · גרועה: 1.92 (ייחוס: מצוינת)</span>',
+    '<b>התקף לב, שבץ וסוכרת יחד:</b> Emerging Risk Factors Collaboration. Association of Cardiometabolic Multimorbidity With Mortality. <i>JAMA</i> 2015;314:52–60. <span class="hrnote">במודל: התקף לב: 2.0 · שבץ: 2.1 · אחד מהם עם סוכרת: 3.7–3.8 · שניהם: 3.5 · שלושתם: 6.9</span>',
+    '<b>דופק במנוחה:</b> Zhang D. et al. Resting heart rate and all-cause and cardiovascular mortality in the general population. <i>CMAJ</i> 2016;188:E53–63. <span class="hrnote">במודל: 1.09 לכל 10 פעימות בדקה</span>',
+    '<b>היקף מותניים:</b> Cerhan J.R. et al. A Pooled Analysis of Waist Circumference and Mortality in 650,000 Adults. <i>Mayo Clin Proc</i> 2014;89:335–45. <span class="hrnote">במודל: 1.07 בגברים, 1.09 בנשים, לכל 5 ס"מ</span>',
+    '<b>כושר אירובי:</b> Kodama S. et al. Cardiorespiratory Fitness as a Quantitative Predictor of All-Cause Mortality. <i>JAMA</i> 2009;301:2024–35. ערכי ייחוס: Kaminsky L.A. et al. (FRIEND Registry). <i>Mayo Clin Proc</i> 2015;90:1515–23. <span class="hrnote">במודל: 0.87 לכל MET (3.5 מ"ל/ק"ג/דקה) של VO2max מעל החציון לגיל ולמין</span>',
+    '<b>ישיבה:</b> Chau J.Y. et al. Daily Sitting Time and All-Cause Mortality: A Meta-Analysis. <i>PLoS One</i> 2013;8:e80000. <span class="hrnote">במודל: 1.02 לכל שעה ביום בין 3 ל-7 שעות, 1.05 לכל שעה מעל 7</span>',
+    '<b>מצב משפחתי:</b> Wang Y. et al. Sex differences in the association between marital status and the risk of cardiovascular, cancer, and all-cause mortality. <i>Glob Health Res Policy</i> 2020;5:4. <span class="hrnote">במודל: ללא בן/בת זוג: 1.46 בגברים, 1.22 בנשים</span>',
+    '<b>טריגליצרידים:</b> Liu J. et al. Effects of blood triglycerides on cardiovascular and all-cause mortality. <i>Lipids Health Dis</i> 2013;12:159. <span class="hrnote">במודל: 1.12 לכל 88.6 מ"ג/ד"ל (1 mmol/L)</span>',
+    '<b>Lp(a):</b> Langsted A. et al. High lipoprotein(a) and high risk of mortality. <i>Eur Heart J</i> 2019;40:2760–70. <span class="hrnote">במודל: 1.05 לכל 50 מ"ג/ד"ל</span>',
+    '<b>GGT:</b> Kunutsor S.K. et al. Liver enzymes and risk of all-cause mortality in general populations. <i>Int J Epidemiol</i> 2014;43:187–201. <span class="hrnote">במודל: 1.07 לכל 5 יחידות, עד 1.6 לכל היותר</span>',
     '<b>בדיקת סבירות לשילוב הגורמים:</b> Li Y. et al. Impact of Healthy Lifestyle Factors on Life Expectancies in the US Population. <i>Circulation</i> 2018;138:345–55.'
   ];
 

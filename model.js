@@ -382,9 +382,9 @@ var LifeModel = (function () {
 
     // --- כושר אירובי (VO2max): Kodama et al., JAMA 2009; ערכי ייחוס: FRIEND, Kaminsky 2015 ---
     if (isNum(inp.vo2max)) {
-      // חציון לפי גיל ומין: 48.0/37.6 בגיל 20-29 עד 24.4/18.3 בגיל 70-79, ירידה של כ-10% לעשור
-      var v0 = sex === 'f' ? 37.6 : 48.0, v1 = sex === 'f' ? 18.3 : 24.4;
-      var vExp = v0 * Math.pow(v1 / v0, (clamp(age, 20, 85) - 25) / 50);
+      // חציון לפי גיל ומין: Kaminsky 2015 (FRIEND, הליכון), Table 3, אחוזון 50 לכל עשור (אומת מול המאמר)
+      var vTab = sex === 'f' ? [37.6, 30.2, 26.7, 23.4, 20.0, 18.3] : [48.0, 42.4, 37.8, 32.6, 28.2, 24.4];
+      var vExp = interp(vTab.map(function (v, i) { return [25 + 10 * i, v]; }), clamp(age, 25, 75));
       derived.vo2Expected = vExp;
       var lnV = Math.log(0.87) * clamp((inp.vo2max - vExp) / 3.5, -4, 4); // 13% פחות סיכון לכל MET
       add('fitness', 'כושר אירובי (VO2max)', inp.vo2max + ' (חציון לגילך: ' + Math.round(vExp) + ')', function (a) { return lnV * attStd(a); });
