@@ -306,11 +306,13 @@ var LifeModel = (function () {
       var lnCM = Math.log(cmHR / 1.13);
       add('cardiomet', 'מחלות לב, שבץ וסוכרת', cmLbl, function (a) { return lnCM * attStd(a); });
     } else if (inp.diabetes || hasGlu) {
-      var lnD = Math.log((diabetic ? 1.80 : 1.0) / 1.08);
+      // ERFC 2011 (NEJM): סוכרת HR 1.80; בלי סוכרת, מעל 100 מ"ג/ד"ל (5.6 mmol/L) HR 1.10 לכל 1 mmol/L (18 מ"ג/ד"ל)
+      var preHR = (!diabetic && isNum(inp.glucose) && inp.glucose > 100) ? Math.pow(1.10, (Math.min(inp.glucose, 126) - 100) / 18.016) : 1.0;
+      var lnD = Math.log((diabetic ? 1.80 : preHR) / 1.08);
       var dDet = diabetic ? (inp.diabetes === 'yes' ? 'סוכרת מאובחנת' : 'ערכים בטווח הסוכרת') : 'ללא סוכרת';
       add('diabetes', 'סוכר / סוכרת', dDet, function (a) { return lnD * attStd(a); });
       if (!diabetic && ((isNum(inp.glucose) && inp.glucose >= 100) || (isNum(inp.hba1c) && inp.hba1c >= 5.7))) {
-        notes.push('ערכי הסוכר שלך בטווח ה"טרום-סוכרת". מחקר ERFC מצא עלייה בסיכון כבר מעל 100 מ"ג/ד"ל, אך היא לא כומתה במודל הזה. שווה לעקוב עם רופא/ת המשפחה.');
+        notes.push('ערכי הסוכר שלך בטווח ה"טרום-סוכרת". מחקר ERFC מצא עלייה של כ-10% בסיכון לכל 18 מ"ג/ד"ל מעל 100, והיא נכללת בחישוב (אם הוזן גלוקוז). שווה לעקוב עם רופא/ת המשפחה.');
       }
       if (diabetic && inp.diabetes !== 'yes') {
         notes.push('הערכים שהזנת (גלוקוז בצום 126 ומעלה או HbA1c 6.5% ומעלה) נמצאים בטווח שמוגדר סוכרת. אם לא אובחנת — כדאי לפנות לרופא/ה.');
