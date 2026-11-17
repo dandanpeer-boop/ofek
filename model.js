@@ -442,7 +442,7 @@ var LifeModel = (function () {
       var orV = inp.famHeart === 'yes' ? (sex === 'f' ? 1.7 : 2.0) : 1;
       var popFH = 1 + 0.12 * ASSUME.fracVascular * ((sex === 'f' ? 1.7 : 2.0) - 1);
       var lnFH = Math.log((1 + ASSUME.fracVascular * (orV - 1)) / popFH);
-      add('famheart', 'מחלת לב מוקדמת במשפחה', inp.famHeart === 'yes' ? 'קרוב/ה מדרגה ראשונה' : 'אין',
+      add('famheart', 'מחלת לב מוקדמת במשפחה', inp.famHeart === 'yes' ? 'הורה עם מחלת לב מוקדמת' : 'אין',
         function (a) { return lnFH * attStd(a); });
     }
 
