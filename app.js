@@ -14,7 +14,7 @@
   }
   function saveSoon() { clearTimeout(saveTimer); saveTimer = setTimeout(save, 300); }
   function wipe() {
-    var ls = storage(); try { if (ls) ls.removeItem(STORE); } catch (e) { /* */ }
+    var ls = storage(); try { if (ls) { ls.removeItem(STORE); ls.removeItem('ofek-checks'); } } catch (e) { /* */ }
     data = { country: 'ISR' };
   }
   (function load() {
@@ -212,7 +212,7 @@
       DISCLAIMER +
       '<label class="remember"><input type="checkbox" id="remember"' + (remember ? ' checked' : '') + '> לזכור את הנתונים שלי במכשיר הזה, כדי שלא אצטרך להזין שוב</label>' +
       '<p class="small muted">🔒 פרטיות: כל החישוב נעשה בדפדפן שלך ושום נתון לא נשלח לשרת. אם בחרת לזכור, הנתונים נשמרים רק בדפדפן הזה, ואפשר למחוק אותם בכל רגע בכפתור "מחיקת הנתונים" למעלה. במחשב משותף עדיף לא לסמן.</p>' +
-      '<div class="guidelink"><button type="button" id="guideOpen">📖 מדריך: שינה, תזונה ולחץ <span class="small muted">(בלי להזין נתונים)</span></button></div>' +
+      '<div class="guidelink"><button type="button" id="guideOpen">📖 מדריכים: שינה, תזונה, צום, סוכר ועוד <span class="small muted">(בלי להזין נתונים)</span></button></div>' +
       '<div class="nav">' + (returning ? '<button id="edit">עדכון הנתונים</button><button class="primary" id="next">לתוצאה שלי</button>'
         : '<span></span><button class="primary" id="next">בואו נתחיל</button>') + '</div></div>';
     document.getElementById('remember').onchange = function () {
@@ -221,7 +221,7 @@
       save();
     };
     document.getElementById('next').onclick = function () { step = returning ? STEPS.length + 1 : 1; render(); };
-    document.getElementById('guideOpen').onclick = function () { step = 'guide'; render(); };
+    document.getElementById('guideOpen').onclick = function () { location.hash = '#/topics'; };
     if (returning) document.getElementById('edit').onclick = function () { step = 1; render(); };
   }
 
@@ -795,6 +795,7 @@
       improveHTML(inp, r) +
       simHTML(inp, r) +
       guideHTML(inp, r) +
+      '<p style="margin-top:14px"><a href="#/topics">לכל המדריכים באתר: תזונה, צום, סוכר, תנועה, קשרים חברתיים ועוד ←</a></p>' +
 
       '<h3>איך זה מחושב</h3>' +
       '<details><summary>השיטה בקצרה</summary><p class="small" style="margin-top:8px">נקודת הבסיס היא לוח התמותה של ארגון הבריאות העולמי לשנת ' + LIFE_TABLE_YEAR + ' (השנה האחרונה לפני הקורונה), לפי מדינה ומין. כל גורם סיכון מתורגם ליחס סיכונים (Hazard Ratio) מתוך מחקר מפורסם, מנורמל לממוצע האוכלוסייה, ומכפיל את קצב התמותה בכל גיל. יחסי הסיכון נחלשים בגיל מבוגר, כפי שנמצא במחקרים. מכיוון שגורמי הסיכון מתואמים זה עם זה, הגורם החזק ביותר נספר במלואו והאחרים במשקל מופחת, והיחס המשולב מוגבל לטווח 0.4–5.</p>' +
@@ -860,11 +861,16 @@
 
   app.addEventListener('input', saveSoon);
   app.addEventListener('change', saveSoon);
-  document.getElementById('guideNav').onclick = function () { step = 'guide'; render(); };
   document.getElementById('wipe').onclick = function () {
     if (!window.confirm('למחוק את כל הנתונים שהוזנו ונשמרו במכשיר הזה?')) return;
-    wipe(); step = 0; render();
+    wipe(); step = 0;
+    if (/^#\/calc/.test(location.hash)) render(); else location.hash = '#/';
+    window.dispatchEvent(new Event('hashchange'));
   };
 
-  render();
+  // האתר (site.js) מנתב בין העמודים, ומבקש מהמחשבון להציג את עצמו כשעוברים אליו
+  window.Calc = {
+    open: function (s) { if (s !== undefined) step = s; render(); },
+    hasData: function () { return num(data.age) !== undefined && !!data.sex; }
+  };
 })();
