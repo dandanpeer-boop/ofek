@@ -939,3 +939,7 @@ Object.assign(I18N.en, {
 "5imbkl": "Find out, in a minute",
 "1cosgin": "When will you die, and how to push it back"
 });
+Object.assign(I18N.en, {
+"1t4uut3": "Optional. At navel height, standing, after a normal breath out. Helps tell muscle from fat, which BMI alone can't see.",
+"1kklcdo": "Your BMI is above 25, but your waist is in the normal range. That fits muscle mass better than excess fat, so no weight-loss recommendation is shown. Your waist measurement already offsets part of the BMI effect in the calculation."
+});

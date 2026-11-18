@@ -937,3 +937,7 @@ Object.assign(I18N.fr, {
 "5imbkl": "Le savoir en une minute",
 "1cosgin": "Quand allez-vous mourir, et comment repousser l’échéance"
 });
+Object.assign(I18N.fr, {
+"1t4uut3": "Facultatif. À hauteur du nombril, debout, après une expiration normale. Aide à distinguer le muscle de la graisse, ce que l'IMC seul ne voit pas.",
+"1kklcdo": "Votre IMC dépasse 25, mais votre tour de taille est dans la zone normale. Cela correspond davantage à de la masse musculaire qu'à un excès de graisse : aucune recommandation de perte de poids n'est donc affichée. Le tour de taille compense déjà une partie de l'effet de l'IMC dans le calcul."
+});

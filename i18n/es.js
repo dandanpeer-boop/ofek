@@ -937,3 +937,7 @@ Object.assign(I18N.es, {
 "5imbkl": "Descúbralo en un minuto",
 "1cosgin": "Cuándo va a morir y cómo retrasarlo"
 });
+Object.assign(I18N.es, {
+"1t4uut3": "Opcional. A la altura del ombligo, de pie, tras una espiración normal. Ayuda a distinguir músculo de grasa, algo que el IMC por sí solo no ve.",
+"1kklcdo": "Su IMC está por encima de 25, pero su cintura está en el rango normal. Eso encaja más con masa muscular que con exceso de grasa, por lo que no se muestra una recomendación de bajar de peso. La cintura ya compensa parte del efecto del IMC en el cálculo."
+});

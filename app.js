@@ -50,7 +50,7 @@
           { id: 'height', type: 'num', label: L('גובה'), unit: L('ס"מ'), min: 120, max: 220 },
           { id: 'weight', type: 'num', label: L('משקל'), unit: L('ק"ג'), min: 30, max: 250 }
         ] },
-        { id: 'waist', type: 'num', label: L('היקף מותניים'), hint: L('בגובה הטבור, בעמידה, אחרי נשיפה רגילה.'), unit: L('ס"מ'), min: 50, max: 200 },
+        { id: 'waist', type: 'num', label: L('היקף מותניים'), hint: L('רשות. בגובה הטבור, בעמידה, אחרי נשיפה רגילה. עוזר להבחין בין שריר לשומן, ש-BMI לבדו לא רואה.'), unit: L('ס"מ'), min: 50, max: 200 },
         { id: 'eduYears', type: 'choice', label: L('השכלה'), options: [['9', L('עד 10 שנות לימוד')], ['12', L('תיכון')], ['14', L('על-תיכונית')], ['15', L('תואר ראשון')], ['17', L('תואר שני')], ['20', L('דוקטורט')]] },
         { id: 'marital', type: 'choice', label: L('מצב משפחתי'), options: [['married', L('נשוי/אה או בזוגיות קבועה')], ['single', L('ללא בן/בת זוג')]] },
         { id: 'srh', type: 'choice', label: L('איך היית מגדיר/ה את מצב הבריאות שלך באופן כללי?'), hint: L('שאלה אחת שמנבאת תמותה טוב יותר מהרבה בדיקות.'), options: [['excellent', L('מצוינת')], ['good', L('טובה')], ['fair', L('בינונית')], ['poor', L('גרועה')]] },
@@ -149,7 +149,7 @@
   var QUICK = [{
     title: L('השאלות העיקריות'), intro: L('השאלות שמשפיעות הכי הרבה, כדקה למילוי. אחרי התוצאה אפשר להוסיף פרטים ולדייק.'),
     fields: [
-      { row: [F('age'), F('country')] }, F('sex'), { row: [F('height'), F('weight')] },
+      { row: [F('age'), F('country')] }, F('sex'), { row: [F('height'), F('weight')] }, F('waist'),
       F('smoking'), F('quitAge'), F('activity'), F('walkPace'), F('alcohol'), F('sleep'), F('srh'), F('diabetes'),
       Object.assign({}, F('conditions'), { hint: undefined })
     ]
@@ -591,7 +591,9 @@
     var c = [], bmi = inp.height && inp.weight ? inp.weight / Math.pow(inp.height / 100, 2) : null;
     function add(id, label, over) { c.push({ id: id, label: label, over: over }); }
     if (inp.smoking === 'current') add('smoking', L('להפסיק לעשן'), { smoking: 'former', quitAge: r.age });
-    if (bmi !== null && bmi > 25.5) { var w = Math.round(24 * Math.pow(inp.height / 100, 2)); add('bmi', L('לרדת למשקל ') + w + L(' ק"ג (BMI 24)'), { weight: w }); }
+    // מותניים בטווח התקין (WHO: פחות מ-94 ס"מ בגברים, 80 בנשים) עם BMI מתחת ל-30 מרמזים על מסת שריר, לא על עודף שומן
+    var leanWaist = inp.waist !== undefined && inp.waist < (inp.sex === 'f' ? 80 : 94);
+    if (bmi !== null && bmi > 25.5 && !(leanWaist && bmi < 30)) { var w = Math.round(24 * Math.pow(inp.height / 100, 2)); add('bmi', L('לרדת למשקל ') + w + L(' ק"ג (BMI 24)'), { weight: w }); }
     if (bmi !== null && bmi < 18.5) { var w2 = Math.round(20 * Math.pow(inp.height / 100, 2)); add('bmi', L('לעלות למשקל ') + w2 + L(' ק"ג (BMI 20)'), { weight: w2 }); }
     if (inp.activity === 'none' || inp.activity === 'low') add('activity', L('להגיע ל-150–300 דקות פעילות גופנית בשבוע'), { activity: 'rec' });
     else if (inp.activity === 'rec') add('activity', L('להגדיל את הפעילות ל-300–450 דקות בשבוע'), { activity: 'high' });
@@ -837,6 +839,8 @@
     if (cnd.indexOf('mi') >= 0 || cnd.indexOf('stroke') >= 0) n.push(L('התקף לב ואירוע מוחי נכללו במספר לפי ממוצע של כל מי שעבר אירוע כזה (ERFC 2015). המצב האישי, הזמן שעבר מאז והטיפול יכולים לשנות את התמונה במידה רבה.'));
     if (meds.indexOf('bp') >= 0 && r.contributions.some(function (c) { return c.id === 'bp'; })) n.push(L('לחץ הדם שהזנת נמדד תחת טיפול תרופתי. המודל משתמש בערך הנמדד; מי שמאוזן בעזרת תרופות נמצא בדרך כלל בסיכון מעט גבוה יותר ממי שיש לו אותו ערך ללא טיפול.'));
     if (meds.indexOf('statin') >= 0 && r.contributions.some(function (c) { return c.id === 'chol'; })) n.push(L('ערכי הכולסטרול שהזנת נמדדו תחת טיפול בסטטינים, והמודל משתמש בערך הנמדד.'));
+    var hN = num(data.height), wN = num(data.weight), wa = num(data.waist), bmiN = hN && wN ? wN / Math.pow(hN / 100, 2) : null;
+    if (bmiN !== null && bmiN > 25 && bmiN < 30 && wa !== undefined && wa < (data.sex === 'f' ? 80 : 94)) n.push(L('ה-BMI שלך מעל 25, אבל היקף המותניים בטווח התקין. זה מתאים יותר למסת שריר מאשר לעודף שומן, ולכן לא מוצגת המלצה לרדת במשקל. היקף המותניים כבר מקזז חלק מההשפעה של ה-BMI בחישוב.'));
     if (r.derived.phenoMissing) n.push(L('כדי לחשב גיל ביולוגי חסרים עוד: ') + r.derived.phenoMissing.join(', ') + '.');
     if (r.derived.phenoAge !== undefined) n.push(L('כשמחושב גיל ביולוגי, CRP ותפקוד הכליות כבר כלולים בו, ולכן הם לא מופיעים כגורמים נפרדים.'));
     if (r.derived.egfr !== undefined && r.derived.egfr < 60) n.push(L('ה-eGFR המחושב מהקריאטינין שלך (') + Math.round(r.derived.egfr) + L(') נמוך מ-60. תוצאה בודדת אינה אבחנה, אבל כדאי להראות אותה לרופא/ה.'));
