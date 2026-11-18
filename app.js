@@ -88,10 +88,7 @@
         { id: 'mother', type: 'person', label: L('אמא') },
         { id: 'father', type: 'person', label: L('אבא') },
         { type: 'heading', label: L('סבים וסבתות') },
-        { id: 'gp0', type: 'person', label: L('סבתא (מצד אמא)') },
-        { id: 'gp1', type: 'person', label: L('סבא (מצד אמא)') },
-        { id: 'gp2', type: 'person', label: L('סבתא (מצד אבא)') },
-        { id: 'gp3', type: 'person', label: L('סבא (מצד אבא)') },
+        { id: 'gpAvg', type: 'choice', label: L('בערך עד איזה גיל חיו הסבים והסבתות שלך, בממוצע?'), hint: L('בלי מי שנפטר בתאונה או במלחמה. מי שעדיין בחיים, לפי הגיל שלו היום.'), options: [['65', L('פחות מ-70')], ['75', '70–79'], ['85', '80–89'], ['93', L('90 ומעלה')], ['', L('לא ידוע')]] },
         { type: 'heading', label: L('מחלות במשפחה') },
         { id: 'famHeart', type: 'choice', label: L('האם לאחד ההורים היה התקף לב או אירוע מוחי בגיל צעיר?'), hint: L('לפני גיל 55 אצל האב, או לפני גיל 65 אצל האם.'), options: [['no', L('לא')], ['yes', L('כן')], ['', L('לא ידוע')]] },
         { id: 'hered', type: 'multi', label: L('מחלות נוספות אצל קרובים מדרגה ראשונה'), hint: L('לא משפיע על המספר, אבל יופיע בהערות.'), options: [['breast', L('סרטן שד או שחלה')], ['colon', L('סרטן המעי הגס')], ['t2d', L('סוכרת סוג 2')], ['alz', L('אלצהיימר')], ['fh', L('כולסטרול גבוה משפחתי')]] },
@@ -99,10 +96,11 @@
       ]
     },
     {
-      title: L('בדיקות דם ולחץ דם'), intro: L('הכול כאן רשות. כל ערך שתזינו מדייק את ההערכה; אם אין לכם תוצאות, פשוט המשיכו.'),
+      title: L('בדיקות דם ולחץ דם'), intro: L('הכול כאן רשות.'),
       fields: [
-        { type: 'upload' },
         { id: 'diabetes', type: 'choice', label: L('האם אובחנת בסוכרת?'), options: [['no', L('לא')], ['yes', L('כן')]] },
+        { id: 'hasLabs', type: 'choice', gate: true, label: L('יש לך תוצאות של בדיקות דם או מדידה של לחץ דם מהשנה-שנתיים האחרונות?'), hint: L('לא חובה. בלי בדיקות מקבלים הערכה מלאה; עם בדיקות היא מדויקת יותר.'), options: [['yes', L('כן, אני רוצה להזין')], ['no', L('לא, לדלג')]] },
+        { type: 'upload' },
         { row: [
           { id: 'sbp', type: 'num', label: L('לחץ דם סיסטולי'), hint: L('המספר הגבוה, במנוחה.'), unit: L('ממ"כ'), min: 70, max: 250 },
           { id: 'dbp', type: 'num', label: L('לחץ דם דיאסטולי'), hint: L('המספר הנמוך. נכנס לחישוב יחד עם הסיסטולי.'), unit: L('ממ"כ'), min: 40, max: 150 }
@@ -145,6 +143,20 @@
       ]
     }
   ];
+
+  // גרסה מהירה: השאלות עם ההשפעה הגדולה ביותר, בשלב אחד. השדות עצמם משותפים לשאלון המלא.
+  function F(id) { return fieldById(id); }
+  var QUICK = [{
+    title: L('השאלות העיקריות'), intro: L('השאלות שמשפיעות הכי הרבה, כדקה למילוי. אחרי התוצאה אפשר להוסיף פרטים ולדייק.'),
+    fields: [
+      { row: [F('age'), F('country')] }, F('sex'), { row: [F('height'), F('weight')] },
+      F('smoking'), F('quitAge'), F('activity'), F('walkPace'), F('alcohol'), F('sleep'), F('srh'), F('diabetes'),
+      Object.assign({}, F('conditions'), { hint: undefined })
+    ]
+  }];
+  var mode = data._mode === 'quick' ? 'quick' : 'full';
+  function steps() { return mode === 'quick' ? QUICK : STEPS; }
+  function setMode(m) { mode = m; data._mode = m; }
 
   // ---------- עזרים ----------
 
@@ -205,6 +217,18 @@
     return '';
   }
 
+  // שדות של שלב, כשאחרי שאלת "שער" (gate) שאר השדות מוסתרים עד שעונים "כן"
+  var LAB_IDS = ['sbp', 'dbp', 'tc', 'hdl', 'ldl', 'tg', 'glucose', 'hba1c', 'creatinine', 'crp', 'ggt', 'acr', 'lpa', 'albumin', 'alp', 'wbc', 'lymph', 'mcv', 'rdw'];
+  function fieldsHTML(fields) {
+    var gi = -1;
+    fields.forEach(function (f, i) { if (f.gate && gi < 0) gi = i; });
+    if (gi < 0) return fields.map(fieldHTML).join('');
+    var g = fields[gi];
+    if (!data[g.id] && LAB_IDS.some(function (k) { return num(data[k]) !== undefined; })) data[g.id] = 'yes';
+    return fields.slice(0, gi + 1).map(fieldHTML).join('') +
+      '<div id="gatebody"' + (data[g.id] === 'yes' ? '' : ' hidden') + '>' + fields.slice(gi + 1).map(fieldHTML).join('') + '</div>';
+  }
+
   function renderIntro() {
     var returning = num(data.age) !== undefined && !!data.sex;
     app.innerHTML = '<div class="card">' +
@@ -212,30 +236,31 @@
       L('<p>מחשבון שמעריך תוחלת חיים אישית. הוא מתחיל מלוח התמותה הרשמי של ארגון הבריאות העולמי לפי גיל, מין ומדינה, ומתקן אותו לפי אורח החיים, ההיסטוריה המשפחתית ובדיקות הדם שלך, על סמך מחקרים אפידמיולוגיים גדולים.</p>') +
       (returning
         ? L('<div class="welcome"><b>הנתונים שהזנת בפעם הקודמת שמורים במכשיר הזה.</b> אפשר לעבור ישר לתוצאה, או לעדכן רק את מה שהשתנה.</div>')
-        : L('<p class="muted">ארבעה שלבים קצרים, כשלוש דקות. רק הגיל, המין והמדינה הם חובה.</p>')) +
+        : L('<p class="muted">אפשר להתחיל בגרסה המהירה, כדקה למילוי, ולהוסיף פרטים אחרי שרואים את התוצאה. רק הגיל, המין והמדינה הם חובה.</p>')) +
       DISCLAIMER +
       '<label class="remember"><input type="checkbox" id="remember"' + (remember ? ' checked' : '') + L('> לזכור את הנתונים שלי במכשיר הזה, כדי שלא אצטרך להזין שוב</label>') +
       L('<p class="small muted">🔒 פרטיות: כל החישוב נעשה בדפדפן שלך ושום נתון לא נשלח לשרת. אם בחרת לזכור, הנתונים נשמרים רק בדפדפן הזה, ואפשר למחוק אותם בכל רגע בכפתור "מחיקת הנתונים" למעלה. במחשב משותף עדיף לא לסמן.</p>') +
       L('<div class="guidelink"><button type="button" id="guideOpen">📖 מדריכים: שינה, תזונה, צום, סוכר ועוד <span class="small muted">(בלי להזין נתונים)</span></button></div>') +
       '<div class="nav">' + (returning ? L('<button id="edit">עדכון הנתונים</button><button class="primary" id="next">לתוצאה שלי</button>')
-        : L('<span></span><button class="primary" id="next">בואו נתחיל</button>')) + '</div></div>';
+        : L('<button id="full">שאלון מלא, כ-4 דקות</button><button class="primary" id="next">חישוב מהיר, כדקה</button>')) + '</div></div>';
     document.getElementById('remember').onchange = function () {
       remember = this.checked;
       var ls = storage(); try { if (ls) { if (remember) ls.removeItem(STORE + '-off'); else ls.setItem(STORE + '-off', '1'); } } catch (e) { /* */ }
       save();
     };
-    document.getElementById('next').onclick = function () { step = returning ? STEPS.length + 1 : 1; render(); };
+    document.getElementById('next').onclick = function () { if (!returning) setMode('quick'); step = returning ? steps().length + 1 : 1; render(); };
+    if (!returning) document.getElementById('full').onclick = function () { setMode('full'); step = 1; render(); };
     document.getElementById('guideOpen').onclick = function () { location.href = SiteURL('topics'); };
-    if (returning) document.getElementById('edit').onclick = function () { step = 1; render(); };
+    if (returning) document.getElementById('edit').onclick = function () { setMode('full'); step = 1; render(); };
   }
 
   function renderStep() {
-    var s = STEPS[step - 1];
-    var prog = '<div class="progress" aria-hidden="true">' + STEPS.map(function (_, i) { return '<div class="' + (i < step ? 'on' : '') + '"></div>'; }).join('') + '</div>';
+    var S = steps(), s = S[step - 1];
+    var prog = '<div class="progress" aria-hidden="true">' + S.map(function (_, i) { return '<div class="' + (i < step ? 'on' : '') + '"></div>'; }).join('') + '</div>';
     app.innerHTML = '<div class="card">' + prog +
-      L('<div class="step-label">שלב ') + step + L(' מתוך ') + STEPS.length + '</div><h2>' + esc(s.title) + '</h2><p class="muted">' + esc(s.intro) + '</p>' +
-      s.fields.map(fieldHTML).join('') +
-      L('<div class="nav"><button id="back">חזרה</button><button class="primary" id="next">') + (step === STEPS.length ? L('חשבו את ההערכה') : L('המשך')) + '</button></div></div>';
+      (S.length > 1 ? L('<div class="step-label">שלב ') + step + L(' מתוך ') + S.length + '</div>' : '') + '<h2>' + esc(s.title) + '</h2><p class="muted">' + esc(s.intro) + '</p>' +
+      fieldsHTML(s.fields) +
+      L('<div class="nav"><button id="back">חזרה</button><button class="primary" id="next">') + (step === S.length ? L('חשבו את ההערכה') : L('המשך')) + '</button></div></div>';
 
     app.querySelectorAll('[data-id]').forEach(function (el) {
       el.addEventListener(el.type === 'number' ? 'input' : 'change', function () {
@@ -243,6 +268,7 @@
         if (el.type === 'checkbox') {
           data[id] = Array.prototype.map.call(app.querySelectorAll('[data-id="' + id + '"]:checked'), function (c) { return c.value; });
         } else data[id] = el.value;
+        if (id === 'hasLabs') { var gb = document.getElementById('gatebody'); if (gb) gb.hidden = el.value !== 'yes'; }
         // שדות מותנים
         flat(s.fields).forEach(function (f) {
           if (f.showIf) { var w = app.querySelector('[data-field="' + f.id + '"]'); if (w) w.hidden = !f.showIf(); }
@@ -495,7 +521,10 @@
     ['smoking', 'alcohol', 'activity', 'walkPace', 'sleep', 'lonely', 'isolated', 'diabetes', 'famHeart', 'srh', 'marital'].forEach(function (k) { inp[k] = data[k] || undefined; });
     inp.conditions = data.conditions || [];
     inp.mother = data.mother; inp.father = data.father;
-    inp.grandparents = [data.gp0, data.gp1, data.gp2, data.gp3].filter(Boolean);
+    // סבים וסבתות: שאלה אחת על הגיל הממוצע. נתונים ישנים (ארבעה שדות נפרדים) עדיין נתמכים.
+    var gpa = num(data.gpAvg);
+    inp.grandparents = gpa !== undefined ? [{ status: 'dead', age: gpa, cause: 'natural' }, { status: 'dead', age: gpa, cause: 'natural' }]
+      : [data.gp0, data.gp1, data.gp2, data.gp3].filter(Boolean);
     return inp;
   }
 
@@ -573,6 +602,11 @@
     if (inp.lonely === 'yes' || inp.isolated === 'rarely') add('social', L('לחזק קשרים חברתיים'), { lonely: inp.lonely && 'no', isolated: inp.isolated && 'weekly' });
     if (inp.sbp !== undefined && inp.sbp > 122) add('bp', L('להוריד לחץ דם סיסטולי ל-120'), inp.dbp !== undefined ? { sbp: 120, dbp: Math.min(inp.dbp, 80) } : { sbp: 120 });
     if (inp.tc !== undefined && inp.tc > 185) add('chol', L('להוריד כולסטרול כללי ל-180'), { tc: 180 });
+    if (inp.vo2max === undefined && (inp.walkPace === 'slow' || inp.walkPace === 'average')) add('walkpace', L('לשפר את הכושר עד הליכה בקצב מהיר'), { walkPace: 'brisk' });
+    var g = inp.glucose, h = inp.hba1c;
+    if (inp.diabetes !== 'yes' && !(g >= 126) && !(h >= 6.5) && (g >= 100 || h >= 5.7)) {
+      add('glucose', L('להחזיר את הסוכר בדם לטווח התקין'), { glucose: g !== undefined ? Math.min(g, 95) : undefined, hba1c: h !== undefined ? Math.min(h, 5.5) : undefined });
+    }
     var base = r.personal.expectedAge;
     c.forEach(function (x) { x.gain = LifeModel.estimate(Object.assign({}, inp, x.over)) - base; });
     return c.filter(function (x) { return x.gain >= 0.1; }).sort(function (a, b) { return b.gain - a.gain; });
@@ -614,6 +648,66 @@
           g.sources.map(function (s) { return '<li><a href="' + esc(s.u) + '" target="_blank" rel="noopener noreferrer">' + esc(s.l) + '</a></li>'; }).join('') +
           '</ul></div></details>';
       }).join('');
+  }
+
+  // ---------- תוכנית פעולה: הצעדים הראשונים ----------
+
+  // מתי כדאי לפנות לרופא/ה לפני כל דבר אחר. ספים לפי ההנחיות המקובלות.
+  function referrals(inp, r) {
+    var out = [], s = inp.sbp, d = inp.dbp, bpTxt = s && d ? s + '/' + d : String(s || d);
+    if (s >= 180 || d >= 120) out.push(L('לחץ הדם שהזנת (') + bpTxt + L(') גבוה מאוד. כדאי לפנות לרופא/ה בהקדם.'));
+    else if (s >= 140 || d >= 90) out.push(L('לחץ הדם שהזנת (') + bpTxt + L(') בטווח של יתר לחץ דם. כדאי למדוד שוב בבית כמה ימים, ולהראות את התוצאות לרופא/ת המשפחה.'));
+    if (inp.diabetes !== 'yes' && (inp.glucose >= 126 || inp.hba1c >= 6.5)) out.push(L('ערך הסוכר שהזנת בטווח של סוכרת. אבחנה דורשת בדיקה חוזרת, ולכן כדאי לפנות לרופא/ת המשפחה.'));
+    if (inp.ldl >= 190 || (inp.ldl === undefined && inp.tc >= 300)) out.push(L('ערך הכולסטרול שהזנת גבוה מאוד, ומתאים לבירור של כולסטרול גבוה משפחתי. כדאי לפנות לרופא/ת המשפחה.'));
+    if (r.derived.egfr !== undefined && r.derived.egfr < 60) out.push(L('תפקוד הכליות המחושב (eGFR ') + Math.round(r.derived.egfr) + L(') נמוך מ-60. כדאי לחזור על הבדיקה ולהראות אותה לרופא/ה.'));
+    if (inp.acr >= 30) out.push(L('יש חלבון בשתן (מעל 30 מ"ג/ג). כדאי לחזור על הבדיקה ולהראות אותה לרופא/ה.'));
+    return out;
+  }
+
+  // צעד ראשון וקונקרטי לכל שינוי, והמדריך באתר שמרחיב עליו
+  var FIRST = {
+    smoking: [L('לקבוע תאריך הפסקה בשבועיים הקרובים, ולפנות לרופא/ת המשפחה או לקו לגמילה. טיפול תרופתי ותמיכה מעלים מאוד את סיכויי ההצלחה.'), 'habits'],
+    bmi: [L('לרשום שבוע אחד מה אוכלים, בלי לשנות כלום. אחר כך להחליף משקה ממותק או חטיף אחד ביום במשהו פשוט יותר.'), 'nutrition'],
+    activity: [L('הליכה מהירה של 30 דקות, חמישה ימים בשבוע. אפשר להתחיל ב-10 דקות אחרי כל ארוחה.'), 'movement'],
+    walkpace: [L('בהליכה היומית, להגביר את הקצב עד שקשה לשיר אבל עדיין אפשר לדבר.'), 'movement'],
+    alcohol: [L('לקבוע ימים קבועים בשבוע בלי אלכוהול, ולהחליף כוס אחת במים מוגזים.'), 'habits'],
+    sleep: [L('שעת קימה קבועה כל יום, גם בסוף השבוע. אם הקושי נמשך, יש טיפול יעיל בלי תרופות (CBT-I).'), 'sleep'],
+    fruitveg: [L('להוסיף ירק לכל ארוחה ופרי אחד כנשנוש. זה כבר ארבע מנות ביום.'), 'nutrition'],
+    sitting: [L('לקום לשתיים-שלוש דקות כל חצי שעה עד שעה, למשל בכל שיחת טלפון.'), 'movement'],
+    social: [L('לקבוע שיחה או מפגש קבועים עם אדם אחד, ביום ובשעה קבועים בשבוע.'), 'social'],
+    bp: [L('למדוד לחץ דם בבית כמה ימים, לרשום ולהראות לרופא/ת המשפחה.'), 'numbers'],
+    chol: [L('לקבוע תור לרופא/ת המשפחה כדי לדבר על הערכים. בינתיים, להחליף שומן מן החי בשמן זית ואגוזים.'), 'numbers'],
+    glucose: [L('לוותר על משקאות ממותקים ולהוסיף הליכה של 10–15 דקות אחרי ארוחות. לחזור על הבדיקה בעוד כמה חודשים.'), 'sugar']
+  };
+
+  function planHTML(inp, r) {
+    var refs = referrals(inp, r), all = improvements(inp, r);
+    // פעילות גופנית היא הדרך המעשית לשפר את קצב ההליכה, ולכן כששניהם ברשימה מציגים רק אותה
+    var hasAct = all.some(function (x) { return x.id === 'activity'; });
+    var top = all.filter(function (x) { return !(hasAct && x.id === 'walkpace'); }).slice(0, 3);
+    var arrow = LANGS[LANG].dir === 'rtl' ? ' ←' : ' →';
+    var h = L('<div class="plan"><h3>הצעדים הראשונים שלך</h3>');
+    if (refs.length) {
+      h += L('<div class="planref"><b>לפני הכול: שווה לדבר עם רופא/ה</b><ul>') + refs.map(function (t) { return '<li>' + esc(t) + '</li>'; }).join('') + '</ul></div>';
+    }
+    if (top.length) {
+      h += L('<p class="small muted">שלושת השינויים שהמודל מעריך שישפיעו אצלך הכי הרבה, ולכל אחד צעד ראשון שאפשר להתחיל כבר השבוע.</p><ol class="plansteps">') +
+        top.map(function (x) {
+          var f = FIRST[x.id] || ['', 'numbers'];
+          return '<li><div class="imptop"><span class="implbl">' + esc(x.label) + '</span><b class="pos" dir="ltr">' + signed(x.gain) + L(' שנים</b></div>') +
+            (f[0] ? '<div class="planfirst">' + esc(f[0]) + '</div>' : '') +
+            '<a class="small" href="' + SiteURL('topic', f[1]) + '">' + L('למדריך המלא ולרשימת הצעדים') + arrow + '</a></li>';
+        }).join('') + '</ol>';
+    } else {
+      h += L('<p>לפי מה שהזנת, ההרגלים שלך כבר בטווח הטוב, ואין שינוי שהמודל מעריך שיוסיף יותר מעשירית שנה. הצעד הבא: לשמור עליהם, ולבדוק את המספרים שלך (לחץ דם, סוכר ושומנים) פעם בשנה.</p>') +
+        '<a class="small" href="' + SiteURL('topic', 'numbers') + '">' + L('למדריך: המספרים שלך') + arrow + '</a>';
+    }
+    return h + '</div>';
+  }
+
+  function refineHTML() {
+    if (mode !== 'quick') return '';
+    return L('<div class="refine"><div><b>ההערכה מבוססת על השאלות העיקריות.</b> <span class="small muted">היסטוריה משפחתית, הרגלים נוספים ובדיקות דם ידייקו אותה ויצמצמו את הטווח.</span></div><button type="button" id="refine">לדייק את ההערכה</button></div>');
   }
 
   function improveHTML(inp, r) {
@@ -721,7 +815,9 @@
     bp: L('לחץ דם גבוה ניתן לטיפול יעיל. שווה למדוד שוב ולדבר עם רופא/ת המשפחה.'),
     chol: L('ערכי כולסטרול גבוהים ניתנים לאיזון בתזונה ובטיפול. שווה להתייעץ עם רופא/ת המשפחה.'),
     sitting: L('ישיבה ממושכת קשורה בתמותה גבוהה יותר, בעיקר מעל 7 שעות ביום. פעילות גופנית מקזזת חלק מההשפעה.'),
-    social: L('קשרים חברתיים הם גורם בריאותי של ממש, בסדר גודל דומה לגורמי סיכון מוכרים אחרים.')
+    social: L('קשרים חברתיים הם גורם בריאותי של ממש, בסדר גודל דומה לגורמי סיכון מוכרים אחרים.'),
+    walkpace: L('קצב הליכה הוא בעיקר מדד לכושר. הוא משתפר עם פעילות אירובית קבועה, כמו הליכה מהירה, אופניים או שחייה.'),
+    glucose: L('סוכר בטווח שבין התקין לסוכרת. בניסוי DPP, ירידה קטנה במשקל ופעילות קבועה הפחיתו ב-58% את המעבר לסוכרת.')
   };
 
   function bioAgeHTML(r) {
@@ -773,6 +869,7 @@
       L('<div class="hero"><div class="muted">תוחלת החיים המשוערת שלך</div><div class="big">') + fmt(p.expectedAge) + '</div>' +
       L('<div class="sub">עוד כ-') + Math.round(p.remaining) + L(' שנים, עד סביבות שנת ') + year + '</div>' +
       '<div class="delta">' + deltaTxt + '</div></div>' +
+      refineHTML() +
       DISCLAIMER +
 
       bioAgeHTML(r) +
@@ -783,6 +880,8 @@
       '<div dir="ltr">' + rangeChart(r) + '</div>' +
       L('<div class="legend"><span><i class="band"></i>50% מהמקרים</span><span><i class="band wide"></i>80% מהמקרים</span></div>') +
       (stats ? '<div class="stats" style="margin-top:18px">' + stats + '</div>' : '') +
+
+      planHTML(inp, r) +
 
       L('<h3>מה מוסיף ומה מוריד שנים</h3>') +
       L('<p class="small muted">השפעת כל גורם בשנים, ביחס לממוצע האוכלוסייה. הסכום שווה להפרש הכולל מהממוצע.</p>') +
@@ -810,6 +909,7 @@
 
     wireSim(inp, r);
     document.getElementById('back').onclick = function () { step = 1; render(); };
+    var rf = document.getElementById('refine'); if (rf) rf.onclick = function () { setMode('full'); step = 1; render(); };
     document.getElementById('print').onclick = function () { window.print(); };
   }
 
@@ -852,14 +952,14 @@
       guideHTML() +
       L('<div class="nav"><button id="gback">חזרה</button><button class="primary" id="gcalc">') + (hasData ? L('לתוצאה שלי, עם התאמה אישית') : L('לחישוב תוחלת החיים שלי')) + '</button></div></div>';
     document.getElementById('gback').onclick = function () { step = 0; render(); };
-    document.getElementById('gcalc').onclick = function () { step = hasData ? STEPS.length + 1 : 1; render(); };
+    document.getElementById('gcalc').onclick = function () { step = hasData ? steps().length + 1 : 1; render(); };
   }
 
   function render() {
     save();
     if (step === 'guide') renderGuide();
     else if (step <= 0) renderIntro();
-    else if (step <= STEPS.length) renderStep();
+    else if (step <= steps().length) renderStep();
     else renderResult();
     window.scrollTo(0, 0);
   }
