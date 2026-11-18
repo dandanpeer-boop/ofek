@@ -239,7 +239,7 @@
         : L('<p class="muted">אפשר להתחיל בגרסה המהירה, כדקה למילוי, ולהוסיף פרטים אחרי שרואים את התוצאה. רק הגיל, המין והמדינה הם חובה.</p>')) +
       DISCLAIMER +
       '<label class="remember"><input type="checkbox" id="remember"' + (remember ? ' checked' : '') + L('> לזכור את הנתונים שלי במכשיר הזה, כדי שלא אצטרך להזין שוב</label>') +
-      L('<p class="small muted">🔒 פרטיות: כל החישוב נעשה בדפדפן שלך ושום נתון לא נשלח לשרת. אם בחרת לזכור, הנתונים נשמרים רק בדפדפן הזה, ואפשר למחוק אותם בכל רגע בכפתור "מחיקת הנתונים" למעלה. במחשב משותף עדיף לא לסמן.</p>') +
+      L('<p class="small muted">🔒 פרטיות: כל החישוב נעשה בדפדפן שלך, והתשובות שלך לא נשלחות לשום מקום. אם בחרת לזכור, הנתונים נשמרים רק בדפדפן הזה, ואפשר למחוק אותם בכל רגע בכפתור "מחיקת הנתונים" למעלה. במחשב משותף עדיף לא לסמן.</p>') +
       L('<div class="guidelink"><button type="button" id="guideOpen">📖 מדריכים: שינה, תזונה, צום, סוכר ועוד <span class="small muted">(בלי להזין נתונים)</span></button></div>') +
       '<div class="nav">' + (returning ? L('<button id="edit">עדכון הנתונים</button><button class="primary" id="next">לתוצאה שלי</button>')
         : L('<button id="full">שאלון מלא, כ-4 דקות</button><button class="primary" id="next">חישוב מהיר, כדקה</button>')) + '</div></div>';

@@ -1,0 +1,31 @@
+# Ofek (myyearsleft.com)
+> Research-based guides on sleep, nutrition, fasting, sugar, movement and relationships, and a personal life expectancy calculator. Every number links to its source study. Available in English, Hebrew, Spanish and French. Not medical advice.
+
+## How to cite
+Link to the specific guide page. The calculator runs entirely in the browser; answers never leave the device.
+
+## Calculator and method
+- [Life expectancy calculator](https://myyearsleft.com/en/calculator/)
+- [How it works, sources and assumptions](https://myyearsleft.com/en/about/)
+
+## Guides (English)
+- [Sleep](https://myyearsleft.com/en/sleep/): How much sleep you really need, and what to do when you can't fall asleep.
+- [Nutrition](https://myyearsleft.com/en/nutrition/): What goes on the plate: vegetables, whole grains, less salt, and a Mediterranean direction.
+- [Intermittent fasting](https://myyearsleft.com/en/fasting/): 16:8, 5:2, the fasting-mimicking diet: what the trials actually found.
+- [Sugar](https://myyearsleft.com/en/sugar/): How much sugar is too much, and why prediabetes is an opportunity.
+- [Movement and fitness](https://myyearsleft.com/en/movement/): Steps, strength training and aerobic fitness: how much is enough.
+- [Stress and mind](https://myyearsleft.com/en/stress/): Short coping tools, and when to ask for help.
+- [Social ties](https://myyearsleft.com/en/social/): Why friends and family are on the list next to smoking and exercise.
+- [Smoking and alcohol](https://myyearsleft.com/en/habits/): How many years quitting smoking gives back, and where the line is with alcohol.
+- [Your numbers](https://myyearsleft.com/en/numbers/): Blood pressure, blood sugar and waist size: what to check and what the ranges are.
+
+## Guides (Hebrew)
+- [שינה](https://myyearsleft.com/sleep/): כמה באמת צריך לישון, ומה עושים כשלא מצליחים להירדם.
+- [תזונה](https://myyearsleft.com/nutrition/): מה שמים בצלחת: ירקות, דגנים מלאים, פחות מלח, וכיוון ים-תיכוני.
+- [צום לסירוגין](https://myyearsleft.com/fasting/): 16:8, 5:2, דיאטה מדמה צום: מה הניסויים באמת מצאו.
+- [סוכר](https://myyearsleft.com/sugar/): כמה סוכר זה יותר מדי, ולמה טרום-סוכרת היא הזדמנות.
+- [תנועה וכושר](https://myyearsleft.com/movement/): צעדים, אימוני כוח וכושר אירובי: כמה זה מספיק.
+- [לחץ ונפש](https://myyearsleft.com/stress/): כלים קצרים להתמודדות, ומתי לפנות לעזרה.
+- [קשרים חברתיים](https://myyearsleft.com/social/): למה חברים ומשפחה נמצאים ברשימה ליד עישון ותנועה.
+- [עישון ואלכוהול](https://myyearsleft.com/habits/): כמה שנים מחזירה הפסקת עישון, ואיפה עובר הגבול באלכוהול.
+- [המספרים שלך](https://myyearsleft.com/numbers/): לחץ דם, סוכר והיקף מותניים: מה כדאי לבדוק ומה הטווחים.

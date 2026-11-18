@@ -975,3 +975,9 @@ Object.assign(I18N.en, {
 "55pdal": "Laukkanen 2015: sauna and mortality in men (JAMA Intern Med)",
 "1bu0f2g": "Laukkanen 2018: sauna and cardiovascular mortality in men and women (BMC Med)"
 });
+Object.assign(I18N.en, {
+"v4hved": "<p class=\"small muted\">🔒 Privacy: the whole calculation runs in your browser, and your answers aren't sent anywhere. If you choose to remember, the data is stored only in this browser, and you can delete it at any time with the \"Delete my data\" button above. On a shared computer, better leave this unticked.</p>",
+"122kyoo": "The whole calculation runs in your browser, and your answers aren't sent anywhere",
+"4v8pwh": "Your answers aren't sent anywhere. The calculation, and the reading of blood test files and watch files, all happen in the browser. If you choose to remember your data, it is stored only in this browser, and you can delete it at any time with the \"Delete my data\" button at the bottom of the page.",
+"13zhblu": "To know how many people visit the site and which pages, we use Google Analytics. It receives the page address and general details such as device type and country, not what you entered in the calculator."
+});

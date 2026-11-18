@@ -973,3 +973,9 @@ Object.assign(I18N.fr, {
 "55pdal": "Laukkanen 2015 : sauna et mortalité chez les hommes (JAMA Intern Med)",
 "1bu0f2g": "Laukkanen 2018 : sauna et mortalité cardiovasculaire chez les hommes et les femmes (BMC Med)"
 });
+Object.assign(I18N.fr, {
+"v4hved": "<p class=\"small muted\">🔒 Confidentialité : tout le calcul se fait dans votre navigateur, et vos réponses ne sont envoyées nulle part. Si vous choisissez de les mémoriser, les données sont conservées uniquement dans ce navigateur, et vous pouvez les effacer à tout moment avec le bouton « Effacer mes données » ci-dessus. Sur un ordinateur partagé, mieux vaut ne pas cocher.</p>",
+"122kyoo": "Tout le calcul se fait dans votre navigateur, et vos réponses ne sont envoyées nulle part",
+"4v8pwh": "Vos réponses ne sont envoyées nulle part. Le calcul et la lecture des fichiers d'analyses et de montre se font dans le navigateur. Si vous choisissez de mémoriser vos données, elles sont conservées uniquement dans ce navigateur, et vous pouvez les effacer à tout moment avec le bouton « Effacer mes données » en bas de page.",
+"13zhblu": "Pour savoir combien de personnes visitent le site et quelles pages, nous utilisons Google Analytics. Il reçoit l'adresse de la page et des informations générales comme le type d'appareil et le pays, pas ce que vous avez saisi dans le calculateur."
+});
