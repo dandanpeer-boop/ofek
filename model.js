@@ -278,11 +278,16 @@ var LifeModel = (function () {
       add('fruitveg', L('פירות וירקות'), inp.fruitveg + L(' מנות ביום'), function (a) { return lnFV * attStd(a); });
     }
 
-    // --- בדידות: Holt-Lunstad et al., Perspect Psychol Sci 2015 ---
-    if (inp.lonely) {
-      var lnL = Math.log((inp.lonely === 'yes' ? 1.26 : 1.0) / 1.052);
-      add('social', L('קשרים חברתיים'), inp.lonely === 'yes' ? L('תחושת בדידות תכופה') : L('קשרים חברתיים טובים'),
-        function (a) { return lnL * attStd(a); });
+    // --- בידוד חברתי ובדידות: Wang F. et al., Nat Hum Behav 2023 (90 מחקרים) ---
+    // בידוד (מעט מפגשים): 1.32 · בדידות (תחושה): 1.14. מנורמל לשכיחות של כ-20% לכל אחד.
+    // כשיש את שניהם, הבדידות נספרת בחצי משקל, כי שני המדדים חופפים בחלקם.
+    if (inp.isolated || inp.lonely) {
+      var isoY = inp.isolated === 'rarely', lonY = inp.lonely === 'yes';
+      var lnS = (inp.isolated ? Math.log((isoY ? 1.32 : 1) / 1.064) : 0) +
+        (inp.lonely ? (isoY ? 0.5 : 1) * Math.log((lonY ? 1.14 : 1) / 1.028) : 0);
+      var socLbl = isoY && lonY ? L('מעט מפגשים ותחושת בדידות') : isoY ? L('מעט מפגשים חברתיים') :
+        lonY ? L('תחושת בדידות תכופה') : L('קשרים חברתיים טובים');
+      add('social', L('קשרים חברתיים'), socLbl, function (a) { return lnS * attStd(a); });
     }
 
     // --- השכלה: IHME-CHAIN Collaborators, Lancet Public Health 2024 ---
@@ -389,6 +394,17 @@ var LifeModel = (function () {
       derived.vo2Expected = vExp;
       var lnV = Math.log(0.87) * clamp((inp.vo2max - vExp) / 3.5, -4, 4); // 13% פחות סיכון לכל MET
       add('fitness', L('כושר אירובי (VO2max)'), inp.vo2max + L(' (חציון לגילך: ') + Math.round(vExp) + ')', function (a) { return lnV * attStd(a); });
+    }
+
+    // --- קצב הליכה: Yates et al., Eur Heart J 2017 (UK Biobank), Table S1, מודל 5 (מותאם מלא, כולל פעילות) ---
+    // לעומת הליכה מהירה: ממוצע 1.09 / איטי 1.56 (נשים), 1.17 / 1.63 (גברים).
+    // נכנס רק כשאין VO2max, כי קצב ההליכה הוא בעיקר מדד עקיף לכושר.
+    // נרמול לפי התפלגות הקצב ב-UK Biobank (כ-41% מהיר, 53% ממוצע, 6–7% איטי).
+    if (inp.walkPace && !isNum(inp.vo2max)) {
+      var wpHR = (sex === 'f' ? { brisk: 1, average: 1.09, slow: 1.56 } : { brisk: 1, average: 1.17, slow: 1.63 })[inp.walkPace] || 1;
+      var lnW = Math.log(wpHR / (sex === 'f' ? 1.086 : 1.127));
+      var wpLbl = { brisk: L('הליכה מהירה'), average: L('הליכה בקצב ממוצע'), slow: L('הליכה איטית') }[inp.walkPace];
+      add('walkpace', L('קצב הליכה'), wpLbl, function (a) { return lnW * attStd(a); });
     }
 
     // --- ישיבה: Chau et al., PLoS One 2013 (מתוקנן לפעילות גופנית) ---

@@ -858,3 +858,29 @@ Object.assign(I18N.es, {
 "e4ourm": "https://www.sanidad.gob.es/linea024/",
 "1icwj0a": "Fuentes"
 });
+Object.assign(I18N.es, {
+"1f6jiae": "¿Cómo describiría su ritmo habitual al caminar?",
+"56rz5z": "Según su percepción, en comparación con personas de su edad. Si tiene una medición de VO2max de un reloj deportivo, se usará esa en su lugar.",
+"zfd7iw": "Rápido",
+"wlinr2": "Normal",
+"zf2jhb": "Lento",
+"115urop": "¿Con qué frecuencia se reúne o habla con amigos o familiares que no viven con usted?",
+"19ewps0": "Al menos una vez por semana",
+"kroa6a": "Menos de una vez por semana",
+"152xr4w": "¿Se siente solo/a con frecuencia?",
+"1oaxmr1": "Se puede sentir soledad rodeado de gente, y al revés. Por eso son dos preguntas distintas.",
+"1dlts1": "Contacto social",
+"ycr3y3": "Ritmo al caminar",
+"5tpp3m": "<b>Aislamiento social y soledad:</b> Wang F. et al. A systematic review and meta-analysis of 90 cohort studies of social isolation, loneliness and mortality. <i>Nat Hum Behav</i> 2023;7:1307–19. <span class=\"hrnote\">En el modelo: poco contacto: 1,32 · soledad: 1,14</span>",
+"1ugo1zw": "<b>Ritmo al caminar:</b> Yates T. et al. Association of walking pace and handgrip strength with all-cause, cardiovascular, and cancer mortality: a UK Biobank observational study. <i>Eur Heart J</i> 2017;38:3232–40. <span class=\"hrnote\">En el modelo, frente a caminar rápido: normal 1,09 / 1,17, lento 1,56 / 1,63 (mujeres / hombres); solo si no hay VO2max</span>",
+"1o99rj1": "Poco contacto y sensación de soledad",
+"1qt0um1": "Poco contacto social",
+"1ir476s": "Camina rápido",
+"1nx3jyd": "Camina a ritmo normal",
+"1ihc5r5": "Camina lento",
+"fobnkv": "En la calculadora: minutos de actividad por semana (Arem 2015), forma aeróbica VO2max (Kodama 2009) o, si no la hay, ritmo al caminar (Yates 2017), frecuencia cardiaca en reposo y horas sentado.",
+"9msnff": "Aislamiento y soledad no son lo mismo",
+"1wjufk3": "El aislamiento es una situación objetiva: pocos encuentros y conversaciones con otras personas. La soledad es un sentimiento: se puede estar rodeado de gente y sentirse solo. En un metaanálisis de 90 estudios con 2,2 millones de participantes (Wang, Nature Human Behaviour 2023), el aislamiento social se asoció con un riesgo de muerte un 32 % mayor, y la soledad con un 14 %. Ambos importan, pero el aislamiento mostró la asociación más fuerte.",
+"n3plot": "En la calculadora: frecuencia de los encuentros sociales, sensación de soledad (Wang 2023) y estado civil.",
+"1rp2myx": "Wang 2023: aislamiento social, soledad y mortalidad, 90 estudios (Nat Hum Behav)"
+});

@@ -860,3 +860,29 @@ Object.assign(I18N.en, {
 "e4ourm": "https://988lifeline.org/",
 "1icwj0a": "Sources"
 });
+Object.assign(I18N.en, {
+"1f6jiae": "How would you describe your usual walking pace?",
+"56rz5z": "Based on how it feels to you, compared with people your age. If you have a VO2max reading from a fitness watch, that will be used instead.",
+"zfd7iw": "Brisk",
+"wlinr2": "Average",
+"zf2jhb": "Slow",
+"115urop": "How often do you meet or talk with friends or family who don't live with you?",
+"19ewps0": "At least once a week",
+"kroa6a": "Less than once a week",
+"152xr4w": "Do you often feel lonely?",
+"1oaxmr1": "You can feel lonely surrounded by people, and the other way round. That's why these are two separate questions.",
+"1dlts1": "Social contact",
+"ycr3y3": "Walking pace",
+"5tpp3m": "<b>Social isolation and loneliness:</b> Wang F. et al. A systematic review and meta-analysis of 90 cohort studies of social isolation, loneliness and mortality. <i>Nat Hum Behav</i> 2023;7:1307–19. <span class=\"hrnote\">In the model: little contact: 1.32 · loneliness: 1.14</span>",
+"1ugo1zw": "<b>Walking pace:</b> Yates T. et al. Association of walking pace and handgrip strength with all-cause, cardiovascular, and cancer mortality: a UK Biobank observational study. <i>Eur Heart J</i> 2017;38:3232–40. <span class=\"hrnote\">In the model, compared with brisk walking: average 1.09 / 1.17, slow 1.56 / 1.63 (women / men); only when there is no VO2max</span>",
+"1o99rj1": "Little contact and feeling lonely",
+"1qt0um1": "Little social contact",
+"1ir476s": "Brisk walker",
+"1nx3jyd": "Average walking pace",
+"1ihc5r5": "Slow walker",
+"fobnkv": "In the calculator: minutes of activity per week (Arem 2015), aerobic fitness VO2max (Kodama 2009) or, without it, walking pace (Yates 2017), resting heart rate and sitting time.",
+"9msnff": "Isolation and loneliness are not the same thing",
+"1wjufk3": "Isolation is an objective state: few meetings and conversations with people. Loneliness is a feeling: you can be surrounded by people and still feel alone. In a meta-analysis of 90 studies with 2.2 million participants (Wang, Nature Human Behaviour 2023), social isolation was linked to a 32% higher risk of death, and loneliness to 14%. Both matter, but isolation showed the stronger link.",
+"n3plot": "In the calculator: how often you see people, feeling lonely (Wang 2023) and marital status.",
+"1rp2myx": "Wang 2023: social isolation, loneliness and mortality, 90 studies (Nat Hum Behav)"
+});

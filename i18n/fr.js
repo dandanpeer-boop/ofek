@@ -858,3 +858,29 @@ Object.assign(I18N.fr, {
 "e4ourm": "https://3114.fr/",
 "1icwj0a": "Sources"
 });
+Object.assign(I18N.fr, {
+"1f6jiae": "Comment décririez-vous votre rythme de marche habituel ?",
+"56rz5z": "Selon votre ressenti, par rapport aux personnes de votre âge. Si vous avez une mesure de VO2max issue d'une montre de sport, c'est elle qui sera utilisée.",
+"zfd7iw": "Rapide",
+"wlinr2": "Moyen",
+"zf2jhb": "Lent",
+"115urop": "À quelle fréquence voyez-vous ou parlez-vous avec des amis ou de la famille qui ne vivent pas avec vous ?",
+"19ewps0": "Au moins une fois par semaine",
+"kroa6a": "Moins d'une fois par semaine",
+"152xr4w": "Vous sentez-vous souvent seul(e) ?",
+"1oaxmr1": "On peut se sentir seul entouré de monde, et inversement. C'est pourquoi ce sont deux questions distinctes.",
+"1dlts1": "Contacts sociaux",
+"ycr3y3": "Rythme de marche",
+"5tpp3m": "<b>Isolement social et solitude :</b> Wang F. et al. A systematic review and meta-analysis of 90 cohort studies of social isolation, loneliness and mortality. <i>Nat Hum Behav</i> 2023;7:1307–19. <span class=\"hrnote\">Dans le modèle : peu de contacts : 1,32 · solitude : 1,14</span>",
+"1ugo1zw": "<b>Rythme de marche :</b> Yates T. et al. Association of walking pace and handgrip strength with all-cause, cardiovascular, and cancer mortality: a UK Biobank observational study. <i>Eur Heart J</i> 2017;38:3232–40. <span class=\"hrnote\">Dans le modèle, par rapport à une marche rapide : moyen 1,09 / 1,17, lent 1,56 / 1,63 (femmes / hommes) ; seulement en l'absence de VO2max</span>",
+"1o99rj1": "Peu de contacts et sentiment de solitude",
+"1qt0um1": "Peu de contacts sociaux",
+"1ir476s": "Marche rapide",
+"1nx3jyd": "Marche à rythme moyen",
+"1ihc5r5": "Marche lente",
+"fobnkv": "Dans le calculateur : minutes d'activité par semaine (Arem 2015), forme aérobie VO2max (Kodama 2009) ou, à défaut, rythme de marche (Yates 2017), fréquence cardiaque au repos et temps assis.",
+"9msnff": "Isolement et solitude, ce n'est pas la même chose",
+"1wjufk3": "L'isolement est une situation objective : peu de rencontres et de conversations avec les autres. La solitude est un sentiment : on peut être entouré de monde et se sentir seul. Dans une méta-analyse de 90 études portant sur 2,2 millions de participants (Wang, Nature Human Behaviour 2023), l'isolement social était associé à un risque de décès plus élevé de 32 %, et la solitude de 14 %. Les deux comptent, mais le lien était plus fort pour l'isolement.",
+"n3plot": "Dans le calculateur : fréquence des rencontres sociales, sentiment de solitude (Wang 2023) et situation conjugale.",
+"1rp2myx": "Wang 2023 : isolement social, solitude et mortalité, 90 études (Nat Hum Behav)"
+});

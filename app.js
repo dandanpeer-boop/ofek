@@ -65,6 +65,7 @@
         { id: 'quitAge', type: 'num', label: L('באיזה גיל הפסקת לעשן?'), unit: L('שנים'), min: 10, max: 100, showIf: function () { return data.smoking === 'former'; } },
         { id: 'alcohol', type: 'choice', label: L('אלכוהול'), hint: L('מנה = כוס יין, בקבוק בירה קטן או כוסית משקה חריף.'), options: [['none', L('לא שותה')], ['light', L('עד 7 מנות בשבוע')], ['mod', '8–14'], ['heavy', '15–25'], ['vheavy', L('מעל 25')]] },
         { id: 'activity', type: 'choice', label: L('פעילות גופנית בשבוע'), hint: L('הליכה מהירה, ריצה, שחייה, אופניים וכדומה. דקת פעילות עצימה שווה שתי דקות מתונות.'), options: [['none', L('כמעט בכלל לא')], ['low', L('פחות מ-150 דקות')], ['rec', L('150–300 דקות')], ['high', L('300–450 דקות')], ['vhigh', L('מעל 450 דקות')]] },
+        { id: 'walkPace', type: 'choice', label: L('איך היית מתאר/ת את קצב ההליכה הרגיל שלך?'), hint: L('לפי התחושה שלך, ביחס לבני גילך. אם יש לך מדידת VO2max משעון כושר, היא תשמש במקום.'), options: [['brisk', L('מהיר')], ['average', L('ממוצע')], ['slow', L('איטי')]] },
         { id: 'sleep', type: 'choice', label: L('שעות שינה בלילה, בממוצע'), options: [['short', L('פחות מ-6')], ['normal', L('6 עד 9')], ['long', L('מעל 9')]] },
         { id: 'fruitveg', type: 'choice', label: L('מנות פירות וירקות ביום'), hint: L('מנה = פרי בינוני או כוס ירקות חתוכים.'), options: [['1', '0–1'], ['2', '2'], ['3', '3'], ['4', '4'], ['5', L('5 ומעלה')]] },
         { id: 'sitting', type: 'choice', label: L('שעות ישיבה ביום'), hint: L('עבודה, נסיעות ומסכים יחד.'), options: [['3', L('פחות מ-4')], ['5.5', '4–7'], ['9', '8–10'], ['12', L('11 ומעלה')]] },
@@ -76,7 +77,8 @@
         ] },
         { type: 'text', label: L('בשעון עצמו: הדופק במנוחה מופיע במסך הדופק, וה-VO2max במסך "מצב אימון" (Training Status). בשעונים של יצרנים אחרים (Apple, Fitbit, Polar) שני הנתונים מופיעים באפליקציית הבריאות של השעון.') },
         { type: 'garmin' },
-        { id: 'lonely', type: 'choice', label: L('האם לעיתים קרובות יש לך תחושת בדידות או ניתוק חברתי?'), options: [['no', L('לא')], ['yes', L('כן')]] }
+        { id: 'isolated', type: 'choice', label: L('באיזו תדירות יש לך מפגש או שיחה עם חברים או בני משפחה שלא גרים איתך?'), options: [['weekly', L('לפחות פעם בשבוע')], ['rarely', L('פחות מפעם בשבוע')]] },
+        { id: 'lonely', type: 'choice', label: L('האם לעיתים קרובות יש לך תחושת בדידות?'), hint: L('גם מי שמוקף באנשים יכול להרגיש בודד, ולהפך. לכן אלה שתי שאלות נפרדות.'), options: [['no', L('לא')], ['yes', L('כן')]] }
       ]
     },
     {
@@ -490,7 +492,7 @@
     var inp = { country: data.country, sex: data.sex, age: num(data.age) };
     ['height', 'weight', 'eduYears', 'quitAge', 'fruitveg', 'sbp', 'tc', 'hdl', 'ldl', 'glucose', 'hba1c', 'creatinine', 'crp', 'albumin', 'alp', 'wbc', 'lymph', 'mcv', 'rdw', 'waist', 'sitting', 'rhr', 'vo2max', 'dbp', 'tg', 'ggt', 'acr', 'lpa']
       .forEach(function (k) { inp[k] = num(data[k]); });
-    ['smoking', 'alcohol', 'activity', 'sleep', 'lonely', 'diabetes', 'famHeart', 'srh', 'marital'].forEach(function (k) { inp[k] = data[k] || undefined; });
+    ['smoking', 'alcohol', 'activity', 'walkPace', 'sleep', 'lonely', 'isolated', 'diabetes', 'famHeart', 'srh', 'marital'].forEach(function (k) { inp[k] = data[k] || undefined; });
     inp.conditions = data.conditions || [];
     inp.mother = data.mother; inp.father = data.father;
     inp.grandparents = [data.gp0, data.gp1, data.gp2, data.gp3].filter(Boolean);
@@ -568,7 +570,7 @@
     if (inp.sleep === 'short' || inp.sleep === 'long') add('sleep', L('לישון 6 עד 9 שעות בלילה'), { sleep: 'normal' });
     if (inp.fruitveg !== undefined && inp.fruitveg < 5) add('fruitveg', L('לאכול 5 מנות פירות וירקות ביום'), { fruitveg: 5 });
     if (inp.sitting !== undefined && inp.sitting > 5.5) add('sitting', L('להפחית ישיבה ל-4–7 שעות ביום'), { sitting: 5.5 });
-    if (inp.lonely === 'yes') add('social', L('לחזק קשרים חברתיים'), { lonely: 'no' });
+    if (inp.lonely === 'yes' || inp.isolated === 'rarely') add('social', L('לחזק קשרים חברתיים'), { lonely: inp.lonely && 'no', isolated: inp.isolated && 'weekly' });
     if (inp.sbp !== undefined && inp.sbp > 122) add('bp', L('להוריד לחץ דם סיסטולי ל-120'), inp.dbp !== undefined ? { sbp: 120, dbp: Math.min(inp.dbp, 80) } : { sbp: 120 });
     if (inp.tc !== undefined && inp.tc > 185) add('chol', L('להוריד כולסטרול כללי ל-180'), { tc: 180 });
     var base = r.personal.expectedAge;
@@ -657,7 +659,7 @@
     var rows = '';
     if (inp.smoking === 'current') rows += L('<div class="simrow"><label for="s_quit">עישון</label><select id="s_quit" data-sim="quit"><option value="">ממשיך/ה לעשן</option><option value="1">מפסיק/ה לעשן עכשיו</option></select></div>');
     if (inp.height && inp.weight) rows += range('weight', L('משקל'), Math.max(35, Math.round(inp.weight - 50)), Math.round(inp.weight + 30), Math.round(inp.weight), L('ק"ג'));
-    rows += sel('activity', L('פעילות גופנית בשבוע')) + sel('alcohol', L('אלכוהול בשבוע')) + sel('fruitveg', L('פירות וירקות ביום')) + sel('sitting', L('שעות ישיבה ביום')) + sel('sleep', L('שעות שינה')) + sel('lonely', L('תחושת בדידות תכופה'));
+    rows += sel('activity', L('פעילות גופנית בשבוע')) + sel('alcohol', L('אלכוהול בשבוע')) + sel('fruitveg', L('פירות וירקות ביום')) + sel('sitting', L('שעות ישיבה ביום')) + sel('sleep', L('שעות שינה')) + sel('isolated', L('מפגשים חברתיים')) + sel('lonely', L('תחושת בדידות תכופה')) + (inp.vo2max ? '' : sel('walkPace', L('קצב הליכה')));
     if (inp.sbp) rows += range('sbp', L('לחץ דם סיסטולי'), 100, 200, Math.round(inp.sbp), L('ממ"כ'));
     if (inp.tc) rows += range('tc', L('כולסטרול כללי'), 120, 350, Math.round(inp.tc), L('מ"ג/ד"ל'));
     return L('<h3>נסו בעצמכם</h3><p class="small muted">הזיזו את הסרגלים וראו מיד כמה שנים כל שינוי מוסיף או מוריד, לשני הכיוונים.</p>') +
@@ -819,7 +821,8 @@
     L('<b>אלכוהול:</b> Wood A.M. et al. Risk thresholds for alcohol consumption. <i>Lancet</i> 2018;391:1513–23. <span class="hrnote">במודל: 8–14 מנות בשבוע: 1.05 · 15–25: 1.16 · מעל 25: 1.57 (נגזר מהפרשי תוחלת החיים במחקר)</span>'),
     L('<b>שינה:</b> Cappuccio F.P. et al. Sleep Duration and All-Cause Mortality. <i>Sleep</i> 2010;33:585–92. <span class="hrnote">במודל: פחות מ-6 שעות: 1.12 · מעל 9 שעות: 1.30</span>'),
     L('<b>פירות וירקות:</b> Wang X. et al. Fruit and vegetable consumption and mortality. <i>BMJ</i> 2014;349:g4490. <span class="hrnote">במודל: 0.95 לכל מנה ביום, עד 5 מנות</span>'),
-    L('<b>בדידות:</b> Holt-Lunstad J. et al. Loneliness and Social Isolation as Risk Factors for Mortality. <i>Perspect Psychol Sci</i> 2015;10:227–37. <span class="hrnote">במודל: בדידות תכופה: 1.26</span>'),
+    L('<b>בידוד חברתי ובדידות:</b> Wang F. et al. A systematic review and meta-analysis of 90 cohort studies of social isolation, loneliness and mortality. <i>Nat Hum Behav</i> 2023;7:1307–19. <span class="hrnote">במודל: מעט מפגשים: 1.32 · בדידות: 1.14</span>'),
+    L('<b>קצב הליכה:</b> Yates T. et al. Association of walking pace and handgrip strength with all-cause, cardiovascular, and cancer mortality: a UK Biobank observational study. <i>Eur Heart J</i> 2017;38:3232–40. <span class="hrnote">במודל, לעומת הליכה מהירה: ממוצע 1.09 / 1.17, איטי 1.56 / 1.63 (נשים / גברים); רק כשאין VO2max</span>'),
     L('<b>השכלה:</b> IHME-CHAIN Collaborators. Effects of education on adult mortality. <i>Lancet Public Health</i> 2024;9:e155–65. <span class="hrnote">במודל: לכל שנת לימוד: 2.9% פחות סיכון עד גיל 50, 1.9% בגיל 50–69, 0.8% מגיל 70</span>'),
     L('<b>סוכרת:</b> Emerging Risk Factors Collaboration. Diabetes Mellitus, Fasting Glucose, and Risk of Cause-Specific Death. <i>NEJM</i> 2011;364:829–41. <span class="hrnote">במודל: סוכרת: 1.80. בלי סוכרת: 1.10 לכל 18 מ"ג/ד"ל גלוקוז בצום מעל 100</span>'),
     L('<b>לחץ דם:</b> Prospective Studies Collaboration. Age-specific relevance of usual blood pressure to vascular mortality. <i>Lancet</i> 2002;360:1903–13. <span class="hrnote">במודל: פי 2 בתמותה ממחלות לב וכלי דם לכל 20 ממ"כ סיסטולי (או 10 דיאסטולי), מוחל על 30% מהתמותה</span>'),
