@@ -932,3 +932,10 @@ Object.assign(I18N.en, {
 "daswgw": "Walking pace is mainly a marker of fitness. It improves with regular aerobic activity such as brisk walking, cycling or swimming.",
 "1kpuajd": "Blood sugar between normal and diabetes. In the DPP trial, modest weight loss and regular activity cut progression to diabetes by 58%."
 });
+Object.assign(I18N.en, {
+"yx225o": "When will you die?",
+"86d82l": "And what you can do to make it later.",
+"48uw09": "Research already knows what shortens life and what lengthens it. A one-minute calculator shows what that means for you, and the guides show what to change.",
+"5imbkl": "Find out, in a minute",
+"1cosgin": "When will you die, and how to push it back"
+});

@@ -930,3 +930,10 @@ Object.assign(I18N.fr, {
 "daswgw": "Le rythme de marche est surtout un indicateur de forme physique. Il s'améliore avec une activité aérobie régulière : marche rapide, vélo ou natation.",
 "1kpuajd": "Une glycémie entre la normale et le diabète. Dans l'essai DPP, une perte de poids modeste et une activité régulière ont réduit de 58 % l'évolution vers le diabète."
 });
+Object.assign(I18N.fr, {
+"yx225o": "Quand allez-vous mourir ?",
+"86d82l": "Et ce que vous pouvez faire pour que ce soit plus tard.",
+"48uw09": "La recherche sait déjà ce qui raccourcit la vie et ce qui l'allonge. Un calculateur d'une minute vous montre ce que cela signifie pour vous, et les guides, ce qu'il faut changer.",
+"5imbkl": "Le savoir en une minute",
+"1cosgin": "Quand allez-vous mourir, et comment repousser l’échéance"
+});

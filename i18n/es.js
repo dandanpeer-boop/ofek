@@ -930,3 +930,10 @@ Object.assign(I18N.es, {
 "daswgw": "El ritmo al caminar es sobre todo un indicador de forma física. Mejora con actividad aeróbica regular, como caminar rápido, la bicicleta o la natación.",
 "1kpuajd": "Azúcar entre lo normal y la diabetes. En el ensayo DPP, una pérdida de peso modesta y la actividad regular redujeron un 58 % la progresión a diabetes."
 });
+Object.assign(I18N.es, {
+"yx225o": "¿Cuándo va a morir?",
+"86d82l": "Y qué puede hacer para que sea más tarde.",
+"48uw09": "La investigación ya sabe qué acorta la vida y qué la alarga. Una calculadora de un minuto le muestra lo que eso significa para usted, y las guías, qué cambiar.",
+"5imbkl": "Descúbralo en un minuto",
+"1cosgin": "Cuándo va a morir y cómo retrasarlo"
+});
