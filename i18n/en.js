@@ -981,3 +981,15 @@ Object.assign(I18N.en, {
 "4v8pwh": "Your answers aren't sent anywhere. The calculation, and the reading of blood test files and watch files, all happen in the browser. If you choose to remember your data, it is stored only in this browser, and you can delete it at any time with the \"Delete my data\" button at the bottom of the page.",
 "13zhblu": "To know how many people visit the site and which pages, we use Google Analytics. It receives the page address and general details such as device type and country, not what you entered in the calculator."
 });
+Object.assign(I18N.en, {
+"1ro9d44": "Free calculator, about a minute",
+"xvls4d": "My estimated life expectancy",
+"1u9lxib": "and I could add about ",
+"3rubt0": " years to it",
+"qrqwpo": "and my habits are already in a good range",
+"1d03ubn": "What about you? A one-minute check",
+"39mm6u": "According to the calculator, my estimated life expectancy is ",
+"i0lmcm": ". What about you?",
+"140ca8z": "The image was saved and the text with the link was copied. You can paste them anywhere.",
+"j5n2n8": "<div class=\"sharerow\"><button type=\"button\" class=\"sharebtn\" id=\"share\">Share my result</button><span class=\"small muted\" id=\"sharestat\" role=\"status\"></span></div>"
+});

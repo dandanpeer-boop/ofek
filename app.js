@@ -731,6 +731,60 @@
       L('<p class="small muted">בכוונה לא כללנו בדיקות שאין לגביהן המלצה לכלל האוכלוסייה, כמו ויטמין D או טסטוסטרון.</p></div>');
   }
 
+  // ---------- שיתוף התוצאה: כרטיס תמונה בלי שום נתון בריאות, רק המספר ----------
+
+  function shareGain(inp, r) {
+    var all = improvements(inp, r);
+    if (!all.length) return 0;
+    var x = Object.assign.apply(null, [{}, inp].concat(all.map(function (i) { return i.over; })));
+    return Math.max(0, LifeModel.estimate(x) - LifeModel.estimate(inp));
+  }
+
+  function drawShare(age, gain) {
+    var W = 1080, H = 1080, c = document.createElement('canvas'); c.width = W; c.height = H;
+    var g = c.getContext('2d'), rtl = LANGS[LANG].dir === 'rtl', sx = rtl ? 230 : W - 230;
+    var bg = g.createLinearGradient(0, 0, 0, H); bg.addColorStop(0, '#fde7c8'); bg.addColorStop(0.7, '#f7f1e6'); g.fillStyle = bg; g.fillRect(0, 0, W, H);
+    g.fillStyle = '#ffd27a'; g.beginPath(); g.arc(sx, 230, 120, 0, 7); g.fill();
+    g.fillStyle = '#f39a4a'; g.beginPath(); g.arc(sx, 230, 86, 0, 7); g.fill();
+    [['#9fcfc6', 760, 700, 780], ['#4e9f97', 830, 790, 850], ['#0e6b68', 890, 870, 905]].forEach(function (h) {
+      g.fillStyle = h[0]; g.beginPath(); g.moveTo(0, h[1]); g.bezierCurveTo(300, h[2], 700, h[3] + 40, W, h[2]); g.lineTo(W, H); g.lineTo(0, H); g.fill();
+    });
+    g.direction = rtl ? 'rtl' : 'ltr'; g.textAlign = 'center'; g.textBaseline = 'alphabetic';
+    function txt(t, font, color, y) { g.font = font; g.fillStyle = color; g.fillText(t, W / 2, y, W - 120); }
+    txt(L('אופק'), '700 44px Rubik, Heebo, sans-serif', '#0e6b68', 120);
+    txt(L('תוחלת החיים המשוערת שלי'), '500 48px Heebo, sans-serif', '#3a4a4e', 420);
+    txt(fmt(age), '700 230px Rubik, Heebo, sans-serif', '#1c2a2e', 630);
+    txt(gain >= 0.3 ? L('ואפשר להוסיף לה עוד כ-') + fmt(gain) + L(' שנים') : L('וההרגלים שלי כבר בטווח הטוב'), '500 46px Heebo, sans-serif', '#2c7a57', 705);
+    txt(L('ומה איתך? בדיקה של דקה'), '500 40px Heebo, sans-serif', '#ffffff', 965);
+    g.direction = 'ltr'; txt('myyearsleft.com', '700 54px Rubik, sans-serif', '#ffffff', 1035);
+    return c;
+  }
+
+  function wireShare(inp, r) {
+    var btn = document.getElementById('share'); if (!btn) return;
+    btn.onclick = function () {
+      var age = r.personal.expectedAge, gain = shareGain(inp, r);
+      var url = new URL(SiteURL('calc'), location.href).href;
+      var text = L('לפי המחשבון, תוחלת החיים המשוערת שלי היא ') + fmt(age) + L('. ומה איתך?');
+      var fontsReady = document.fonts && document.fonts.load ? Promise.all(['700 230px Rubik', '500 48px Heebo']
+        .map(function (f) { return document.fonts.load(f); })).catch(function () {}) : Promise.resolve();
+      fontsReady.then(function () {
+        drawShare(age, gain).toBlob(function (blob) {
+          var file = new File([blob], 'myyearsleft.png', { type: 'image/png' });
+          if (navigator.canShare && navigator.canShare({ files: [file] })) {
+            navigator.share({ files: [file], text: text + ' ' + url }).catch(function () {});
+            return;
+          }
+          var a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = 'myyearsleft.png'; a.click();
+          setTimeout(function () { URL.revokeObjectURL(a.href); }, 5000);
+          var st = document.getElementById('sharestat');
+          var done = function () { if (st) st.textContent = L('התמונה נשמרה והטקסט עם הקישור הועתק. אפשר להדביק אותם בכל מקום.'); };
+          if (navigator.clipboard) navigator.clipboard.writeText(text + ' ' + url).then(done, done); else done();
+        }, 'image/png');
+      });
+    };
+  }
+
   function refineHTML() {
     if (mode !== 'quick') return '';
     return L('<div class="refine"><div><b>ההערכה מבוססת על השאלות העיקריות.</b> <span class="small muted">היסטוריה משפחתית, הרגלים נוספים ובדיקות דם ידייקו אותה ויצמצמו את הטווח.</span></div><button type="button" id="refine">לדייק את ההערכה</button></div>');
@@ -896,7 +950,8 @@
     app.innerHTML = '<div class="card">' +
       L('<div class="hero"><div class="muted">תוחלת החיים המשוערת שלך</div><div class="big">') + fmt(p.expectedAge) + '</div>' +
       L('<div class="sub">עוד כ-') + Math.round(p.remaining) + L(' שנים, עד סביבות שנת ') + year + '</div>' +
-      '<div class="delta">' + deltaTxt + '</div></div>' +
+      '<div class="delta">' + deltaTxt + '</div>' +
+      L('<div class="sharerow"><button type="button" class="sharebtn" id="share">שיתוף התוצאה</button><span class="small muted" id="sharestat" role="status"></span></div>') + '</div>' +
       refineHTML() +
       DISCLAIMER +
 
@@ -937,6 +992,7 @@
       L('<div class="nav"><button id="back">עריכת הנתונים</button><button class="primary" id="print">הדפסה / שמירה כ-PDF</button></div></div>');
 
     wireSim(inp, r);
+    wireShare(inp, r);
     document.getElementById('back').onclick = function () { step = 1; render(); };
     var rf = document.getElementById('refine'); if (rf) rf.onclick = function () { setMode('full'); step = 1; render(); };
     document.getElementById('print').onclick = function () { window.print(); };

@@ -979,3 +979,15 @@ Object.assign(I18N.es, {
 "4v8pwh": "Tus respuestas no se envían a ninguna parte. El cálculo y la lectura de archivos de análisis y del reloj se hacen en el navegador. Si eliges recordar tus datos, se guardan solo en este navegador y puedes borrarlos en cualquier momento con el botón \"Borrar mis datos\" al pie de la página.",
 "13zhblu": "Para saber cuántas personas visitan el sitio y qué páginas, usamos Google Analytics. Recibe la dirección de la página y datos generales como el tipo de dispositivo y el país, no lo que introdujiste en la calculadora."
 });
+Object.assign(I18N.es, {
+"1ro9d44": "Calculadora gratuita, un minuto",
+"xvls4d": "Mi esperanza de vida estimada",
+"1u9lxib": "y podría sumarle unos ",
+"3rubt0": " años",
+"qrqwpo": "y mis hábitos ya están en un buen rango",
+"1d03ubn": "¿Y tú? Compruébalo en un minuto",
+"39mm6u": "Según la calculadora, mi esperanza de vida estimada es ",
+"i0lmcm": ". ¿Y la tuya?",
+"140ca8z": "La imagen se guardó y el texto con el enlace se copió. Puedes pegarlos donde quieras.",
+"j5n2n8": "<div class=\"sharerow\"><button type=\"button\" class=\"sharebtn\" id=\"share\">Compartir mi resultado</button><span class=\"small muted\" id=\"sharestat\" role=\"status\"></span></div>"
+});

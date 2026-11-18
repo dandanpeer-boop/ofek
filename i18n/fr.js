@@ -979,3 +979,15 @@ Object.assign(I18N.fr, {
 "4v8pwh": "Vos réponses ne sont envoyées nulle part. Le calcul et la lecture des fichiers d'analyses et de montre se font dans le navigateur. Si vous choisissez de mémoriser vos données, elles sont conservées uniquement dans ce navigateur, et vous pouvez les effacer à tout moment avec le bouton « Effacer mes données » en bas de page.",
 "13zhblu": "Pour savoir combien de personnes visitent le site et quelles pages, nous utilisons Google Analytics. Il reçoit l'adresse de la page et des informations générales comme le type d'appareil et le pays, pas ce que vous avez saisi dans le calculateur."
 });
+Object.assign(I18N.fr, {
+"1ro9d44": "Calculateur gratuit, une minute",
+"xvls4d": "Mon espérance de vie estimée",
+"1u9lxib": "et je pourrais y ajouter environ ",
+"3rubt0": " ans",
+"qrqwpo": "et mes habitudes sont déjà dans une bonne zone",
+"1d03ubn": "Et vous ? Vérifiez en une minute",
+"39mm6u": "Selon le calculateur, mon espérance de vie estimée est de ",
+"i0lmcm": ". Et vous ?",
+"140ca8z": "L'image a été enregistrée et le texte avec le lien a été copié. Vous pouvez les coller où vous voulez.",
+"j5n2n8": "<div class=\"sharerow\"><button type=\"button\" class=\"sharebtn\" id=\"share\">Partager mon résultat</button><span class=\"small muted\" id=\"sharestat\" role=\"status\"></span></div>"
+});

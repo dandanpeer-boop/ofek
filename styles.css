@@ -433,6 +433,10 @@ a { color: var(--accent); }
 .plansteps li { padding: 10px 0; border-bottom: 1px solid var(--line); }
 .plansteps li:last-child { border-bottom: 0; }
 .planfirst { margin: 4px 0 6px; }
+.sharerow { margin-top: 14px; display: flex; flex-wrap: wrap; gap: 10px; align-items: center; justify-content: center; }
+.sharebtn { background: var(--accent); color: var(--accent-ink); border: 0; border-radius: 999px; padding: 10px 22px; font: inherit; font-weight: 700; cursor: pointer; }
+.sharebtn::before { content: '↗ '; }
+@media print { .sharerow { display: none; } }
 .tests { border: 1px solid var(--line); border-radius: 16px; padding: 4px 18px 12px; margin: 14px 0 6px; }
 .tests h3 { margin-top: 14px; }
 .tests h4 { margin: 12px 0 4px; font-size: 1rem; }
