@@ -707,6 +707,30 @@
     return h + '</div>';
   }
 
+  // בדיקות ששווה לשאול עליהן את הרופא/ה: רק מה שחסר ומתאים לגיל ולמה שהוזן, לפי ההנחיות המקובלות
+  // (USPSTF, ESC/EAS, ADA). בכוונה בלי בדיקות שאין לגביהן המלצה לכלל האוכלוסייה.
+  function testsHTML(inp) {
+    var a = inp.age, fem = inp.sex === 'f', meds = data.meds || [], labs = [], screen = [];
+    var bmi = inp.height && inp.weight ? inp.weight / Math.pow(inp.height / 100, 2) : null;
+    var dm = inp.diabetes === 'yes', htn = meds.indexOf('bp') >= 0 || inp.sbp >= 140 || inp.dbp >= 90;
+    if (inp.sbp === undefined && meds.indexOf('bp') < 0) labs.push(L('מדידת לחץ דם: לא הזנת ערך. כדאי למדוד לפחות פעם בשנה מגיל 40, ופעם בכמה שנים לפני כן.'));
+    if (inp.tc === undefined && inp.ldl === undefined && (a >= 40 || inp.famHeart === 'yes')) labs.push(L('פרופיל שומנים (כולסטרול, LDL, HDL וטריגליצרידים): בדיקה שגרתית מגיל 40, ומוקדם יותר כשיש היסטוריה משפחתית. היא גם מדייקת את ההערכה כאן.'));
+    if (dm) { if (inp.hba1c === undefined) labs.push(L('HbA1c: למי שיש סוכרת, בדרך כלל כל שלושה עד שישה חודשים.')); }
+    else if (inp.glucose === undefined && inp.hba1c === undefined && (a >= 35 || (bmi !== null && bmi >= 25))) labs.push(L('סוכר בצום או HbA1c: לגילוי טרום-סוכרת, שלב שבו עוד אפשר לעצור את ההתפתחות לסוכרת.'));
+    if ((dm || htn) && (inp.creatinine === undefined || inp.acr === undefined)) labs.push(L('תפקוד כליות (קריאטינין) וחלבון בשתן (יחס אלבומין לקריאטינין): מומלץ פעם בשנה למי שיש סוכרת או יתר לחץ דם.'));
+    if (inp.lpa === undefined) labs.push(L('Lp(a), פעם אחת בחיים: ערך שנקבע בעיקר גנטית ולא משתנה, ורוב האנשים מעולם לא בדקו אותו. ההנחיות האירופיות ממליצות לבדוק אותו פעם אחת.'));
+    if (a >= 45 && a <= 75) screen.push(L('סקר לסרטן המעי הגס: בגילים 45–75 (בחלק מהמדינות מגיל 50), בדיקת דם סמוי בצואה או קולונוסקופיה.'));
+    if (fem && a >= 40 && a <= 74) screen.push(L('ממוגרפיה: לנשים בגילים 40–74 (בחלק מהמדינות מגיל 50), כל שנה עד שנתיים.'));
+    if (fem && a >= 25 && a <= 65) screen.push(L('סקר לסרטן צוואר הרחם (בדיקת HPV או פאפ): לנשים בגילים 25–65 בערך, לפי ההנחיות במדינה.'));
+    if ((inp.smoking === 'current' || (inp.smoking === 'former' && !(inp.quitAge < a - 15))) && a >= 50 && a <= 80) screen.push(L('CT במינון נמוך לסרטן ריאה: למי שעישן הרבה, בהווה או ב-15 השנים האחרונות, בגילים 50–80.'));
+    if (!labs.length && !screen.length) return '';
+    var li = function (t) { return '<li>' + esc(t) + '</li>'; };
+    return L('<div class="tests"><h3>בדיקות ששווה לשאול עליהן את הרופא/ה</h3><p class="small muted">לפי הגיל שלך ומה שהזנת. ההנחיות משתנות בין מדינות, וזו רשימה לשיחה עם הרופא/ה, לא הפניה.</p>') +
+      (labs.length ? L('<h4>בדיקות דם ומדידות</h4>') + '<ul>' + labs.map(li).join('') + '</ul>' : '') +
+      (screen.length ? L('<h4>גילוי מוקדם של סרטן</h4>') + '<ul>' + screen.map(li).join('') + '</ul>' : '') +
+      L('<p class="small muted">בכוונה לא כללנו בדיקות שאין לגביהן המלצה לכלל האוכלוסייה, כמו ויטמין D או טסטוסטרון.</p></div>');
+  }
+
   function refineHTML() {
     if (mode !== 'quick') return '';
     return L('<div class="refine"><div><b>ההערכה מבוססת על השאלות העיקריות.</b> <span class="small muted">היסטוריה משפחתית, הרגלים נוספים ובדיקות דם ידייקו אותה ויצמצמו את הטווח.</span></div><button type="button" id="refine">לדייק את ההערכה</button></div>');
@@ -886,6 +910,7 @@
       (stats ? '<div class="stats" style="margin-top:18px">' + stats + '</div>' : '') +
 
       planHTML(inp, r) +
+      testsHTML(inp) +
 
       L('<h3>מה מוסיף ומה מוריד שנים</h3>') +
       L('<p class="small muted">השפעת כל גורם בשנים, ביחס לממוצע האוכלוסייה. הסכום שווה להפרש הכולל מהממוצע.</p>') +

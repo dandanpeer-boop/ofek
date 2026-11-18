@@ -941,3 +941,35 @@ Object.assign(I18N.es, {
 "1t4uut3": "Opcional. A la altura del ombligo, de pie, tras una espiración normal. Ayuda a distinguir músculo de grasa, algo que el IMC por sí solo no ve.",
 "1kklcdo": "Su IMC está por encima de 25, pero su cintura está en el rango normal. Eso encaja más con masa muscular que con exceso de grasa, por lo que no se muestra una recomendación de bajar de peso. La cintura ya compensa parte del efecto del IMC en el cálculo."
 });
+Object.assign(I18N.es, {
+"ne3pdk": "16:8, 5:2, la dieta que imita el ayuno: lo que realmente encontraron los ensayos.",
+"1o3sfhk": "La dieta que imita el ayuno",
+"gdrdx2": "La dieta que imita el ayuno (FMD) consiste en cinco días seguidos comiendo muy poco, unas 700 a 1.100 calorías al día, con poco azúcar y proteína y mucha grasa insaturada. Se hace una vez al mes, y el resto del mes se come con normalidad. La idea: obtener parte de los efectos del ayuno sin ayunar del todo.",
+"1se762i": "En el ensayo de Wei (2017), 100 personas sanas se dividieron en dos grupos. Quienes hicieron tres ciclos de cinco días perdieron peso y grasa, y bajó su presión arterial, igual que el IGF-1, una hormona de crecimiento ligada al envejecimiento. Las bajadas de azúcar, colesterol y PCR se vieron sobre todo en quienes partían de valores altos. Un análisis posterior de los datos (Brandhorst, 2024) calculó una reducción de unos dos años y medio en la edad biológica.",
+"rbbri": "Lo que aún no se sabe: los ensayos fueron pequeños, duraron tres meses y no estudiaron enfermedades ni mortalidad. La edad biológica es una medida calculada a partir de análisis de sangre, no un resultado de salud. Hay además un conflicto de intereses: el kit lo vende una empresa (L-Nutra) en la que el investigador principal, Valter Longo, tiene acciones, y la USC recibe regalías de ella. Longo ha declarado que sus acciones irán a fines benéficos.",
+"yrm2r0": "En resumen: un método interesante con buenos resultados iniciales en los marcadores, pero no se ha demostrado que alargue la vida. Valen las mismas precauciones que para el ayuno, y quien tome medicación debe consultar antes con su médico.",
+"1x6vgvj": "Wei 2017: dieta que imita el ayuno y factores de riesgo (Sci Transl Med)",
+"hycti3": "Brandhorst 2024: dieta que imita el ayuno y edad biológica (Nat Commun)"
+});
+Object.assign(I18N.es, {
+"h38ugu": "Presión arterial: no introdujo un valor. Conviene medirla al menos una vez al año a partir de los 40, y cada pocos años antes.",
+"503pnx": "Perfil lipídico (colesterol, LDL, HDL y triglicéridos): rutinario a partir de los 40, y antes si hay antecedentes familiares. También afina la estimación aquí.",
+"16rlnoy": "HbA1c: para quien tiene diabetes, normalmente cada tres a seis meses.",
+"1ccr8xi": "Glucosa en ayunas o HbA1c: para detectar la prediabetes, una etapa en la que todavía se puede frenar la evolución a diabetes.",
+"7tsjq6": "Función renal (creatinina) y proteína en orina (cociente albúmina/creatinina): recomendado una vez al año para quien tiene diabetes o hipertensión.",
+"7th3rw": "Lp(a), una vez en la vida: un valor sobre todo genético que no cambia, y la mayoría nunca se lo ha medido. Las guías europeas recomiendan medirlo una vez.",
+"1otkd0g": "Cribado de cáncer colorrectal: de 45 a 75 años (desde los 50 en algunos países), con prueba de sangre oculta en heces o colonoscopia.",
+"bezeng": "Mamografía: para mujeres de 40 a 74 años (desde los 50 en algunos países), cada uno o dos años.",
+"1fmkzl5": "Cribado de cáncer de cuello uterino (prueba de VPH o citología): para mujeres de unos 25 a 65 años, según las guías de su país.",
+"13822ei": "TC de baja dosis para cáncer de pulmón: para grandes fumadores, actuales o en los últimos 15 años, de 50 a 80 años.",
+"xyvayl": "<div class=\"tests\"><h3>Pruebas sobre las que conviene preguntar a su médico</h3><p class=\"small muted\">Según su edad y lo que introdujo. Las guías varían entre países; es una lista para hablar con su médico, no una derivación.</p>",
+"1h63s2s": "<h4>Análisis de sangre y mediciones</h4>",
+"zakbno": "<h4>Detección precoz del cáncer</h4>",
+"1mjopnv": "<p class=\"small muted\">Dejamos fuera a propósito pruebas que no se recomiendan a la población general, como la vitamina D o la testosterona.</p></div>",
+"12wdykk": "¿Y la sauna?",
+"qar0pd": "El estudio más conocido viene de Finlandia (Laukkanen, 2015): unos 2.300 hombres de 42 a 60 años seguidos durante unos 20 años. Frente a quienes iban a la sauna una vez por semana, quienes iban 4–7 veces murieron en ese periodo a una tasa cerca de un 40 % menor, y la muerte cardíaca súbita fue más de un 60 % menos frecuente. Un estudio posterior (2018) encontró una relación parecida con la mortalidad cardiovascular también en mujeres.",
+"9ex653": "Por qué aún no es una recomendación: son estudios observacionales, no ensayos. Quien tiene tiempo para ir a la sauna casi a diario se diferencia también en otras cosas, y en el grupo de 4–7 veces por semana había solo unos 200 hombres. La sauna en sí, finlandesa tradicional a 80–100 grados, no es necesariamente como cualquier sauna. En ensayos cortos se vio una bajada de la presión arterial y vasos más flexibles, lo que hace plausible la relación, pero aún no demuestra que la sauna alargue la vida.",
+"1uafvz3": "Si la disfruta, no hay motivo para dejarla. Beba agua y no entre después de tomar alcohol. Quien tenga una enfermedad cardíaca inestable, presión baja o esté embarazada debe consultar antes con su médico.",
+"55pdal": "Laukkanen 2015: sauna y mortalidad en hombres (JAMA Intern Med)",
+"1bu0f2g": "Laukkanen 2018: sauna y mortalidad cardiovascular en hombres y mujeres (BMC Med)"
+});

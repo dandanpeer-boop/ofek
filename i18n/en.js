@@ -943,3 +943,35 @@ Object.assign(I18N.en, {
 "1t4uut3": "Optional. At navel height, standing, after a normal breath out. Helps tell muscle from fat, which BMI alone can't see.",
 "1kklcdo": "Your BMI is above 25, but your waist is in the normal range. That fits muscle mass better than excess fat, so no weight-loss recommendation is shown. Your waist measurement already offsets part of the BMI effect in the calculation."
 });
+Object.assign(I18N.en, {
+"ne3pdk": "16:8, 5:2, the fasting-mimicking diet: what the trials actually found.",
+"1o3sfhk": "The fasting-mimicking diet",
+"gdrdx2": "The fasting-mimicking diet (FMD) is five days in a row of eating very little, about 700 to 1,100 calories a day, low in sugar and protein and high in unsaturated fat. It's done once a month, and the rest of the month you eat normally. The idea: get some of fasting's effects on the body without fasting completely.",
+"1se762i": "In Wei's trial (2017), 100 healthy people were split into two groups. Those who did three five-day cycles lost weight and fat, and their blood pressure fell, as did IGF-1, a growth hormone linked to aging. Drops in sugar, cholesterol and CRP were found mainly in people who started with high values. A further analysis of the trial data (Brandhorst, 2024) calculated a drop of about two and a half years in biological age.",
+"rbbri": "What isn't known yet: the trials were small, lasted three months, and didn't look at disease or death. Biological age is a measure calculated from blood tests, not a health outcome. There's also a conflict of interest: the kit is sold by a company (L-Nutra) in which the lead researcher, Valter Longo, holds shares, and USC receives royalties from it. Longo has said his shares will go to charity.",
+"yrm2r0": "Bottom line: an interesting method with good early results on markers, but it hasn't been shown to extend life. The same caveats as for fasting apply here, and anyone on medication should talk to a doctor first.",
+"1x6vgvj": "Wei 2017: fasting-mimicking diet and risk factors (Sci Transl Med)",
+"hycti3": "Brandhorst 2024: fasting-mimicking diet and biological age (Nat Commun)"
+});
+Object.assign(I18N.en, {
+"h38ugu": "Blood pressure: you didn't enter a value. It's worth measuring at least once a year from age 40, and every few years before that.",
+"503pnx": "Lipid panel (cholesterol, LDL, HDL and triglycerides): routine from age 40, and earlier with a family history. It also sharpens the estimate here.",
+"16rlnoy": "HbA1c: for people with diabetes, usually every three to six months.",
+"1ccr8xi": "Fasting glucose or HbA1c: to catch prediabetes, a stage where progression to diabetes can still be stopped.",
+"7tsjq6": "Kidney function (creatinine) and urine protein (albumin-to-creatinine ratio): recommended once a year for people with diabetes or high blood pressure.",
+"7th3rw": "Lp(a), once in a lifetime: a mostly genetic value that doesn't change, and most people have never had it tested. European guidelines recommend measuring it once.",
+"1otkd0g": "Colorectal cancer screening: ages 45–75 (from 50 in some countries), with a stool blood test or colonoscopy.",
+"bezeng": "Mammogram: for women aged 40–74 (from 50 in some countries), every one to two years.",
+"1fmkzl5": "Cervical cancer screening (HPV test or Pap smear): for women roughly aged 25–65, per your country's guidelines.",
+"13822ei": "Low-dose CT for lung cancer: for heavy smokers, current or within the last 15 years, aged 50–80.",
+"xyvayl": "<div class=\"tests\"><h3>Tests worth asking your doctor about</h3><p class=\"small muted\">Based on your age and what you entered. Guidelines vary between countries; this is a list for a conversation with your doctor, not a referral.</p>",
+"1h63s2s": "<h4>Blood tests and measurements</h4>",
+"zakbno": "<h4>Early cancer detection</h4>",
+"1mjopnv": "<p class=\"small muted\">We deliberately left out tests that aren't recommended for the general population, such as vitamin D or testosterone.</p></div>",
+"12wdykk": "What about the sauna?",
+"qar0pd": "The best-known study comes from Finland (Laukkanen, 2015): about 2,300 men aged 42–60 were followed for about 20 years. Compared with those who used a sauna once a week, those who went 4–7 times a week died at a rate about 40% lower over that period, and sudden cardiac death was more than 60% rarer. A follow-up study (2018) found a similar link with heart disease deaths in women too.",
+"9ex653": "Why this isn't a recommendation yet: these are observational studies, not trials. People with time for a sauna almost every day differ in other ways too, and the 4–7 times a week group had only about 200 men. The sauna itself, a traditional Finnish one at 80 to 100 degrees Celsius, isn't necessarily like every sauna. Short trials found lower blood pressure and more flexible blood vessels, which makes the link plausible, but doesn't yet prove a sauna extends life.",
+"1uafvz3": "If you enjoy it, there's no reason to give it up. Drink water and don't go in after alcohol. Anyone with unstable heart disease, low blood pressure, or who is pregnant should talk to a doctor first.",
+"55pdal": "Laukkanen 2015: sauna and mortality in men (JAMA Intern Med)",
+"1bu0f2g": "Laukkanen 2018: sauna and cardiovascular mortality in men and women (BMC Med)"
+});

@@ -941,3 +941,35 @@ Object.assign(I18N.fr, {
 "1t4uut3": "Facultatif. À hauteur du nombril, debout, après une expiration normale. Aide à distinguer le muscle de la graisse, ce que l'IMC seul ne voit pas.",
 "1kklcdo": "Votre IMC dépasse 25, mais votre tour de taille est dans la zone normale. Cela correspond davantage à de la masse musculaire qu'à un excès de graisse : aucune recommandation de perte de poids n'est donc affichée. Le tour de taille compense déjà une partie de l'effet de l'IMC dans le calcul."
 });
+Object.assign(I18N.fr, {
+"ne3pdk": "16:8, 5:2, le régime imitant le jeûne : ce que les essais ont vraiment trouvé.",
+"1o3sfhk": "Le régime imitant le jeûne",
+"gdrdx2": "Le régime imitant le jeûne (FMD) consiste en cinq jours d'affilée à manger très peu, environ 700 à 1 100 calories par jour, pauvre en sucre et en protéines et riche en graisses insaturées. On le fait une fois par mois, et le reste du mois on mange normalement. L'idée : obtenir une partie des effets du jeûne sans jeûner complètement.",
+"1se762i": "Dans l'essai de Wei (2017), 100 personnes en bonne santé ont été réparties en deux groupes. Celles qui ont fait trois cycles de cinq jours ont perdu du poids et de la graisse, et leur tension a baissé, tout comme l'IGF-1, une hormone de croissance liée au vieillissement. Les baisses de glycémie, de cholestérol et de CRP concernaient surtout les personnes qui partaient de valeurs élevées. Une analyse ultérieure des données (Brandhorst, 2024) a calculé une baisse d'environ deux ans et demi de l'âge biologique.",
+"rbbri": "Ce qu'on ne sait pas encore : les essais étaient petits, ont duré trois mois et n'ont étudié ni les maladies ni la mortalité. L'âge biologique est une mesure calculée à partir d'analyses de sang, pas un résultat de santé. Il y a aussi un conflit d'intérêts : le kit est vendu par une entreprise (L-Nutra) dont le chercheur principal, Valter Longo, détient des parts, et l'USC en reçoit des redevances. Longo a déclaré que ses parts iraient à des œuvres caritatives.",
+"yrm2r0": "En résumé : une méthode intéressante, avec de bons premiers résultats sur les marqueurs, mais il n'est pas démontré qu'elle allonge la vie. Les mêmes précautions que pour le jeûne s'appliquent, et toute personne sous traitement doit d'abord consulter son médecin.",
+"1x6vgvj": "Wei 2017 : régime imitant le jeûne et facteurs de risque (Sci Transl Med)",
+"hycti3": "Brandhorst 2024 : régime imitant le jeûne et âge biologique (Nat Commun)"
+});
+Object.assign(I18N.fr, {
+"h38ugu": "Tension artérielle : vous n'avez pas saisi de valeur. Il vaut la peine de la mesurer au moins une fois par an à partir de 40 ans, et tous les quelques ans avant.",
+"503pnx": "Bilan lipidique (cholestérol, LDL, HDL et triglycérides) : systématique à partir de 40 ans, et plus tôt en cas d'antécédents familiaux. Il affine aussi l'estimation ici.",
+"16rlnoy": "HbA1c : pour les personnes diabétiques, en général tous les trois à six mois.",
+"1ccr8xi": "Glycémie à jeun ou HbA1c : pour repérer un prédiabète, stade où l'évolution vers le diabète peut encore être évitée.",
+"7tsjq6": "Fonction rénale (créatinine) et protéines urinaires (rapport albumine/créatinine) : recommandé une fois par an en cas de diabète ou d'hypertension.",
+"7th3rw": "Lp(a), une fois dans la vie : une valeur surtout génétique qui ne change pas, et la plupart des gens ne l'ont jamais fait doser. Les recommandations européennes conseillent de la mesurer une fois.",
+"1otkd0g": "Dépistage du cancer colorectal : de 45 à 75 ans (dès 50 ans dans certains pays), par test de sang dans les selles ou coloscopie.",
+"bezeng": "Mammographie : pour les femmes de 40 à 74 ans (dès 50 ans dans certains pays), tous les un à deux ans.",
+"1fmkzl5": "Dépistage du cancer du col de l'utérus (test HPV ou frottis) : pour les femmes d'environ 25 à 65 ans, selon les recommandations de votre pays.",
+"13822ei": "Scanner faible dose pour le cancer du poumon : pour les gros fumeurs, actuels ou au cours des 15 dernières années, de 50 à 80 ans.",
+"xyvayl": "<div class=\"tests\"><h3>Examens à évoquer avec votre médecin</h3><p class=\"small muted\">Selon votre âge et vos réponses. Les recommandations varient selon les pays ; c'est une liste pour en discuter avec votre médecin, pas une prescription.</p>",
+"1h63s2s": "<h4>Analyses de sang et mesures</h4>",
+"zakbno": "<h4>Dépistage précoce des cancers</h4>",
+"1mjopnv": "<p class=\"small muted\">Nous avons volontairement écarté les examens non recommandés pour la population générale, comme la vitamine D ou la testostérone.</p></div>",
+"12wdykk": "Et le sauna ?",
+"qar0pd": "L'étude la plus connue vient de Finlande (Laukkanen, 2015) : environ 2 300 hommes de 42 à 60 ans suivis pendant une vingtaine d'années. Par rapport à ceux qui allaient au sauna une fois par semaine, ceux qui y allaient 4 à 7 fois sont morts sur cette période à un taux inférieur d'environ 40 %, et la mort subite cardiaque était plus de 60 % plus rare. Une étude de suivi (2018) a trouvé un lien semblable avec la mortalité cardiovasculaire chez les femmes aussi.",
+"9ex653": "Pourquoi ce n'est pas encore une recommandation : ce sont des études d'observation, pas des essais. Les personnes qui ont le temps d'aller au sauna presque tous les jours diffèrent aussi par d'autres aspects, et le groupe à 4–7 fois par semaine ne comptait qu'environ 200 hommes. Le sauna lui-même, finlandais traditionnel à 80–100 degrés, ne ressemble pas forcément à tous les saunas. De courts essais ont montré une baisse de la tension et des vaisseaux plus souples, ce qui rend le lien plausible, sans prouver encore que le sauna allonge la vie.",
+"1uafvz3": "Si vous l'appréciez, aucune raison d'y renoncer. Buvez de l'eau et n'y allez pas après avoir bu de l'alcool. En cas de maladie cardiaque instable, de tension basse ou de grossesse, demandez d'abord l'avis d'un médecin.",
+"55pdal": "Laukkanen 2015 : sauna et mortalité chez les hommes (JAMA Intern Med)",
+"1bu0f2g": "Laukkanen 2018 : sauna et mortalité cardiovasculaire chez les hommes et les femmes (BMC Med)"
+});
