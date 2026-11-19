@@ -88,8 +88,8 @@ var SiteRender = (function () {
       '<section class="hero"><div class="hero-in">' +
         '<div class="hero-text">' +
           '<p class="eyebrow">' + L('מדע פשוט לחיים ארוכים') + '</p>' +
-          '<h1>' + L('מתי תמות?') + '<br><span class="h1sub">' + L('ומה אפשר לעשות כדי שזה יקרה מאוחר יותר.') + '</span>' + '</h1>' +
-          '<p class="hero-lead">' + L('המחקר כבר יודע מה מקצר חיים ומה מאריך אותם. מחשבון של דקה מראה מה זה אומר עליך, והמדריכים מראים מה לשנות.') + '</p>' +
+          '<h1>' + L('כמה שנים עוד לפניך?') + '<br><span class="h1sub">' + L('מחשבון תוחלת חיים של דקה: הערכה וטווח, ומה אפשר לשנות כדי להוסיף עוד.') + '</span>' + '</h1>' +
+          '<p class="hero-lead">' + L('המחקר כבר יודע מה מקצר חיים ומה מאריך אותם. החישוב מראה מה זה אומר עליך, והמדריכים מראים מה לשנות.') + '</p>' +
           '<div class="cta-row"><a class="btn primary" href="' + SiteURL('calc') + '" data-calc-cta>' + icon('calc') + '<span>' + calcLabel(L('לחישוב, כדקה')) + '</span></a>' +
           '<a class="btn ghost" href="' + SiteURL('topics') + '">' + icon('book') + L('למדריכים') + '</a></div>' +
           '<ul class="trust"><li>' + icon('lock', 'sm') + L('בלי הרשמה, הנתונים נשארים במכשיר') + '</li><li>' + icon('check', 'sm') + L('כל מספר עם מקור מחקרי') + '</li></ul>' +

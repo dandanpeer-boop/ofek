@@ -1062,3 +1062,23 @@ Object.assign(I18N.fr, {
 Object.assign(I18N.fr, {
 "an70uh": "Tout ici est facultatif. Vous pouvez laisser n'importe quel champ vide et passer à l'étape suivante : le calcul utilisera ce que vous avez saisi."
 });
+Object.assign(I18N.fr, {
+"1ki9wgp": "Quel est votre horizon ?",
+"zq8euc": "Combien d'années vous attendent, et comment en ajouter.",
+"1lemi3": "La recherche sait déjà ce qui raccourcit la vie et ce qui l'allonge. Un calculateur d'espérance de vie d'une minute montre ce que cela signifie pour vous, et les guides montrent quoi changer.",
+"h4aj2t": "Calculateur d'espérance de vie : combien d'années vous attendent, et comment en ajouter"
+});
+Object.assign(I18N.fr, {
+"1yzs24": "Jusqu'à quel âge pouvez-vous espérer vivre ?",
+"1mx1ksm": "Et comment en ajouter. Calculateur d'espérance de vie gratuit, en une minute."
+});
+Object.assign(I18N.fr, {
+"d9dy3b": "Et comment en ajouter."
+});
+Object.assign(I18N.fr, {
+"1mtejn1": "Combien d'années vous attendent encore ?",
+"d2lktr": "Un calculateur d'espérance de vie d'une minute : une estimation et une fourchette, et ce que vous pouvez changer pour en ajouter."
+});
+Object.assign(I18N.fr, {
+"1xjfyli": "La recherche sait déjà ce qui raccourcit la vie et ce qui l'allonge. Le calcul montre ce que cela signifie pour vous, et les guides montrent quoi changer."
+});

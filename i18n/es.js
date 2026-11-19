@@ -1062,3 +1062,23 @@ Object.assign(I18N.es, {
 Object.assign(I18N.es, {
 "an70uh": "Todo aquí es opcional. Puedes dejar cualquier campo vacío y pasar al siguiente paso: el cálculo usará lo que hayas introducido."
 });
+Object.assign(I18N.es, {
+"1ki9wgp": "¿Cuál es tu horizonte?",
+"zq8euc": "Cuántos años tienes por delante y cómo sumar más.",
+"1lemi3": "La investigación ya sabe qué acorta la vida y qué la alarga. Una calculadora de esperanza de vida de un minuto muestra qué significa eso para ti, y las guías muestran qué cambiar.",
+"h4aj2t": "Calculadora de esperanza de vida: cuántos años tienes por delante y cómo sumar más"
+});
+Object.assign(I18N.es, {
+"1yzs24": "¿Hasta qué edad puedes esperar vivir?",
+"1mx1ksm": "Y cómo sumar más. Calculadora de esperanza de vida gratuita, en un minuto."
+});
+Object.assign(I18N.es, {
+"d9dy3b": "Y cómo sumar más."
+});
+Object.assign(I18N.es, {
+"1mtejn1": "¿Cuántos años tienes todavía por delante?",
+"d2lktr": "Una calculadora de esperanza de vida de un minuto: una estimación y un rango, y qué puedes cambiar para sumar más."
+});
+Object.assign(I18N.es, {
+"1xjfyli": "La investigación ya sabe qué acorta la vida y qué la alarga. El cálculo muestra qué significa eso para ti, y las guías muestran qué cambiar."
+});

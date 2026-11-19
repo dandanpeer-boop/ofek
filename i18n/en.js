@@ -1064,3 +1064,23 @@ Object.assign(I18N.en, {
 Object.assign(I18N.en, {
 "an70uh": "Everything here is optional. You can leave any field empty and continue to the next step: the calculation will use what you entered."
 });
+Object.assign(I18N.en, {
+"1ki9wgp": "What is your horizon?",
+"zq8euc": "How many years are ahead of you, and how to add more.",
+"1lemi3": "Research already knows what shortens life and what extends it. A one-minute life expectancy calculator shows what that means for you, and the guides show what to change.",
+"h4aj2t": "Life expectancy calculator: how many years are ahead of you, and how to add more"
+});
+Object.assign(I18N.en, {
+"1yzs24": "How long can you expect to live?",
+"1mx1ksm": "And how to add more. A free life expectancy calculator, about a minute."
+});
+Object.assign(I18N.en, {
+"d9dy3b": "And how to add more."
+});
+Object.assign(I18N.en, {
+"1mtejn1": "How many years are still ahead of you?",
+"d2lktr": "A one-minute life expectancy calculator: an estimate and a range, and what you can change to add more."
+});
+Object.assign(I18N.en, {
+"1xjfyli": "Research already knows what shortens life and what extends it. The calculation shows what that means for you, and the guides show what to change."
+});
