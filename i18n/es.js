@@ -1022,3 +1022,18 @@ Object.assign(I18N.es, {
 "emg1m2": "Caminar talón con punta",
 "ytbpp7": "<p class=\"small muted\">Ilustraciones esquemáticas, no una guía para realizar los ejercicios. Si algo no está claro o duele, consulta con un entrenador o fisioterapeuta.</p>"
 });
+Object.assign(I18N.es, {
+"r52hjd": "Cuánto hay que dormir, cómo dormir mejor y cómo dormir más.",
+"1abuprs": "Cómo dormir mejor",
+"s00pxe": "Cafeína: en el ensayo de Drake (2013), 400 mg de cafeína, más o menos la cantidad de cuatro tazas de café, perjudicaron el sueño incluso tomados seis horas antes de acostarse, también en una medición objetiva. Por eso se aconseja evitar cantidades importantes de cafeína en las últimas seis horas antes de dormir.",
+"uk1f5u": "Pantallas y luz: Chang (2015) comparó leer en un libro electrónico luminoso con leer un libro impreso en las horas previas a acostarse. Quienes leyeron en pantalla tardaron más en dormirse, secretaron menos melatonina, tuvieron el reloj biológico desplazado hacia más tarde y estuvieron menos alerta a la mañana siguiente. Por eso conviene alejar las pantallas luminosas durante la última hora antes de dormir, o pasar a un libro impreso.",
+"rknfnj": "Cuando cuesta dormirse: en el metaanálisis de Trauer (2015), 20 ensayos aleatorizados con 1.162 participantes con insomnio crónico, la terapia cognitivo-conductual (TCC-I) incluía al menos tres de estos componentes: terapia cognitiva, control de estímulos (la cama se usa solo para dormir), restricción del sueño, higiene del sueño y relajación. Acortó el tiempo para dormirse en unos 19 minutos (IC 95%: 14–24), redujo los despertares nocturnos en unos 26 minutos y aumentó la eficiencia del sueño en unos 10 puntos porcentuales. El tiempo total de sueño casi no cambió (unos 8 minutos, no significativo). Es decir, el tratamiento mejora la calidad del sueño, no necesariamente su duración.",
+"1l0fj01": "Cómo dormir más horas",
+"16jy19e": "Quien duerme menos de 7 horas tiene que adelantar en la práctica la hora de acostarse, no solo desear dormir más. En el ensayo de Tasali (2022) participaron 80 adultos de 21 a 40 años con sobrepeso que dormían menos de 6,5 horas por noche. La mitad recibió una sesión individual de asesoramiento sobre higiene del sueño, con el objetivo de llegar a 8,5 horas en la cama. Durmieron en promedio unas 1,2 horas más por noche (IC 95%: 1,0–1,4) que el grupo que no cambió nada, y comieron unas 270 calorías menos al día (IC 95%: 147–393), sin que se les indicara cambiar la dieta.",
+"1c7j0xx": "Fue un ensayo en adultos jóvenes con sobrepeso, así que no es seguro que el resultado sea igual para todos. Para adelantar la hora de acostarse en la práctica: elegir una hora fija de levantarse, contar hacia atrás desde ella las horas que se quieren dormir y añadir tiempo para dormirse, y adelantar la hora de acostarse poco a poco, un cuarto de hora cada vez.",
+"kz07l7": "Sin cafeína en las seis horas previas a acostarse",
+"1dzpe8i": "Drake 2013: cafeína antes de acostarse (J Clin Sleep Med)",
+"1isvand": "Chang 2015: libros electrónicos luminosos antes de dormir (PNAS)",
+"1v466y8": "Trauer 2015: TCC-I para el insomnio crónico, metaanálisis (Ann Intern Med)",
+"1cfeszn": "Tasali 2022: extensión del sueño y alimentación (JAMA Intern Med)"
+});

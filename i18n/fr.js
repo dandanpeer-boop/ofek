@@ -1022,3 +1022,18 @@ Object.assign(I18N.fr, {
 "emg1m2": "Marche talon-pointe",
 "ytbpp7": "<p class=\"small muted\">Illustrations schématiques, pas un guide d'exécution des exercices. Si quelque chose n'est pas clair ou fait mal, demandez à un entraîneur ou à un kinésithérapeute.</p>"
 });
+Object.assign(I18N.fr, {
+"r52hjd": "De combien de sommeil on a besoin, comment mieux dormir et comment dormir plus longtemps.",
+"1abuprs": "Comment mieux dormir",
+"s00pxe": "Caféine : dans l'essai de Drake (2013), 400 mg de caféine, soit à peu près quatre tasses de café, ont perturbé le sommeil même prises six heures avant le coucher, y compris lors d'une mesure objective. Il est donc conseillé d'éviter une quantité importante de caféine pendant les six dernières heures avant de dormir.",
+"uk1f5u": "Écrans et lumière : Chang (2015) a comparé la lecture sur une liseuse lumineuse à celle d'un livre imprimé dans les heures précédant le coucher. Les lecteurs sur écran se sont endormis plus lentement, ont sécrété moins de mélatonine, ont vu leur horloge biologique décalée plus tard et étaient moins alertes le lendemain matin. Il vaut donc mieux éloigner les écrans lumineux pendant la dernière heure avant de dormir, ou passer à un livre imprimé.",
+"rknfnj": "Quand il est difficile de s'endormir : dans la méta-analyse de Trauer (2015), 20 essais randomisés avec 1 162 participants souffrant d'insomnie chronique, la thérapie cognitivo-comportementale (TCC-I) comprenait au moins trois de ces composantes : thérapie cognitive, contrôle du stimulus (le lit sert uniquement à dormir), restriction du sommeil, hygiène du sommeil et relaxation. Elle a raccourci le temps d'endormissement d'environ 19 minutes (IC à 95 % : 14–24), réduit les éveils nocturnes d'environ 26 minutes et amélioré l'efficacité du sommeil d'environ 10 points de pourcentage. La durée totale de sommeil n'a presque pas changé (environ 8 minutes, non significatif). Autrement dit, le traitement améliore la qualité du sommeil, pas forcément sa durée.",
+"1l0fj01": "Comment dormir plus longtemps",
+"16jy19e": "Quelqu'un qui dort moins de 7 heures doit avancer concrètement l'heure du coucher, et pas seulement souhaiter dormir plus. Dans l'essai de Tasali (2022), 80 adultes de 21 à 40 ans en surpoids, qui dormaient moins de 6,5 heures par nuit, ont participé. La moitié a reçu une séance individuelle de conseils d'hygiène du sommeil, visant 8,5 heures au lit. Ils ont dormi en moyenne environ 1,2 heure de plus par nuit (IC à 95 % : 1,0–1,4) que le groupe qui n'a rien changé, et ont mangé environ 270 calories de moins par jour (IC à 95 % : 147–393), sans consigne de changer d'alimentation.",
+"1c7j0xx": "C'était un essai chez de jeunes adultes en surpoids, le résultat n'est donc pas forcément le même pour tout le monde. Pour avancer concrètement l'heure du coucher : choisir une heure de lever fixe, compter à rebours le nombre d'heures qu'on veut dormir en ajoutant le temps de s'endormir, et avancer progressivement l'heure du coucher, un quart d'heure à la fois.",
+"kz07l7": "Pas de caféine dans les six heures avant le coucher",
+"1dzpe8i": "Drake 2013 : caféine avant le coucher (J Clin Sleep Med)",
+"1isvand": "Chang 2015 : liseuses lumineuses avant de dormir (PNAS)",
+"1v466y8": "Trauer 2015 : TCC-I pour l'insomnie chronique, méta-analyse (Ann Intern Med)",
+"1cfeszn": "Tasali 2022 : allongement du sommeil et alimentation (JAMA Intern Med)"
+});

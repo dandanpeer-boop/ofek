@@ -1024,3 +1024,18 @@ Object.assign(I18N.en, {
 "emg1m2": "Heel-to-toe walking",
 "ytbpp7": "<p class=\"small muted\">Schematic illustrations, not instructions for performing the exercises. If something is unclear or hurts, ask a trainer or physiotherapist.</p>"
 });
+Object.assign(I18N.en, {
+"r52hjd": "How much you need to sleep, how to sleep better, and how to sleep longer.",
+"1abuprs": "How to sleep better",
+"s00pxe": "Caffeine: in Drake's trial (2013), 400 mg of caffeine, roughly the amount in four cups of coffee, harmed sleep even when taken six hours before bedtime, including on an objective measurement. So the advice is to avoid significant caffeine in the last six hours before sleep.",
+"uk1f5u": "Screens and light: Chang (2015) compared reading on a light-emitting e-book with a printed book in the hours before bed. Screen readers fell asleep more slowly, secreted less melatonin, had their body clock shifted later, and were less alert the next morning. So it is worth keeping bright screens away for the last hour before sleep, or switching to a printed book.",
+"rknfnj": "When falling asleep is hard: in Trauer's meta-analysis (2015), 20 randomised trials with 1,162 participants with chronic insomnia, cognitive behavioural therapy (CBT-I) included at least three of these components: cognitive therapy, stimulus control (the bed is used only for sleep), sleep restriction, sleep hygiene and relaxation. It shortened the time to fall asleep by about 19 minutes (95% CI: 14–24), reduced night-time wakefulness by about 26 minutes, and raised sleep efficiency by about 10 percentage points. Total sleep time barely changed (about 8 minutes, not significant). In other words, the treatment improves the quality of sleep, not necessarily its length.",
+"1l0fj01": "How to sleep longer",
+"16jy19e": "Someone who sleeps less than 7 hours needs to move their bedtime earlier in practice, not just wish to sleep more. In Tasali's trial (2022), 80 adults aged 21–40 with overweight, who slept under 6.5 hours a night, took part. Half of them received one individual sleep-hygiene counselling session, aimed at reaching 8.5 hours in bed. They slept about 1.2 hours more per night on average (95% CI: 1.0–1.4) than the group that changed nothing, and ate about 270 fewer calories a day (95% CI: 147–393), without being told to change their diet.",
+"1c7j0xx": "This was a trial in young adults with overweight, so the result may not be the same for everyone. To move bedtime earlier in practice: choose a fixed wake-up time, count back from it the number of hours you want to sleep and add time to fall asleep, and move your bedtime earlier gradually, a quarter of an hour at a time.",
+"kz07l7": "No caffeine in the six hours before bed",
+"1dzpe8i": "Drake 2013: caffeine before bedtime (J Clin Sleep Med)",
+"1isvand": "Chang 2015: light-emitting e-books before bed (PNAS)",
+"1v466y8": "Trauer 2015: CBT-I for chronic insomnia, meta-analysis (Ann Intern Med)",
+"1cfeszn": "Tasali 2022: sleep extension and eating (JAMA Intern Med)"
+});

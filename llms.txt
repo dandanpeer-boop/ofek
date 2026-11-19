@@ -9,7 +9,7 @@ Link to the specific guide page. The calculator runs entirely in the browser; an
 - [How it works, sources and assumptions](https://myyearsleft.com/en/about/)
 
 ## Guides (English)
-- [Sleep](https://myyearsleft.com/en/sleep/): How much sleep you really need, and what to do when you can't fall asleep.
+- [Sleep](https://myyearsleft.com/en/sleep/): How much you need to sleep, how to sleep better, and how to sleep longer.
 - [Nutrition](https://myyearsleft.com/en/nutrition/): What goes on the plate: vegetables, whole grains, less salt, and a Mediterranean direction.
 - [Intermittent fasting](https://myyearsleft.com/en/fasting/): 16:8, 5:2, the fasting-mimicking diet: what the trials actually found.
 - [Sugar](https://myyearsleft.com/en/sugar/): How much sugar is too much, and why prediabetes is an opportunity.
@@ -20,7 +20,7 @@ Link to the specific guide page. The calculator runs entirely in the browser; an
 - [Your numbers](https://myyearsleft.com/en/numbers/): Blood pressure, blood sugar and waist size: what to check and what the ranges are.
 
 ## Guides (Hebrew)
-- [שינה](https://myyearsleft.com/sleep/): כמה באמת צריך לישון, ומה עושים כשלא מצליחים להירדם.
+- [שינה](https://myyearsleft.com/sleep/): כמה צריך לישון, איך לישון טוב יותר ואיך להאריך את השינה.
 - [תזונה](https://myyearsleft.com/nutrition/): מה שמים בצלחת: ירקות, דגנים מלאים, פחות מלח, וכיוון ים-תיכוני.
 - [צום לסירוגין](https://myyearsleft.com/fasting/): 16:8, 5:2, דיאטה מדמה צום: מה הניסויים באמת מצאו.
 - [סוכר](https://myyearsleft.com/sugar/): כמה סוכר זה יותר מדי, ולמה טרום-סוכרת היא הזדמנות.
