@@ -1037,3 +1037,6 @@ Object.assign(I18N.es, {
 "1v466y8": "Trauer 2015: TCC-I para el insomnio crónico, metaanálisis (Ann Intern Med)",
 "1cfeszn": "Tasali 2022: extensión del sueño y alimentación (JAMA Intern Med)"
 });
+Object.assign(I18N.es, {
+"w217yz": "<p><b>Conviene comprobar:</b> el colesterol total, el HDL, el LDL y los triglicéridos no concuerdan entre sí (el LDL debería ser cercano a \"total menos HDL menos triglicéridos dividido por 5\"). Puede que un valor se haya leído de una línea equivocada, así que comprueba cada uno con el archivo antes de continuar.</p>"
+});

@@ -1039,3 +1039,6 @@ Object.assign(I18N.en, {
 "1v466y8": "Trauer 2015: CBT-I for chronic insomnia, meta-analysis (Ann Intern Med)",
 "1cfeszn": "Tasali 2022: sleep extension and eating (JAMA Intern Med)"
 });
+Object.assign(I18N.en, {
+"w217yz": "<p><b>Worth checking:</b> total cholesterol, HDL, LDL and triglycerides do not agree with each other (LDL should be close to \"total minus HDL minus triglycerides divided by 5\"). A value may have been read from the wrong line, so check each of them against the file before you go on.</p>"
+});

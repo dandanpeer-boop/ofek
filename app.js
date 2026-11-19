@@ -351,6 +351,15 @@
       return { name: name, ok: true, found: found };
     }
 
+    // בדיקת עקביות: LDL אמור להיות קרוב ל"כללי פחות HDL פחות טריגליצרידים/5" (נוסחת Friedewald, תקפה עד טריגליצרידים 400).
+    // אם הערכים רחוקים, כנראה ערך אחד נקרא משורה לא נכונה. אזהרה בלבד, לא מתקנת כלום.
+    function lipidWarning(found) {
+      var v = {}; found.forEach(function (r) { v[r.id] = r.value; });
+      if (v.tc === undefined || v.hdl === undefined || v.ldl === undefined || v.tg === undefined || v.tg >= 400) return '';
+      return Math.abs(v.tc - v.hdl - v.tg / 5 - v.ldl) > 20
+        ? L('<p><b>כדאי לבדוק:</b> כולסטרול כללי, HDL, LDL וטריגליצרידים לא מתיישבים זה עם זה (LDL אמור להיות קרוב ל"כללי פחות HDL פחות טריגליצרידים חלקי 5"). ייתכן שערך נקרא משורה לא נכונה, ולכן כדאי לבדוק כל אחד מהם מול הקובץ לפני שממשיכים.</p>') : '';
+    }
+
     function report(results) {
       drawDocs(); applyLabDocs();
       var good = results.filter(function (r) { return r.ok; }), bad = results.filter(function (r) { return !r.ok; });
@@ -362,7 +371,7 @@
           last.found.map(function (r) {
             return '<li>' + esc(r.label) + ': <b dir="ltr">' + r.value + '</b> ' + esc(r.unit) + (r.converted ? L(' (הומר מיחידות אחרות)') : '') +
               '<div class="src" dir="auto">' + esc(r.line) + '</div></li>';
-          }).join('') + '</ul>';
+          }).join('') + '</ul>' + lipidWarning(last.found);
       }
       bad.forEach(function (r) {
         html += '<p>' + esc(r.name) + ': ' + (r.error ? (r.error === 'ScriptLoadError' ? L('רכיב קריאת ה-PDF לא נטען. אם הדף פתוח בכתובת localhost, השרת המקומי כנראה כבוי: פתחו את הקובץ index.html ישירות בלחיצה כפולה, או הפעילו את השרת מחדש ורעננו.')

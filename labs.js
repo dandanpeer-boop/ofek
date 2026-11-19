@@ -211,6 +211,23 @@ var LabParser = (function () {
           if (!cur || Math.abs(cur.y - it.y) > 3) { cur = { y: it.y, items: [] }; rows.push(cur); }
           cur.items.push(it);
         });
+        // בטבלאות מסוימות (למשל תוצאות מעבדה מקופות החולים) הערך יושב גבוה כמה נקודות מעל שם הבדיקה, ולכן נשאר בשורה נפרדת.
+        // שורה שיש בה רק ערך (ויחידה) מצורפת לשורת השם הקרובה אליה (עד 13 נקודות), אם לשורת השם אין מספר משלה.
+        var stripped = function (r) { return r.items.map(function (i) { return i.s; }).join(' ').replace(UNIT_RE, ' '); };
+        rows.forEach(function (r) {
+          // רק לתוצאה עצמה יש יחידה (mg/dL, U/L...); מספרי טווח הייחוס והתווית שמתחת לא נכללים
+          var txt = r.items.map(function (i) { return i.s; }).join(' ');
+          r.valueOnly = /(?:mg|g|[uµμ]g|ng|pg|m?iu|u|[mnpuµμ]?mol|meq)\s*\/\s*(?:dl|l|ml|[uµμ]l)\b|%/i.test(txt) && /\d/.test(stripped(r)) && !/[A-Za-z֐-׿]{2}/.test(stripped(r));
+          r.nameOnly = !r.valueOnly && /[A-Za-z֐-׿]{3}/.test(stripped(r)) && candidateNumbers(r.items.map(function (i) { return i.s; }).join(' ')).length === 0;
+        });
+        rows.forEach(function (r) {
+          if (!r.valueOnly) return;
+          var best = null, bd = 13;
+          rows.forEach(function (o) { var d = Math.abs(o.y - r.y); if (o.nameOnly && d <= bd) { best = o; bd = d; } });
+          if (best) { best.merge = (best.merge || []).concat(r.items); r.dead = true; }
+        });
+        rows.forEach(function (r) { if (r.merge) r.items = r.items.concat(r.merge); });
+        rows = rows.filter(function (r) { return !r.dead; });
         rows.forEach(function (row) {
           var r = row.items.sort(function (a, b) { return a.x - b.x; }).map(function (i) { return i.s; });
           ltr.push(r.join(' ')); rtl.push(r.slice().reverse().join(' '));
