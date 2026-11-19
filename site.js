@@ -29,6 +29,7 @@ var SiteRender = (function () {
     people: '<circle cx="9" cy="8" r="3"/><circle cx="17" cy="9.5" r="2.4"/><path d="M3.5 19c.8-3.5 3-5 5.5-5s4.7 1.5 5.5 5M15 14.2c2.6-.4 4.6 1 5.4 4.3"/>',
     glass: '<path d="M7 3h10l-1 8a4 4 0 0 1-8 0z"/><path d="M12 15v5M8.5 20h7"/><path d="M4 4l16 16" opacity=".55"/>',
     pulse: '<path d="M3 12h4l2-5 4 10 2-5h6"/>',
+    pill: '<path d="M10.5 20.5a4.95 4.95 0 0 1-7-7l9-9a4.95 4.95 0 0 1 7 7z"/><path d="M8.5 8.5l7 7"/>',
     arrow: '<path d="M15 6l-6 6 6 6"/>',
     check: '<path d="M5 12.5l4.5 4.5L19 7.5"/>',
     lock: '<rect x="5" y="10.5" width="14" height="10" rx="2"/><path d="M8 10.5V8a4 4 0 0 1 8 0v2.5"/>',
