@@ -991,3 +991,34 @@ Object.assign(I18N.fr, {
 "140ca8z": "L'image a été enregistrée et le texte avec le lien a été copié. Vous pouvez les coller où vous voulez.",
 "j5n2n8": "<div class=\"sharerow\"><button type=\"button\" class=\"sharebtn\" id=\"share\">Partager mon résultat</button><span class=\"small muted\" id=\"sharestat\" role=\"status\"></span></div>"
 });
+Object.assign(I18N.fr, {
+"psojr7": "Aérobie : votre volume dépasse déjà le minimum recommandé. Inutile de l'augmenter, mieux vaut se concentrer sur les deux points suivants.",
+"12sbd68": "Aérobie : continuer avec 150 à 300 minutes par semaine d'activité d'intensité modérée, par exemple de la marche rapide cinq jours par semaine.",
+"pcots0": "Aérobie : commencer par trois marches de 10 à 15 minutes par semaine, et ajouter quelques minutes chaque semaine ou toutes les deux semaines, jusqu'à 150 minutes par semaine à intensité modérée.",
+"1kozg7n": "Force : au moins deux jours par semaine, pour tous les grands groupes musculaires, à intensité modérée ou plus. Pas besoin de poids : se lever d'une chaise et se rasseoir, pompes contre un mur ou une table, pont fessier, rowing avec un élastique.",
+"1gyvmb8": "Équilibre : à partir de 65 ans, il est utile d'intégrer une activité variée qui met l'accent sur l'équilibre et la force, au moins trois jours par semaine. Par exemple, se tenir sur une jambe près d'un appui, marcher talon-pointe et se lever d'une chaise sans l'aide des mains.",
+"qdzm2w": "<div class=\"tests train\"><h3>Un point de départ pour s'entraîner</h3><p class=\"small muted\">D'après l'âge et l'activité que vous avez indiqués. Les quantités viennent de l'Organisation mondiale de la santé (2020) ; les exemples sont des suggestions générales, pas un programme personnel.</p><ul>",
+"13nqxhc": "<p class=\"small\">Vous avez une maladie chronique (diabète ou tension artérielle), il vaut donc la peine de demander à votre médecin quelle intensité vous convient avant de l'augmenter.</p>",
+"11t45eg": "<p class=\"small muted\">Une douleur dans la poitrine, un vertige ou un essoufflement inhabituel pendant l'effort sont un signe pour s'arrêter et consulter un médecin. Ce sont des informations générales, pas un avis médical.</p>",
+"q0l54i": "Vers le guide : Mouvement et forme physique",
+"1ox29p5": "Muscle et équilibre avec l'âge",
+"7ihy58": "La masse et la force musculaires diminuent progressivement avec l'âge, et dans les cas extrêmes on parle de sarcopénie. Selon une revue d'Abellan van Kan (2009), elle touche de 8 % à 40 % des personnes de 60 ans et plus, selon la définition et la méthode de mesure, et il n'existe pas encore de définition consensuelle. L'Organisation mondiale de la santé recommande des activités de renforcement musculaire à tout âge, et au moins deux jours par semaine à intensité modérée ou plus, pour tous les grands groupes musculaires.",
+"1m0ubi5": "Après 65 ans s'ajoute la question de l'équilibre : au moins un tiers des personnes de cet âge tombent chaque année. Dans une revue Cochrane de 108 essais randomisés avec 23 407 participants (Sherrington 2019), l'exercice a réduit le taux de chutes de 23 % (RaR 0,77, IC à 95 % : 0,71–0,83). C'est pourquoi les recommandations de l'Organisation mondiale de la santé pour les 65 ans et plus incluent une activité variée qui met l'accent sur l'équilibre et la force, au moins trois jours par semaine.",
+"cyl7zj": "Abellan van Kan 2009 : épidémiologie de la sarcopénie (J Nutr Health Aging)",
+"1ctdv2p": "Sherrington 2019 : exercice pour prévenir les chutes (Cochrane)"
+});
+Object.assign(I18N.fr, {
+"xl8lhe": "Mises à jour régulières",
+"1qmwnpt": "Chaque semaine, PubMed est passé en revue pour repérer de nouvelles recherches du domaine : méta-analyses, revues systématiques, essais contrôlés et grandes études de cohorte sur la mortalité et l'espérance de vie. Chaque étude trouvée est comparée à son résumé et aux chiffres déjà présents sur le site, et seule une étude solide qui change le tableau met à jour un chiffre du calculateur ou un guide.",
+"4g69h": "Toutes les nouvelles études ne changent pas quelque chose, et c'est voulu : une seule étude atypique ne devrait pas faire bouger votre estimation."
+});
+Object.assign(I18N.fr, {
+"1urge1w": "Illustrations des exemples",
+"1i77x2n": "Se lever d'une chaise et se rasseoir",
+"zzj873": "Pompes contre un mur",
+"munt1s": "Pont fessier",
+"t81kil": "Rowing avec un élastique",
+"1pvq7id": "Debout sur une jambe près d'un appui",
+"emg1m2": "Marche talon-pointe",
+"ytbpp7": "<p class=\"small muted\">Illustrations schématiques, pas un guide d'exécution des exercices. Si quelque chose n'est pas clair ou fait mal, demandez à un entraîneur ou à un kinésithérapeute.</p>"
+});

@@ -993,3 +993,34 @@ Object.assign(I18N.en, {
 "140ca8z": "The image was saved and the text with the link was copied. You can paste them anywhere.",
 "j5n2n8": "<div class=\"sharerow\"><button type=\"button\" class=\"sharebtn\" id=\"share\">Share my result</button><span class=\"small muted\" id=\"sharestat\" role=\"status\"></span></div>"
 });
+Object.assign(I18N.en, {
+"psojr7": "Aerobic: your volume is already above the recommended minimum. There is no need to increase it, and it is better to focus on the next two items.",
+"12sbd68": "Aerobic: keep going with 150–300 minutes a week of moderate-intensity activity, for example brisk walking five days a week.",
+"pcots0": "Aerobic: start with three walks of 10–15 minutes a week, and add a few minutes every week or two, up to 150 minutes a week at moderate intensity.",
+"1kozg7n": "Strength: at least two days a week, for all the major muscle groups, at moderate intensity or higher. No weights are needed: sit-to-stands from a chair, push-ups against a wall or table, glute bridges, rows with a resistance band.",
+"1gyvmb8": "Balance: from age 65 it is worth including varied activity that emphasises balance and strength, on at least three days a week. For example standing on one leg next to a support, heel-to-toe walking, and getting up from a chair without using your hands.",
+"qdzm2w": "<div class=\"tests train\"><h3>A starting point for training</h3><p class=\"small muted\">Based on the age and activity you entered. The amounts are from the World Health Organization (2020); the examples are general suggestions, not a personal programme.</p><ul>",
+"13nqxhc": "<p class=\"small\">You have a chronic condition (diabetes or blood pressure), so it is worth asking your doctor which intensity suits you before you step it up.</p>",
+"11t45eg": "<p class=\"small muted\">Chest pain, dizziness or unusual shortness of breath during exertion are a sign to stop and see a doctor. This is general information, not medical advice.</p>",
+"q0l54i": "To the guide: Movement and fitness",
+"1ox29p5": "Muscle and balance with age",
+"7ihy58": "Muscle mass and strength decline gradually with age, and in extreme cases this is called sarcopenia. According to a review by Abellan van Kan (2009), it affects 8% to 40% of people aged 60 and over, depending on the definition and the way it is measured, and there is still no agreed definition. The World Health Organization recommends muscle-strengthening activity at every age, and at least two days a week at moderate intensity or higher, covering all the major muscle groups.",
+"1m0ubi5": "After 65 there is also the matter of balance: at least a third of people this age fall every year. In a Cochrane review of 108 randomised trials with 23,407 participants (Sherrington 2019), exercise reduced the rate of falls by 23% (RaR 0.77, 95% CI 0.71–0.83). That is why the World Health Organization guidelines for people aged 65 and over include varied activity that emphasises balance and strength, on at least three days a week.",
+"cyl7zj": "Abellan van Kan 2009: epidemiology of sarcopenia (J Nutr Health Aging)",
+"1ctdv2p": "Sherrington 2019: exercise for preventing falls (Cochrane)"
+});
+Object.assign(I18N.en, {
+"xl8lhe": "Ongoing updates",
+"1qmwnpt": "Every week PubMed is scanned for new research in the field: meta-analyses, systematic reviews, controlled trials and large cohort studies on mortality and life expectancy. Each study found is checked against its abstract and against the numbers already on the site, and only a strong study that changes the picture updates a number in the calculator or a guide.",
+"4g69h": "Not every new study changes anything, and that is intentional: a single unusual study should not move your estimate."
+});
+Object.assign(I18N.en, {
+"1urge1w": "Illustrations of the examples",
+"1i77x2n": "Sit-to-stand from a chair",
+"zzj873": "Wall push-ups",
+"munt1s": "Glute bridge",
+"t81kil": "Row with a resistance band",
+"1pvq7id": "Standing on one leg next to a support",
+"emg1m2": "Heel-to-toe walking",
+"ytbpp7": "<p class=\"small muted\">Schematic illustrations, not instructions for performing the exercises. If something is unclear or hurts, ask a trainer or physiotherapist.</p>"
+});

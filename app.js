@@ -707,6 +707,45 @@
     return h + '</div>';
   }
 
+  // איורי קו סכמטיים לדוגמאות התרגילים בכרטיס האימונים. דמות מקלות, בלי טקסט בתוך התמונה; הכיתוב נשלף מ-L().
+  var EXFIG = {
+    sit: '<circle cx="34" cy="20" r="7"/><path d="M34 28V54L52 54V80M34 34L48 44"/><path class="ctx" d="M22 30V56H46M24 56V82M44 56V82"/><circle cx="100" cy="16" r="7"/><path d="M100 24V52L96 82M100 52L104 82M100 30L116 38"/><path class="ctx" d="M62 48H78M73 43L78 48L73 53"/>',
+    wall: '<circle cx="94" cy="25" r="7"/><path d="M30 82L90 36M90 36L111 40"/><path class="ctx" d="M114 8V82M10 82H110"/>',
+    bridge: '<circle cx="12" cy="71" r="6"/><path d="M20 74L92 36L106 80M22 77L50 78"/><path class="ctx" d="M6 82H118"/>',
+    row: '<circle cx="50" cy="28" r="7"/><path d="M50 36V76H100M50 44L38 52L54 58"/><path class="ctx" d="M100 74L54 58" stroke-dasharray="4 4"/><path class="ctx" d="M6 82H118"/>',
+    leg: '<circle cx="60" cy="16" r="7"/><path d="M60 24V52L60 82M60 52L76 58L74 74M60 32L98 40"/><path class="ctx" d="M102 28V82"/>',
+    heel: '<circle cx="66" cy="16" r="7"/><path d="M66 24V52L52 82M66 52L64 82M66 34L46 38M66 34L86 38M50 82H62M64 82H76"/><path class="ctx" d="M6 82H118"/>'
+  };
+  function exFig(key, cap) {
+    return '<figure class="exfig"><svg viewBox="0 0 120 90" role="img" aria-label="' + esc(cap) + '" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">' + EXFIG[key] + '</svg><figcaption>' + esc(cap) + '</figcaption></figure>';
+  }
+
+  // נקודת התחלה לאימונים לפי גיל ורמת הפעילות שהוזנה. הכמויות (150–300 דקות, שני ימי כוח, איזון וכוח בשלושה ימים מגיל 65)
+  // הן של WHO 2020 (Bull); דוגמאות התרגילים הן הצעות כלליות. בכוונה לא תכנית אישית ולא ייעוץ רפואי.
+  function trainingHTML(inp) {
+    var a = inp.age, act = inp.activity, old = a >= 65, meds = data.meds || [];
+    var chronic = inp.diabetes === 'yes' || meds.indexOf('bp') >= 0 || inp.sbp >= 140 || inp.dbp >= 90;
+    var arrow = LANGS[LANG].dir === 'rtl' ? ' ←' : ' →';
+    var li = function (t) { return '<li>' + esc(t) + '</li>'; };
+    var aer = act === 'high' || act === 'vhigh'
+      ? L('אירובי: הנפח שלך כבר מעל המינימום המומלץ. אין צורך להגדיל אותו, ועדיף לשים לב לשני הסעיפים הבאים.')
+      : act === 'rec'
+        ? L('אירובי: להמשיך ב-150–300 דקות בשבוע של פעילות בעצימות בינונית, למשל הליכה מהירה חמישה ימים בשבוע.')
+        : L('אירובי: להתחיל בשלוש הליכות של 10–15 דקות בשבוע, ולהוסיף כמה דקות מדי שבוע או שבועיים, עד 150 דקות בשבוע בעצימות בינונית.');
+    var items = [aer,
+      L('כוח: לפחות שני ימים בשבוע, לכל קבוצות השרירים הגדולות, בעצימות בינונית ומעלה. אפשר גם בלי משקולות: קימה וישיבה מכיסא, שכיבות סמיכה על קיר או שולחן, גשר עכוז, חתירה עם גומיית התנגדות.')];
+    if (old) items.push(L('איזון: מגיל 65 כדאי לשלב פעילות מגוונת שמדגישה איזון וכוח, בשלושה ימים בשבוע לפחות. למשל עמידה על רגל אחת ליד משענת, הליכה עקב-אגודל, וקימה מכיסא בלי עזרת הידיים.'));
+    return L('<div class="tests train"><h3>נקודת התחלה לאימונים</h3><p class="small muted">לפי הגיל והפעילות שהזנת. הכמויות הן של ארגון הבריאות העולמי (2020); הדוגמאות הן הצעות כלליות, לא תכנית אישית.</p><ul>') +
+      items.map(li).join('') + '</ul>' +
+      '<details class="exfigs"><summary>' + L('איורים לדוגמאות') + '</summary><div class="exgrid">' +
+        exFig('sit', L('קימה וישיבה מכיסא')) + exFig('wall', L('שכיבות סמיכה על קיר')) + exFig('bridge', L('גשר עכוז')) + exFig('row', L('חתירה עם גומיית התנגדות')) +
+        (old ? exFig('leg', L('עמידה על רגל אחת ליד משענת')) + exFig('heel', L('הליכה עקב-אגודל')) : '') +
+        '</div>' + L('<p class="small muted">איורים סכמטיים, לא הדרכה לביצוע. אם משהו לא ברור או כואב, שווה לשאול מאמן/ת או פיזיותרפיסט/ית.</p>') + '</details>' +
+      (chronic ? L('<p class="small">יש לך מצב כרוני (סוכרת או לחץ דם), ולכן כדאי לשאול את הרופא/ה איזו עצימות מתאימה לך לפני שמגבירים.</p>') : '') +
+      L('<p class="small muted">כאב בחזה, סחרחורת או קוצר נשימה חריג באמצע מאמץ הם סימן לעצור ולפנות לרופא/ה. זה מידע כללי ולא ייעוץ רפואי.</p>') +
+      '<a class="small" href="' + SiteURL('topic', 'movement') + '">' + L('למדריך: תנועה וכושר') + arrow + '</a></div>';
+  }
+
   // בדיקות ששווה לשאול עליהן את הרופא/ה: רק מה שחסר ומתאים לגיל ולמה שהוזן, לפי ההנחיות המקובלות
   // (USPSTF, ESC/EAS, ADA). בכוונה בלי בדיקות שאין לגביהן המלצה לכלל האוכלוסייה.
   function testsHTML(inp) {
@@ -965,6 +1004,7 @@
       (stats ? '<div class="stats" style="margin-top:18px">' + stats + '</div>' : '') +
 
       planHTML(inp, r) +
+      trainingHTML(inp) +
       testsHTML(inp) +
 
       L('<h3>מה מוסיף ומה מוריד שנים</h3>') +

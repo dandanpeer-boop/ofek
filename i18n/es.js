@@ -991,3 +991,34 @@ Object.assign(I18N.es, {
 "140ca8z": "La imagen se guardó y el texto con el enlace se copió. Puedes pegarlos donde quieras.",
 "j5n2n8": "<div class=\"sharerow\"><button type=\"button\" class=\"sharebtn\" id=\"share\">Compartir mi resultado</button><span class=\"small muted\" id=\"sharestat\" role=\"status\"></span></div>"
 });
+Object.assign(I18N.es, {
+"psojr7": "Aeróbico: tu volumen ya supera el mínimo recomendado. No hace falta aumentarlo, y es mejor centrarse en los dos puntos siguientes.",
+"12sbd68": "Aeróbico: seguir con 150–300 minutos a la semana de actividad de intensidad moderada, por ejemplo caminar a paso rápido cinco días a la semana.",
+"pcots0": "Aeróbico: empezar con tres caminatas de 10–15 minutos a la semana, y añadir unos minutos cada semana o cada dos, hasta llegar a 150 minutos a la semana a intensidad moderada.",
+"1kozg7n": "Fuerza: al menos dos días a la semana, para todos los grandes grupos musculares, a intensidad moderada o mayor. No hacen falta pesas: levantarse y sentarse de una silla, flexiones contra una pared o una mesa, puente de glúteos, remo con banda elástica.",
+"1gyvmb8": "Equilibrio: a partir de los 65 años conviene incluir actividad variada que haga hincapié en el equilibrio y la fuerza, al menos tres días a la semana. Por ejemplo, estar de pie sobre una pierna junto a un apoyo, caminar talón con punta y levantarse de una silla sin usar las manos.",
+"qdzm2w": "<div class=\"tests train\"><h3>Un punto de partida para entrenar</h3><p class=\"small muted\">Según la edad y la actividad que indicaste. Las cantidades son de la Organización Mundial de la Salud (2020); los ejemplos son sugerencias generales, no un programa personal.</p><ul>",
+"13nqxhc": "<p class=\"small\">Tienes una enfermedad crónica (diabetes o presión arterial), así que conviene preguntar a tu médico qué intensidad te conviene antes de aumentarla.</p>",
+"11t45eg": "<p class=\"small muted\">Dolor en el pecho, mareo o falta de aire inusual durante el esfuerzo son una señal para parar y acudir al médico. Es información general, no un consejo médico.</p>",
+"q0l54i": "A la guía: Movimiento y condición física",
+"1ox29p5": "Músculo y equilibrio con la edad",
+"7ihy58": "La masa y la fuerza muscular disminuyen gradualmente con la edad, y en casos extremos se habla de sarcopenia. Según una revisión de Abellan van Kan (2009), afecta del 8% al 40% de las personas de 60 años o más, según la definición y la forma de medirla, y todavía no hay una definición consensuada. La Organización Mundial de la Salud recomienda actividades de fortalecimiento muscular a cualquier edad, y al menos dos días a la semana a intensidad moderada o mayor, para todos los grandes grupos musculares.",
+"1m0ubi5": "Después de los 65 se suma el equilibrio: al menos un tercio de las personas de esa edad se cae cada año. En una revisión Cochrane de 108 ensayos aleatorizados con 23.407 participantes (Sherrington 2019), el ejercicio redujo la tasa de caídas un 23% (RaR 0,77, IC 95%: 0,71–0,83). Por eso las recomendaciones de la Organización Mundial de la Salud para mayores de 65 incluyen actividad variada con énfasis en el equilibrio y la fuerza, al menos tres días a la semana.",
+"cyl7zj": "Abellan van Kan 2009: epidemiología de la sarcopenia (J Nutr Health Aging)",
+"1ctdv2p": "Sherrington 2019: ejercicio para prevenir caídas (Cochrane)"
+});
+Object.assign(I18N.es, {
+"xl8lhe": "Actualización continua",
+"1qmwnpt": "Cada semana se revisa PubMed en busca de nuevas investigaciones del campo: metaanálisis, revisiones sistemáticas, ensayos controlados y grandes estudios de cohortes sobre mortalidad y esperanza de vida. Cada estudio encontrado se contrasta con su resumen y con las cifras que ya están en el sitio, y solo un estudio sólido que cambie el panorama actualiza una cifra de la calculadora o una guía.",
+"4g69h": "No todo estudio nuevo cambia algo, y es a propósito: un único estudio atípico no debería mover tu estimación."
+});
+Object.assign(I18N.es, {
+"1urge1w": "Ilustraciones de los ejemplos",
+"1i77x2n": "Levantarse y sentarse de una silla",
+"zzj873": "Flexiones contra la pared",
+"munt1s": "Puente de glúteos",
+"t81kil": "Remo con banda elástica",
+"1pvq7id": "De pie sobre una pierna junto a un apoyo",
+"emg1m2": "Caminar talón con punta",
+"ytbpp7": "<p class=\"small muted\">Ilustraciones esquemáticas, no una guía para realizar los ejercicios. Si algo no está claro o duele, consulta con un entrenador o fisioterapeuta.</p>"
+});
