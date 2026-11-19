@@ -1042,3 +1042,15 @@ Object.assign(I18N.en, {
 Object.assign(I18N.en, {
 "w217yz": "<p><b>Worth checking:</b> total cholesterol, HDL, LDL and triglycerides do not agree with each other (LDL should be close to \"total minus HDL minus triglycerides divided by 5\"). A value may have been read from the wrong line, so check each of them against the file before you go on.</p>"
 });
+Object.assign(I18N.en, {
+"5xtypw": "<p><b>Check every value against the document, then approve.</b> The form is filled only after you click \"Approve and fill the form\". You can correct a number, or untick a value that is wrong.</p>",
+"1be602o": "Test date: ",
+"1jyirqx": "In the form now: ",
+"7q4y56": " (will be replaced)",
+"5b5t0w": "Approve and fill the form",
+"wc8fdk": "Cancel",
+"1gnz978": "Filled from file",
+"1aubjn9": "The form was filled from ",
+"1m0eqml": " values you approved. You can correct any field by hand.",
+"6bkbqy": "No value was approved, and the form did not change."
+});

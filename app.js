@@ -347,8 +347,7 @@
         return { name: name, ok: false, scanned: fromPdf && text.replace(/\s/g, '').length < 20,
           preview: half.split('\n').filter(function (l) { return l.trim(); }).slice(0, 40).map(function (l) { return l.slice(0, 110); }).join('\n') };
       }
-      data.labDocs.push({ name: name, date: LabParser.findDate(text) || todayISO(), found: found, other: other });
-      return { name: name, ok: true, found: found };
+      return { name: name, ok: true, found: found, other: other, date: LabParser.findDate(text) || todayISO() };
     }
 
     // בדיקת עקביות: LDL אמור להיות קרוב ל"כללי פחות HDL פחות טריגליצרידים/5" (נוסחת Friedewald, תקפה עד טריגליצרידים 400).
@@ -360,19 +359,67 @@
         ? L('<p><b>כדאי לבדוק:</b> כולסטרול כללי, HDL, LDL וטריגליצרידים לא מתיישבים זה עם זה (LDL אמור להיות קרוב ל"כללי פחות HDL פחות טריגליצרידים חלקי 5"). ייתכן שערך נקרא משורה לא נכונה, ולכן כדאי לבדוק כל אחד מהם מול הקובץ לפני שממשיכים.</p>') : '';
     }
 
-    function report(results) {
-      drawDocs(); applyLabDocs();
-      var good = results.filter(function (r) { return r.ok; }), bad = results.filter(function (r) { return !r.ok; });
-      var html = '';
-      if (good.length) {
-        var last = good[good.length - 1];
-        html += '<b>' + (good.length === 1 ? L('נמצאו ') + last.found.length + L(' ערכים') : L('נקראו ') + good.length + L(' מסמכים')) + L(' והטופס מולא מהבדיקה העדכנית ביותר.</b> בדקו את הערכים מול המסמך לפני שממשיכים') +
-          (good.length === 1 ? ':' : L('. הערכים מהמסמך האחרון שנקרא (') + esc(last.name) + '):') + '<ul>' +
-          last.found.map(function (r) {
-            return '<li>' + esc(r.label) + ': <b dir="ltr">' + r.value + '</b> ' + esc(r.unit) + (r.converted ? L(' (הומר מיחידות אחרות)') : '') +
-              '<div class="src" dir="auto">' + esc(r.line) + '</div></li>';
-          }).join('') + '</ul>' + lipidWarning(last.found);
+    // שלב אישור: הערכים שנקראו מוצגים לבדיקה, והטופס מתמלא רק אחרי שהמשתמש לוחץ "אישור". אפשר לתקן מספר או להסיר סימון מערך שגוי.
+    function reviewHTML(good) {
+      var h = L('<p><b>בדקו כל ערך מול המסמך ואשרו.</b> הטופס יתמלא רק אחרי שתלחצו "אישור ומילוי הטופס". אפשר לתקן מספר, או להסיר את הסימון מערך שאינו נכון.</p>');
+      good.forEach(function (g, gi) {
+        h += '<div class="review"><div class="revhead"><b dir="auto">' + esc(g.name) + '</b> <label class="small">' + L('תאריך הבדיקה: ') +
+          '<input type="date" data-gdate="' + gi + '" value="' + esc(g.date) + '" max="' + todayISO() + '"></label></div><ul class="revlist">';
+        g.found.forEach(function (r, i) {
+          var cur = data[r.id], differs = cur !== undefined && cur !== '' && Number(cur) !== r.value;
+          h += '<li><label class="revrow"><input type="checkbox" checked data-g="' + gi + '" data-i="' + i + '" aria-label="' + esc(r.label) + '"> <span>' + esc(r.label) + '</span></label> ' +
+            '<input type="number" step="any" dir="ltr" class="revval" data-g="' + gi + '" data-i="' + i + '" value="' + r.value + '"> ' + esc(r.unit) +
+            (r.converted ? L(' (הומר מיחידות אחרות)') : '') +
+            (differs ? '<div class="small">' + L('בטופס כרגע: ') + esc(cur) + L(' (יוחלף)') + '</div>' : '') +
+            '<div class="src" dir="auto">' + esc(r.line) + '</div></li>';
+        });
+        h += '</ul><div data-w="' + gi + '"></div></div>';
+      });
+      return h + '<div class="revbtns"><button type="button" class="btn primary" id="labconfirm">' + L('אישור ומילוי הטופס') + '</button> <button type="button" class="btn ghost" id="labcancel">' + L('ביטול') + '</button></div>';
+    }
+
+    function markFromFile(ids) {
+      ids.forEach(function (id) {
+        var el = document.getElementById('f_' + id), box = el && el.closest('.field');
+        if (!el || !box || el.classList.contains('fromfile')) return;
+        el.classList.add('fromfile');
+        var tag = document.createElement('div'); tag.className = 'filetag small'; tag.textContent = L('מולא מקובץ'); box.appendChild(tag);
+        el.addEventListener('input', function () { el.classList.remove('fromfile'); if (tag.parentNode) tag.parentNode.removeChild(tag); });
+      });
+    }
+
+    function wireReview(good) {
+      function checked(gi) {
+        var vals = [];
+        out.querySelectorAll('input[type=checkbox][data-g="' + gi + '"]').forEach(function (cb) {
+          if (!cb.checked) return;
+          var i = +cb.dataset.i, v = parseFloat(out.querySelector('input.revval[data-g="' + gi + '"][data-i="' + i + '"]').value);
+          if (isFinite(v)) vals.push({ i: i, id: good[gi].found[i].id, value: v });
+        });
+        return vals;
       }
+      function refresh() { good.forEach(function (g, gi) { var w = out.querySelector('[data-w="' + gi + '"]'); if (w) w.innerHTML = lipidWarning(checked(gi)); }); }
+      out.querySelectorAll('input[data-i]').forEach(function (el) { el.addEventListener('input', refresh); el.addEventListener('change', refresh); });
+      refresh();
+      document.getElementById('labcancel').onclick = function () { msg(''); };
+      document.getElementById('labconfirm').onclick = function () {
+        var count = 0, ids = [];
+        good.forEach(function (g, gi) {
+          var kept = checked(gi).map(function (k) {
+            var r = g.found[k.i]; ids.push(r.id);
+            return { id: r.id, label: r.label, unit: r.unit, value: k.value, converted: r.converted, line: r.line };
+          });
+          var dEl = out.querySelector('input[data-gdate="' + gi + '"]');
+          if (kept.length) { data.labDocs.push({ name: g.name, date: (dEl && dEl.value) || g.date, found: kept, other: g.other }); count += kept.length; }
+        });
+        drawDocs(); applyLabDocs(); markFromFile(ids);
+        msg(count ? L('הטופס מולא מ-') + count + L(' ערכים שאישרתם. אפשר לתקן כל שדה ידנית.') : L('לא אושר אף ערך, והטופס לא השתנה.'), count ? 'ok' : 'warn');
+      };
+    }
+
+    function report(results) {
+      var good = results.filter(function (r) { return r.ok; }), bad = results.filter(function (r) { return !r.ok; });
+      var html = good.length ? reviewHTML(good) : '';
       bad.forEach(function (r) {
         html += '<p>' + esc(r.name) + ': ' + (r.error ? (r.error === 'ScriptLoadError' ? L('רכיב קריאת ה-PDF לא נטען. אם הדף פתוח בכתובת localhost, השרת המקומי כנראה כבוי: פתחו את הקובץ index.html ישירות בלחיצה כפולה, או הפעילו את השרת מחדש ורעננו.')
           : /Password/.test(r.error) ? L('הקובץ מוגן בסיסמה ולא נפתח. נסו שוב והקלידו את הסיסמה (בדרך כלל מספר תעודת הזהות).')
@@ -382,6 +429,7 @@
           (r.preview && !r.scanned ? L('<details class="rawtext"><summary>הצגת הטקסט שנקרא מהקובץ</summary><p class="small">זה מה שהמערכת הצליחה לקרוא. אם זה אכן דוח בדיקות, העתיקו מכאן כמה שורות של תוצאות (בלי שם, תעודת זהות או פרטים מזהים) כדי שאפשר יהיה להתאים את הקריאה למבנה של הדוח.</p><pre dir="auto">') + esc(r.preview) + '</pre></details>' : '');
       });
       msg(html, good.length ? 'ok' : 'warn');
+      if (good.length) wireReview(good);
     }
 
     file.onchange = function () {

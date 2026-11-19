@@ -1040,3 +1040,15 @@ Object.assign(I18N.fr, {
 Object.assign(I18N.fr, {
 "w217yz": "<p><b>À vérifier :</b> le cholestérol total, le HDL, le LDL et les triglycérides ne concordent pas entre eux (le LDL devrait être proche de « total moins HDL moins triglycérides divisés par 5 »). Une valeur a peut-être été lue sur la mauvaise ligne, vérifiez donc chacune d'elles avec le fichier avant de continuer.</p>"
 });
+Object.assign(I18N.fr, {
+"5xtypw": "<p><b>Vérifiez chaque valeur avec le document, puis validez.</b> Le formulaire n'est rempli qu'après avoir cliqué sur « Valider et remplir le formulaire ». Vous pouvez corriger un nombre ou décocher une valeur incorrecte.</p>",
+"1be602o": "Date de l'analyse : ",
+"1jyirqx": "Dans le formulaire actuellement : ",
+"7q4y56": " (sera remplacé)",
+"5b5t0w": "Valider et remplir le formulaire",
+"wc8fdk": "Annuler",
+"1gnz978": "Rempli depuis un fichier",
+"1aubjn9": "Le formulaire a été rempli avec ",
+"1m0eqml": " valeurs que vous avez validées. Vous pouvez corriger chaque champ à la main.",
+"6bkbqy": "Aucune valeur n'a été validée et le formulaire n'a pas changé."
+});

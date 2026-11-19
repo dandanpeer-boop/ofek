@@ -1040,3 +1040,15 @@ Object.assign(I18N.es, {
 Object.assign(I18N.es, {
 "w217yz": "<p><b>Conviene comprobar:</b> el colesterol total, el HDL, el LDL y los triglicéridos no concuerdan entre sí (el LDL debería ser cercano a \"total menos HDL menos triglicéridos dividido por 5\"). Puede que un valor se haya leído de una línea equivocada, así que comprueba cada uno con el archivo antes de continuar.</p>"
 });
+Object.assign(I18N.es, {
+"5xtypw": "<p><b>Comprueba cada valor con el documento y aprueba.</b> El formulario solo se rellena después de pulsar \"Aprobar y rellenar el formulario\". Puedes corregir un número o desmarcar un valor que sea incorrecto.</p>",
+"1be602o": "Fecha de la prueba: ",
+"1jyirqx": "En el formulario ahora: ",
+"7q4y56": " (se reemplazará)",
+"5b5t0w": "Aprobar y rellenar el formulario",
+"wc8fdk": "Cancelar",
+"1gnz978": "Rellenado desde archivo",
+"1aubjn9": "El formulario se rellenó con ",
+"1m0eqml": " valores que aprobaste. Puedes corregir cualquier campo a mano.",
+"6bkbqy": "No se aprobó ningún valor y el formulario no cambió."
+});

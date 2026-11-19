@@ -454,3 +454,13 @@ a { color: var(--accent); }
 .exfig svg { width: 100%; height: auto; max-height: 120px; color: var(--ink, currentColor); }
 .exfig .ctx { stroke: currentColor; opacity: .35; stroke-width: 2.5; }
 .exfig figcaption { font-size: .85rem; color: var(--muted); margin-top: 4px; }
+.review { border: 1px solid var(--line); border-radius: 12px; padding: 10px 14px; margin: 10px 0; }
+.revhead { display: flex; flex-wrap: wrap; gap: 8px 16px; align-items: center; margin-bottom: 6px; }
+.revlist { list-style: none; margin: 0; padding: 0; }
+.revlist li { padding: 6px 0; border-top: 1px solid var(--line); }
+.revlist li:first-child { border-top: 0; }
+.revrow { display: inline-flex; gap: 6px; align-items: center; min-width: 140px; font-weight: 600; }
+.revval { width: 90px; }
+.revbtns { display: flex; gap: 10px; margin-top: 10px; }
+.fromfile { border-color: var(--accent) !important; }
+.filetag { color: var(--accent); margin-top: 2px; }
