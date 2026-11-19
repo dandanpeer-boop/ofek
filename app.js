@@ -96,7 +96,7 @@
       ]
     },
     {
-      title: L('בדיקות דם ולחץ דם'), intro: L('הכול כאן רשות.'),
+      title: L('בדיקות דם ולחץ דם'), intro: L('הכול כאן רשות. אפשר להשאיר כל שדה ריק ולהמשיך לשלב הבא: החישוב ישתמש במה שהוזן.'),
       fields: [
         { id: 'diabetes', type: 'choice', label: L('האם אובחנת בסוכרת?'), options: [['no', L('לא')], ['yes', L('כן')]] },
         { id: 'hasLabs', type: 'choice', gate: true, label: L('יש לך תוצאות של בדיקות דם או מדידה של לחץ דם מהשנה-שנתיים האחרונות?'), hint: L('לא חובה. בלי בדיקות מקבלים הערכה מלאה; עם בדיקות היא מדויקת יותר.'), options: [['yes', L('כן, אני רוצה להזין')], ['no', L('לא, לדלג')]] },
@@ -294,13 +294,14 @@
   // ---------- שליפת ערכים ממסמך בדיקות ----------
 
   function heDate(iso) { var p = String(iso).split('-'); return p.length === 3 ? p[2] + '/' + p[1] + '/' + p[0] : iso; }
+  function dlabel(iso) { return iso ? heDate(iso) : L('ללא תאריך'); }
   function todayISO() { var d = new Date(); return d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0'); }
 
   /** מסמכי הבדיקות לפי תאריך: [{date, values:{id:value}}], מהישן לחדש. מסמכים מאותו תאריך מתמזגים. */
   function labsByDate() {
     var map = {};
     (data.labDocs || []).forEach(function (doc) {
-      var k = doc.date || todayISO();
+      var k = doc.date || '';
       map[k] = map[k] || {};
       doc.found.forEach(function (r) { map[k][r.id] = r.value; });
     });
@@ -309,8 +310,10 @@
 
   /** ממלא את שדות הטופס מהבדיקה העדכנית ביותר שיש בה כל ערך */
   function applyLabDocs() {
-    var latest = {};
-    labsByDate().forEach(function (d) { Object.keys(d.values).forEach(function (id) { latest[id] = d.values[id]; }); });
+    var latest = {}, undated = {};
+    labsByDate().forEach(function (d) { Object.keys(d.values).forEach(function (id) { (d.date ? latest : undated)[id] = d.values[id]; }); });
+    // מסמך בלי תאריך לא דורס שום דבר: הוא ממלא רק שדה שאין בו ערך מבדיקה מתוארכת ושעדיין ריק בטופס
+    Object.keys(undated).forEach(function (id) { if (latest[id] === undefined && (data[id] === undefined || data[id] === '')) latest[id] = undated[id]; });
     Object.keys(latest).forEach(function (id) {
       data[id] = String(latest[id]);
       var el = document.getElementById('f_' + id); if (el) el.value = latest[id];
@@ -347,7 +350,7 @@
         return { name: name, ok: false, scanned: fromPdf && text.replace(/\s/g, '').length < 20,
           preview: half.split('\n').filter(function (l) { return l.trim(); }).slice(0, 40).map(function (l) { return l.slice(0, 110); }).join('\n') };
       }
-      return { name: name, ok: true, found: found, other: other, date: LabParser.findDate(text) || todayISO() };
+      return { name: name, ok: true, found: found, other: other, date: LabParser.findDate(text) || '' };
     }
 
     // בדיקת עקביות: LDL אמור להיות קרוב ל"כללי פחות HDL פחות טריגליצרידים/5" (נוסחת Friedewald, תקפה עד טריגליצרידים 400).
@@ -361,16 +364,16 @@
 
     // שלב אישור: הערכים שנקראו מוצגים לבדיקה, והטופס מתמלא רק אחרי שהמשתמש לוחץ "אישור". אפשר לתקן מספר או להסיר סימון מערך שגוי.
     function reviewHTML(good) {
-      var h = L('<p><b>בדקו כל ערך מול המסמך ואשרו.</b> הטופס יתמלא רק אחרי שתלחצו "אישור ומילוי הטופס". אפשר לתקן מספר, או להסיר את הסימון מערך שאינו נכון.</p>');
+      var h = L('<p><b>בדקו כל ערך מול המסמך ואשרו.</b> הטופס יתמלא רק אחרי שתלחצו "אישור ומילוי הטופס". אפשר לתקן מספר, או להסיר את הסימון מערך שאינו נכון.</p>') +
+        L('<p class="small muted">כשיש כמה בדיקות, בכל ערך נבחרת הבדיקה העדכנית ביותר לפי התאריך.</p>');
       good.forEach(function (g, gi) {
         h += '<div class="review"><div class="revhead"><b dir="auto">' + esc(g.name) + '</b> <label class="small">' + L('תאריך הבדיקה: ') +
-          '<input type="date" data-gdate="' + gi + '" value="' + esc(g.date) + '" max="' + todayISO() + '"></label></div><ul class="revlist">';
+          '<input type="date" data-gdate="' + gi + '" value="' + esc(g.date) + '" max="' + todayISO() + '"></label><span class="small nodatenote" data-dn="' + gi + '"></span></div><ul class="revlist">';
         g.found.forEach(function (r, i) {
-          var cur = data[r.id], differs = cur !== undefined && cur !== '' && Number(cur) !== r.value;
           h += '<li><label class="revrow"><input type="checkbox" checked data-g="' + gi + '" data-i="' + i + '" aria-label="' + esc(r.label) + '"> <span>' + esc(r.label) + '</span></label> ' +
             '<input type="number" step="any" dir="ltr" class="revval" data-g="' + gi + '" data-i="' + i + '" value="' + r.value + '"> ' + esc(r.unit) +
             (r.converted ? L(' (הומר מיחידות אחרות)') : '') +
-            (differs ? '<div class="small">' + L('בטופס כרגע: ') + esc(cur) + L(' (יוחלף)') + '</div>' : '') +
+            '<div class="small revnote" data-n="' + gi + '-' + i + '"></div>' +
             '<div class="src" dir="auto">' + esc(r.line) + '</div></li>';
         });
         h += '</ul><div data-w="' + gi + '"></div></div>';
@@ -398,8 +401,26 @@
         });
         return vals;
       }
-      function refresh() { good.forEach(function (g, gi) { var w = out.querySelector('[data-w="' + gi + '"]'); if (w) w.innerHTML = lipidWarning(checked(gi)); }); }
-      out.querySelectorAll('input[data-i]').forEach(function (el) { el.addEventListener('input', refresh); el.addEventListener('change', refresh); });
+      function noteFor(g, gi, r) {
+        var dEl = out.querySelector('input[data-gdate="' + gi + '"]'), date = dEl ? dEl.value : g.date;
+        var cur = data[r.id], has = cur !== undefined && cur !== '', newest = '';
+        if (!has) return '';
+        (data.labDocs || []).forEach(function (d) { if (d.date && d.date > newest && d.found.some(function (x) { return x.id === r.id; })) newest = d.date; });
+        if (date) {
+          if (newest && newest > date) return L('בטופס כרגע: ') + esc(cur) + L(' (יישאר: קיימת בדיקה חדשה יותר מ-') + heDate(newest) + ')';
+          return Number(cur) !== r.value ? L('בטופס כרגע: ') + esc(cur) + L(' (יוחלף)') : '';
+        }
+        return L('בטופס כרגע: ') + esc(cur) + L(' (יישאר: לא ידוע תאריך הבדיקה)');
+      }
+      function refresh() {
+        good.forEach(function (g, gi) {
+          var w = out.querySelector('[data-w="' + gi + '"]'); if (w) w.innerHTML = lipidWarning(checked(gi));
+          var dEl = out.querySelector('input[data-gdate="' + gi + '"]'), dn = out.querySelector('[data-dn="' + gi + '"]');
+          if (dn) dn.textContent = dEl && !dEl.value ? L('לא זוהה תאריך בקובץ. אפשר להשאיר ריק, ואז הערכים ימלאו רק שדות שעדיין ריקים.') : '';
+          g.found.forEach(function (r, i) { var n = out.querySelector('[data-n="' + gi + '-' + i + '"]'); if (n) n.innerHTML = noteFor(g, gi, r); });
+        });
+      }
+      out.querySelectorAll('input[data-i], input[data-gdate]').forEach(function (el) { el.addEventListener('input', refresh); el.addEventListener('change', refresh); });
       refresh();
       document.getElementById('labcancel').onclick = function () { msg(''); };
       document.getElementById('labconfirm').onclick = function () {
@@ -520,7 +541,7 @@
       var rel = first ? (last - first) / Math.abs(first) : 0, dir = TREND_DIR[T.id] || 0;
       var cls = Math.abs(rel) < 0.03 || !dir ? '' : (rel * dir > 0 ? 'pos' : 'neg');
       var word = Math.abs(rel) < 0.03 ? L('יציב') : (rel > 0 ? L('עלייה') : L('ירידה')) + L(' של ') + Math.round(Math.abs(rel) * 100) + '%';
-      rows += '<div class="trow"><div class="name">' + esc(T.label) + '<div class="det">' + heDate(pts[0].date) + ' ← ' + heDate(pts[pts.length - 1].date) + '</div></div>' +
+      rows += '<div class="trow"><div class="name">' + esc(T.label) + '<div class="det">' + dlabel(pts[0].date) + ' ← ' + dlabel(pts[pts.length - 1].date) + '</div></div>' +
         '<div dir="ltr">' + spark(pts.map(function (d) { return d.values[T.id]; }), cls) + '</div>' +
         '<div class="tval"><span dir="ltr">' + first + ' → ' + last + '</span><div class="det ' + cls + '">' + word + '</div></div></div>';
     });
@@ -537,7 +558,7 @@
       });
       var diff = ages[ages.length - 1] - ages[0];
       est = L('<div class="trendest"><div class="small muted">ההערכה לפי כל בדיקה, בגילך הנוכחי וכשכל שאר הנתונים קבועים</div><div class="estrow">') +
-        dates.map(function (d, i) { return '<div><b>' + fmt(ages[i]) + '</b><span>' + heDate(d.date) + '</span></div>'; }).join('<i aria-hidden="true">←</i>') + '</div>' +
+        dates.map(function (d, i) { return '<div><b>' + fmt(ages[i]) + '</b><span>' + dlabel(d.date) + '</span></div>'; }).join('<i aria-hidden="true">←</i>') + '</div>' +
         '<div>' + (Math.abs(diff) < 0.05 ? L('הבדיקות לא שינו את ההערכה.') : L('השינוי בבדיקות ') + (diff > 0 ? L('הוסיף') : L('הוריד')) +
           ' <b class="' + (diff > 0 ? 'pos' : 'neg') + '" dir="ltr">' + signed(diff) + L('</b> שנים להערכה.')) + '</div></div>';
     }

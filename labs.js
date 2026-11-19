@@ -148,22 +148,31 @@ var LabParser = (function () {
     return out;
   }
 
-  /** תאריך הבדיקה: התאריך שמופיע הכי הרבה פעמים במסמך (בשוויון — המאוחר). מחזיר 'YYYY-MM-DD' או ''. */
+  /** תאריך הבדיקה: קודם תאריך שכתוב ליד "תאריך הבדיקה" (ולא תאריך הדפסה), ואם אין כזה, התאריך שמופיע הכי הרבה פעמים (בשוויון — המאוחר). מחזיר 'YYYY-MM-DD' או ''. */
   function findDate(text, now) {
-    var today = now || new Date(), counts = {}, m;
+    var today = now || new Date();
     var re = /(?:^|[^\d])(\d{1,2})[\/.\-](\d{1,2})[\/.\-](\d{4}|\d{2})(?!\d)|(?:^|[^\d])(\d{4})-(\d{2})-(\d{2})(?!\d)/g;
-    while ((m = re.exec(String(text)))) {
-      var d, mo, y;
-      if (m[4]) { y = +m[4]; mo = +m[5]; d = +m[6]; } else { d = +m[1]; mo = +m[2]; y = +m[3]; if (y < 100) y += 2000; }
-      if (mo < 1 || mo > 12 || d < 1 || d > 31 || y < 1990) continue;
-      var dt = new Date(y, mo - 1, d);
-      if (dt > today) continue;
-      var key = y + '-' + String(mo).padStart(2, '0') + '-' + String(d).padStart(2, '0');
-      counts[key] = (counts[key] || 0) + 1;
+    // תווית "תאריך הבדיקה" בשני סדרי המילים (מסמכי PDF חזותיים שומרים עברית הפוכה)
+    var LABEL = /תאריך\s*הבדיקה|הבדיקה\s*תאריך|הקידבה\s*ךיראת|ךיראת\s*הקידבה|(?:collection|sample|specimen|test|draw|collected)\s*date|date\s*(?:collected|of\s*(?:test|sample|collection|draw))/i;
+    function best(lines) {
+      var counts = {}, m, any = false;
+      lines.forEach(function (line) {
+        re.lastIndex = 0;
+        while ((m = re.exec(line))) {
+          var d, mo, y;
+          if (m[4]) { y = +m[4]; mo = +m[5]; d = +m[6]; } else { d = +m[1]; mo = +m[2]; y = +m[3]; if (y < 100) y += 2000; }
+          if (mo < 1 || mo > 12 || d < 1 || d > 31 || y < 1990) continue;
+          if (new Date(y, mo - 1, d) > today) continue;
+          var key = y + '-' + String(mo).padStart(2, '0') + '-' + String(d).padStart(2, '0');
+          counts[key] = (counts[key] || 0) + 1; any = true;
+        }
+      });
+      var b = '';
+      if (any) Object.keys(counts).forEach(function (k) { if (!b || counts[k] > counts[b] || (counts[k] === counts[b] && k > b)) b = k; });
+      return b;
     }
-    var best = '';
-    Object.keys(counts).forEach(function (k) { if (!best || counts[k] > counts[best] || (counts[k] === counts[best] && k > best)) best = k; });
-    return best;
+    var lines = String(text).split(/\r?\n/);
+    return best(lines.filter(function (l) { return LABEL.test(l); })) || best(lines);
   }
 
   // ---------- PDF ----------

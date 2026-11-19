@@ -1052,3 +1052,13 @@ Object.assign(I18N.es, {
 "1m0eqml": " valores que aprobaste. Puedes corregir cualquier campo a mano.",
 "6bkbqy": "No se aprobó ningún valor y el formulario no cambió."
 });
+Object.assign(I18N.es, {
+"1vtqgci": "Sin fecha",
+"1f8ykr7": "<p class=\"small muted\">Cuando hay varias pruebas, para cada valor se usa la más reciente según la fecha.</p>",
+"16cwwdh": " (se mantendrá: hay una prueba más reciente, del ",
+"ulmx1v": " (se mantendrá: se desconoce la fecha de la prueba)",
+"5qh76c": "No se encontró ninguna fecha en el archivo. Puedes dejarla vacía y entonces los valores solo rellenarán los campos que sigan vacíos."
+});
+Object.assign(I18N.es, {
+"an70uh": "Todo aquí es opcional. Puedes dejar cualquier campo vacío y pasar al siguiente paso: el cálculo usará lo que hayas introducido."
+});

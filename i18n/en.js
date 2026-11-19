@@ -1054,3 +1054,13 @@ Object.assign(I18N.en, {
 "1m0eqml": " values you approved. You can correct any field by hand.",
 "6bkbqy": "No value was approved, and the form did not change."
 });
+Object.assign(I18N.en, {
+"1vtqgci": "No date",
+"1f8ykr7": "<p class=\"small muted\">When there are several tests, the most recent one is used for each value, by date.</p>",
+"16cwwdh": " (will stay: a newer test from ",
+"ulmx1v": " (will stay: the test date is unknown)",
+"5qh76c": "No date was found in the file. You can leave it empty, and then the values will fill only fields that are still empty."
+});
+Object.assign(I18N.en, {
+"an70uh": "Everything here is optional. You can leave any field empty and continue to the next step: the calculation will use what you entered."
+});

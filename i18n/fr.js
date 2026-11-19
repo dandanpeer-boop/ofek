@@ -1052,3 +1052,13 @@ Object.assign(I18N.fr, {
 "1m0eqml": " valeurs que vous avez validées. Vous pouvez corriger chaque champ à la main.",
 "6bkbqy": "Aucune valeur n'a été validée et le formulaire n'a pas changé."
 });
+Object.assign(I18N.fr, {
+"1vtqgci": "Sans date",
+"1f8ykr7": "<p class=\"small muted\">Quand il y a plusieurs analyses, c'est la plus récente, selon la date, qui est utilisée pour chaque valeur.</p>",
+"16cwwdh": " (sera conservé : une analyse plus récente, du ",
+"ulmx1v": " (sera conservé : la date de l'analyse est inconnue)",
+"5qh76c": "Aucune date n'a été trouvée dans le fichier. Vous pouvez la laisser vide, et les valeurs ne rempliront alors que les champs encore vides."
+});
+Object.assign(I18N.fr, {
+"an70uh": "Tout ici est facultatif. Vous pouvez laisser n'importe quel champ vide et passer à l'étape suivante : le calcul utilisera ce que vous avez saisi."
+});
