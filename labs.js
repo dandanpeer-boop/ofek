@@ -175,8 +175,10 @@ var LabParser = (function () {
   function ensurePdfJs() {
     if (!pdfReady) {
       // טעינת קוד ה-worker כסקריפט רגיל גורמת ל-pdf.js לרוץ על התהליך הראשי, כך שזה עובד גם בפתיחה ישירה של הקובץ
-      pdfReady = loadScript('vendor/pdf.min.js').then(function () { return loadScript('vendor/pdf.worker.min.js'); })
-        .then(function () { window.pdfjsLib.GlobalWorkerOptions.workerSrc = 'vendor/pdf.worker.min.js'; });
+      // הנתיב יחסי לשורש האתר (ROOT נקבע בכל עמוד), כי המחשבון יושב בתיקייה ולא בשורש
+      var base = (typeof ROOT !== 'undefined' ? ROOT : '') + 'vendor/';
+      pdfReady = loadScript(base + 'pdf.min.js').then(function () { return loadScript(base + 'pdf.worker.min.js'); })
+        .then(function () { window.pdfjsLib.GlobalWorkerOptions.workerSrc = base + 'pdf.worker.min.js'; });
     }
     return pdfReady;
   }
