@@ -1156,3 +1156,6 @@ Object.assign(I18N.en, {
 "1j1zs8d": "The reason: after my mother died at 77, and cancer was found in my father at 77, I decided to help people improve their life expectancy.",
 "y6w08y": "The site was written with the help of artificial intelligence tools. Every number was checked against the abstract or full text of the original study. The content has not yet been reviewed by a doctor or an actuary. When that happens, we will say so here."
 });
+Object.assign(I18N.en, {
+"3zbczk": "The site was written with the help of artificial intelligence tools. Every number was checked against the abstract or full text of the original study."
+});

@@ -1154,3 +1154,6 @@ Object.assign(I18N.es, {
 "1j1zs8d": "El motivo: después de que mi madre muriera a los 77 años, y de que a mi padre le detectaran un cáncer a los 77, decidí ayudar a las personas a mejorar su esperanza de vida.",
 "y6w08y": "El sitio se escribió con ayuda de herramientas de inteligencia artificial. Cada número se contrastó con el resumen o el texto completo del estudio original. El contenido todavía no ha sido revisado por un médico ni por un actuario. Cuando ocurra, lo indicaremos aquí."
 });
+Object.assign(I18N.es, {
+"3zbczk": "El sitio se escribió con ayuda de herramientas de inteligencia artificial. Cada número se contrastó con el resumen o el texto completo del estudio original."
+});

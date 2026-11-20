@@ -1154,3 +1154,6 @@ Object.assign(I18N.fr, {
 "1j1zs8d": "La raison : après la mort de ma mère à 77 ans, et la découverte d’un cancer chez mon père à 77 ans, j’ai décidé d’aider les gens à améliorer leur espérance de vie.",
 "y6w08y": "Le site a été rédigé avec l’aide d’outils d’intelligence artificielle. Chaque chiffre a été vérifié par rapport au résumé ou au texte complet de l’étude d’origine. Le contenu n’a pas encore été relu par un médecin ni par un actuaire. Quand ce sera fait, nous l’indiquerons ici."
 });
+Object.assign(I18N.fr, {
+"3zbczk": "Le site a été rédigé avec l’aide d’outils d’intelligence artificielle. Chaque chiffre a été vérifié par rapport au résumé ou au texte complet de l’étude d’origine."
+});
