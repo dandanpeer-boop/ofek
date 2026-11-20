@@ -1132,3 +1132,6 @@ Object.assign(I18N.fr, {
 "42ff5a": "Vous ne les connaissez pas un par un ? À peu près jusqu'à quel âge ont vécu vos grands-parents, en moyenne ?",
 "1o13ibj": "Sans compter ceux décédés dans un accident ou à la guerre. Pour ceux qui sont encore en vie, selon leur âge actuel. Si vous avez rempli chaque grand-parent ci-dessus, cette réponse ne sera pas utilisée."
 });
+Object.assign(I18N.fr, {
+"kuk5d9": "<b>IMC :</b> Global BMI Mortality Collaboration. Body-mass index and all-cause mortality: individual-participant-data meta-analysis of 239 prospective studies. <i>Lancet</i> 2016;388:776–86. <span class=\"hrnote\">Dans le modèle : moins de 18,5 : 1,51 · 18,5–20 : 1,13 · 25–27,5 : 1,07 · 27,5–30 : 1,20 · 30–35 : 1,45 · 35–40 : 1,94 · 40+ : 2,76 (référence : 20–25). La courbe est proche de celle des femmes ; chez les hommes, l’effet au-dessus de l’IMC 21 est amplifié (×1,43 en échelle logarithmique), car l’étude a trouvé un risque plus élevé chez les hommes (obésité de grade 1 : 1,70 contre 1,37 chez les femmes)</span>"
+});

@@ -242,8 +242,12 @@ var LifeModel = (function () {
       var lnB = interp([[17.5, Math.log(1.51)], [19.25, Math.log(1.13)], [21, 0], [24, 0],
         [26.25, Math.log(1.07)], [28.75, Math.log(1.20)], [32.5, Math.log(1.45)],
         [37.5, Math.log(1.94)], [45, Math.log(2.76)]], bmi);
+      // GBMC 2016: העקומה המאוחדת קרובה לעקומת הנשים (יותר נשים מגברים בהשמנה), והסיכון בגברים גבוה יותר
+      // (דרגה 1: גברים 1.70, נשים 1.37 מול 1.45 מאוחד). לכן נשים נשארות על העקומה המאוחדת, וב-ln HR של גברים
+      // מעל BMI 21 מוכפל ב-ln(1.70)/ln(1.45) = 1.428. נרמול האוכלוסייה לגברים 1.339 (התפלגות BMI משוערת). החלטה 20.11.2026.
+      if (sex === 'm' && bmi >= 21) lnB *= 1.428;
       if (lnB > 0 && bmi > 25 && hasBP && hasGlu && hasLip) lnB *= ASSUME.bmiMediation;
-      var lnBr = lnB - Math.log(1.21); // ממוצע אוכלוסייה משוער לפי התפלגות BMI טיפוסית
+      var lnBr = lnB - Math.log(sex === 'm' ? 1.339 : 1.21); // ממוצע אוכלוסייה משוער לפי התפלגות BMI טיפוסית, לכל מין
       add('bmi', L('משקל (BMI)'), 'BMI ' + dsep(bmi.toFixed(1)), function (a) { return lnBr * attStd(a); });
     }
 
