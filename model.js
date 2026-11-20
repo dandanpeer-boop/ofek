@@ -469,6 +469,14 @@ var LifeModel = (function () {
         function (a) { return lnFH * attStd(a); });
     }
 
+    // הערכה עצמית של בריאות חופפת חלקית לגורמים קליניים (DeSalvo לא התאים ל-BMI, כושר וביומרקרים).
+    // משקל מוחלק: 1 - 0.15 לכל גורם קליני שהוזן, לא פחות מ-0.5. שיפוט של ועדת אופק (20.11.2026), לא נתון ממחקר.
+    var CLIN = ['bioage', 'bmi', 'bp', 'chol', 'diabetes', 'cardiomet', 'fitness', 'kidney', 'crp', 'acr', 'ggt', 'lpa', 'tg', 'waist', 'rhr'];
+    var nClin = F.filter(function (f) { return CLIN.indexOf(f.id) >= 0; }).length;
+    var wSrh = Math.max(0.5, 1 - 0.15 * nClin);
+    if (wSrh < 1) F.forEach(function (f) {
+      if (f.id === 'srh') { var fn0 = f.fn; f.fn = function (a) { return wSrh * fn0(a); }; f.detail += L(' (משוקללת יחד עם המדדים הרפואיים שהזנת)'); }
+    });
     return { factors: F, notes: notes, derived: derived };
   }
 
@@ -510,15 +518,20 @@ var LifeModel = (function () {
 
   // שילוב הגורמים: הגורם החזק ביותר נספר במלואו, והבאים אחריו במשקל מופחת,
   // משום שגורמי הסיכון מתואמים זה עם זה והמחקרים לא תקננו זה לזה באופן מלא.
-  function combinedLogHR(factors, mask) {
+  function rawLogHR(factors, mask) {
     return function (a) {
       var v = [];
       for (var i = 0; i < factors.length; i++) if (!mask || mask[i]) v.push(factors[i].fn(a));
       v.sort(function (x, y) { return Math.abs(y) - Math.abs(x); });
       var s = 0;
       for (var k = 0; k < v.length; k++) s += v[k] * (ASSUME.weights[k] !== undefined ? ASSUME.weights[k] : ASSUME.weightRest);
-      return clamp(s, Math.log(ASSUME.minHR), Math.log(ASSUME.maxHR));
+      return s;
     };
+  }
+
+  function combinedLogHR(factors, mask) {
+    var raw = rawLogHR(factors, mask);
+    return function (a) { return clamp(raw(a), Math.log(ASSUME.minHR), Math.log(ASSUME.maxHR)); };
   }
 
   // חלוקת ההפרש בשנים בין הגורמים (קירוב לערכי שפלי): ממוצע התרומה השולית של כל
@@ -578,7 +591,16 @@ var LifeModel = (function () {
       };
     }
 
+    // האם החישוב נגע בגבולות ה-HR המשולב (בכל גיל עד 40 שנה קדימה)
+    var rawFn = rawLogHR(built.factors, null), limits = { upper: false, lower: false };
+    for (var la = age; la < Math.min(MAX_AGE, age + 40); la += 5) {
+      var lr = rawFn(la);
+      if (lr > Math.log(ASSUME.maxHR)) limits.upper = true;
+      if (lr < Math.log(ASSUME.minHR)) limits.lower = true;
+    }
+
     return {
+      limits: limits,
       age: age,
       baseline: summary(base),
       personal: summary(pers),

@@ -1045,6 +1045,8 @@
     if (meds.indexOf('statin') >= 0 && r.contributions.some(function (c) { return c.id === 'chol'; })) n.push(L('ערכי הכולסטרול שהזנת נמדדו תחת טיפול בסטטינים, והמודל משתמש בערך הנמדד.'));
     var hN = num(data.height), wN = num(data.weight), wa = num(data.waist), bmiN = hN && wN ? wN / Math.pow(hN / 100, 2) : null;
     if (bmiN !== null && bmiN > 25 && bmiN < 30 && wa !== undefined && wa < (data.sex === 'f' ? 80 : 94)) n.push(L('ה-BMI שלך מעל 25, אבל היקף המותניים בטווח התקין. זה מתאים יותר למסת שריר מאשר לעודף שומן, ולכן לא מוצגת המלצה לרדת במשקל. היקף המותניים כבר מקזז חלק מההשפעה של ה-BMI בחישוב.'));
+    if (r.limits && r.limits.upper) n.push(L('השילוב שהזנת מגיע לגבול העליון של המודל, ולכן ההערכה פחות בטוחה. כדאי לדבר על כך עם רופא/ה.'));
+    if (r.limits && r.limits.lower) n.push(L('השילוב שהזנת מגיע לגבול ההגנה המרבי שהמודל מעניק, ולכן ההערכה כנראה שמרנית.'));
     if (r.derived.phenoMissing) n.push(L('כדי לחשב גיל ביולוגי חסרים עוד: ') + r.derived.phenoMissing.join(', ') + '.');
     if (r.derived.phenoAge !== undefined) n.push(L('כשמחושב גיל ביולוגי, CRP ותפקוד הכליות כבר כלולים בו, ולכן הם לא מופיעים כגורמים נפרדים.'));
     if (r.derived.egfr !== undefined && r.derived.egfr < 60) n.push(L('ה-eGFR המחושב מהקריאטינין שלך (') + Math.round(r.derived.egfr) + L(') נמוך מ-60. תוצאה בודדת אינה אבחנה, אבל כדאי להראות אותה לרופא/ה.'));

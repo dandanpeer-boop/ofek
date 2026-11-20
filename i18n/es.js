@@ -1135,3 +1135,8 @@ Object.assign(I18N.es, {
 Object.assign(I18N.es, {
 "kuk5d9": "<b>IMC:</b> Global BMI Mortality Collaboration. Body-mass index and all-cause mortality: individual-participant-data meta-analysis of 239 prospective studies. <i>Lancet</i> 2016;388:776–86. <span class=\"hrnote\">En el modelo: menos de 18,5: 1,51 · 18,5–20: 1,13 · 25–27,5: 1,07 · 27,5–30: 1,20 · 30–35: 1,45 · 35–40: 1,94 · 40+: 2,76 (referencia: 20–25). La curva es cercana a la de las mujeres; en los hombres el efecto por encima de IMC 21 se amplifica (×1,43 en escala logarítmica), porque el estudio halló mayor riesgo en hombres (obesidad de grado 1: 1,70 frente a 1,37 en mujeres)</span>"
 });
+Object.assign(I18N.es, {
+"1dzsh5o": " (ponderada junto con las mediciones médicas que introdujiste)",
+"1d5vewb": "La combinación que introdujiste alcanza el límite superior del modelo, por lo que la estimación es menos segura. Conviene hablarlo con un médico.",
+"vtqhad": "La combinación que introdujiste alcanza la máxima protección que da el modelo, por lo que la estimación probablemente es conservadora."
+});

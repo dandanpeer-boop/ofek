@@ -1137,3 +1137,8 @@ Object.assign(I18N.en, {
 Object.assign(I18N.en, {
 "kuk5d9": "<b>BMI:</b> Global BMI Mortality Collaboration. Body-mass index and all-cause mortality: individual-participant-data meta-analysis of 239 prospective studies. <i>Lancet</i> 2016;388:776–86. <span class=\"hrnote\">In the model: under 18.5: 1.51 · 18.5–20: 1.13 · 25–27.5: 1.07 · 27.5–30: 1.20 · 30–35: 1.45 · 35–40: 1.94 · 40+: 2.76 (reference: 20–25). The curve is close to the one for women; for men the effect above BMI 21 is scaled up (×1.43 on the log scale), because the paper found higher risk in men (grade 1 obesity: 1.70 vs 1.37 in women)</span>"
 });
+Object.assign(I18N.en, {
+"1dzsh5o": " (weighted together with the medical measurements you entered)",
+"1d5vewb": "The combination you entered reaches the upper limit of the model, so the estimate is less certain. It is worth discussing with a doctor.",
+"vtqhad": "The combination you entered reaches the maximum protection the model gives, so the estimate is probably conservative."
+});
