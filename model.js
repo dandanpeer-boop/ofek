@@ -476,8 +476,9 @@ var LifeModel = (function () {
       return null;
     }
     var ln = 0, parts = [], any = false;
-    // הורים: 17% פחות סיכון לכל עשור שלפחות הורה אחד חי מעבר לגיל 70
-    var pa = [usable(inp.mother, 70), usable(inp.father, 70)].filter(function (x) { return x !== null; });
+    // הורים: 17% פחות סיכון לכל עשור שלפחות הורה אחד חי מעבר לגיל 80
+    // הורה חי נספר רק מגיל 80 (חסם תחתון לאריכות ימים). מתחת לכך הנתון חתוך ואינו מעיד על כלום (החלטה 20.11.2026, ועדת אופק)
+    var pa = [usable(inp.mother, 80), usable(inp.father, 80)].filter(function (x) { return x !== null; });
     var bothKnown = pa.length === 2;
     if (pa.length) {
       var Lmax = Math.max.apply(null, pa);
