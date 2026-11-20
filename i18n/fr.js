@@ -1157,3 +1157,6 @@ Object.assign(I18N.fr, {
 Object.assign(I18N.fr, {
 "3zbczk": "Le site a été rédigé avec l’aide d’outils d’intelligence artificielle. Chaque chiffre a été vérifié par rapport au résumé ou au texte complet de l’étude d’origine."
 });
+Object.assign(I18N.fr, {
+"vxpe9y": "<b>BMI:</b> Global BMI Mortality Collaboration. Body-mass index and all-cause mortality: individual-participant-data meta-analysis of 239 prospective studies. <i>Lancet</i> 2016;388:776–86. <span class=\"hrnote\">Dans le modèle : en dessous de 18,5 : 1,51 · 18,5–20 : 1,13 · 25–27,5 : 1,07 · 27,5–30 : 1,20 · 30–35 : 1,45 · 35–40 : 1,94 · 40+ : 2,76 (référence : 20–25). La courbe est proche de celle des femmes ; chez les hommes, l’effet au-dessus d’un IMC de 21 est amplifié 1,43 fois en échelle logarithmique, car dans l’article le risque est plus élevé chez les hommes (obésité de grade 1 : 1,70 contre 1,37 chez les femmes)</span>"
+});

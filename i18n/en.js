@@ -1159,3 +1159,6 @@ Object.assign(I18N.en, {
 Object.assign(I18N.en, {
 "3zbczk": "The site was written with the help of artificial intelligence tools. Every number was checked against the abstract or full text of the original study."
 });
+Object.assign(I18N.en, {
+"vxpe9y": "<b>BMI:</b> Global BMI Mortality Collaboration. Body-mass index and all-cause mortality: individual-participant-data meta-analysis of 239 prospective studies. <i>Lancet</i> 2016;388:776–86. <span class=\"hrnote\">In the model: below 18.5: 1.51 · 18.5–20: 1.13 · 25–27.5: 1.07 · 27.5–30: 1.20 · 30–35: 1.45 · 35–40: 1.94 · 40+: 2.76 (reference: 20–25). The curve is close to the women's curve; for men the effect above BMI 21 is amplified 1.43-fold on the log scale, because in the paper the risk is higher in men (grade 1 obesity: 1.70 versus 1.37 in women)</span>"
+});
