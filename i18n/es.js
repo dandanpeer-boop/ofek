@@ -1140,3 +1140,17 @@ Object.assign(I18N.es, {
 "1d5vewb": "La combinación que introdujiste alcanza el límite superior del modelo, por lo que la estimación es menos segura. Conviene hablarlo con un médico.",
 "vtqhad": "La combinación que introdujiste alcanza la máxima protección que da el modelo, por lo que la estimación probablemente es conservadora."
 });
+Object.assign(I18N.es, {
+"18dzp1z": "Límites del modelo",
+"edvpax": "El modelo combina resultados de estudios distintos. No se basa en un único estudio contrastado con resultados reales, por lo que no es un modelo validado.",
+"5ht83p": "Los factores relacionados entre sí, como el peso, el azúcar en sangre y la presión arterial, se solapan en parte. El tratamiento de este solapamiento es una aproximación y puede exagerar o subestimar el resultado, sobre todo en personas con muchos factores de riesgo.",
+"er3ayn": "La tabla de mortalidad refleja la mortalidad de hoy, no los avances médicos futuros, por lo que la estimación para personas jóvenes probablemente es conservadora.",
+"ntxb5c": "El rango mostrado refleja las diferencias entre personas con el mismo perfil, no la incertidumbre del propio modelo.",
+"1m41opz": "La mayoría de los estudios son observacionales. Cuando muestran una asociación, no siempre se sabe cuánta es causal, por lo que “cuántos años podrías ganar” es una estimación, no una promesa.",
+"f5n6de": "Muchos de los estudios se hicieron en países occidentales. El modelo no conoce enfermedades raras, genética ni riesgos agudos.",
+"1o61nal": "Puedes comprobarlo tú mismo: una vez cargada la página, puedes desconectarte de internet o activar el modo avión y la calculadora seguirá funcionando, incluida la lectura de un archivo de análisis de sangre.",
+"3amz2p": "Quién construyó este sitio",
+"i4tr7g": "El sitio fue creado por una persona particular. No hay detrás una aseguradora, una empresa de suplementos ni ánimo de lucro por ahora.",
+"1j1zs8d": "El motivo: después de que mi madre muriera a los 77 años, y de que a mi padre le detectaran un cáncer a los 77, decidí ayudar a las personas a mejorar su esperanza de vida.",
+"y6w08y": "El sitio se escribió con ayuda de herramientas de inteligencia artificial. Cada número se contrastó con el resumen o el texto completo del estudio original. El contenido todavía no ha sido revisado por un médico ni por un actuario. Cuando ocurra, lo indicaremos aquí."
+});

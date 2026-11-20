@@ -1142,3 +1142,17 @@ Object.assign(I18N.en, {
 "1d5vewb": "The combination you entered reaches the upper limit of the model, so the estimate is less certain. It is worth discussing with a doctor.",
 "vtqhad": "The combination you entered reaches the maximum protection the model gives, so the estimate is probably conservative."
 });
+Object.assign(I18N.en, {
+"18dzp1z": "Limits of the model",
+"edvpax": "The model combines findings from separate studies. It is not built on one study tested against real outcomes, so it is not a validated model.",
+"5ht83p": "Factors that are linked, such as weight, blood sugar and blood pressure, partly overlap. The handling of this overlap is an approximation and may overstate or understate the result, especially for people with many risk factors.",
+"er3ayn": "The mortality table reflects mortality today, not future medical progress, so the estimate for younger people is probably conservative.",
+"ntxb5c": "The range shown reflects differences between people with the same profile, not the uncertainty of the model itself.",
+"1m41opz": "Most studies are observational. When they show an association, it is not always clear how much of it is causal, so “how many years you could gain” is an estimate, not a promise.",
+"f5n6de": "Many of the studies were done in Western countries. The model does not know about rare diseases, genetics or acute risks.",
+"1o61nal": "You can check this yourself: once the page has loaded, you can disconnect from the internet or switch to airplane mode and the calculator keeps working, including reading a blood test file.",
+"3amz2p": "Who built this site",
+"i4tr7g": "The site was built by a private person. There is no insurance company, supplement company or profit motive behind it at this point.",
+"1j1zs8d": "The reason: after my mother died at 77, and cancer was found in my father at 77, I decided to help people improve their life expectancy.",
+"y6w08y": "The site was written with the help of artificial intelligence tools. Every number was checked against the abstract or full text of the original study. The content has not yet been reviewed by a doctor or an actuary. When that happens, we will say so here."
+});

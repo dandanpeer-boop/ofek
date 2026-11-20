@@ -1140,3 +1140,17 @@ Object.assign(I18N.fr, {
 "1d5vewb": "La combinaison saisie atteint la limite supérieure du modèle ; l’estimation est donc moins sûre. Il vaut la peine d’en parler avec un médecin.",
 "vtqhad": "La combinaison saisie atteint la protection maximale que donne le modèle ; l’estimation est donc probablement prudente."
 });
+Object.assign(I18N.fr, {
+"18dzp1z": "Limites du modèle",
+"edvpax": "Le modèle combine les résultats d’études distinctes. Il ne repose pas sur une seule étude confrontée à des résultats réels ; ce n’est donc pas un modèle validé.",
+"5ht83p": "Les facteurs liés entre eux, comme le poids, la glycémie et la tension, se recoupent en partie. Le traitement de ce chevauchement est une approximation et peut exagérer ou sous-estimer le résultat, surtout chez les personnes ayant de nombreux facteurs de risque.",
+"er3ayn": "La table de mortalité reflète la mortalité d’aujourd’hui, et non les progrès médicaux futurs ; l’estimation pour les jeunes est donc probablement prudente.",
+"ntxb5c": "La fourchette affichée reflète les différences entre des personnes de même profil, et non l’incertitude du modèle lui-même.",
+"1m41opz": "La plupart des études sont observationnelles. Quand elles montrent une association, on ne sait pas toujours quelle part est causale ; « combien d’années vous pourriez gagner » est donc une estimation, pas une promesse.",
+"f5n6de": "Beaucoup d’études ont été menées dans des pays occidentaux. Le modèle ne connaît ni les maladies rares, ni la génétique, ni les risques aigus.",
+"1o61nal": "Vous pouvez le vérifier vous-même : une fois la page chargée, vous pouvez vous déconnecter d’internet ou passer en mode avion, et le calculateur continue de fonctionner, y compris la lecture d’un fichier d’analyses de sang.",
+"3amz2p": "Qui a construit ce site",
+"i4tr7g": "Le site a été créé par un particulier. Il n’y a derrière lui ni compagnie d’assurance, ni fabricant de compléments, ni but lucratif pour le moment.",
+"1j1zs8d": "La raison : après la mort de ma mère à 77 ans, et la découverte d’un cancer chez mon père à 77 ans, j’ai décidé d’aider les gens à améliorer leur espérance de vie.",
+"y6w08y": "Le site a été rédigé avec l’aide d’outils d’intelligence artificielle. Chaque chiffre a été vérifié par rapport au résumé ou au texte complet de l’étude d’origine. Le contenu n’a pas encore été relu par un médecin ni par un actuaire. Quand ce sera fait, nous l’indiquerons ici."
+});
