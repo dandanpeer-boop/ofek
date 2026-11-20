@@ -1128,3 +1128,7 @@ Object.assign(I18N.es, {
 "1l6pj98": "Chilibeck 2017: creatina y músculo en adultos mayores (Open Access J Sports Med)",
 "1uf6wue": "Martens 2018: ribósido de nicotinamida en adultos mayores (Nat Commun)"
 });
+Object.assign(I18N.es, {
+"42ff5a": "¿No conoces a cada uno? Aproximadamente, ¿hasta qué edad vivieron en promedio tus abuelos y abuelas?",
+"1o13ibj": "Sin contar a quien murió en un accidente o en la guerra. Para quien sigue vivo, según su edad actual. Si has rellenado a los abuelos uno por uno arriba, esta respuesta no se usará."
+});

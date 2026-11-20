@@ -1128,3 +1128,7 @@ Object.assign(I18N.fr, {
 "1l6pj98": "Chilibeck 2017 : créatine et muscle chez les adultes âgés (Open Access J Sports Med)",
 "1uf6wue": "Martens 2018 : nicotinamide riboside chez les adultes âgés (Nat Commun)"
 });
+Object.assign(I18N.fr, {
+"42ff5a": "Vous ne les connaissez pas un par un ? À peu près jusqu'à quel âge ont vécu vos grands-parents, en moyenne ?",
+"1o13ibj": "Sans compter ceux décédés dans un accident ou à la guerre. Pour ceux qui sont encore en vie, selon leur âge actuel. Si vous avez rempli chaque grand-parent ci-dessus, cette réponse ne sera pas utilisée."
+});

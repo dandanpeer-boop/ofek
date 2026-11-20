@@ -88,7 +88,11 @@
         { id: 'mother', type: 'person', label: L('אמא') },
         { id: 'father', type: 'person', label: L('אבא') },
         { type: 'heading', label: L('סבים וסבתות') },
-        { id: 'gpAvg', type: 'choice', label: L('בערך עד איזה גיל חיו הסבים והסבתות שלך, בממוצע?'), hint: L('בלי מי שנפטר בתאונה או במלחמה. מי שעדיין בחיים, לפי הגיל שלו היום.'), options: [['65', L('פחות מ-70')], ['75', '70–79'], ['85', '80–89'], ['93', L('90 ומעלה')], ['', L('לא ידוע')]] },
+        { id: 'gp0', type: 'person', label: L('סבתא (מצד אמא)') },
+        { id: 'gp1', type: 'person', label: L('סבא (מצד אמא)') },
+        { id: 'gp2', type: 'person', label: L('סבתא (מצד אבא)') },
+        { id: 'gp3', type: 'person', label: L('סבא (מצד אבא)') },
+        { id: 'gpAvg', type: 'choice', label: L('לא מכירים כל אחד? בערך עד איזה גיל חיו הסבים והסבתות שלך, בממוצע?'), hint: L('בלי מי שנפטר בתאונה או במלחמה. מי שעדיין בחיים, לפי הגיל שלו היום. אם מילאתם את הסבים והסבתות אחד אחד למעלה, התשובה הזו לא תשמש.'), options: [['65', L('פחות מ-70')], ['75', '70–79'], ['85', '80–89'], ['93', L('90 ומעלה')], ['', L('לא ידוע')]] },
         { type: 'heading', label: L('מחלות במשפחה') },
         { id: 'famHeart', type: 'choice', label: L('האם לאחד ההורים היה התקף לב או אירוע מוחי בגיל צעיר?'), hint: L('לפני גיל 55 אצל האב, או לפני גיל 65 אצל האם.'), options: [['no', L('לא')], ['yes', L('כן')], ['', L('לא ידוע')]] },
         { id: 'hered', type: 'multi', label: L('מחלות נוספות אצל קרובים מדרגה ראשונה'), hint: L('לא משפיע על המספר, אבל יופיע בהערות.'), options: [['breast', L('סרטן שד או שחלה')], ['colon', L('סרטן המעי הגס')], ['t2d', L('סוכרת סוג 2')], ['alz', L('אלצהיימר')], ['fh', L('כולסטרול גבוה משפחתי')]] },
@@ -161,10 +165,13 @@
   // ---------- עזרים ----------
 
   function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
-  function num(v) { if (v === undefined || v === null || String(v).trim() === '') return undefined; var n = Number(v); return isFinite(n) ? n : undefined; }
+  // מפריד עשרוני לתצוגה: פסיק בספרדית ובצרפתית, נקודה בשאר השפות. גם הקלדה עם פסיק (5,8) מתקבלת.
+  var DEC = (LANG === 'es' || LANG === 'fr') ? ',' : '.';
+  function dec(s) { return DEC === '.' ? String(s) : String(s).replace('.', DEC); }
+  function num(v) { if (v === undefined || v === null || String(v).trim() === '') return undefined; var n = Number(String(v).trim().replace(/^(-?\d+),(\d+)$/, '$1.$2')); return isFinite(n) ? n : undefined; }
   function flat(fields) { var out = []; fields.forEach(function (f) { if (f.row) out = out.concat(f.row); else out.push(f); }); return out; }
-  function fmt(x, d) { return x.toFixed(d === undefined ? 1 : d); }
-  function signed(x) { return (x >= 0 ? '+' : '−') + Math.abs(x).toFixed(1); }
+  function fmt(x, d) { return dec(x.toFixed(d === undefined ? 1 : d)); }
+  function signed(x) { return (x >= 0 ? '+' : '−') + dec(Math.abs(x).toFixed(1)); }
 
   // ---------- ציור הטופס ----------
 
@@ -599,10 +606,12 @@
     ['smoking', 'alcohol', 'activity', 'walkPace', 'sleep', 'lonely', 'isolated', 'diabetes', 'famHeart', 'srh', 'marital'].forEach(function (k) { inp[k] = data[k] || undefined; });
     inp.conditions = data.conditions || [];
     inp.mother = data.mother; inp.father = data.father;
-    // סבים וסבתות: שאלה אחת על הגיל הממוצע. נתונים ישנים (ארבעה שדות נפרדים) עדיין נתמכים.
+    // סבים וסבתות: הזנה לכל אחד בנפרד, או (כקיצור) שאלה אחת על הגיל הממוצע.
     var gpa = num(data.gpAvg);
-    inp.grandparents = gpa !== undefined ? [{ status: 'dead', age: gpa, cause: 'natural' }, { status: 'dead', age: gpa, cause: 'natural' }]
-      : [data.gp0, data.gp1, data.gp2, data.gp3].filter(Boolean);
+    // קודם הזנה לכל אחד בנפרד (לפחות שניים עם גיל); אחרת התשובה הממוצעת
+    var gps = [data.gp0, data.gp1, data.gp2, data.gp3].filter(function (g) { return g && g.status && num(g.age) !== undefined; });
+    inp.grandparents = gps.length >= 2 ? gps
+      : gpa !== undefined ? [{ status: 'dead', age: gpa, cause: 'natural' }, { status: 'dead', age: gpa, cause: 'natural' }] : gps;
     return inp;
   }
 
@@ -969,7 +978,7 @@
         if (c.dataset.ord) { var op = optsOf(id)[+v]; v = op[0]; o.textContent = op[1]; }
         if (c.type === 'range' && !c.dataset.ord) {
           x[id] = Number(v);
-          o.textContent = id === 'weight' ? v + ' (BMI ' + (v / Math.pow(inp.height / 100, 2)).toFixed(1) + ')' : v;
+          o.textContent = id === 'weight' ? v + ' (BMI ' + dec((v / Math.pow(inp.height / 100, 2)).toFixed(1)) + ')' : v;
         } else if (id === 'quit') { if (v) { x.smoking = 'former'; x.quitAge = r.age; } }
         else if (id === 'fruitveg' || id === 'sitting') x[id] = v === '' ? undefined : Number(v);
         else x[id] = v || undefined;
@@ -1021,8 +1030,8 @@
     var ph = r.derived.phenoAge; if (ph === undefined) return '';
     var d = ph - r.age;
     var txt = Math.abs(d) < 0.5 ? L('זהה כמעט לגילך בפועל')
-      : '<b class="' + (d < 0 ? 'pos' : 'neg') + '">' + (d < 0 ? L('צעיר') : L('מבוגר')) + L(' ב-') + Math.abs(d).toFixed(1) + L(' שנים</b> מגילך בפועל (') + r.age + ')';
-    return L('<div class="bioage"><div><div class="muted small">הגיל הביולוגי שלך</div><div class="bionum">') + ph.toFixed(1) + '</div></div>' +
+      : '<b class="' + (d < 0 ? 'pos' : 'neg') + '">' + (d < 0 ? L('צעיר') : L('מבוגר')) + L(' ב-') + dec(Math.abs(d).toFixed(1)) + L(' שנים</b> מגילך בפועל (') + r.age + ')';
+    return L('<div class="bioage"><div><div class="muted small">הגיל הביולוגי שלך</div><div class="bionum">') + dec(ph.toFixed(1)) + '</div></div>' +
       '<div class="biotxt">' + txt + L('<div class="small muted">מחושב מתשעה ערכים בבדיקות הדם לפי נוסחת Phenotypic Age (Levine 2018). אנשים בריאים מקבלים לעיתים קרובות גיל ביולוגי נמוך בכמה שנים מגילם.</div></div></div>');
   }
 

@@ -70,8 +70,11 @@ var LabParser = (function () {
   /** עברית שנשמרה ב-PDF בסדר חזותי (אותיות הפוכות): הופך כל רצף אותיות עבריות */
   function unreverseHebrew(line) { return line.replace(/[\u0590-\u05FF]{2,}/g, function (w) { return w.split('').reverse().join(''); }); }
 
+  /** פסיק עשרוני (תוצאות ממעבדות באירופה): 5,8 -> 5.8. שתי ספרות או פחות אחרי הפסיק; שלוש ספרות הן מפריד אלפים ולא משתנות. */
+  function decComma(s) { return String(s).replace(/(\d),(\d{1,2})(?!\d)/g, '$1.$2'); }
+
   function parse(text) {
-    var lines = String(text).split(/\r?\n/), found = {}, fallback = {}, list = [];
+    var lines = decComma(text).split(/\r?\n/), found = {}, fallback = {}, list = [];
     lines.slice().forEach(function (l) { if (/[\u0590-\u05FF]{2}/.test(l)) lines.push(unreverseHebrew(l)); });
     function hit(T, v, converted, line) { return { id: T.id, label: T.label, unit: T.unit, value: round(v, T.id), converted: converted, line: line.trim().slice(0, 120) }; }
 
@@ -126,7 +129,7 @@ var LabParser = (function () {
    */
   function parseOther(text) {
     var seen = {}, out = [];
-    String(text).split(/\r?\n/).forEach(function (line) {
+    decComma(text).split(/\r?\n/).forEach(function (line) {
       if (out.length >= 80 || !line.trim() || isRemark(line)) return;
       for (var t = 0; t < TESTS.length; t++) if (TESTS[t].re.test(line)) return; // בדיקה שכבר מטופלת במודל
       var clean = line.replace(/\d{1,4}[\/.\-]\d{1,2}[\/.\-]\d{1,4}/g, ' ').replace(/\d{1,2}:\d{2}(:\d{2})?/g, ' ');

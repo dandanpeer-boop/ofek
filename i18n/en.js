@@ -1130,3 +1130,7 @@ Object.assign(I18N.en, {
 "1l6pj98": "Chilibeck 2017: creatine and muscle in older adults (Open Access J Sports Med)",
 "1uf6wue": "Martens 2018: nicotinamide riboside in older adults (Nat Commun)"
 });
+Object.assign(I18N.en, {
+"42ff5a": "Don't know each one? Roughly how old did your grandparents live to be, on average?",
+"1o13ibj": "Not counting anyone who died in an accident or in war. For anyone still alive, their age today. If you filled in your grandparents one by one above, this answer will not be used."
+});

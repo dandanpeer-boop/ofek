@@ -122,6 +122,8 @@ var LifeModel = (function () {
 
   // ---------- 2. עזרי גורמי סיכון ----------
 
+  function dsep(s) { return (typeof LANG !== 'undefined' && (LANG === 'es' || LANG === 'fr')) ? String(s).replace('.', ',') : String(s); }
+
   function clamp(x, lo, hi) { return Math.max(lo, Math.min(hi, x)); }
   function isNum(x) { return typeof x === 'number' && isFinite(x); }
 
@@ -195,7 +197,7 @@ var LifeModel = (function () {
       derived.phenoAge = pheno;
       // 9% עלייה בסיכון לכל שנת גיל ביולוגי מעבר לגיל הכרונולוגי; מנורמל לפיזור משוער באוכלוסייה
       var lnPh = Math.log(1.09) * clamp(pheno - age, -12, 12) - Math.log(1.10);
-      add('bioage', L('גיל ביולוגי (בדיקות דם)'), L('גיל ביולוגי ') + pheno.toFixed(1), function (a) { return lnPh * attStd(a); });
+      add('bioage', L('גיל ביולוגי (בדיקות דם)'), L('גיל ביולוגי ') + dsep(pheno.toFixed(1)), function (a) { return lnPh * attStd(a); });
     } else {
       var miss = PHENO_FIELDS.filter(function (k) { return !isNum(inp[k[0]]); });
       if (miss.length < PHENO_FIELDS.length - 2 && miss.length) derived.phenoMissing = miss.map(function (k) { return k[1]; });
@@ -242,7 +244,7 @@ var LifeModel = (function () {
         [37.5, Math.log(1.94)], [45, Math.log(2.76)]], bmi);
       if (lnB > 0 && bmi > 25 && hasBP && hasGlu && hasLip) lnB *= ASSUME.bmiMediation;
       var lnBr = lnB - Math.log(1.21); // ממוצע אוכלוסייה משוער לפי התפלגות BMI טיפוסית
-      add('bmi', L('משקל (BMI)'), 'BMI ' + bmi.toFixed(1), function (a) { return lnBr * attStd(a); });
+      add('bmi', L('משקל (BMI)'), 'BMI ' + dsep(bmi.toFixed(1)), function (a) { return lnBr * attStd(a); });
     }
 
     // --- פעילות גופנית: Arem et al., JAMA Intern Med 2015 ---
