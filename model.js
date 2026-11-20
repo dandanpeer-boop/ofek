@@ -285,11 +285,11 @@ var LifeModel = (function () {
     // כשיש את שניהם, הבדידות נספרת בחצי משקל, כי שני המדדים חופפים בחלקם.
     if (inp.isolated || inp.lonely) {
       var isoY = inp.isolated === 'rarely', lonY = inp.lonely === 'yes';
-      var lnS = (inp.isolated ? Math.log((isoY ? 1.32 : 1) / 1.064) : 0) +
+      var lnSoc = (inp.isolated ? Math.log((isoY ? 1.32 : 1) / 1.064) : 0) +
         (inp.lonely ? (isoY ? 0.5 : 1) * Math.log((lonY ? 1.14 : 1) / 1.028) : 0);
       var socLbl = isoY && lonY ? L('מעט מפגשים ותחושת בדידות') : isoY ? L('מעט מפגשים חברתיים') :
         lonY ? L('תחושת בדידות תכופה') : L('קשרים חברתיים טובים');
-      add('social', L('קשרים חברתיים'), socLbl, function (a) { return lnS * attStd(a); });
+      add('social', L('קשרים חברתיים'), socLbl, function (a) { return lnSoc * attStd(a); });
     }
 
     // --- השכלה: IHME-CHAIN Collaborators, Lancet Public Health 2024 ---
@@ -404,9 +404,9 @@ var LifeModel = (function () {
     // נרמול לפי התפלגות הקצב ב-UK Biobank (כ-41% מהיר, 53% ממוצע, 6–7% איטי).
     if (inp.walkPace && !isNum(inp.vo2max)) {
       var wpHR = (sex === 'f' ? { brisk: 1, average: 1.09, slow: 1.56 } : { brisk: 1, average: 1.17, slow: 1.63 })[inp.walkPace] || 1;
-      var lnW = Math.log(wpHR / (sex === 'f' ? 1.086 : 1.127));
+      var lnWP = Math.log(wpHR / (sex === 'f' ? 1.086 : 1.127));
       var wpLbl = { brisk: L('הליכה מהירה'), average: L('הליכה בקצב ממוצע'), slow: L('הליכה איטית') }[inp.walkPace];
-      add('walkpace', L('קצב הליכה'), wpLbl, function (a) { return lnW * attStd(a); });
+      add('walkpace', L('קצב הליכה'), wpLbl, function (a) { return lnWP * attStd(a); });
     }
 
     // --- ישיבה: Chau et al., PLoS One 2013 (מתוקנן לפעילות גופנית) ---
