@@ -1169,3 +1169,17 @@ Object.assign(I18N.en, {
 Object.assign(I18N.en, {
 "16j526p": "In a first check we ran on US NHANES data (about 23,500 adults, 10-year follow-up), the model separated people at high and low risk well, but on average it predicted about 15 to 20 percent more deaths than were actually observed. The absolute estimate may therefore be somewhat too low, and comparisons between people or between habits are more reliable than the number itself. This is not an independent check, and it was not done on an Israeli population."
 });
+Object.assign(I18N.en, {
+"7t84qp": " (weighted together with the VO2max you entered)"
+});
+Object.assign(I18N.en, {
+"js2piu": "<p><b>Worth checking:</b> the MCV value (",
+"74m802": ") does not match the hematocrit and RBC in the file (which give about ",
+"1q7mxn9": "). The value may have been read from the wrong line; check it against the file.</p>",
+"1pzjawx": "<p><b>Worth checking:</b> the CRP value is high (",
+"1477z9r": " mg/L). If the file shows it in mg/dL, the units may not have been converted.</p>",
+"8hs16x": " · old value ("
+});
+Object.assign(I18N.en, {
+"8chmw4": "Hematocrit"
+});

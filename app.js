@@ -359,7 +359,7 @@
         return { name: name, ok: false, scanned: fromPdf && text.replace(/\s/g, '').length < 20,
           preview: half.split('\n').filter(function (l) { return l.trim(); }).slice(0, 40).map(function (l) { return l.slice(0, 110); }).join('\n') };
       }
-      return { name: name, ok: true, found: found, other: other, date: LabParser.findDate(text) || '' };
+      return { name: name, ok: true, found: found, other: other, support: LabParser.parseSupport(text), date: LabParser.findDate(text) || '' };
     }
 
     // בדיקת עקביות: LDL אמור להיות קרוב ל"כללי פחות HDL פחות טריגליצרידים/5" (נוסחת Friedewald, תקפה עד טריגליצרידים 400).
@@ -369,6 +369,19 @@
       if (v.tc === undefined || v.hdl === undefined || v.ldl === undefined || v.tg === undefined || v.tg >= 400) return '';
       return Math.abs(v.tc - v.hdl - v.tg / 5 - v.ldl) > 20
         ? L('<p><b>כדאי לבדוק:</b> כולסטרול כללי, HDL, LDL וטריגליצרידים לא מתיישבים זה עם זה (LDL אמור להיות קרוב ל"כללי פחות HDL פחות טריגליצרידים חלקי 5"). ייתכן שערך נקרא משורה לא נכונה, ולכן כדאי לבדוק כל אחד מהם מול הקובץ לפני שממשיכים.</p>') : '';
+    }
+
+    // בדיקות שפיות נוספות (אזהרה בלבד): MCV מול המטוקריט ו-RBC (MCV = 10 × HCT / RBC), ו-CRP גבוה במידה חשודה (בלבול יחידות).
+    function labSanity(g, vals) {
+      var v = {}, sp = {}, h = '';
+      vals.forEach(function (x) { v[x.id] = x.value; });
+      (g.support || []).forEach(function (x) { sp[x.id] = x.value; });
+      if (v.mcv !== undefined && sp.hct !== undefined && sp.rbc !== undefined) {
+        var calc = 10 * sp.hct / sp.rbc;
+        if (Math.abs(calc - v.mcv) / v.mcv > 0.1) h += L('<p><b>כדאי לבדוק:</b> ערך ה-MCV (') + v.mcv + L(') לא מתיישב עם המטוקריט ו-RBC בקובץ (לפיהם כ-') + Math.round(calc) + L('). ייתכן שהערך נקרא משורה לא נכונה; בדקו אותו מול הקובץ.</p>');
+      }
+      if (v.crp !== undefined && v.crp > 30) h += L('<p><b>כדאי לבדוק:</b> ערך ה-CRP גבוה (') + v.crp + L(' מ"ג/ליטר). אם בקובץ הוא מופיע ב-mg/dL, ייתכן שהיחידות לא הומרו.</p>');
+      return h;
     }
 
     // שלב אישור: הערכים שנקראו מוצגים לבדיקה, והטופס מתמלא רק אחרי שהמשתמש לוחץ "אישור". אפשר לתקן מספר או להסיר סימון מערך שגוי.
@@ -395,7 +408,10 @@
         var el = document.getElementById('f_' + id), box = el && el.closest('.field');
         if (!el || !box || el.classList.contains('fromfile')) return;
         el.classList.add('fromfile');
-        var tag = document.createElement('div'); tag.className = 'filetag small'; tag.textContent = L('מולא מקובץ'); box.appendChild(tag);
+        var tag = document.createElement('div'); tag.className = 'filetag small'; tag.textContent = L('מולא מקובץ');
+        var ld = data.labDates && data.labDates[id], cut = new Date(); cut.setFullYear(cut.getFullYear() - 2);
+        if (ld && ld < cut.getFullYear() + '-' + String(cut.getMonth() + 1).padStart(2, '0') + '-' + String(cut.getDate()).padStart(2, '0')) tag.textContent += L(' · ערך ישן (') + heDate(ld) + ')';
+        box.appendChild(tag);
         el.addEventListener('input', function () { el.classList.remove('fromfile'); if (tag.parentNode) tag.parentNode.removeChild(tag); });
       });
     }
@@ -423,7 +439,7 @@
       }
       function refresh() {
         good.forEach(function (g, gi) {
-          var w = out.querySelector('[data-w="' + gi + '"]'); if (w) w.innerHTML = lipidWarning(checked(gi));
+          var w = out.querySelector('[data-w="' + gi + '"]'); if (w) w.innerHTML = lipidWarning(checked(gi)) + labSanity(g, checked(gi));
           var dEl = out.querySelector('input[data-gdate="' + gi + '"]'), dn = out.querySelector('[data-dn="' + gi + '"]');
           if (dn) dn.textContent = dEl && !dEl.value ? L('לא זוהה תאריך בקובץ. אפשר להשאיר ריק, ואז הערכים ימלאו רק שדות שעדיין ריקים.') : '';
           g.found.forEach(function (r, i) { var n = out.querySelector('[data-n="' + gi + '-' + i + '"]'); if (n) n.innerHTML = noteFor(g, gi, r); });

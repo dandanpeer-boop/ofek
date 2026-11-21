@@ -1167,3 +1167,17 @@ Object.assign(I18N.es, {
 Object.assign(I18N.es, {
 "16j526p": "En una primera comprobación con datos estadounidenses de NHANES (unos 23.500 adultos, seguimiento de 10 años), el modelo distinguió bien entre personas de riesgo alto y bajo, pero en promedio predijo entre un 15 y un 20 por ciento más de muertes de las observadas. Por eso la estimación absoluta puede ser algo baja, y las comparaciones entre personas o entre hábitos son más fiables que el número en sí. No es una comprobación independiente ni se hizo con población israelí."
 });
+Object.assign(I18N.es, {
+"7t84qp": " (ponderada junto con el VO2máx introducido)"
+});
+Object.assign(I18N.es, {
+"js2piu": "<p><b>Conviene revisar:</b> el valor de VCM (",
+"74m802": ") no concuerda con el hematocrito y los hematíes del archivo (que dan aproximadamente ",
+"1q7mxn9": "). Puede que el valor se haya leído de una línea equivocada; compruébalo con el archivo.</p>",
+"1pzjawx": "<p><b>Conviene revisar:</b> el valor de PCR es alto (",
+"1477z9r": " mg/L). Si el archivo lo muestra en mg/dL, puede que las unidades no se hayan convertido.</p>",
+"8hs16x": " · valor antiguo ("
+});
+Object.assign(I18N.es, {
+"8chmw4": "Hematocrito"
+});

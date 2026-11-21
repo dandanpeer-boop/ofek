@@ -1167,3 +1167,17 @@ Object.assign(I18N.fr, {
 Object.assign(I18N.fr, {
 "16j526p": "Lors d’une première vérification sur les données américaines NHANES (environ 23 500 adultes, suivi de 10 ans), le modèle distinguait bien les personnes à risque élevé et faible, mais il prédisait en moyenne 15 à 20 pour cent de décès de plus que ceux observés. L’estimation absolue peut donc être un peu trop basse, et les comparaisons entre personnes ou entre habitudes sont plus fiables que le chiffre lui-même. Il ne s’agit pas d’une vérification indépendante, et elle n’a pas été faite sur une population israélienne."
 });
+Object.assign(I18N.fr, {
+"7t84qp": " (pondérée avec la VO2max saisie)"
+});
+Object.assign(I18N.fr, {
+"js2piu": "<p><b>À vérifier :</b> la valeur du VGM (",
+"74m802": ") ne correspond pas à l’hématocrite et aux globules rouges du fichier (qui donnent environ ",
+"1q7mxn9": "). La valeur a peut-être été lue sur une mauvaise ligne ; vérifiez-la dans le fichier.</p>",
+"1pzjawx": "<p><b>À vérifier :</b> la valeur de CRP est élevée (",
+"1477z9r": " mg/L). Si le fichier l’indique en mg/dL, les unités n’ont peut-être pas été converties.</p>",
+"8hs16x": " · valeur ancienne ("
+});
+Object.assign(I18N.fr, {
+"8chmw4": "Hématocrite"
+});

@@ -42,6 +42,12 @@ var LabParser = (function () {
       alt: { re: /a^/, k: 0.001, min: 500, max: 50000 } }
   ];
 
+  // בדיקות תמיכה: לא נכנסות למודל, משמשות רק לבדיקת שפיות של MCV (MCV = 10 × המטוקריט / RBC)
+  var SUPPORT = [
+    { id: 'hct', label: L('המטוקריט'), unit: '%', re: /\bhct\b|hematocrit|המטוקריט/i, min: 15, max: 70 },
+    { id: 'rbc', label: 'RBC', unit: 'M/µL', re: /\brbc\b|red\s*blood\s*cell|אריתרוציטים|כדוריות\s*אדומות/i, not: /\brdw\b|\bmchc?\b/i, min: 1.5, max: 8.5 }
+  ];
+
   /** המספרים בשורה שיכולים להיות תוצאה: בלי תאריכים, שעות, טווחי ייחוס וספי השוואה */
   function candidateNumbers(line) {
     var s = line
@@ -55,7 +61,7 @@ var LabParser = (function () {
   }
 
   function round(x, id) {
-    var d = id === 'creatinine' ? 2 : /^(hba1c|crp|albumin|lymph|mcv|rdw|wbc|lpa)$/.test(id) ? 1 : 0;
+    var d = id === 'creatinine' || id === 'rbc' ? 2 : /^(hba1c|crp|albumin|lymph|mcv|rdw|wbc|lpa|hct)$/.test(id) ? 1 : 0;
     var p = Math.pow(10, d);
     return Math.round(x * p) / p;
   }
@@ -65,7 +71,11 @@ var LabParser = (function () {
     return /הערות\s*לבדיקות|לבדיקות\s*הערות|תורעה\s*תוקידבל|תוקידבל\s*תורעה|ערך\s*רצוי|רצוי\s*ערך|יוצר\s*ךרע|ךרע\s*יוצר|\bremarks\b|\bdesirable\b|\boptimal\b|\bnormal\s*:|\bdeficient\s*:/i.test(line);
   }
 
-  function matchesAnyTest(line) { for (var t = 0; t < TESTS.length; t++) if (TESTS[t].re.test(line)) return true; return false; }
+  function matchesAnyTest(line) {
+    for (var t = 0; t < TESTS.length; t++) if (TESTS[t].re.test(line)) return true;
+    for (var u = 0; u < SUPPORT.length; u++) if (SUPPORT[u].re.test(line)) return true;
+    return false;
+  }
 
   /** עברית שנשמרה ב-PDF בסדר חזותי (אותיות הפוכות): הופך כל רצף אותיות עבריות */
   function unreverseHebrew(line) { return line.replace(/[\u0590-\u05FF]{2,}/g, function (w) { return w.split('').reverse().join(''); }); }
@@ -73,7 +83,8 @@ var LabParser = (function () {
   /** פסיק עשרוני (תוצאות ממעבדות באירופה): 5,8 -> 5.8. שתי ספרות או פחות אחרי הפסיק; שלוש ספרות הן מפריד אלפים ולא משתנות. */
   function decComma(s) { return String(s).replace(/(\d),(\d{1,2})(?!\d)/g, '$1.$2'); }
 
-  function parse(text) {
+  function parse(text, tests) {
+    var TS = tests || TESTS;
     var lines = decComma(text).split(/\r?\n/), found = {}, fallback = {}, list = [];
     lines.slice().forEach(function (l) { if (/[\u0590-\u05FF]{2}/.test(l)) lines.push(unreverseHebrew(l)); });
     function hit(T, v, converted, line) { return { id: T.id, label: T.label, unit: T.unit, value: round(v, T.id), converted: converted, line: line.trim().slice(0, 120) }; }
@@ -102,8 +113,8 @@ var LabParser = (function () {
 
     lines.forEach(function (line, idx) {
       if (!line.trim() || isRemark(line)) return;
-      for (var t = 0; t < TESTS.length; t++) {
-        var T = TESTS[t];
+      for (var t = 0; t < TS.length; t++) {
+        var T = TS[t];
         if (!T.re.test(line) || (T.not && T.not.test(line))) continue;
         if (found[T.id]) break;
         if (!attempt(T, line.replace(T.re, ' '), line, line)) {
@@ -122,7 +133,7 @@ var LabParser = (function () {
     return list;
   }
 
-  var UNIT_RE = /(?:mg|g|ug|µg|μg|ng|pg|iu|miu|u|mmol|umol|µmol|nmol|pmol|meq|k|cells)\s*\/\s*(?:dl|l|ml|microl|ul|µl|mm3|hpf)\b|\b(?:fl|pg|sec|mm\/hr?|x?10\^?\d)\b|%/gi;
+  var UNIT_RE = /(?:mg|g|ug|µg|μg|ng|pg|iu|miu|u|m|mmol|umol|µmol|nmol|pmol|meq|k|cells)\s*\/\s*(?:dl|l|ml|microl|ul|µl|mm3|hpf)\b|\b(?:fl|pg|sec|mm\/hr?|x?10\^?\d)\b|%/gi;
 
   /**
    * ערכים שאינם חלק מהמודל: כל שורה שיש בה שם, תוצאה וטווח ייחוס ("70 - 100").
@@ -255,7 +266,7 @@ var LabParser = (function () {
     });
   }
 
-  return { parse: parse, parseOther: parseOther, findDate: findDate, readPdf: readPdf, TESTS: TESTS };
+  return { parse: parse, parseSupport: function (text) { return parse(text, SUPPORT); }, parseOther: parseOther, findDate: findDate, readPdf: readPdf, TESTS: TESTS };
 })();
 
 if (typeof module !== 'undefined') module.exports = LabParser;
