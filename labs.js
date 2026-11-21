@@ -110,7 +110,8 @@ var LabParser = (function () {
           // שם הבדיקה בשורה אחת והתוצאה בשורה שאחריה (פריסת "כרטיסים")
           for (var k = 1; k <= 2; k++) {
             var next = lines[idx + k];
-            if (next === undefined || matchesAnyTest(next) || isRemark(next)) break;
+            // שורה שיש בה שם בדיקה משלה (למשל "50.0 % NEUT%") שייכת לבדיקה אחרת: לא לקחת ממנה ערך
+            if (next === undefined || matchesAnyTest(next) || isRemark(next) || /[A-Za-z֐-׿]{3}/.test(next.replace(UNIT_RE, ' '))) break;
             if (attempt(T, next, line + ' ' + next, line.trim() + ' ⏎ ' + next.trim())) break;
           }
         }
@@ -234,7 +235,7 @@ var LabParser = (function () {
         rows.forEach(function (r) {
           // רק לתוצאה עצמה יש יחידה (mg/dL, U/L...); מספרי טווח הייחוס והתווית שמתחת לא נכללים
           var txt = r.items.map(function (i) { return i.s; }).join(' ');
-          r.valueOnly = /(?:mg|g|[uµμ]g|ng|pg|m?iu|u|[mnpuµμ]?mol|meq)\s*\/\s*(?:dl|l|ml|[uµμ]l)\b|%/i.test(txt) && /\d/.test(stripped(r)) && !/[A-Za-z֐-׿]{2}/.test(stripped(r));
+          r.valueOnly = new RegExp(UNIT_RE.source, 'i').test(txt) && /\d/.test(stripped(r)) && !/[A-Za-z֐-׿]{2}/.test(stripped(r));
           r.nameOnly = !r.valueOnly && /[A-Za-z֐-׿]{3}/.test(stripped(r)) && candidateNumbers(r.items.map(function (i) { return i.s; }).join(' ')).length === 0;
         });
         rows.forEach(function (r) {
