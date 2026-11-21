@@ -317,12 +317,14 @@
 
   /** ממלא את שדות הטופס מהבדיקה העדכנית ביותר שיש בה כל ערך */
   function applyLabDocs() {
-    var latest = {}, undated = {};
-    labsByDate().forEach(function (d) { Object.keys(d.values).forEach(function (id) { (d.date ? latest : undated)[id] = d.values[id]; }); });
+    var latest = {}, undated = {}, dates = {};
+    labsByDate().forEach(function (d) { Object.keys(d.values).forEach(function (id) { if (d.date) { latest[id] = d.values[id]; dates[id] = d.date; } else undated[id] = d.values[id]; }); });
+    data.labDates = {}; data.labVals = {};
     // מסמך בלי תאריך לא דורס שום דבר: הוא ממלא רק שדה שאין בו ערך מבדיקה מתוארכת ושעדיין ריק בטופס
     Object.keys(undated).forEach(function (id) { if (latest[id] === undefined && (data[id] === undefined || data[id] === '')) latest[id] = undated[id]; });
     Object.keys(latest).forEach(function (id) {
       data[id] = String(latest[id]);
+      if (dates[id]) { data.labDates[id] = dates[id]; data.labVals[id] = String(latest[id]); } // תאריך הערך, כדי לזהות ערכים ישנים (נמחק אם המשתמש מקליד ערך ידנית)
       var el = document.getElementById('f_' + id); if (el) el.value = latest[id];
     });
     save();
@@ -599,11 +601,21 @@
 
   // ---------- איסוף הקלט למודל ----------
 
+  var staleLabs = [];
   function collect() {
     var inp = { country: data.country, sex: data.sex, age: num(data.age) };
     ['height', 'weight', 'eduYears', 'quitAge', 'fruitveg', 'sbp', 'tc', 'hdl', 'ldl', 'glucose', 'hba1c', 'creatinine', 'crp', 'albumin', 'alp', 'wbc', 'lymph', 'mcv', 'rdw', 'waist', 'sitting', 'rhr', 'vo2max', 'dbp', 'tg', 'ggt', 'acr', 'lpa']
       .forEach(function (k) { inp[k] = num(data[k]); });
     ['smoking', 'alcohol', 'activity', 'walkPace', 'sleep', 'lonely', 'isolated', 'diabetes', 'famHeart', 'srh', 'marital'].forEach(function (k) { inp[k] = data[k] || undefined; });
+    // גיל ביולוגי: כל תשעת הערכים צריכים להיות מחלון של 12 חודשים. ערך שהוקלד ידנית (שונה מהערך מהקובץ) נחשב עדכני.
+    var ph = ['albumin', 'creatinine', 'glucose', 'crp', 'lymph', 'mcv', 'rdw', 'alp', 'wbc'], dated = [], ref = '';
+    ph.forEach(function (k) {
+      var d = data.labDates && data.labDates[k];
+      if (d && data.labVals && String(data[k]) === data.labVals[k]) { dated.push({ id: k, date: d }); if (d > ref) ref = d; }
+    });
+    staleLabs = [];
+    if (ref) { var cut = (parseInt(ref.slice(0, 4), 10) - 1) + ref.slice(4); dated.forEach(function (x) { if (x.date < cut) staleLabs.push(x); }); }
+    inp.phenoExclude = staleLabs.map(function (x) { return x.id; });
     inp.conditions = data.conditions || [];
     inp.mother = data.mother; inp.father = data.father;
     // סבים וסבתות: הזנה לכל אחד בנפרד, או (כקיצור) שאלה אחת על הגיל הממוצע.
@@ -1047,7 +1059,13 @@
     if (bmiN !== null && bmiN > 25 && bmiN < 30 && wa !== undefined && wa < (data.sex === 'f' ? 80 : 94)) n.push(L('ה-BMI שלך מעל 25, אבל היקף המותניים בטווח התקין. זה מתאים יותר למסת שריר מאשר לעודף שומן, ולכן לא מוצגת המלצה לרדת במשקל. היקף המותניים כבר מקזז חלק מההשפעה של ה-BMI בחישוב.'));
     if (r.limits && r.limits.upper) n.push(L('השילוב שהזנת מגיע לגבול העליון של המודל, ולכן ההערכה פחות בטוחה. כדאי לדבר על כך עם רופא/ה.'));
     // הודעת רצפה הוסרה (20.11.2026): הרצפה 0.40 נפגשת כבר אצל לא-מעשן בכושר טוב, והיא לא מכוילת. הדגל limits.lower נשאר ב-compute למידע.
-    if (r.derived.phenoMissing) n.push(L('כדי לחשב גיל ביולוגי חסרים עוד: ') + r.derived.phenoMissing.join(', ') + '.');
+    if (staleLabs.length && r.derived.phenoAge === undefined) {
+      n.push(L('הגיל הביולוגי לא חושב, כי הערכים שהועלו אינם מאותה תקופה (חלון של 12 חודשים). ערכים ישנים: ') + staleLabs.map(function (x) {
+        var T = LabParser.TESTS.filter(function (t) { return t.id === x.id; })[0];
+        return (T ? T.label : x.id) + ' (' + heDate(x.date) + ')';
+      }).join(', ') + L('. אפשר להזין ערך עדכני ידנית בשדה המתאים, או להעלות בדיקה חדשה.'));
+    }
+        if (r.derived.phenoMissing) n.push(L('כדי לחשב גיל ביולוגי חסרים עוד: ') + r.derived.phenoMissing.join(', ') + '.');
     if (r.derived.phenoAge !== undefined) n.push(L('כשמחושב גיל ביולוגי, CRP ותפקוד הכליות כבר כלולים בו, ולכן הם לא מופיעים כגורמים נפרדים.'));
     if (r.derived.egfr !== undefined && r.derived.egfr < 60) n.push(L('ה-eGFR המחושב מהקריאטינין שלך (') + Math.round(r.derived.egfr) + L(') נמוך מ-60. תוצאה בודדת אינה אבחנה, אבל כדאי להראות אותה לרופא/ה.'));
     if (r.derived.cholRatio !== undefined) n.push(L('יחס כולסטרול כללי ל-HDL שלך: ') + fmt(r.derived.cholRatio) + L('. לפי Prospective Studies Collaboration, היחס הזה הוא המנבא הטוב ביותר מבין מדדי הכולסטרול לתמותה ממחלת לב.'));

@@ -165,7 +165,8 @@ var LifeModel = (function () {
    * מחזיר null אם חסר אחד מתשעת הערכים.
    */
   function phenoAge(inp) {
-    for (var i = 0; i < PHENO_FIELDS.length; i++) if (!isNum(inp[PHENO_FIELDS[i][0]])) return null;
+    var ex = inp.phenoExclude || [];
+    for (var i = 0; i < PHENO_FIELDS.length; i++) if (!isNum(inp[PHENO_FIELDS[i][0]]) || ex.indexOf(PHENO_FIELDS[i][0]) >= 0) return null;
     var xb = -19.907
       - 0.0336 * (inp.albumin * 10)
       + 0.0095 * (inp.creatinine * 88.4)
