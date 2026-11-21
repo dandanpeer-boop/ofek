@@ -1164,3 +1164,6 @@ Object.assign(I18N.fr, {
 "qhngxf": "L’âge biologique n’a pas été calculé car les valeurs importées ne datent pas de la même période (fenêtre de 12 mois). Valeurs anciennes : ",
 "1l5r6v4": ". Vous pouvez saisir une valeur récente manuellement dans le champ correspondant, ou importer une nouvelle analyse."
 });
+Object.assign(I18N.fr, {
+"16j526p": "Lors d’une première vérification sur les données américaines NHANES (environ 23 500 adultes, suivi de 10 ans), le modèle distinguait bien les personnes à risque élevé et faible, mais il prédisait en moyenne 15 à 20 pour cent de décès de plus que ceux observés. L’estimation absolue peut donc être un peu trop basse, et les comparaisons entre personnes ou entre habitudes sont plus fiables que le chiffre lui-même. Il ne s’agit pas d’une vérification indépendante, et elle n’a pas été faite sur une population israélienne."
+});

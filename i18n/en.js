@@ -1166,3 +1166,6 @@ Object.assign(I18N.en, {
 "qhngxf": "Biological age was not calculated because the uploaded values are not from the same period (12-month window). Old values: ",
 "1l5r6v4": ". You can enter a current value manually in the matching field, or upload a new test."
 });
+Object.assign(I18N.en, {
+"16j526p": "In a first check we ran on US NHANES data (about 23,500 adults, 10-year follow-up), the model separated people at high and low risk well, but on average it predicted about 15 to 20 percent more deaths than were actually observed. The absolute estimate may therefore be somewhat too low, and comparisons between people or between habits are more reliable than the number itself. This is not an independent check, and it was not done on an Israeli population."
+});

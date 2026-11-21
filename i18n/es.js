@@ -1164,3 +1164,6 @@ Object.assign(I18N.es, {
 "qhngxf": "No se calculó la edad biológica porque los valores subidos no son del mismo período (ventana de 12 meses). Valores antiguos: ",
 "1l5r6v4": ". Puedes introducir un valor actual manualmente en el campo correspondiente, o subir un análisis nuevo."
 });
+Object.assign(I18N.es, {
+"16j526p": "En una primera comprobación con datos estadounidenses de NHANES (unos 23.500 adultos, seguimiento de 10 años), el modelo distinguió bien entre personas de riesgo alto y bajo, pero en promedio predijo entre un 15 y un 20 por ciento más de muertes de las observadas. Por eso la estimación absoluta puede ser algo baja, y las comparaciones entre personas o entre hábitos son más fiables que el número en sí. No es una comprobación independiente ni se hizo con población israelí."
+});
