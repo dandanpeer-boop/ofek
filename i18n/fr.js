@@ -1536,3 +1536,6 @@ Object.assign(I18N.fr, {
 "8peqiu": "Coach sommeil : un plan personnel fondé sur la recherche",
 "p9jsbg": "Quelques questions sur votre sommeil et un plan fondé sur la recherche, avec les sources. Tout dans le navigateur, sans enregistrer ni envoyer les réponses."
 });
+Object.assign(I18N.fr, {
+"19xlkf": "Quels sont les problèmes ? Vous pouvez en cocher plusieurs."
+});

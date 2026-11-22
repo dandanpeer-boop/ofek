@@ -1538,3 +1538,6 @@ Object.assign(I18N.en, {
 "8peqiu": "Sleep coach: a personal plan based on research",
 "p9jsbg": "A few questions about your sleep, and a research-based plan with sources. All in the browser, with no saving or sending of the answers."
 });
+Object.assign(I18N.en, {
+"19xlkf": "What are the problems? You can tick several."
+});

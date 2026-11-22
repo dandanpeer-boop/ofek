@@ -1536,3 +1536,6 @@ Object.assign(I18N.es, {
 "8peqiu": "Entrenador de sueño: un plan personal basado en la investigación",
 "p9jsbg": "Unas preguntas sobre tu sueño y un plan basado en la investigación, con fuentes. Todo en el navegador, sin guardar ni enviar las respuestas."
 });
+Object.assign(I18N.es, {
+"19xlkf": "¿Cuáles son los problemas? Puedes marcar varios."
+});
