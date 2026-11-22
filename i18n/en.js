@@ -1247,3 +1247,15 @@ Object.assign(I18N.en, {
 "5xogv6": "FDA 2019: boxed warning for sleep medicines (complex sleep behaviors)",
 "t4buh": "FDA 2020: updated boxed warning for benzodiazepines"
 });
+Object.assign(I18N.en, {
+"1d4ra5h": "Sleep apnea",
+"1n36h9x": "Obstructive sleep apnea means repeated pauses in breathing during the night. In the meta-analysis by Fu (2017), 27 cohort studies with 3.16 million participants, severe apnea was linked to about 2.1 times the risk of death from any cause (HR 2.13, 95% CI: 1.68–2.68). For mild (1.19) and moderate (1.28) apnea the link was not statistically significant.",
+"1xnteaa": "In the meta-analysis by Benjafield (2025), 30 studies, ten of them randomized trials, treatment with continuous positive airway pressure (CPAP) was linked to 37% lower all-cause mortality compared with no treatment (HR 0.63, 95% CI: 0.56–0.72), and the benefit grew with use. The authors describe this as a potential effect. Most studies were not randomized trials, so part of the difference may come from other differences between people who are treated and people who are not.",
+"kih0kg": "Sleep apnea is not included in the calculation. Loud snoring, breathing pauses that someone has noticed, or severe tiredness during the day are a reason to see a family doctor, who can refer for a sleep study.",
+"1xer0hy": "Fu 2017: sleep apnea and mortality, meta-analysis (Sleep Breath)",
+"15q2xv7": "Benjafield 2025: CPAP treatment and mortality in sleep apnea, meta-analysis (Lancet Respir Med)"
+});
+Object.assign(I18N.en, {
+"12qraaj": "Every number here comes from a study, with a link to the source.",
+"hkihj1": "No gut feelings here. Every number is written in plain language, and anyone who wants to can open the study itself. When the evidence is weak or conflicting, we say so openly. In every guide: what the research found, small steps you can tick off, common myths and sources."
+});

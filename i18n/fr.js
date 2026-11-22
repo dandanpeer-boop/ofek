@@ -1245,3 +1245,15 @@ Object.assign(I18N.fr, {
 "5xogv6": "FDA 2019 : encadré de mise en garde pour les somnifères (comportements complexes pendant le sommeil)",
 "t4buh": "FDA 2020 : encadré de mise en garde actualisé pour les benzodiazépines"
 });
+Object.assign(I18N.fr, {
+"1d4ra5h": "Apnée du sommeil",
+"1n36h9x": "L'apnée obstructive du sommeil correspond à des pauses respiratoires répétées pendant la nuit. Dans la méta-analyse de Fu (2017), 27 études de cohorte avec 3,16 millions de participants, l'apnée sévère était associée à un risque de décès toutes causes environ 2,1 fois plus élevé (HR 2,13, IC à 95 % : 1,68–2,68). Pour l'apnée légère (1,19) et modérée (1,28), l'association n'était pas statistiquement significative.",
+"1xnteaa": "Dans la méta-analyse de Benjafield (2025), 30 études dont dix essais randomisés, le traitement par pression positive continue (PPC) était associé à une mortalité toutes causes inférieure de 37 % par rapport à l'absence de traitement (HR 0,63, IC à 95 % : 0,56–0,72), et le bénéfice augmentait avec l'utilisation. Les auteurs parlent d'un effet potentiel. La plupart des études n'étaient pas des essais randomisés ; une partie de la différence peut donc venir d'autres différences entre les personnes traitées et non traitées.",
+"kih0kg": "L'apnée du sommeil n'est pas incluse dans le calcul. Des ronflements forts, des pauses respiratoires remarquées par quelqu'un ou une grande fatigue en journée sont une raison de consulter son médecin généraliste, qui peut orienter vers une étude du sommeil.",
+"1xer0hy": "Fu 2017 : apnée du sommeil et mortalité, méta-analyse (Sleep Breath)",
+"15q2xv7": "Benjafield 2025 : traitement par PPC et mortalité dans l'apnée du sommeil, méta-analyse (Lancet Respir Med)"
+});
+Object.assign(I18N.fr, {
+"12qraaj": "Chaque chiffre ici vient d'une étude, avec un lien vers la source.",
+"hkihj1": "Ici, pas d'avis à la louche. Chaque chiffre est écrit en langage simple, et chacun peut ouvrir l'étude elle-même. Quand les preuves sont faibles ou contradictoires, nous le disons franchement. Dans chaque guide : ce que la recherche a trouvé, de petits pas à cocher, les mythes courants et les sources."
+});

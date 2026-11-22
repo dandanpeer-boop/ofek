@@ -1245,3 +1245,15 @@ Object.assign(I18N.es, {
 "5xogv6": "FDA 2019: advertencia en recuadro para medicamentos para dormir (conductas complejas durante el sueño)",
 "t4buh": "FDA 2020: advertencia en recuadro actualizada para benzodiacepinas"
 });
+Object.assign(I18N.es, {
+"1d4ra5h": "Apnea del sueño",
+"1n36h9x": "La apnea obstructiva del sueño consiste en pausas repetidas de la respiración durante la noche. En el metanálisis de Fu (2017), 27 estudios de cohortes con 3,16 millones de participantes, la apnea grave se asoció con un riesgo de muerte por cualquier causa unas 2,1 veces mayor (HR 2,13, IC 95 %: 1,68–2,68). En la apnea leve (1,19) y moderada (1,28) la asociación no fue estadísticamente significativa.",
+"1xnteaa": "En el metanálisis de Benjafield (2025), 30 estudios, diez de ellos ensayos aleatorizados, el tratamiento con presión positiva continua en la vía aérea (CPAP) se asoció con una mortalidad por cualquier causa un 37 % menor que sin tratamiento (HR 0,63, IC 95 %: 0,56–0,72), y el beneficio aumentaba con el uso. Los autores lo describen como un efecto posible. La mayoría de los estudios no eran ensayos aleatorizados, por lo que parte de la diferencia puede deberse a otras diferencias entre quienes se tratan y quienes no.",
+"kih0kg": "La apnea del sueño no se incluye en el cálculo. Los ronquidos fuertes, las pausas respiratorias que alguien ha notado o el cansancio intenso durante el día son motivo para acudir al médico de cabecera, que puede derivar a un estudio del sueño.",
+"1xer0hy": "Fu 2017: apnea del sueño y mortalidad, metanálisis (Sleep Breath)",
+"15q2xv7": "Benjafield 2025: tratamiento con CPAP y mortalidad en la apnea del sueño, metanálisis (Lancet Respir Med)"
+});
+Object.assign(I18N.es, {
+"12qraaj": "Cada número de aquí viene de un estudio, con un enlace a la fuente.",
+"hkihj1": "Aquí no hay opiniones al aire. Cada número está escrito en lenguaje sencillo, y quien quiera puede abrir el estudio original. Cuando la evidencia es débil o contradictoria, lo decimos abiertamente. En cada guía: qué encontró la investigación, pequeños pasos que puedes marcar, mitos frecuentes y fuentes."
+});

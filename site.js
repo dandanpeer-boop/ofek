@@ -110,7 +110,8 @@ var SiteRender = (function () {
       '</div></section>' +
 
       '<section class="sec" id="topics"><div class="sec-head"><p class="eyebrow">' + L('המדריכים') + '</p><h2>' + L('מה משפיע על אורך החיים, ומה עושים עם זה') + '</h2>' +
-        '<p class="muted">' + L('כל מדריך: מה המחקר מצא, צעדים מעשיים שאפשר לסמן, מיתוסים נפוצים, ומקורות.') + '</p></div>' +
+        '<p class="trustline">' + L('כל מספר כאן מגיע ממחקר, עם קישור למקור.') + '</p>' +
+        '<p class="muted">' + L('אין כאן דעות מהמותן. כל מספר נכתב בעברית פשוטה, ומי שרוצה יכול לפתוח את המחקר עצמו. כשהראיות חלשות או סותרות, כותבים את זה בגלוי. בכל מדריך: מה המחקר מצא, צעדים קטנים שאפשר לסמן, מיתוסים נפוצים ומקורות.') + '</p></div>' +
         '<div class="tgrid">' + TOPICS.map(topicCard).join('') + '</div></section>' +
 
       '<section class="sec calc-promo"><div class="promo">' +
