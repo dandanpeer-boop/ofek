@@ -977,7 +977,7 @@ Object.assign(I18N.es, {
 "v4hved": "<p class=\"small muted\">🔒 Privacidad: todo el cálculo se hace en tu navegador, y tus respuestas no se envían a ninguna parte. Si eliges recordarlos, los datos se guardan solo en este navegador y puedes borrarlos en cualquier momento con el botón \"Borrar mis datos\" de arriba. En un ordenador compartido, mejor no marcar esta casilla.</p>",
 "122kyoo": "Todo el cálculo se hace en tu navegador, y tus respuestas no se envían a ninguna parte",
 "4v8pwh": "Tus respuestas no se envían a ninguna parte. El cálculo y la lectura de archivos de análisis y del reloj se hacen en el navegador. Si eliges recordar tus datos, se guardan solo en este navegador y puedes borrarlos en cualquier momento con el botón \"Borrar mis datos\" al pie de la página.",
-"13zhblu": "Para saber cuántas personas visitan el sitio y qué páginas, usamos Google Analytics. Recibe la dirección de la página y datos generales como el tipo de dispositivo y el país, no lo que introdujiste en la calculadora."
+"13zhblu": "En esta versión del sitio no se utilizan herramientas de análisis ni cookies. No sabemos cuántas personas visitan el sitio ni qué ha introducido en la calculadora."
 });
 Object.assign(I18N.es, {
 "1ro9d44": "Calculadora gratuita, un minuto",

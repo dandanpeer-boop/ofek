@@ -167,7 +167,7 @@
 
   function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
   // מפריד עשרוני לתצוגה: פסיק בספרדית ובצרפתית, נקודה בשאר השפות. גם הקלדה עם פסיק (5,8) מתקבלת.
-  var DEC = (LANG === 'es' || LANG === 'fr') ? ',' : '.';
+  var DEC = (LANG === 'es' || LANG === 'fr' || LANG === 'de') ? ',' : '.';
   function dec(s) { return DEC === '.' ? String(s) : String(s).replace('.', DEC); }
   function num(v) { if (v === undefined || v === null || String(v).trim() === '') return undefined; var n = Number(String(v).trim().replace(/^(-?\d+),(\d+)$/, '$1.$2')); return isFinite(n) ? n : undefined; }
   function flat(fields) { var out = []; fields.forEach(function (f) { if (f.row) out = out.concat(f.row); else out.push(f); }); return out; }

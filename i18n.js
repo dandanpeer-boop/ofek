@@ -27,7 +27,8 @@ var LANGS = {
   he: { name: 'עברית', dir: 'rtl', locale: 'he-IL', country: 'ISR', path: '' },
   en: { name: 'English', dir: 'ltr', locale: 'en-US', country: 'USA', path: 'en/' },
   es: { name: 'Español', dir: 'ltr', locale: 'es-ES', country: 'ESP', path: 'es/' },
-  fr: { name: 'Français', dir: 'ltr', locale: 'fr-FR', country: 'FRA', path: 'fr/' }
+  fr: { name: 'Français', dir: 'ltr', locale: 'fr-FR', country: 'FRA', path: 'fr/' },
+  de: { name: 'Deutsch', dir: 'ltr', locale: 'de-DE', country: 'DEU', path: 'de/' }
 };
 
 /* שמות המדינות בלוחות התמותה מגיעים בעברית; בשפות אחרות הדפדפן מתרגם אותם לפי קוד המדינה */
