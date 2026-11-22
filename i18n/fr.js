@@ -1190,3 +1190,6 @@ Object.assign(I18N.fr, {
 "tku4ji": "<p class=\"small muted\">L'effet de chaque facteur en années, par rapport à la moyenne de la population. La somme est égale à l'écart total par rapport à la moyenne.",
 "16w37js": " Les associations sont statistiques et pas nécessairement causales ; ce n'est donc pas une promesse de gain réel.</p>"
 });
+Object.assign(I18N.fr, {
+"gu1hme": "<p><b>Vous pouvez aussi saisir les valeurs à la main.</b> Si le système n'a pas pu lire un fichier, ignorez-le et saisissez les résultats dans les champs du formulaire. Aucune valeur n'est obligatoire.</p>"
+});

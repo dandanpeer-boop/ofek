@@ -1192,3 +1192,6 @@ Object.assign(I18N.en, {
 "tku4ji": "<p class=\"small muted\">The effect of each factor in years, relative to the population average. The sum equals the total difference from the average.",
 "16w37js": " The associations are statistical and not necessarily causal, so this is not a promise of an actual gain.</p>"
 });
+Object.assign(I18N.en, {
+"gu1hme": "<p><b>You can also enter the values by hand.</b> For any file the system could not read, skip it and type the results into the form fields. No value is required.</p>"
+});

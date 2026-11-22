@@ -1190,3 +1190,6 @@ Object.assign(I18N.es, {
 "tku4ji": "<p class=\"small muted\">El efecto de cada factor en años, respecto a la media de la población. La suma es igual a la diferencia total con la media.",
 "16w37js": " Las asociaciones son estadísticas y no necesariamente causales, por lo que no es una promesa de ganancia real.</p>"
 });
+Object.assign(I18N.es, {
+"gu1hme": "<p><b>También puedes introducir los valores a mano.</b> Si el sistema no pudo leer un archivo, omítelo y escribe los resultados en los campos del formulario. Ningún valor es obligatorio.</p>"
+});
