@@ -30,7 +30,8 @@
   var step = 0;                    // 0 = פתיחה, 1..4 = שלבי הטופס, 5 = תוצאה
 
   var DISCLAIMER = L('<div class="disclaimer"><strong>חשוב לדעת:</strong> זו הערכה סטטיסטית לצורכי סקרנות בלבד. ') +
-    L('היא מתארת ממוצעים של קבוצות גדולות של אנשים, לא את העתיד של אדם מסוים. היא אינה אבחנה רפואית, אינה ייעוץ רפואי ואינה תחליף לרופא/ה.</div>');
+    L('היא מתארת ממוצעים של קבוצות גדולות של אנשים, לא את העתיד של אדם מסוים. היא אינה אבחנה רפואית, אינה ייעוץ רפואי ואינה תחליף לרופא/ה.') +
+    L(' ההערכה נשענת על מחקרים תצפיתיים, שמראים קשר סטטיסטי ולא בהכרח סיבתי, ולכן שינוי הרגל אינו מבטיח את ההפרש המוצג.</div>');
 
   // ---------- הגדרת הטופס ----------
 
@@ -952,7 +953,7 @@
     }
     var all = {}; list.forEach(function (x) { Object.assign(all, x.over); });
     var total = LifeModel.estimate(Object.assign({}, inp, all)), max = list[0].gain;
-    return head + L('<p class="small muted">השינויים שהמודל מעריך שישפיעו הכי הרבה, מהגדול לקטן. כל שורה מחושבת בנפרד, כשכל השאר נשאר כמו שהוא.</p>') +
+    return head + L('<p class="small muted">השינויים שהמודל מעריך שישפיעו הכי הרבה, מהגדול לקטן. כל שורה מחושבת בנפרד, כשכל השאר נשאר כמו שהוא.') + L(' המספרים מבוססים על קשרים סטטיסטיים, ואינם מבטיחים שהשינוי יניב את מלוא ההפרש.</p>') +
       list.map(function (x) {
         return '<div class="imp"><div class="imptop"><span class="implbl">' + esc(x.label) + '</span><b class="pos" dir="ltr">' + signed(x.gain) + L(' שנים</b></div>') +
           '<div class="impbar"><div style="width:' + (x.gain / max * 100).toFixed(1) + '%"></div></div>' +
@@ -1113,6 +1114,7 @@
       L('<div class="hero"><div class="muted">תוחלת החיים המשוערת שלך</div><div class="big">') + fmt(p.expectedAge) + '</div>' +
       L('<div class="sub">עוד כ-') + Math.round(p.remaining) + L(' שנים, עד סביבות שנת ') + year + '</div>' +
       '<div class="delta">' + deltaTxt + '</div>' +
+      L('<div class="sub" style="margin-top:6px">חצי מהאנשים עם נתונים כמו שלך חיים עד גיל שבין <b>') + Math.round(p.p25) + L(' ל-') + Math.round(p.p75) + '</b></div>' +
       L('<div class="sharerow"><button type="button" class="sharebtn" id="share">שיתוף התוצאה</button><span class="small muted" id="sharestat" role="status"></span></div>') + '</div>' +
       refineHTML() +
       DISCLAIMER +
@@ -1131,7 +1133,7 @@
       testsHTML(inp) +
 
       L('<h3>מה מוסיף ומה מוריד שנים</h3>') +
-      L('<p class="small muted">השפעת כל גורם בשנים, ביחס לממוצע האוכלוסייה. הסכום שווה להפרש הכולל מהממוצע.</p>') +
+      L('<p class="small muted">השפעת כל גורם בשנים, ביחס לממוצע האוכלוסייה. הסכום שווה להפרש הכולל מהממוצע.') + L(' הקשרים סטטיסטיים ולא בהכרח סיבתיים, ולכן זו אינה הבטחה לרווח בפועל.</p>') +
       factorRows(r) +
 
       trendsHTML(inp, r) +

@@ -1181,3 +1181,12 @@ Object.assign(I18N.es, {
 Object.assign(I18N.es, {
 "8chmw4": "Hematocrito"
 });
+Object.assign(I18N.es, {
+"x5gtoa": "Describe promedios de grandes grupos de personas, no el futuro de una persona concreta. No es un diagnóstico médico, no es asesoramiento médico y no sustituye a un médico.",
+"1rnif02": " La estimación se basa en estudios observacionales, que muestran una asociación estadística y no necesariamente causalidad, por lo que cambiar un hábito no garantiza la diferencia mostrada.</div>",
+"1395yyo": "<p class=\"small muted\">Los cambios que el modelo estima que más influirán, de mayor a menor. Cada fila se calcula por separado, dejando todo lo demás igual.",
+"11cigb9": " Las cifras se basan en asociaciones estadísticas y no garantizan que el cambio produzca toda la diferencia.</p>",
+"m9tmj7": "<div class=\"sub\" style=\"margin-top:6px\">La mitad de las personas con datos como los tuyos vive hasta una edad entre <b>",
+"tku4ji": "<p class=\"small muted\">El efecto de cada factor en años, respecto a la media de la población. La suma es igual a la diferencia total con la media.",
+"16w37js": " Las asociaciones son estadísticas y no necesariamente causales, por lo que no es una promesa de ganancia real.</p>"
+});

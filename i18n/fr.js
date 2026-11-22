@@ -1181,3 +1181,12 @@ Object.assign(I18N.fr, {
 Object.assign(I18N.fr, {
 "8chmw4": "Hématocrite"
 });
+Object.assign(I18N.fr, {
+"x5gtoa": "Elle décrit des moyennes de grands groupes de personnes, pas l'avenir d'une personne en particulier. Ce n'est ni un diagnostic médical, ni un conseil médical, ni un substitut à un médecin.",
+"1rnif02": " L'estimation repose sur des études observationnelles, qui montrent une association statistique et pas nécessairement un lien de cause à effet ; changer une habitude ne garantit donc pas la différence affichée.</div>",
+"1395yyo": "<p class=\"small muted\">Les changements dont le modèle estime qu'ils auront le plus d'effet, du plus grand au plus petit. Chaque ligne est calculée séparément, tout le reste étant inchangé.",
+"11cigb9": " Les chiffres reposent sur des associations statistiques et ne garantissent pas que le changement produira toute la différence.</p>",
+"m9tmj7": "<div class=\"sub\" style=\"margin-top:6px\">La moitié des personnes ayant des données comme les vôtres vit jusqu'à un âge compris entre <b>",
+"tku4ji": "<p class=\"small muted\">L'effet de chaque facteur en années, par rapport à la moyenne de la population. La somme est égale à l'écart total par rapport à la moyenne.",
+"16w37js": " Les associations sont statistiques et pas nécessairement causales ; ce n'est donc pas une promesse de gain réel.</p>"
+});

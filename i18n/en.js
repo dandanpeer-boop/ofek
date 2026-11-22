@@ -1183,3 +1183,12 @@ Object.assign(I18N.en, {
 Object.assign(I18N.en, {
 "8chmw4": "Hematocrit"
 });
+Object.assign(I18N.en, {
+"x5gtoa": "It describes averages of large groups of people, not the future of any one person. It is not a medical diagnosis, not medical advice and not a substitute for a doctor.",
+"1rnif02": " The estimate relies on observational studies, which show a statistical association and not necessarily causation, so changing a habit does not guarantee the difference shown.</div>",
+"1395yyo": "<p class=\"small muted\">The changes the model estimates will matter most, from largest to smallest. Each row is calculated separately, with everything else unchanged.",
+"11cigb9": " The numbers are based on statistical associations and do not guarantee that the change will deliver the full difference.</p>",
+"m9tmj7": "<div class=\"sub\" style=\"margin-top:6px\">Half of the people with data like yours live to an age between <b>",
+"tku4ji": "<p class=\"small muted\">The effect of each factor in years, relative to the population average. The sum equals the total difference from the average.",
+"16w37js": " The associations are statistical and not necessarily causal, so this is not a promise of an actual gain.</p>"
+});
