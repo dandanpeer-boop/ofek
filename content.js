@@ -421,6 +421,71 @@ var TOPICS = [
     ]
   },
   {
+    id: 'usa', title: L('Life expectancy in the United States'), seoTitle: L('Life expectancy in the United States by age and sex: latest CDC data'), icon: 'people', hue: 215, mins: 3, langs: ['en'],
+    short: L('Life expectancy in the United States according to the CDC, and what it means at each age.'),
+    answer: L('According to the CDC, life expectancy at birth in the United States was 79.0 years in 2024: 76.5 for males and 81.4 for females.'),
+    lead: L('Life expectancy is a group average, not a forecast for one person. These figures come from the CDC\'s National Center for Health Statistics and describe the mortality of a single year.'),
+    facts: [
+      { n: '79.0', u: L('years'), t: L('life expectancy at birth in 2024, up 0.6 from 78.4 in 2023'), s: 0 },
+      { n: '4.9', u: L('years'), t: L('gap between females (81.4) and males (76.5) in 2024, down 0.4 from 2023'), s: 0 },
+      { n: '19.7', u: L('years'), t: L('average remaining life at age 65, for a total of 84.7 years'), s: 0 }
+    ],
+    sections: [
+      { h: L('The latest figures'), p: [L('The CDC\'s National Vital Statistics Reports (United States Life Tables, 2024) put life expectancy at birth at 79.0 years in 2024, up 0.6 year from 78.4 in 2023. For males it rose from 75.8 to 76.5, and for females from 81.1 to 81.4.')] },
+      { h: L('What a period life table means'), p: [L('A period life table asks what would happen to a group of people if they lived their whole lives under the death rates of one year, here 2024. It is a snapshot of current mortality, not a forecast of how long today\'s newborns will actually live.')] },
+      { h: L('Life expectancy at older ages'), p: [L('Life expectancy at birth includes people who die young. Someone who reaches 65 has already passed those risks: on 2024 mortality, a person aged 65 could expect to live 19.7 more years, for a total of 84.7. At 85 the average is 6.7 more years (91.7 in total), and at 100 it is 2.2 more years.')] },
+      { h: L('The gap between men and women'), p: [L('The difference in life expectancy between the sexes was 4.9 years in 2024. It narrowed from 7.8 years in 1979 to 4.8 in 2010, rose to 5.8 in 2021, and fell back to 4.9 in 2024.')] },
+      { h: L('Differences between groups'), p: [L('The same report gives 2024 life expectancy at birth of 81.8 for the Hispanic population, and, among non-Hispanic populations, 85.8 for Asian, 78.9 for White, 74.8 for Black and 71.1 for American Indian and Alaska Native people. These are group averages, and they say little about any one person.')] },
+      { h: L('What this does not tell you'), p: [L('A national average ignores your own habits, test results and family history. To see what the number looks like for you, the calculator starts from a life table for your age and sex and adjusts it to your habits and tests.')] }
+    ],
+    actions: [
+      { t: L('Look at your own age'), h: L('Use the figure for your age, not life expectancy at birth.') },
+      { t: L('Calculate it personally'), h: L('The calculator adjusts the table to habits and tests.') },
+      { t: L('Check the latest CDC release'), h: L('The figures are updated every year.') }
+    ],
+    myths: [
+      { m: L('Life expectancy at birth is the age you will die'), f: L('It is a group average. A person who reaches 65 can expect to live to about 84.7 on average, more than life expectancy at birth.') },
+      { m: L('Men and women live equally long'), f: L('In 2024 females lived 4.9 years longer on average.') }
+    ],
+    model: L('Included in the calculator: the WHO life table for the United States (2019) is the baseline by age and sex. The updated CDC figures are not yet used in the calculation.'),
+    sources: [
+      { l: L('CDC NCHS: United States Life Tables, 2024 (NVSR 75-5)'), u: 'https://www.cdc.gov/nchs/data/nvsr/nvsr75/nvsr75-05.pdf' },
+      { l: L('World Health Organization: life tables (GHO)'), u: 'https://www.who.int/data/gho' }
+    ]
+  },
+  {
+    id: 'uk', title: L('Life expectancy in the United Kingdom'), seoTitle: L('Life expectancy in the UK by age and sex: latest ONS data'), icon: 'people', hue: 225, mins: 3, langs: ['en'],
+    short: L('Life expectancy in the UK according to the ONS, and what it means at age 65.'),
+    answer: L('According to the ONS, life expectancy at birth in the UK for 2022 to 2024 was 79.1 years for males and 83.0 years for females.'),
+    lead: L('Life expectancy is a group average, not a forecast for one person. These figures come from the Office for National Statistics (ONS) and describe a three-year period.'),
+    facts: [
+      { n: '79.1', u: L('years'), t: L('life expectancy at birth for males, 2022 to 2024'), s: 0 },
+      { n: '83.0', u: L('years'), t: L('life expectancy at birth for females, 2022 to 2024'), s: 0 },
+      { n: '18.7 / 21.2', u: L('years'), t: L('average remaining life at age 65, for males and females'), s: 0 }
+    ],
+    sections: [
+      { h: L('The latest figures'), p: [L('The ONS release National life tables, life expectancy in the UK: 2022 to 2024 (published 10 December 2025) gives life expectancy at birth of 79.1 years for males and 83.0 years for females. At age 65 it is 18.7 more years for males and 21.2 for females.')] },
+      { h: L('Three-year periods and single years'), p: [L('The ONS publishes three-year period tables. For 2024 alone, life expectancy at birth was 79.4 years for males and 83.3 for females. A single year is noisier, which is why the ONS uses three years for its main figures.')] },
+      { h: L('Compared with 2019 to 2021'), p: [L('For 2019 to 2021 the ONS figures were 78.7 years for males and 82.7 for females at birth, and 18.3 and 20.8 more years at 65. The ONS describes the gains since then as 21 weeks for males and 18 weeks for females at birth.')] },
+      { h: L('What a period life table means'), p: [L('The ONS notes that period life tables do not give a true estimate of how long someone can expect to live on average. They show what would happen if today\'s death rates stayed the same for a person\'s whole life.')] },
+      { h: L('What this does not tell you'), p: [L('A national average ignores your own habits, test results and family history. To see what the number looks like for you, the calculator starts from a life table for your age and sex and adjusts it to your habits and tests.')] }
+    ],
+    actions: [
+      { t: L('Look at your own age'), h: L('Use the figure for your age, not life expectancy at birth.') },
+      { t: L('Calculate it personally'), h: L('The calculator adjusts the table to habits and tests.') },
+      { t: L('Check the latest ONS release'), h: L('The figures are updated regularly.') }
+    ],
+    myths: [
+      { m: L('Life expectancy at birth is the age you will die'), f: L('It is a group average from a period table, and the ONS itself says it is not a true estimate for any one person.') },
+      { m: L('One year of data tells the whole story'), f: L('The ONS uses three-year periods for its main figures because single years vary more.') }
+    ],
+    model: L('Included in the calculator: the WHO life table for the United Kingdom (2019) is the baseline by age and sex. The updated ONS figures are not yet used in the calculation.'),
+    sources: [
+      { l: L('ONS: National life tables, life expectancy in the UK, 2022 to 2024'), u: 'https://www.ons.gov.uk/peoplepopulationandcommunity/birthsdeathsandmarriages/lifeexpectancies/bulletins/nationallifetablesunitedkingdom/2022to2024' },
+      { l: L('World Health Organization: life tables (GHO)'), u: 'https://www.who.int/data/gho' }
+    ]
+  },
+  {
     id: 'supplements', title: L('תוספי תזונה'), seoTitle: L('תוספי תזונה: מה יש עליו ראיות ומה לא'), icon: 'pill', hue: 95, mins: 6,
     short: L('מה יש עליו ראיות ומה לא: ויטמין D, אומגה 3, מולטי-ויטמין ועוד.'),
     answer: L('ברוב התוספים אין ראיה שהם מאריכים חיים אצל אנשים בריאים: בניסוי VITAL ויטמין D לא שינה את התמותה הכללית, ותוספי נוגדי חמצון העלו מעט את התמותה.'),
@@ -492,6 +557,9 @@ var TOPICS = [
     ]
   }
 ];
+
+/* מדריכים שמיועדים לשפות מסוימות בלבד (langs) */
+TOPICS = TOPICS.filter(function (t) { return !t.langs || t.langs.indexOf(typeof LANG !== 'undefined' ? LANG : 'he') >= 0; });
 
 /* חמשת ההרגלים: Li 2018, Circulation. בגיל 50, מי שאימץ את כל חמשת ההרגלים חי בממוצע 14.0 שנים יותר (נשים) ו-12.2 (גברים) ממי שלא אימץ אף אחד. */
 var FIVE_HABITS = {
