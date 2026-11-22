@@ -167,6 +167,7 @@ var SiteRender = (function () {
       '<header class="topic-hero"><div class="topic-hero-in">' +
         '<a class="crumb" href="' + SiteURL('topics') + '">' + icon('arrow', 'sm back') + L('כל המדריכים') + '</a>' +
         '<div class="topic-title"><span class="topic-ic">' + icon(t.icon) + '</span><h1>' + esc(t.title) + '</h1></div>' +
+        (t.answer ? '<p class="topic-answer"><b>' + L('התשובה הקצרה:') + '</b> ' + esc(t.answer) + '</p>' : '') +
         '<p class="topic-lead">' + esc(t.lead) + '</p>' +
         '<p class="topic-meta">' + t.mins + ' ' + L('דקות קריאה') + ' · ' + t.sources.length + ' ' + L('מקורות') + '</p>' +
       '</div></header>' +
