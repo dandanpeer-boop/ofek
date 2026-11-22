@@ -34,11 +34,11 @@ var LabParser = (function () {
     // הערכים הנוספים לגיל הביולוגי
     { id: 'albumin', label: L('אלבומין'), unit: L('ג/ד"ל'), re: /albumin|אלבומין|\balb\b/i, not: /micro|urine|שתן|ratio|יחס|globulin|גלובולין|creat|קריאט|a\/g/i, min: 1.5, max: 6.5,
       alt: { re: /g\s*\/\s*l\b/i, k: 0.1, min: 15, max: 65 } },
-    { id: 'lymph', label: L('לימפוציטים'), unit: '%', re: /lymp|\blym\b|לימפוציט/i, not: /abs|#|atyp|אבסולוט|מוחלט/i, min: 5, max: 80 },
+    { id: 'lymph', label: L('לימפוציטים'), unit: '%', re: /lymp|\blym\b|לימפוציט/i, not: /abs|#|atyp|אבסולוט|מוחלט|\bno\b\.?(?=\s|$)/i, min: 5, max: 80 },
     { id: 'mcv', label: 'MCV', unit: 'fL', re: /\bmcv\b/i, min: 50, max: 130 },
     { id: 'rdw', label: 'RDW', unit: '%', re: /\brdw\b/i, not: /rdw\s*-?\s*sd/i, min: 9, max: 25 },
     { id: 'alp', label: L('פוספטאזה בסיסית'), unit: 'U/L', re: /alk\w*\.?\s*phos|\balp\b|\balk\.?\s*p\b|פוספטאז/i, min: 10, max: 1000 },
-    { id: 'wbc', label: L('תאים לבנים (WBC)'), unit: L('אלפים/מק"ל'), re: /\bwbc\b|leu[ck]ocytes|תאים\s*לבנים|לויקוציטים/i, not: /urine|שתן|esterase|hpf/i, min: 0.5, max: 50,
+    { id: 'wbc', label: L('תאים לבנים (WBC)'), unit: L('אלפים/מק"ל'), re: /\bwbc\b|leu[ck]ocytes|תאים\s*לבנים|לויקוציטים/i, not: /urine|שתן|esterase|hpf|nrbc|nucleated|\/\s*100|per\s*100/i, min: 0.5, max: 50,
       alt: { re: /a^/, k: 0.001, min: 500, max: 50000 } }
   ];
 
@@ -145,6 +145,7 @@ var LabParser = (function () {
       if (out.length >= 80 || !line.trim() || isRemark(line)) return;
       for (var t = 0; t < TESTS.length; t++) if (TESTS[t].re.test(line)) return; // בדיקה שכבר מטופלת במודל
       var clean = line.replace(/\d{1,4}[\/.\-]\d{1,2}[\/.\-]\d{1,4}/g, ' ').replace(/\d{1,2}:\d{2}(:\d{2})?/g, ' ');
+      clean = clean.replace(/\b10e\d\s*\/\s*\S*/gi, ' ').replace(/\[[.*\s]*\]/g, ' ').replace(/\.{2,}/g, ' ');
       var rm = clean.match(/(\d+(?:\.\d+)?)\s*[-–—]\s*(\d+(?:\.\d+)?)/);
       if (!rm) return;
       var lo = Math.min(+rm[1], +rm[2]), hi = Math.max(+rm[1], +rm[2]);

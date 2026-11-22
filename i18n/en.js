@@ -1195,3 +1195,23 @@ Object.assign(I18N.en, {
 Object.assign(I18N.en, {
 "gu1hme": "<p><b>You can also enter the values by hand.</b> For any file the system could not read, skip it and type the results into the form fields. No value is required.</p>"
 });
+Object.assign(I18N.en, {
+"1em5d8z": "How many hours of sleep do you need? What the research says",
+"13duyc5": "Nutrition and longevity: what is actually proven",
+"bizv3d": "Intermittent fasting: does it extend life? What the trials found",
+"ktcfjo": "How much sugar is too much? Sugar and diabetes risk",
+"53txt6": "How much exercise is enough? Steps, strength and fitness",
+"gqhl92": "Stress and mental health: short tools and when to seek help",
+"1dgl1dl": "Social connection and loneliness: the effect on life expectancy",
+"54oxor": "How many years does quitting smoking give back? And alcohol: where the limit is",
+"1ikn0w8": "Supplements: what has evidence and what does not",
+"1fbjs64": "Blood pressure, glucose and waist: what to check and the ranges",
+"1iwlsbr": "Free life expectancy calculator: how many years do I have left?",
+"1vsd6q8": "Life expectancy calculator: how many years do I have left? Free, no sign-up",
+"ykjsh4": "A free, research-based life expectancy calculator with no sign-up. The calculation runs in your browser and no data leaves your device. Plus guides on sleep, nutrition, fasting and movement, with sources.",
+"1fgi79r": " A research-based guide with a link to every source.",
+"1p29ers": "Enter your age, habits and blood tests and get an estimate based on the World Health Organization life table and hazard ratios from studies. Everything runs in your browser. A statistical estimate, not medical advice."
+});
+Object.assign(I18N.en, {
+"fggssb": " (the last year before COVID), by country and sex. Each risk factor is translated into a hazard ratio from a published study, normalized to the population average, and multiplies the death rate at every age. Hazard ratios weaken at older ages, as found in the studies. Because risk factors are correlated with each other, the strongest factor counts in full and the others with reduced weight, and the combined ratio is capped at 0.4–8.</p>"
+});

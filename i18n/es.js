@@ -1193,3 +1193,23 @@ Object.assign(I18N.es, {
 Object.assign(I18N.es, {
 "gu1hme": "<p><b>También puedes introducir los valores a mano.</b> Si el sistema no pudo leer un archivo, omítelo y escribe los resultados en los campos del formulario. Ningún valor es obligatorio.</p>"
 });
+Object.assign(I18N.es, {
+"1em5d8z": "¿Cuántas horas de sueño necesitas? Lo que dice la investigación",
+"13duyc5": "Nutrición y longevidad: qué está realmente demostrado",
+"bizv3d": "Ayuno intermitente: ¿alarga la vida? Lo que encontraron los ensayos",
+"ktcfjo": "¿Cuánto azúcar es demasiado? Azúcar y riesgo de diabetes",
+"53txt6": "¿Cuánto ejercicio es suficiente? Pasos, fuerza y condición física",
+"gqhl92": "Estrés y salud mental: herramientas breves y cuándo pedir ayuda",
+"1dgl1dl": "Relaciones sociales y soledad: el efecto en la esperanza de vida",
+"54oxor": "¿Cuántos años devuelve dejar de fumar? Y el alcohol: dónde está el límite",
+"1ikn0w8": "Suplementos: qué tiene evidencia y qué no",
+"1fbjs64": "Presión arterial, glucosa y cintura: qué revisar y cuáles son los rangos",
+"1iwlsbr": "Calculadora de esperanza de vida gratis: ¿cuántos años me quedan?",
+"1vsd6q8": "Calculadora de esperanza de vida: ¿cuántos años me quedan? Gratis, sin registro",
+"ykjsh4": "Una calculadora de esperanza de vida gratuita y basada en investigación, sin registro. El cálculo se hace en tu navegador y ningún dato sale de tu dispositivo. Además, guías sobre sueño, nutrición, ayuno y movimiento, con fuentes.",
+"1fgi79r": " Una guía basada en investigación, con enlace a cada fuente.",
+"1p29ers": "Introduce tu edad, hábitos y análisis de sangre y obtén una estimación basada en la tabla de mortalidad de la Organización Mundial de la Salud y en razones de riesgo de estudios. Todo se calcula en tu navegador. Una estimación estadística, no un consejo médico."
+});
+Object.assign(I18N.es, {
+"fggssb": " (el último año antes de la COVID), por país y sexo. Cada factor de riesgo se traduce en un cociente de riesgo (hazard ratio) de un estudio publicado, normalizado a la media de la población, que multiplica la tasa de mortalidad a cada edad. Los cocientes de riesgo se debilitan con la edad, como se ha observado en los estudios. Como los factores de riesgo están correlacionados entre sí, el factor más fuerte cuenta entero y los demás con menor peso, y el cociente combinado se limita al rango 0,4–8.</p>"
+});

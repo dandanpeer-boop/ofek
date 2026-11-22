@@ -405,15 +405,20 @@
     }
 
     function markFromFile(ids) {
+      // ערך ישן: מעל 12 חודשים מהיום (אותו חלון כמו בחישוב הגיל הביולוגי). התגית מתעדכנת גם כשערך חדש יותר דורס את הקודם.
+      var cut = new Date(); cut.setFullYear(cut.getFullYear() - 1);
+      var cutS = cut.getFullYear() + '-' + String(cut.getMonth() + 1).padStart(2, '0') + '-' + String(cut.getDate()).padStart(2, '0');
       ids.forEach(function (id) {
         var el = document.getElementById('f_' + id), box = el && el.closest('.field');
-        if (!el || !box || el.classList.contains('fromfile')) return;
-        el.classList.add('fromfile');
-        var tag = document.createElement('div'); tag.className = 'filetag small'; tag.textContent = L('מולא מקובץ');
-        var ld = data.labDates && data.labDates[id], cut = new Date(); cut.setFullYear(cut.getFullYear() - 2);
-        if (ld && ld < cut.getFullYear() + '-' + String(cut.getMonth() + 1).padStart(2, '0') + '-' + String(cut.getDate()).padStart(2, '0')) tag.textContent += L(' · ערך ישן (') + heDate(ld) + ')';
-        box.appendChild(tag);
-        el.addEventListener('input', function () { el.classList.remove('fromfile'); if (tag.parentNode) tag.parentNode.removeChild(tag); });
+        if (!el || !box) return;
+        var tag = box.querySelector('.filetag');
+        if (!tag) {
+          el.classList.add('fromfile');
+          tag = document.createElement('div'); tag.className = 'filetag small'; box.appendChild(tag);
+          el.addEventListener('input', function () { el.classList.remove('fromfile'); if (tag.parentNode) tag.parentNode.removeChild(tag); });
+        }
+        var ld = data.labDates && data.labDates[id];
+        tag.textContent = L('מולא מקובץ') + (ld && ld < cutS ? L(' · ערך ישן (') + heDate(ld) + ')' : '');
       });
     }
 
@@ -1151,7 +1156,7 @@
       '<p style="margin-top:14px"><a href="' + SiteURL('topics') + '">' + L('לכל המדריכים באתר: תזונה, צום, סוכר, תנועה, קשרים חברתיים ועוד') + (LANGS[LANG].dir === 'rtl' ? ' ←' : ' →') + '</a></p>' +
 
       L('<h3>איך זה מחושב</h3>') +
-      L('<details><summary>השיטה בקצרה</summary><p class="small" style="margin-top:8px">נקודת הבסיס היא לוח התמותה של ארגון הבריאות העולמי לשנת ') + LIFE_TABLE_YEAR + L(' (השנה האחרונה לפני הקורונה), לפי מדינה ומין. כל גורם סיכון מתורגם ליחס סיכונים (Hazard Ratio) מתוך מחקר מפורסם, מנורמל לממוצע האוכלוסייה, ומכפיל את קצב התמותה בכל גיל. יחסי הסיכון נחלשים בגיל מבוגר, כפי שנמצא במחקרים. מכיוון שגורמי הסיכון מתואמים זה עם זה, הגורם החזק ביותר נספר במלואו והאחרים במשקל מופחת, והיחס המשולב מוגבל לטווח 0.4–5.</p>') +
+      L('<details><summary>השיטה בקצרה</summary><p class="small" style="margin-top:8px">נקודת הבסיס היא לוח התמותה של ארגון הבריאות העולמי לשנת ') + LIFE_TABLE_YEAR + L(' (השנה האחרונה לפני הקורונה), לפי מדינה ומין. כל גורם סיכון מתורגם ליחס סיכונים (Hazard Ratio) מתוך מחקר מפורסם, מנורמל לממוצע האוכלוסייה, ומכפיל את קצב התמותה בכל גיל. יחסי הסיכון נחלשים בגיל מבוגר, כפי שנמצא במחקרים. מכיוון שגורמי הסיכון מתואמים זה עם זה, הגורם החזק ביותר נספר במלואו והאחרים במשקל מופחת, והיחס המשולב מוגבל לטווח 0.4–8.</p>') +
       L('<p class="small"><b>מגבלות:</b> המחקרים הם תצפיתיים ומראים קשר סטטיסטי, לא בהכרח סיבתיות. המודל אינו מכיר מחלות קיימות, תרופות, גנטיקה אישית או תאונות, ואינו מביא בחשבון שיפורים עתידיים ברפואה. לוח התמותה משקף את התמותה של היום, ולכן לצעירים ההערכה נוטה להיות שמרנית.</p></details>') +
       L('<details><summary>המקורות ויחסי הסיכון ששימשו</summary><p class="small muted" style="margin-top:8px">ליד כל מקור מופיע יחס הסיכון (HR) ששימש במודל. מעל 1 פירושו סיכון גבוה יותר, ומתחת ל-1 נמוך יותר. אלה הערכים מהמחקר, לפני הנרמול לממוצע האוכלוסייה ולפני ההיחלשות בגיל מבוגר.</p><ol>') + SOURCES.map(function (s) { return '<li>' + s + '</li>'; }).join('') + '</ol></details>' +
 

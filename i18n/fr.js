@@ -1193,3 +1193,23 @@ Object.assign(I18N.fr, {
 Object.assign(I18N.fr, {
 "gu1hme": "<p><b>Vous pouvez aussi saisir les valeurs à la main.</b> Si le système n'a pas pu lire un fichier, ignorez-le et saisissez les résultats dans les champs du formulaire. Aucune valeur n'est obligatoire.</p>"
 });
+Object.assign(I18N.fr, {
+"1em5d8z": "De combien d'heures de sommeil avez-vous besoin ? Ce que dit la recherche",
+"13duyc5": "Nutrition et longévité : ce qui est réellement prouvé",
+"bizv3d": "Jeûne intermittent : allonge-t-il la vie ? Ce qu'ont trouvé les essais",
+"ktcfjo": "Quelle quantité de sucre est trop ? Sucre et risque de diabète",
+"53txt6": "Combien d'activité physique suffit-il ? Pas, force et forme",
+"gqhl92": "Stress et santé mentale : outils courts et quand demander de l'aide",
+"1dgl1dl": "Liens sociaux et solitude : l'effet sur l'espérance de vie",
+"54oxor": "Combien d'années rend l'arrêt du tabac ? Et l'alcool : où est la limite",
+"1ikn0w8": "Compléments alimentaires : ce qui a des preuves et ce qui n'en a pas",
+"1fbjs64": "Tension, glycémie et tour de taille : que contrôler et quelles valeurs",
+"1iwlsbr": "Calculateur d'espérance de vie gratuit : combien d'années me reste-t-il ?",
+"1vsd6q8": "Calculateur d'espérance de vie : combien d'années me reste-t-il ? Gratuit, sans inscription",
+"ykjsh4": "Un calculateur d'espérance de vie gratuit et fondé sur la recherche, sans inscription. Le calcul se fait dans votre navigateur et aucune donnée ne quitte votre appareil. Et des guides sur le sommeil, la nutrition, le jeûne et le mouvement, avec sources.",
+"1fgi79r": " Un guide fondé sur la recherche, avec un lien vers chaque source.",
+"1p29ers": "Saisissez votre âge, vos habitudes et vos analyses de sang et obtenez une estimation fondée sur la table de mortalité de l'Organisation mondiale de la santé et sur des rapports de risque issus d'études. Tout se calcule dans votre navigateur. Une estimation statistique, pas un avis médical."
+});
+Object.assign(I18N.fr, {
+"fggssb": " (la dernière année avant le COVID), par pays et par sexe. Chaque facteur de risque est traduit en rapport de risque (hazard ratio) tiré d'une étude publiée, normalisé à la moyenne de la population, qui multiplie le taux de mortalité à chaque âge. Les rapports de risque s'atténuent avec l'âge, comme l'ont montré les études. Comme les facteurs de risque sont corrélés entre eux, le plus fort compte entièrement et les autres avec un poids réduit, et le rapport combiné est limité à l'intervalle 0,4–8.</p>"
+});
