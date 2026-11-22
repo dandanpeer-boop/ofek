@@ -1,3 +1,9 @@
+@font-face { font-family: "Heebo"; font-weight: 400; font-style: normal; font-display: swap; src: url(fonts/Heebo-400.ttf) format("truetype"); }
+@font-face { font-family: "Heebo"; font-weight: 500; font-style: normal; font-display: swap; src: url(fonts/Heebo-500.ttf) format("truetype"); }
+@font-face { font-family: "Heebo"; font-weight: 700; font-style: normal; font-display: swap; src: url(fonts/Heebo-700.ttf) format("truetype"); }
+@font-face { font-family: "Rubik"; font-weight: 500; font-style: normal; font-display: swap; src: url(fonts/Rubik-500.ttf) format("truetype"); }
+@font-face { font-family: "Rubik"; font-weight: 600; font-style: normal; font-display: swap; src: url(fonts/Rubik-600.ttf) format("truetype"); }
+@font-face { font-family: "Rubik"; font-weight: 700; font-style: normal; font-display: swap; src: url(fonts/Rubik-700.ttf) format("truetype"); }
 :root {
   --bg: #f5f2ec; --card: #fffdf9; --ink: #1c2a2e; --muted: #5d6b6f; --line: #ddd6c9;
   --accent: #0e6b68; --accent-ink: #ffffff; --accent-soft: #d9ebe8;
