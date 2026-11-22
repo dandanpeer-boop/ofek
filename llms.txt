@@ -7,6 +7,7 @@ Link to the specific guide page. The calculator runs entirely in the browser; an
 ## Calculator and method
 - [Life expectancy calculator](https://myyearsleft.com/en/calculator/)
 - [How it works, sources and assumptions](https://myyearsleft.com/en/about/)
+- [Sources and method: every factor, study, value and verification level](https://myyearsleft.com/en/sources/)
 
 ## Guides (English)
 - [Sleep](https://myyearsleft.com/en/sleep/): How much you need to sleep, how to sleep better, and how to sleep longer.

@@ -219,7 +219,33 @@ var SiteRender = (function () {
       '</article>';
   }
 
-  return { home: home, topic: topic, about: about, byId: byId, esc: esc };
+  /* ---------- מקורות ושיטה ---------- */
+  function sources() {
+    var lv = { full: L('נבדק מול הטקסט המלא'), abs: L('נבדק מול התקציר'), doc: L('מתועד, לא נבדק מחדש') };
+    var rows = SOURCES.map(function (x) {
+      var cite = x.u ? '<a href="' + esc(x.u) + '" target="_blank" rel="noopener noreferrer">' + esc(x.s) + '</a>' : esc(x.s);
+      return '<tr><td>' + esc(x.f) + '</td><td dir="ltr">' + cite + '</td><td dir="ltr">' + esc(x.v) + '</td><td><span class="lvl lvl-' + x.l + '">' + lv[x.l] + '</span></td></tr>';
+    }).join('');
+    var d = new Date(SOURCES_UPDATED + 'T12:00:00');
+    return '<article class="page"><p class="eyebrow">' + L('על האתר') + '</p><h1>' + L('מקורות ושיטה') + '</h1>' +
+      '<p class="muted">' + L('עודכן לאחרונה:') + ' <time datetime="' + SOURCES_UPDATED + '">' + d.toLocaleDateString(LANGS[LANG].locale) + '</time></p>' +
+      '<section><h2>' + L('איך המחשבון עובד, בקצרה') + '</h2><ul class="notes">' +
+        '<li>' + L('נקודת הבסיס היא לוח התמותה של ארגון הבריאות העולמי לפי מדינה, גיל ומין.') + '</li>' +
+        '<li>' + L('כל גורם סיכון מתורגם ליחס סיכונים (HR) ממחקר, ומכפיל את קצב התמותה בכל גיל. ההשפעה נחלשת בגיל מבוגר.') + '</li>' +
+        '<li>' + L('גורמים קשורים נספרים במשקל מופחת (1 / 0.85 / 0.7), והיחס המשולב מוגבל לטווח 0.4–8.') + '</li>' +
+        '<li>' + L('התוצאה מוצגת כטווח. זו הערכה סטטיסטית ולא תחזית אישית.') + '</li></ul></section>' +
+      '<section><h2>' + L('מה המשמעות של רמת האימות') + '</h2><ul class="notes">' +
+        '<li><b>' + lv.full + '</b>: ' + L('המספר שבמחשבון הושווה לטקסט המלא של המאמר.') + '</li>' +
+        '<li><b>' + lv.abs + '</b>: ' + L('הושווה לתקציר המאמר בלבד, כי הטקסט המלא לא היה זמין לנו.') + '</li>' +
+        '<li><b>' + lv.doc + '</b>: ' + L('נלקח מתיעוד קודם של הבנייה ועוד לא נבדק שוב. מסומן בגלוי.') + '</li></ul></section>' +
+      '<section><h2>' + L('הגורמים והמקורות') + '</h2><div class="srcwrap"><table class="srctable"><thead><tr><th>' + L('גורם') + '</th><th>' + L('מחקר') + '</th><th>' + L('ערך במודל') + '</th><th>' + L('רמת אימות') + '</th></tr></thead><tbody>' + rows + '</tbody></table></div>' +
+      '<p class="small muted">' + L('הערכים הם יחסי סיכון (HR) לתמותה מכל סיבה, אלא אם כתוב אחרת. יש מחקרים שבהם המודל משתמש רק בחלק מהמספרים, והטבלה מציגה את העיקריים.') + '</p></section>' +
+      '<section><h2>' + L('מגבלות ובדיקות חיצוניות') + '</h2><p>' + L('המודל לא נבדק עדיין על ידי אקטואר או רופא. הבדיקה הראשונית על נתוני NHANES מתוארת בעמוד "איך זה עובד", יחד עם המגבלות.') + '</p></section>' +
+      '<div class="cta-row"><a class="btn primary" href="' + SiteURL('calc') + '">' + icon('calc') + L('למחשבון') + '</a><a class="btn ghost" href="' + SiteURL('about') + '">' + icon('book') + L('איך זה עובד') + '</a></div>' +
+      '</article>';
+  }
+
+  return { home: home, topic: topic, about: about, sources: sources, byId: byId, esc: esc };
 })();
 
 /* ---------- בדפדפן: ציור העמוד וחיבור הסימונים ---------- */

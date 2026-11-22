@@ -420,3 +420,38 @@ var FIVE_HABITS = {
     { t: L('תזונה איכותית'), topic: 'nutrition' }
   ]
 };
+
+/* ---------- מקורות ושיטה: הטבלה בדף הציבורי. level: full / abs / doc. מתעדכן ידנית עם sources-registry.md ---------- */
+var SOURCES_UPDATED = '2026-11-22';
+var SOURCES = [
+  { f: L('עישון (נוכחי)'), s: "Jha, NEJM 2013", u: "https://doi.org/10.1056/NEJMsa1211128", v: "2.8 / 3.0", l: "full" },
+  { f: L('גיל הפסקת עישון'), s: "Jha, NEJM 2013", u: "https://doi.org/10.1056/NEJMsa1211128", v: "1.0 → 1.7", l: "full" },
+  { f: L('BMI'), s: "GBMC, Lancet 2016", u: "https://doi.org/10.1016/S0140-6736(16)30175-1", v: "1.07 – 2.76", l: "full" },
+  { f: L('פעילות גופנית'), s: "Arem, JAMA Intern Med 2015", u: "https://doi.org/10.1001/jamainternmed.2015.0533", v: "0.80 – 0.61", l: "full" },
+  { f: L('אלכוהול'), s: "Wood, Lancet 2018", u: "", v: "", l: "full" },
+  { f: L('שינה'), s: "Cappuccio, Sleep 2010", u: "https://pubmed.ncbi.nlm.nih.gov/?term=Cappuccio%20Sleep%20duration%20and%20all-cause%20mortality%202010", v: "1.12 / 1.30", l: "abs" },
+  { f: L('פירות וירקות'), s: "Wang, BMJ 2014", u: "https://pubmed.ncbi.nlm.nih.gov/?term=Wang%20Fruit%20and%20vegetable%20intake%20and%20mortality%20BMJ%202014", v: "0.95", l: "abs" },
+  { f: L('בידוד חברתי ובדידות'), s: "Wang, Nat Hum Behav 2023", u: "https://pubmed.ncbi.nlm.nih.gov/?term=Wang%20Association%20of%20loneliness%20and%20social%20isolation%20with%20mortality%20Nature%20Human%20Behaviour%202023", v: "1.32 / 1.14", l: "abs" },
+  { f: L('השכלה'), s: "IHME-CHAIN, Lancet Public Health 2024", u: "https://pmc.ncbi.nlm.nih.gov/articles/PMC10901745/", v: "1.9%", l: "full" },
+  { f: L('מצב משפחתי'), s: "Wang, Glob Health Res Policy 2020", u: "https://pmc.ncbi.nlm.nih.gov/articles/PMC7047380/", v: "1.46 / 1.22", l: "full" },
+  { f: L('סוכרת'), s: "ERFC, NEJM 2011", u: "https://doi.org/10.1056/NEJMoa1008862", v: "1.80", l: "full" },
+  { f: L('התקף לב, שבץ וסוכרת יחד'), s: "ERFC, JAMA 2015", u: "https://doi.org/10.1001/jama.2015.7008", v: "2.0 – 6.9", l: "abs" },
+  { f: L('לחץ דם'), s: "PSC, Lancet 2002", u: "https://doi.org/10.1016/S0140-6736(02)11911-8", v: "×2 / 20 mmHg", l: "full" },
+  { f: L('כולסטרול'), s: "PSC, Lancet 2007", u: "https://doi.org/10.1016/S0140-6736(07)61778-4", v: "0.44 / 0.66 / 0.83", l: "full" },
+  { f: L('טריגליצרידים'), s: "Liu, Lipids Health Dis 2013", u: "https://pmc.ncbi.nlm.nih.gov/articles/PMC4231478/", v: "1.12", l: "full" },
+  { f: L('Lp(a)'), s: "Langsted, Eur Heart J 2019", u: "https://doi.org/10.1093/eurheartj/ehy902", v: "1.05 / 50 mg/dL", l: "full" },
+  { f: L('תפקוד כליות (eGFR)'), s: "CKD-PC, Lancet 2010", u: "https://pubmed.ncbi.nlm.nih.gov/?term=Chronic%20Kidney%20Disease%20Prognosis%20Consortium%20eGFR%20and%20mortality%20Lancet%202010", v: "1.18 / 1.57 / 3.14", l: "abs" },
+  { f: L('CRP'), s: "ERFC, Lancet 2010", u: "https://pubmed.ncbi.nlm.nih.gov/?term=Emerging%20Risk%20Factors%20Collaboration%20C-reactive%20protein%20concentration%20and%20risk%20of%20coronary%20heart%20disease%20stroke%20mortality%20Lancet%202010", v: "1.34", l: "full" },
+  { f: L('GGT'), s: "Kunutsor, Int J Epidemiol 2014", u: "https://pubmed.ncbi.nlm.nih.gov/?term=Kunutsor%20gamma-glutamyltransferase%20and%20mortality%20Int%20J%20Epidemiol%202014", v: "1.07 / 5 U/L", l: "abs" },
+  { f: L('דופק במנוחה'), s: "Zhang, CMAJ 2016", u: "https://pubmed.ncbi.nlm.nih.gov/?term=Zhang%20Resting%20heart%20rate%20and%20all-cause%20mortality%20CMAJ%202016", v: "1.09 / 10 bpm", l: "abs" },
+  { f: L('היקף מותניים'), s: "Cerhan, Mayo Clin Proc 2014", u: "https://pubmed.ncbi.nlm.nih.gov/?term=Cerhan%20Waist%20circumference%20mortality%20Mayo%20Clin%20Proc%202014", v: "1.07 / 1.09", l: "abs" },
+  { f: L('קצב הליכה'), s: "Yates, Eur Heart J 2017", u: "https://doi.org/10.1093/eurheartj/ehx449", v: "1.09 – 1.63", l: "full" },
+  { f: L('כושר (VO2max)'), s: "Kodama, JAMA 2009", u: "https://doi.org/10.1001/jama.2009.681", v: "0.87 / MET", l: "full" },
+  { f: L('ישיבה'), s: "Chau, PLoS One 2013", u: "https://pmc.ncbi.nlm.nih.gov/articles/PMC3827429/", v: "1.00 / 1.02 / 1.05", l: "full" },
+  { f: L('אריכות ימים של ההורים'), s: "Atkins, JACC 2016", u: "https://pubmed.ncbi.nlm.nih.gov/?term=Atkins%20Association%20of%20parental%20age%20at%20death%20with%20mortality%20JACC%202016", v: "0.83 / decade", l: "doc" },
+  { f: L('מחלת לב מוקדמת בהורה'), s: "Lloyd-Jones, JAMA 2004", u: "https://doi.org/10.1001/jama.291.18.2204", v: "OR 2.0 / 1.7", l: "full" },
+  { f: L('הערכה עצמית של בריאות'), s: "DeSalvo, J Gen Intern Med 2006", u: "https://doi.org/10.1111/j.1525-1497.2005.00291.x", v: "1.23 / 1.44 / 1.92", l: "abs" },
+  { f: L('גיל ביולוגי (PhenoAge)'), s: "Levine, Aging 2018; Liu, PLoS Med 2018", u: "https://pmc.ncbi.nlm.nih.gov/articles/PMC6388911/", v: "1.09 / year", l: "full" },
+  { f: L('נוסחת eGFR'), s: "Inker, NEJM 2021", u: "https://pubmed.ncbi.nlm.nih.gov/?term=Inker%20New%20creatinine-%20and%20cystatin%20C-based%20equations%20NEJM%202021", v: "CKD-EPI 2021", l: "doc" },
+  { f: L('תמותה בסיסית'), s: "WHO life tables 2019", u: "https://www.who.int/data/gho/data/themes/mortality-and-global-health-estimates", v: "", l: "doc" }
+];

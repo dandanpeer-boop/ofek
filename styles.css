@@ -480,3 +480,9 @@ a { color: var(--accent); }
 .doctable td:first-child { width: 48%; opacity: .8; }
 .docline { height: 30px; border-bottom: 1px solid color-mix(in srgb, currentColor 35%, transparent); }
 @media print { .docreport h3 { break-after: avoid; } .docreport .tests { break-inside: avoid; } }
+
+.srcwrap { overflow-x: auto; margin: 8px 0; }
+.srctable { width: 100%; border-collapse: collapse; font-size: 14px; min-width: 560px; }
+.srctable th, .srctable td { padding: 7px 8px; text-align: start; border-bottom: 1px solid color-mix(in srgb, currentColor 18%, transparent); vertical-align: top; }
+.lvl { white-space: nowrap; font-size: 12.5px; padding: 2px 8px; border-radius: 999px; background: color-mix(in srgb, currentColor 10%, transparent); }
+.lvl-doc { outline: 1px dashed currentColor; }
