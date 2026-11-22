@@ -1304,3 +1304,18 @@ Object.assign(I18N.es, {
 "6huae": "Para la mayoría de los suplementos no hay evidencia de que alarguen la vida en personas sanas: en el ensayo VITAL la vitamina D no cambió la mortalidad total, y los antioxidantes la subieron ligeramente.",
 "10g9sz6": "La presión arterial normal es inferior a 120/80, la glucosa en ayunas inferior a 100 mg/dL y la HbA1c inferior a 5,7%. La única forma de saberlo es medir."
 });
+Object.assign(I18N.es, {
+"13zwvf5": "eGFR (calculado a partir de la creatinina)",
+"nqp6ow": "Enfermedades diagnosticadas",
+"1sulb38": "Antecedentes familiares",
+"1e5kew2": "Infarto o ictus a edad temprana en uno de los padres",
+"14g4z4d": "<h2>Hoja de preparación para la consulta médica</h2>",
+"9j08dr": "<p class=\"small muted\">Los datos los introdujo el usuario y no se han verificado. No es un diagnóstico médico, solo una hoja para preparar la conversación. Se genera únicamente en tu navegador.</p>",
+"bdaw59": "<h3>Los datos que introduje</h3>",
+"1gfbtni": "<h3>Valores que conviene comentar</h3>",
+"bpkx6u": "<p class=\"small\">No se identificaron valores fuera de rango según los umbrales habituales de derivación, a partir de lo introducido.</p>",
+"1k81k78": "<h3>Mis preguntas</h3>",
+"aq3k0p": "<h3>Notas de la consulta</h3>",
+"16ykpxj": "<div class=\"nav\"><button id=\"docback\">Volver a los resultados</button><button class=\"primary\" id=\"docprint\">Imprimir / guardar como PDF</button></div>",
+"18l7ot3": "Hoja para el médico"
+});

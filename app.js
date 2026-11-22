@@ -918,6 +918,45 @@
       L('<p class="small muted">בכוונה לא כללנו בדיקות שאין לגביהן המלצה לכלל האוכלוסייה, כמו ויטמין D או טסטוסטרון.</p></div>');
   }
 
+  // ---------- דוח הכנה לרופא/ה: דף להדפסה, בלי תוחלת חיים, רק מה שהוזן ומה כדאי לשאול ----------
+
+  function doctorReport(inp, r) {
+    var rows = [];
+    function add(label, val) { if (val !== undefined && val !== '') rows.push('<tr><td>' + esc(label) + '</td><td dir="auto">' + esc(val) + '</td></tr>'); }
+    function numRow(id) { var f = F(id); if (inp[id] !== undefined && f) add(f.label, dec(String(inp[id])) + ' ' + (f.unit || '')); }
+    var bmi = inp.height && inp.weight ? inp.weight / Math.pow(inp.height / 100, 2) : null;
+    add(L('גיל'), String(inp.age));
+    add(L('מין'), inp.sex === 'f' ? L('אישה') : L('גבר'));
+    if (bmi !== null) add('BMI', fmt(bmi) + ' (' + inp.weight + ' ' + L('ק"ג') + ', ' + inp.height + ' ' + L('ס"מ') + ')');
+    numRow('waist');
+    if (inp.sbp !== undefined || inp.dbp !== undefined) add(L('לחץ דם'), (inp.sbp || '?') + '/' + (inp.dbp || '?') + ' ' + L('ממ"כ'));
+    ['tc', 'ldl', 'hdl', 'tg', 'glucose', 'hba1c', 'creatinine'].forEach(numRow);
+    if (r.derived.egfr !== undefined) add(L('eGFR (מחושב מהקריאטינין)'), String(Math.round(r.derived.egfr)));
+    ['acr', 'crp', 'lpa', 'rhr'].forEach(numRow);
+    if (inp.diabetes === 'yes') add(L('סוכרת'), L('כן'));
+    if (inp.smoking) { var so = F('smoking').options.filter(function (o) { return o[0] === inp.smoking; })[0]; if (so) add(L('עישון'), so[1]); }
+    var cf = F('conditions'), cs = (inp.conditions || []).map(function (c) { var o = cf.options.filter(function (x) { return x[0] === c; })[0]; return o ? o[1] : c; });
+    if (cs.length) add(L('מחלות שאובחנו'), cs.join(', '));
+    var mf = F('meds'), ms = ((data.meds) || []).map(function (c) { var o = mf.options.filter(function (x) { return x[0] === c; })[0]; return o ? o[1] : c; });
+    if (ms.length) add(L('תרופות קבועות'), ms.join(', '));
+    if (inp.famHeart === 'yes') add(L('היסטוריה משפחתית'), L('התקף לב או אירוע מוחי בגיל צעיר אצל הורה'));
+    var refs = referrals(inp, r);
+    var li = function (t) { return '<li>' + esc(t) + '</li>'; };
+    var blank = '<div class="docline"></div><div class="docline"></div><div class="docline"></div><div class="docline"></div>';
+    return '<div class="card docreport">' +
+      L('<h2>דוח הכנה לפגישה עם הרופא/ה</h2>') +
+      '<p class="small muted">' + new Date().toLocaleDateString(LANGS[LANG].locale) + ' · myyearsleft.com</p>' +
+      L('<p class="small muted">הנתונים הוזנו על ידי המשתמש/ת ולא אומתו. זה אינו אבחנה רפואית, אלא דף להכנת השיחה. הוא נוצר בדפדפן שלך בלבד.</p>') +
+      L('<h3>הנתונים שהזנתי</h3>') + '<table class="doctable">' + rows.join('') + '</table>' +
+      L('<h3>ערכים שכדאי לדון בהם</h3>') +
+      (refs.length ? '<ul>' + refs.map(li).join('') + '</ul>' : L('<p class="small">לא זוהו ערכים חריגים לפי ספי ההפניה הרגילים, על סמך מה שהוזן.</p>')) +
+      testsHTML(inp) +
+      L('<h3>השאלות שלי</h3>') + blank +
+      L('<h3>הערות מהפגישה</h3>') + blank +
+      L('<div class="nav"><button id="docback">חזרה לתוצאות</button><button class="primary" id="docprint">הדפסה / שמירה כ-PDF</button></div>') +
+      '</div>';
+  }
+
   // ---------- שיתוף התוצאה: כרטיס תמונה בלי שום נתון בריאות, רק המספר ----------
 
   function shareGain(inp, r) {
@@ -1195,6 +1234,13 @@
     document.getElementById('back').onclick = function () { step = 1; render(); };
     var rf = document.getElementById('refine'); if (rf) rf.onclick = function () { setMode('full'); step = 1; render(); };
     document.getElementById('print').onclick = function () { window.print(); };
+    var pb = document.getElementById('print'), db = document.createElement('button');
+    db.textContent = L('דוח הכנה לרופא/ה'); db.id = 'docrep'; pb.parentNode.insertBefore(db, pb);
+    db.onclick = function () {
+      app.innerHTML = doctorReport(inp, r); window.scrollTo(0, 0);
+      document.getElementById('docback').onclick = renderResult;
+      document.getElementById('docprint').onclick = function () { window.print(); };
+    };
   }
 
   var SOURCES = [

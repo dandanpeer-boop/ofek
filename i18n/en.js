@@ -1306,3 +1306,18 @@ Object.assign(I18N.en, {
 "6huae": "For most supplements there is no evidence that they extend life in healthy people: in the VITAL trial vitamin D did not change overall mortality, and antioxidant supplements slightly raised it.",
 "10g9sz6": "Normal blood pressure is below 120/80, fasting glucose below 100 mg/dL and HbA1c below 5.7%. The only way to know is to measure."
 });
+Object.assign(I18N.en, {
+"13zwvf5": "eGFR (calculated from creatinine)",
+"nqp6ow": "Diagnosed conditions",
+"1sulb38": "Family history",
+"1e5kew2": "Heart attack or stroke at a young age in a parent",
+"14g4z4d": "<h2>Preparation sheet for my doctor visit</h2>",
+"9j08dr": "<p class=\"small muted\">The data were entered by the user and have not been verified. This is not a medical diagnosis, only a sheet to prepare the conversation. It is created in your browser only.</p>",
+"bdaw59": "<h3>The data I entered</h3>",
+"1gfbtni": "<h3>Values worth discussing</h3>",
+"bpkx6u": "<p class=\"small\">No out-of-range values were identified by the usual referral thresholds, based on what was entered.</p>",
+"1k81k78": "<h3>My questions</h3>",
+"aq3k0p": "<h3>Notes from the visit</h3>",
+"16ykpxj": "<div class=\"nav\"><button id=\"docback\">Back to results</button><button class=\"primary\" id=\"docprint\">Print / save as PDF</button></div>",
+"18l7ot3": "Doctor visit sheet"
+});

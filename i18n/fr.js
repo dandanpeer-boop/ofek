@@ -1304,3 +1304,18 @@ Object.assign(I18N.fr, {
 "6huae": "Pour la plupart des compléments, rien ne prouve qu'ils prolongent la vie des personnes en bonne santé : dans l'essai VITAL la vitamine D n'a pas modifié la mortalité totale, et les antioxydants l'ont légèrement augmentée.",
 "10g9sz6": "Une tension normale est inférieure à 120/80, la glycémie à jeun inférieure à 100 mg/dL et l'HbA1c inférieure à 5,7 %. La seule façon de savoir est de mesurer."
 });
+Object.assign(I18N.fr, {
+"13zwvf5": "eGFR (calculé à partir de la créatinine)",
+"nqp6ow": "Maladies diagnostiquées",
+"1sulb38": "Antécédents familiaux",
+"1e5kew2": "Infarctus ou AVC précoce chez un parent",
+"14g4z4d": "<h2>Fiche de préparation pour la consultation</h2>",
+"9j08dr": "<p class=\"small muted\">Les données ont été saisies par l'utilisateur et n'ont pas été vérifiées. Ce n'est pas un diagnostic médical, seulement une fiche pour préparer l'échange. Elle est créée uniquement dans votre navigateur.</p>",
+"bdaw59": "<h3>Les données que j'ai saisies</h3>",
+"1gfbtni": "<h3>Valeurs à discuter</h3>",
+"bpkx6u": "<p class=\"small\">Aucune valeur hors norme n'a été repérée selon les seuils habituels d'orientation, d'après ce qui a été saisi.</p>",
+"1k81k78": "<h3>Mes questions</h3>",
+"aq3k0p": "<h3>Notes de la consultation</h3>",
+"16ykpxj": "<div class=\"nav\"><button id=\"docback\">Retour aux résultats</button><button class=\"primary\" id=\"docprint\">Imprimer / enregistrer en PDF</button></div>",
+"18l7ot3": "Fiche pour le médecin"
+});

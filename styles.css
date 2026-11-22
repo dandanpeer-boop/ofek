@@ -475,3 +475,8 @@ a { color: var(--accent); }
 .filetag { color: var(--accent); margin-top: 2px; }
 
 .trustline { color: var(--accent); font-weight: 700; font-size: 1.1em; margin: 6px 0 4px; }
+.doctable { width: 100%; border-collapse: collapse; margin: 6px 0 14px; }
+.doctable td { padding: 6px 8px; border-bottom: 1px solid color-mix(in srgb, currentColor 18%, transparent); vertical-align: top; }
+.doctable td:first-child { width: 48%; opacity: .8; }
+.docline { height: 30px; border-bottom: 1px solid color-mix(in srgb, currentColor 35%, transparent); }
+@media print { .docreport h3 { break-after: avoid; } .docreport .tests { break-inside: avoid; } }
