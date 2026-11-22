@@ -19,6 +19,7 @@ Link to the specific guide page. The calculator runs entirely in the browser; an
 - [Social ties](https://myyearsleft.com/en/social/): Why friends and family are on the list next to smoking and exercise.
 - [Smoking and alcohol](https://myyearsleft.com/en/habits/): How many years quitting smoking gives back, and where the line is with alcohol.
 - [Weight and BMI](https://myyearsleft.com/en/weight/): How BMI relates to mortality risk, and what the findings say about excess weight.
+- [Biological age](https://myyearsleft.com/en/bioage/): How biological age is calculated from nine blood values, and how well it predicts.
 - [Dietary supplements](https://myyearsleft.com/en/supplements/): What has evidence and what does not: vitamin D, omega-3, multivitamins and more.
 - [Your numbers](https://myyearsleft.com/en/numbers/): Blood pressure, blood sugar and waist size: what to check and what the ranges are.
 
@@ -32,5 +33,6 @@ Link to the specific guide page. The calculator runs entirely in the browser; an
 - [קשרים חברתיים](https://myyearsleft.com/social/): למה חברים ומשפחה נמצאים ברשימה ליד עישון ותנועה.
 - [עישון ואלכוהול](https://myyearsleft.com/habits/): כמה שנים מחזירה הפסקת עישון, ואיפה עובר הגבול באלכוהול.
 - [משקל ו-BMI](https://myyearsleft.com/weight/): איך BMI קשור לסיכון לתמותה, ומה הממצאים אומרים על עודף משקל.
+- [גיל ביולוגי](https://myyearsleft.com/bioage/): איך מחשבים גיל ביולוגי מתשעה ערכים בבדיקת דם, וכמה הוא מנבא.
 - [תוספי תזונה](https://myyearsleft.com/supplements/): מה יש עליו ראיות ומה לא: ויטמין D, אומגה 3, מולטי-ויטמין ועוד.
 - [המספרים שלך](https://myyearsleft.com/numbers/): לחץ דם, סוכר והיקף מותניים: מה כדאי לבדוק ומה הטווחים.
