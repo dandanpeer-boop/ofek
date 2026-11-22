@@ -73,6 +73,8 @@ input:focus-visible, select:focus-visible, button:focus-visible, .opt:focus-with
 }
 .opt input:checked + span { background: var(--accent); color: var(--accent-ink); border-color: var(--accent); }
 .err { color: var(--neg); font-size: 14px; margin-top: 4px; min-height: 0; }
+.softwarn { background: var(--warn-bg); color: var(--warn-ink); border-radius: 8px; padding: 4px 10px; font-size: 14px; margin-top: 4px; }
+.softwarn:empty { display: none; }
 .person { border-top: 1px solid var(--line); padding-top: 14px; margin-top: 14px; }
 .person .lbl { font-weight: 600; margin-bottom: 6px; }
 .person-grid { display: grid; grid-template-columns: 1.1fr .8fr 1.3fr; gap: 10px; }

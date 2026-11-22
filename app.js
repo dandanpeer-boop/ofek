@@ -171,6 +171,27 @@
   function dec(s) { return DEC === '.' ? String(s) : String(s).replace('.', DEC); }
   function num(v) { if (v === undefined || v === null || String(v).trim() === '') return undefined; var n = Number(String(v).trim().replace(/^(-?\d+),(\d+)$/, '$1.$2')); return isFinite(n) ? n : undefined; }
   function flat(fields) { var out = []; fields.forEach(function (f) { if (f.row) out = out.concat(f.row); else out.push(f); }); return out; }
+  // ---------- בדיקת סבירות רכה: מסמנת ערך חריג בלי לחסום ----------
+  // טווחים רחבים לאדם בוגר. מחוץ להם הערך אפשרי אבל נדיר, ולכן עדיף לוודא שלא הוזן בטעות (גלגלת עכבר, הקלדה, יחידות).
+  var SOFT = { height: [140, 205], weight: [40, 180], waist: [55, 140], rhr: [40, 100], vo2max: [20, 70], sbp: [90, 200], dbp: [50, 120],
+    tc: [100, 350], hdl: [20, 100], ldl: [40, 250], tg: [30, 800], glucose: [60, 300], hba1c: [4, 12], creatinine: [0.4, 3], crp: [0, 50],
+    ggt: [5, 300], acr: [0, 1000], lpa: [0, 300], albumin: [2.5, 5.5], alp: [25, 300], wbc: [2, 20], lymph: [10, 60], mcv: [70, 110],
+    rdw: [11, 18], gpAvg: [50, 105] };
+  var SOFT_AGE = [30, 108];
+  var SOFT_MSG = L('ערך חריג. כדאי לוודא שהוזן נכון.');
+  function softBad(id) { var r = SOFT[id], v = num(data[id]); return !!r && v !== undefined && (v < r[0] || v > r[1]); }
+  function softPersonBad(id) { var p = data[id], a = p && p.status ? num(p.age) : undefined; return a !== undefined && (a < SOFT_AGE[0] || a > SOFT_AGE[1]); }
+  function setSoft(id, bad) { var w = document.getElementById('w_' + id); if (w) w.textContent = bad ? SOFT_MSG : ''; }
+  function flaggedInputs() {
+    var out = [];
+    STEPS.forEach(function (st) {
+      flat(st.fields).forEach(function (f) {
+        if (f.type === 'num' && softBad(f.id)) out.push(f.label);
+        else if (f.type === 'person' && softPersonBad(f.id)) out.push(f.label);
+      });
+    });
+    return out;
+  }
   function fmt(x, d) { return dec(x.toFixed(d === undefined ? 1 : d)); }
   function signed(x) { return (x >= 0 ? '+' : '−') + dec(Math.abs(x).toFixed(1)); }
 
@@ -200,7 +221,7 @@
     if (f.type === 'num') {
       return '<div class="field" data-field="' + f.id + '"' + hidden + '><label for="f_' + f.id + '">' + esc(f.label) + '</label>' + hint +
         '<div class="with-unit"><input type="number" inputmode="decimal" id="f_' + f.id + '" data-id="' + f.id + '" step="' + (f.stepAttr || '1') +
-        '" value="' + esc(v === undefined ? '' : v) + '"><span>' + esc(f.unit || '') + '</span></div><div class="err" id="e_' + f.id + '"></div></div>';
+        '" value="' + esc(v === undefined ? '' : v) + '"><span>' + esc(f.unit || '') + '</span></div><div class="err" id="e_' + f.id + '"></div><div class="softwarn" id="w_' + f.id + '"></div></div>';
     }
     if (f.type === 'select') {
       return '<div class="field"><label for="f_' + f.id + '">' + esc(f.label) + '</label>' + hint + '<select id="f_' + f.id + '" data-id="' + f.id + '">' +
@@ -220,7 +241,7 @@
         '<select data-p="status" aria-label="' + esc(f.label) + L(' — מצב"><option value="">לא ידוע</option><option value="alive"') + (p.status === 'alive' ? ' selected' : '') + L('>בחיים</option><option value="dead"') + (p.status === 'dead' ? ' selected' : '') + L('>נפטר/ה</option></select>') +
         '<input type="number" inputmode="numeric" data-p="age" min="0" max="120" placeholder="' + (p.status === 'dead' ? L('גיל בפטירה') : L('גיל')) + '" aria-label="' + esc(f.label) + L(' — גיל" value="') + esc(p.age === undefined ? '' : p.age) + '"' + (p.status ? '' : ' hidden') + '>' +
         '<select data-p="cause" aria-label="' + esc(f.label) + L(' — סיבת הפטירה"') + (p.status === 'dead' ? '' : ' hidden') + L('><option value="natural">ממחלה או מזקנה</option><option value="external"') + (p.cause === 'external' ? ' selected' : '') + L('>תאונה, מלחמה או אלימות</option></select>') +
-        '</div><div class="err" id="e_' + f.id + '"></div></div>';
+        '</div><div class="err" id="e_' + f.id + '"></div><div class="softwarn" id="w_' + f.id + '"></div></div>';
     }
     return '';
   }
@@ -276,6 +297,7 @@
         if (el.type === 'checkbox') {
           data[id] = Array.prototype.map.call(app.querySelectorAll('[data-id="' + id + '"]:checked'), function (c) { return c.value; });
         } else data[id] = el.value;
+        if (el.type === 'number') setSoft(id, softBad(id));
         if (id === 'hasLabs') { var gb = document.getElementById('gatebody'); if (gb) gb.hidden = el.value !== 'yes'; }
         // שדות מותנים
         flat(s.fields).forEach(function (f) {
@@ -290,9 +312,13 @@
         data[id] = { status: st.value, age: num(ag.value), cause: ca.value };
         ag.hidden = !st.value; ca.hidden = st.value !== 'dead';
         ag.placeholder = st.value === 'dead' ? L('גיל בפטירה') : L('גיל כיום');
+        setSoft(id, softPersonBad(id));
       }
       st.onchange = sync; ag.oninput = sync; ca.onchange = sync;
     });
+    // גלגלת העכבר על שדה מספר ממוקד משנה את הערך בלי ששמים לב (עד המקסימום). מסירים מיקוד בגלילה.
+    flat(s.fields).forEach(function (f) { if (f.type === 'num') setSoft(f.id, softBad(f.id)); else if (f.type === 'person') setSoft(f.id, softPersonBad(f.id)); });
+    app.querySelectorAll('input[type=number]').forEach(function (el) { el.addEventListener('wheel', function () { if (document.activeElement === el) el.blur(); }, { passive: true }); });
     wireUpload();
     wireGarmin();
     document.getElementById('back').onclick = function () { step--; render(); };
@@ -1072,6 +1098,8 @@
 
   function buildNotes(r) {
     var n = r.notes.slice();
+    var flagged = flaggedInputs();
+    if (flagged.length) n.unshift(L('ערכים חריגים שכדאי לוודא שהוזנו נכון: ') + flagged.join(', ') + L('. אם יש טעות, אפשר לתקן ב"עריכת הנתונים".'));
     var h = data.hered || [], o = data.origin || [];
     var cnd = data.conditions || [], meds = data.meds || [];
     if (cnd.indexOf('cancer') >= 0 || cnd.indexOf('copd') >= 0 || cnd.indexOf('other') >= 0) n.unshift(L('ציינת סרטן, מחלת ריאות כרונית או מחלה קשה אחרת. אלה לא נכללו במספר: ההשפעה שלהן תלויה מאוד בסוג, בשלב ובטיפול, והמודל בנוי על האוכלוסייה הכללית. לכן ההערכה כאן כנראה אופטימית מדי עבורך, והרופא/ה המטפל/ת הוא הכתובת.'));

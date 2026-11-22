@@ -1213,3 +1213,35 @@ Object.assign(I18N.fr, {
 Object.assign(I18N.fr, {
 "fggssb": " (la dernière année avant le COVID), par pays et par sexe. Chaque facteur de risque est traduit en rapport de risque (hazard ratio) tiré d'une étude publiée, normalisé à la moyenne de la population, qui multiplie le taux de mortalité à chaque âge. Les rapports de risque s'atténuent avec l'âge, comme l'ont montré les études. Comme les facteurs de risque sont corrélés entre eux, le plus fort compte entièrement et les autres avec un poids réduit, et le rapport combiné est limité à l'intervalle 0,4–8.</p>"
 });
+Object.assign(I18N.fr, {
+"1w14gwx": "Compléments pour le sommeil : ce que montrent les preuves",
+"g19gu2": "Beaucoup de personnes ressentent un soulagement grâce aux compléments, et cela peut être réel. Mais l'expérience personnelle ne distingue pas le complément de l'effet placebo ni d'un autre changement survenu en même temps ; seul ce qui a été testé dans des essais figure donc ici.",
+"9ukrkb": "Mélatonine : dans la méta-analyse de Ferracioli-Oda (2013), 19 essais avec 1 683 participants atteints de troubles primaires du sommeil, la mélatonine a raccourci le délai d'endormissement d'environ 7 minutes par rapport au placebo (IC à 95 % : 4,4–9,8) et allongé la durée totale de sommeil d'environ 8 minutes (IC à 95 % : 1,7–14,8). Les auteurs qualifient l'effet de modeste et notent qu'il ne s'est pas atténué avec l'usage continu.",
+"10cz1c8": "Magnésium : dans la revue de Mah (2021), trois essais avec 151 personnes âgées souffrant d'insomnie, le délai d'endormissement était d'environ 17 minutes plus court qu'avec le placebo (IC à 95 % : 7,4–27,3), sans amélioration significative de la durée totale de sommeil. Tous les essais présentaient un risque de biais modéré à élevé et les preuves étaient de qualité faible à très faible ; les auteurs concluent donc qu'il n'y a pas encore de base suffisante pour une recommandation éclairée.",
+"u3zf9z": "La recommandation de l'Académie américaine de médecine du sommeil (Sateia 2017) suggère, de façon faible, de ne pas utiliser la mélatonine, la valériane ni le tryptophane pour traiter l'insomnie chronique chez l'adulte. Une recommandation faible signifie une faible certitude des preuves, pas que le complément ne fonctionne pas. Le guide recommande toujours de commencer par la TCC-I.",
+"1qgd0w6": "Si un complément précis vous aide, rien ici ne conclut qu'il faut l'arrêter. Il est seulement utile d'en parler à un médecin ou à un pharmacien, surtout en cas de traitement régulier, de grossesse, ou si le problème de sommeil est nouveau et soudain.",
+"1n1ojbv": "Ferracioli-Oda 2013 : mélatonine et troubles du sommeil, méta-analyse (PLoS One)",
+"u2z2nc": "Mah 2021 : magnésium par voie orale pour l'insomnie chez les personnes âgées (BMC Complement Med Ther)",
+"1ryp0lb": "Sateia 2017 : recommandation de l'AASM sur le traitement médicamenteux de l'insomnie chronique (J Clin Sleep Med)"
+});
+Object.assign(I18N.fr, {
+"138bjol": "Valeur inhabituelle. Vérifiez qu'elle a été saisie correctement.",
+"wstu0f": "Valeurs inhabituelles à vérifier : ",
+"1skmclo": ". En cas d'erreur, vous pouvez corriger dans « Modifier mes données »."
+});
+Object.assign(I18N.fr, {
+"1ygtux8": "Somnifères : ce qu'il faut savoir",
+"11bvpii": "Les médicaments du sommeil sur ordonnance conviennent à certaines personnes, dans le cadre d'une décision prise avec un médecin. Ce sont des avertissements officiels de l'agence américaine des produits alimentaires et médicamenteux (FDA), pas un appel à les éviter dans tous les cas.",
+"ecx7o": "Zolpidem, eszopiclone et zaleplon : en 2019, la FDA a ajouté un encadré de mise en garde sur les comportements complexes pendant le sommeil, comme le somnambulisme ou la conduite en dormant, qui ont causé des blessures graves et des décès. Ces événements sont survenus même à la plus faible dose recommandée et après une seule dose, et la personne ne s'en souvient généralement pas. Toute personne qui remarque un tel comportement doit arrêter le médicament et consulter un médecin.",
+"1bhp7d2": "Benzodiazépines : en 2020, la FDA a mis à jour l'encadré de mise en garde pour toute la classe : risque d'usage abusif, de dépendance, de dépendance physique et de réactions de sevrage. Les associer à des opioïdes ou à l'alcool augmente le risque de surdose et de décès. Il ne faut pas les arrêter d'un coup, mais les réduire progressivement avec un médecin, car le sevrage peut comporter des convulsions.",
+"1ay8qnj": "Avant tout médicament, il vaut la peine de s'informer sur la TCC-I, le traitement recommandé en premier.",
+"15i588v": "L-théanine : dans l'essai de Hidese (2019), 30 adultes ont reçu 200 mg par jour pendant quatre semaines dans un plan croisé contre placebo. Les scores de l'indice de qualité du sommeil de Pittsburgh (PSQI) ont diminué (c'est-à-dire amélioré), surtout pour la latence d'endormissement, les perturbations du sommeil et l'usage de médicaments pour dormir. C'est un petit essai qui portait surtout sur le stress et la cognition, le sommeil étant un critère secondaire.",
+"b8d22s": "Glycine : une revue de Bannai et Kawai (2012) rapporte que la glycine avant le coucher a amélioré la qualité subjective du sommeil chez des personnes ayant une tendance à l'insomnie. Les preuves viennent de petits essais du même groupe de recherche.",
+"qwqyri": "Camomille, source naturelle d'apigénine : dans une méta-analyse de 10 essais avec 772 participants (2024), le score PSQI a baissé de 1,88 point (IC à 95 % : 0,31–3,46, avec une forte hétérogénéité), mais la durée et l'efficacité du sommeil ne se sont pas améliorées. Une recherche sur PubMed le 22 novembre 2026 n'a trouvé aucun essai contrôlé de l'apigénine seule pour le sommeil ; le seul essai apparu testait un mélange de plusieurs ingrédients.",
+"wb19hr": "Phosphatidylsérine et myo-inositol : une recherche sur PubMed le 22 novembre 2026 n'a trouvé aucun essai contrôlé randomisé de la phosphatidylsérine pour le sommeil chez l'adulte. Pour le myo-inositol, il existe un essai chez des femmes enceintes (2022) et aucun dans la population générale. Cela signifie qu'il n'y a pas encore de preuves, pas qu'ils ne fonctionnent pas. Une combinaison de tous ces compléments n'a pas non plus été testée, à ma connaissance.",
+"16a1exm": "Hidese 2019 : L-théanine, stress, sommeil et cognition (Nutrients)",
+"k5cx2k": "Bannai 2012 : glycine et qualité du sommeil, revue (Front Neurol)",
+"12k94ab": "Méta-analyse de 2024 : camomille et sommeil (Complement Ther Med)",
+"5xogv6": "FDA 2019 : encadré de mise en garde pour les somnifères (comportements complexes pendant le sommeil)",
+"t4buh": "FDA 2020 : encadré de mise en garde actualisé pour les benzodiazépines"
+});

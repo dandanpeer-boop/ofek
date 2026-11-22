@@ -1215,3 +1215,35 @@ Object.assign(I18N.en, {
 Object.assign(I18N.en, {
 "fggssb": " (the last year before COVID), by country and sex. Each risk factor is translated into a hazard ratio from a published study, normalized to the population average, and multiplies the death rate at every age. Hazard ratios weaken at older ages, as found in the studies. Because risk factors are correlated with each other, the strongest factor counts in full and the others with reduced weight, and the combined ratio is capped at 0.4–8.</p>"
 });
+Object.assign(I18N.en, {
+"1w14gwx": "Supplements for sleep: what the evidence shows",
+"g19gu2": "Many people feel relief from supplements, and that can be real. But personal experience cannot tell a supplement apart from the placebo effect or from another change that happened at the same time, so only what was tested in trials appears here.",
+"9ukrkb": "Melatonin: in the meta-analysis by Ferracioli-Oda (2013), 19 trials with 1,683 participants with primary sleep disorders, melatonin shortened the time to fall asleep by about 7 minutes compared with placebo (95% CI: 4.4–9.8) and lengthened total sleep time by about 8 minutes (95% CI: 1.7–14.8). The authors call the effect modest, and note that it did not fade with continued use.",
+"10cz1c8": "Magnesium: in the review by Mah (2021), three trials with 151 older adults with insomnia, the time to fall asleep was about 17 minutes shorter than with placebo (95% CI: 7.4–27.3), with no significant improvement in total sleep time. All trials were at moderate to high risk of bias and the evidence was of low to very low quality, so the authors conclude there is not yet enough basis for an informed recommendation.",
+"u3zf9z": "The guideline of the American Academy of Sleep Medicine (Sateia 2017) suggests, as a weak recommendation, not using melatonin, valerian or tryptophan to treat chronic insomnia in adults. A weak recommendation means low certainty in the evidence, not that the supplement does not work. The guideline still recommends starting with CBT-I.",
+"1qgd0w6": "If a particular supplement helps you, there is no conclusion here that you should stop. It is only worth checking with a doctor or pharmacist, especially if you take regular medication, are pregnant, or the sleep problem is new and sudden.",
+"1n1ojbv": "Ferracioli-Oda 2013: melatonin for sleep disorders, meta-analysis (PLoS One)",
+"u2z2nc": "Mah 2021: oral magnesium for insomnia in older adults (BMC Complement Med Ther)",
+"1ryp0lb": "Sateia 2017: AASM guideline on drug treatment of chronic insomnia (J Clin Sleep Med)"
+});
+Object.assign(I18N.en, {
+"138bjol": "Unusual value. Please check that it was entered correctly.",
+"wstu0f": "Unusual values worth double-checking: ",
+"1skmclo": ". If there is a mistake, you can fix it under \"Edit my data\"."
+});
+Object.assign(I18N.en, {
+"1ygtux8": "Sleeping pills: what to know",
+"11bvpii": "Prescription sleep medicines suit some people, as a decision made with a doctor. These are official warnings from the US Food and Drug Administration (FDA), not a call to avoid them in every case.",
+"ecx7o": "Zolpidem, eszopiclone and zaleplon: in 2019 the FDA added a boxed warning about complex sleep behaviors, such as sleepwalking or sleep-driving, that caused serious injuries and deaths. The events happened even at the lowest recommended dose and after a single dose, and the person usually does not remember them. Anyone who notices such behavior should stop the medicine and contact a doctor.",
+"1bhp7d2": "Benzodiazepines: in 2020 the FDA updated the boxed warning for the whole class: risk of misuse, addiction, physical dependence and withdrawal reactions. Combining them with opioids or alcohol raises the risk of overdose and death. They should not be stopped all at once but tapered gradually with a doctor, because withdrawal can include seizures.",
+"1ay8qnj": "Before any medicine, it is worth asking about CBT-I, the recommended first treatment.",
+"15i588v": "L-theanine: in the trial by Hidese (2019), 30 adults received 200 mg a day for four weeks in a placebo-controlled crossover design. Scores on the Pittsburgh Sleep Quality Index (PSQI) fell (that is, improved), mainly in sleep latency, sleep disturbances and use of sleep medication. It is a small trial that mainly examined stress and cognition, and sleep was a secondary outcome.",
+"b8d22s": "Glycine: a review by Bannai and Kawai (2012) reports that glycine before bedtime improved subjective sleep quality in people with insomnia tendencies. The evidence comes from small trials by the same research group.",
+"qwqyri": "Chamomile, the natural source of apigenin: in a meta-analysis of 10 trials with 772 participants (2024), the PSQI score fell by 1.88 points (95% CI: 0.31–3.46, with high heterogeneity), but sleep duration and sleep efficiency did not improve. A PubMed search on 22 November 2026 found no controlled trial of apigenin alone for sleep; the only trial that came up tested a mixture of several ingredients.",
+"wb19hr": "Phosphatidylserine and myo-inositol: a PubMed search on 22 November 2026 found no randomized controlled trial of phosphatidylserine for sleep in adults. For myo-inositol there is one trial in pregnant women (2022) and none in the general population. That means there is no evidence yet, not that they do not work. A combination of all these supplements together was also not tested, as far as I found.",
+"16a1exm": "Hidese 2019: L-theanine, stress, sleep and cognition (Nutrients)",
+"k5cx2k": "Bannai 2012: glycine and sleep quality, review (Front Neurol)",
+"12k94ab": "2024 meta-analysis: chamomile and sleep (Complement Ther Med)",
+"5xogv6": "FDA 2019: boxed warning for sleep medicines (complex sleep behaviors)",
+"t4buh": "FDA 2020: updated boxed warning for benzodiazepines"
+});

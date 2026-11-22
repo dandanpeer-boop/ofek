@@ -1213,3 +1213,35 @@ Object.assign(I18N.es, {
 Object.assign(I18N.es, {
 "fggssb": " (el último año antes de la COVID), por país y sexo. Cada factor de riesgo se traduce en un cociente de riesgo (hazard ratio) de un estudio publicado, normalizado a la media de la población, que multiplica la tasa de mortalidad a cada edad. Los cocientes de riesgo se debilitan con la edad, como se ha observado en los estudios. Como los factores de riesgo están correlacionados entre sí, el factor más fuerte cuenta entero y los demás con menor peso, y el cociente combinado se limita al rango 0,4–8.</p>"
 });
+Object.assign(I18N.es, {
+"1w14gwx": "Suplementos para dormir: qué muestra la evidencia",
+"g19gu2": "Mucha gente siente alivio con los suplementos, y eso puede ser real. Pero la experiencia personal no distingue entre el suplemento, el efecto placebo u otro cambio ocurrido al mismo tiempo, por lo que aquí solo aparece lo que se probó en ensayos.",
+"9ukrkb": "Melatonina: en el metanálisis de Ferracioli-Oda (2013), 19 ensayos con 1.683 participantes con trastornos primarios del sueño, la melatonina acortó el tiempo para dormirse unos 7 minutos frente al placebo (IC 95 %: 4,4–9,8) y alargó el tiempo total de sueño unos 8 minutos (IC 95 %: 1,7–14,8). Los autores califican el efecto de modesto y señalan que no se debilitó con el uso continuado.",
+"10cz1c8": "Magnesio: en la revisión de Mah (2021), tres ensayos con 151 personas mayores con insomnio, el tiempo para dormirse fue unos 17 minutos menor que con placebo (IC 95 %: 7,4–27,3), sin mejora significativa del tiempo total de sueño. Todos los ensayos tenían riesgo de sesgo moderado a alto y la evidencia era de calidad baja a muy baja, por lo que los autores concluyen que aún no hay base suficiente para una recomendación fundada.",
+"u3zf9z": "La guía de la Academia Estadounidense de Medicina del Sueño (Sateia 2017) sugiere, como recomendación débil, no usar melatonina, valeriana ni triptófano para tratar el insomnio crónico en adultos. Una recomendación débil significa baja certeza en la evidencia, no que el suplemento no funcione. La guía sigue recomendando empezar con la TCC-I.",
+"1qgd0w6": "Si un suplemento concreto te ayuda, aquí no se concluye que debas dejarlo. Solo conviene consultarlo con un médico o farmacéutico, sobre todo si tomas medicación habitual, estás embarazada o el problema de sueño es nuevo y repentino.",
+"1n1ojbv": "Ferracioli-Oda 2013: melatonina para trastornos del sueño, metanálisis (PLoS One)",
+"u2z2nc": "Mah 2021: magnesio oral para el insomnio en personas mayores (BMC Complement Med Ther)",
+"1ryp0lb": "Sateia 2017: guía de la AASM sobre el tratamiento farmacológico del insomnio crónico (J Clin Sleep Med)"
+});
+Object.assign(I18N.es, {
+"138bjol": "Valor inusual. Conviene comprobar que se introdujo correctamente.",
+"wstu0f": "Valores inusuales que conviene comprobar: ",
+"1skmclo": ". Si hay un error, puedes corregirlo en «Editar mis datos»."
+});
+Object.assign(I18N.es, {
+"1ygtux8": "Pastillas para dormir: qué conviene saber",
+"11bvpii": "Los medicamentos recetados para dormir son adecuados para algunas personas, como decisión tomada con un médico. Estas son advertencias oficiales de la Administración de Alimentos y Medicamentos de EE. UU. (FDA), no una invitación a evitarlos en todos los casos.",
+"ecx7o": "Zolpidem, eszopiclona y zaleplón: en 2019 la FDA añadió una advertencia en recuadro sobre conductas complejas durante el sueño, como caminar o conducir dormido, que causaron lesiones graves y muertes. Los episodios ocurrieron incluso con la dosis recomendada más baja y tras una sola dosis, y la persona normalmente no los recuerda. Quien note una conducta así debe dejar el medicamento y consultar a un médico.",
+"1bhp7d2": "Benzodiacepinas: en 2020 la FDA actualizó la advertencia en recuadro para toda la clase: riesgo de uso indebido, adicción, dependencia física y reacciones de abstinencia. Combinarlas con opioides o alcohol aumenta el riesgo de sobredosis y muerte. No deben suspenderse de golpe, sino reducirse poco a poco con un médico, porque la abstinencia puede incluir convulsiones.",
+"1ay8qnj": "Antes de cualquier medicamento, conviene preguntar por la TCC-I, el primer tratamiento recomendado.",
+"15i588v": "L-teanina: en el ensayo de Hidese (2019), 30 adultos recibieron 200 mg al día durante cuatro semanas en un diseño cruzado con placebo. Las puntuaciones del Índice de Calidad del Sueño de Pittsburgh (PSQI) bajaron (es decir, mejoraron), sobre todo en latencia del sueño, alteraciones del sueño y uso de medicación para dormir. Es un ensayo pequeño que evaluó sobre todo estrés y cognición, y el sueño fue un resultado secundario.",
+"b8d22s": "Glicina: una revisión de Bannai y Kawai (2012) informa de que la glicina antes de acostarse mejoró la calidad subjetiva del sueño en personas con tendencia al insomnio. La evidencia procede de ensayos pequeños del mismo grupo de investigación.",
+"qwqyri": "Manzanilla, la fuente natural de apigenina: en un metanálisis de 10 ensayos con 772 participantes (2024), la puntuación PSQI bajó 1,88 puntos (IC 95 %: 0,31–3,46, con alta heterogeneidad), pero la duración y la eficiencia del sueño no mejoraron. Una búsqueda en PubMed el 22 de noviembre de 2026 no encontró ningún ensayo controlado de apigenina sola para el sueño; el único ensayo que apareció probó una mezcla de varios ingredientes.",
+"wb19hr": "Fosfatidilserina y mioinositol: una búsqueda en PubMed el 22 de noviembre de 2026 no encontró ningún ensayo controlado aleatorizado de fosfatidilserina para el sueño en adultos. Para el mioinositol hay un ensayo en mujeres embarazadas (2022) y ninguno en la población general. Eso significa que aún no hay evidencia, no que no funcionen. Tampoco se probó, que yo haya encontrado, una combinación de todos estos suplementos juntos.",
+"16a1exm": "Hidese 2019: L-teanina, estrés, sueño y cognición (Nutrients)",
+"k5cx2k": "Bannai 2012: glicina y calidad del sueño, revisión (Front Neurol)",
+"12k94ab": "Metanálisis de 2024: manzanilla y sueño (Complement Ther Med)",
+"5xogv6": "FDA 2019: advertencia en recuadro para medicamentos para dormir (conductas complejas durante el sueño)",
+"t4buh": "FDA 2020: advertencia en recuadro actualizada para benzodiacepinas"
+});
