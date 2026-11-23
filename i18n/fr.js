@@ -1539,3 +1539,6 @@ Object.assign(I18N.fr, {
 Object.assign(I18N.fr, {
 "19xlkf": "Quels sont les problèmes ? Vous pouvez en cocher plusieurs."
 });
+Object.assign(I18N.fr, {
+"1oduwv3": "Magnésium : dans une revue de Mah (2021), trois essais portant sur 151 personnes âgées souffrant d'insomnie, le délai d'endormissement a été raccourci d'environ 17 minutes par rapport au placebo (intervalle de confiance à 95 % : 7,4–27,3), sans amélioration significative du temps de sommeil total. Tous les essais présentaient un risque de biais modéré à élevé, et les preuves étaient de qualité faible à très faible ; les auteurs concluent donc que la qualité de la littérature est trop faible pour une recommandation éclairée. Ils ajoutent que, le magnésium étant bon marché et largement disponible, les preuves pourraient soutenir son usage pour les symptômes d'insomnie."
+});

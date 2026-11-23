@@ -1539,3 +1539,6 @@ Object.assign(I18N.es, {
 Object.assign(I18N.es, {
 "19xlkf": "¿Cuáles son los problemas? Puedes marcar varios."
 });
+Object.assign(I18N.es, {
+"1oduwv3": "Magnesio: en una revisión de Mah (2021), tres ensayos con 151 personas mayores con insomnio, el tiempo para dormirse se acortó unos 17 minutos frente a placebo (intervalo de confianza del 95%: 7,4–27,3), sin mejora significativa del tiempo total de sueño. Todos los ensayos tenían un riesgo de sesgo moderado a alto y la evidencia era de calidad baja a muy baja, por lo que los autores concluyen que la calidad de la literatura es demasiado baja para una recomendación informada. Añaden que, como el magnesio es barato y de fácil acceso, la evidencia podría respaldar su uso para los síntomas de insomnio."
+});

@@ -1541,3 +1541,6 @@ Object.assign(I18N.en, {
 Object.assign(I18N.en, {
 "19xlkf": "What are the problems? You can tick several."
 });
+Object.assign(I18N.en, {
+"1oduwv3": "Magnesium: in a review by Mah (2021), three trials with 151 older adults with insomnia, sleep onset time was shortened by about 17 minutes compared with placebo (95% confidence interval: 7.4–27.3), with no significant improvement in total sleep time. All the trials were at moderate to high risk of bias, and the evidence was of low to very low quality, so the authors conclude that the quality of the literature is too low for an informed recommendation. They add that because magnesium is cheap and widely available, the evidence may support its use for insomnia symptoms."
+});
