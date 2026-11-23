@@ -1064,12 +1064,13 @@
     if (inp.tc) rows += range('tc', L('כולסטרול כללי'), 120, 350, Math.round(inp.tc), L('מ"ג/ד"ל'));
     return L('<h3>נסו בעצמכם</h3><p class="small muted">הזיזו את הסרגלים וראו מיד כמה שנים כל שינוי מוסיף או מוריד, לשני הכיוונים.</p>') +
       L('<div class="sim" id="simBox"><div class="simout" aria-live="polite"><div><span class="muted small">ההערכה בתרחיש הזה</span><b id="simAge">') + fmt(r.personal.expectedAge) + '</b></div>' +
-      L('<div id="simDelta" class="simdelta">ללא שינוי</div></div>') + rows +
+      L('<div id="simDelta" class="simdelta">ללא שינוי</div></div>') + rows + '<p class="small muted" id="simFloor" hidden></p>' +
+      (LifeModel.limitsOf(inp).lower ? L('<button type="button" id="simWorse">מה אם ההרגלים יחמירו? (צעד אחד לרעה בכל גורם)</button> ') : '') +
       L('<button type="button" id="simReset">איפוס</button></div>');
   }
 
   function wireSim(inp, r) {
-    var ctrls = app.querySelectorAll('[data-sim]');
+    var ctrls = app.querySelectorAll('[data-sim]'), uBase = LifeModel.estimateUncapped(inp);
     function optsOf(id) { return fieldById(id).options.filter(function (o) { return o[0] !== ''; }); }
     function update() {
       var x = Object.assign({}, inp);
@@ -1084,6 +1085,13 @@
         else x[id] = v || undefined;
       });
       var e = LifeModel.estimate(x), d = e - r.personal.expectedAge;
+      var fl = document.getElementById('simFloor'), lim = LifeModel.limitsOf(x);
+      fl.hidden = !lim.lower;
+      if (lim.lower) {
+        var u = LifeModel.estimateUncapped(x), du = u - uBase;
+        fl.innerHTML = esc(L('שימו לב: הגורמים שהזנת טובים במיוחד, והמודל מגביל את היחס המשולב לרצפה (0.4, הנחה שלנו שנתמכת בנתוני NHANES). לכן שינויים בסרגלים משפיעים כאן פחות מהרגיל, ואל תסיקו מכך שהם לא חשובים.')) + ' ' +
+          esc(L('בלי הרצפה (תיאורטי ולא מכויל, רק להמחשת הכיוון) השינוי היה')) + ' <b dir="ltr">' + signed(du) + '</b> ' + esc(L('שנים.'));
+      }
       document.getElementById('simAge').textContent = fmt(e);
       var el = document.getElementById('simDelta');
       if (Math.abs(d) < 0.05) { el.className = 'simdelta'; el.textContent = L('ללא שינוי'); }
@@ -1092,6 +1100,26 @@
     ctrls.forEach(function (c) { c.addEventListener(c.type === 'range' ? 'input' : 'change', update); });
     document.getElementById('simReset').onclick = function () {
       ctrls.forEach(function (c) { c.value = c.type === 'range' ? c.defaultValue : (c.querySelector('[selected]') || c.options[0]).value; });
+      update();
+    };
+    // "מה אם ההרגלים יחמירו": מי שנמצא על הרצפה לא רואה תגובה לשיפור, אז מזיזים כל גורם צעד אחד לרעה (לפי המודל, בלי הרצפה)
+    var worseBtn = document.getElementById('simWorse');
+    if (worseBtn) worseBtn.onclick = function () {
+      ctrls.forEach(function (c) {
+        var id = c.dataset.sim;
+        if (id === 'quit' || (c.type === 'range' && !c.dataset.ord)) return;
+        var os = optsOf(id).map(function (o) { return o[0]; }), cur = c.dataset.ord ? os[+c.value] : c.value, scored = [];
+        os.forEach(function (v) {
+          var y = Object.assign({}, inp);
+          y[id] = (id === 'fruitveg' || id === 'sitting') ? Number(v) : v;
+          scored.push({ v: v, e: LifeModel.estimateUncapped(y) });
+        });
+        scored.sort(function (a, b) { return b.e - a.e; });
+        var i = -1; scored.forEach(function (o, k) { if (o.v === String(cur)) i = k; });
+        if (i < 0) i = 0;
+        var nxt = scored[Math.min(i + 1, scored.length - 1)].v;
+        c.value = c.dataset.ord ? os.indexOf(nxt) : nxt;
+      });
       update();
     };
     // "הצגה בסרגלים": מעביר את כל השינויים המומלצים לסרגלים

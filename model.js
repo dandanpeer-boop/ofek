@@ -619,7 +619,24 @@ var LifeModel = (function () {
     };
   }
 
-  return { phenoAge: phenoAge, estimate: estimate, compute: compute, baseHazard: baseHazard, survival: survival, egfr: egfr, ASSUME: ASSUME };
+  // האם היחס המשולב נוגע בגבולות (0.4 / 8) בגיל הנוכחי או עד 40 שנה קדימה. קל יותר מ-compute (בלי פירוק לשנים), לשימוש הסימולטור.
+  function limitsOf(inp) {
+    var rawFn = rawLogHR(buildFactors(inp).factors, null), age = Math.floor(inp.age), lim = { upper: false, lower: false };
+    for (var la = age; la < Math.min(MAX_AGE, age + 40); la += 5) {
+      var lr = rawFn(la);
+      if (lr > Math.log(ASSUME.maxHR)) lim.upper = true;
+      if (lr < Math.log(ASSUME.minHR)) lim.lower = true;
+    }
+    return lim;
+  }
+
+  /** תוחלת חיים בלי הרצפה התחתונה על היחס המשולב (רק התקרה נשארת). תיאורטי ולא מכויל: לשימוש בסימולטור בלבד, להראות כיוון וגודל כשהרצפה חוסמת. */
+  function estimateUncapped(inp) {
+    var mu = baseHazard(inp.country, inp.sex), age = Math.floor(inp.age), raw = rawLogHR(buildFactors(inp).factors, null);
+    return age + survival(mu, age, function (a) { return Math.min(raw(a), Math.log(ASSUME.maxHR)); }).remaining;
+  }
+
+  return { phenoAge: phenoAge, estimate: estimate, estimateUncapped: estimateUncapped, limitsOf: limitsOf, compute: compute, baseHazard: baseHazard, survival: survival, egfr: egfr, ASSUME: ASSUME };
 })();
 
 if (typeof module !== 'undefined') module.exports = LifeModel;

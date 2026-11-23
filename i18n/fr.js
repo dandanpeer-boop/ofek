@@ -1542,3 +1542,12 @@ Object.assign(I18N.fr, {
 Object.assign(I18N.fr, {
 "1oduwv3": "Magnésium : dans une revue de Mah (2021), trois essais portant sur 151 personnes âgées souffrant d'insomnie, le délai d'endormissement a été raccourci d'environ 17 minutes par rapport au placebo (intervalle de confiance à 95 % : 7,4–27,3), sans amélioration significative du temps de sommeil total. Tous les essais présentaient un risque de biais modéré à élevé, et les preuves étaient de qualité faible à très faible ; les auteurs concluent donc que la qualité de la littérature est trop faible pour une recommandation éclairée. Ils ajoutent que, le magnésium étant bon marché et largement disponible, les preuves pourraient soutenir son usage pour les symptômes d'insomnie."
 });
+Object.assign(I18N.fr, {
+"1byw6v4": "Attention : les facteurs que vous avez saisis sont exceptionnellement bons, et le modèle limite le rapport de risque combiné à un plancher (0,4, une hypothèse de notre part, pas issue de la recherche). Les changements des curseurs ont donc ici beaucoup moins d'effet que d'habitude. N'en concluez pas qu'ils sont sans importance."
+});
+Object.assign(I18N.fr, {
+"1qlmds": "<button type=\"button\" id=\"simWorse\">Et si mes habitudes se dégradaient ? (un cran de moins bien pour chaque facteur)</button> ",
+"1oh1hh4": "Attention : les facteurs saisis sont exceptionnellement bons et le modèle plafonne le rapport de risque combiné à un plancher (0,4, hypothèse de notre part, appuyée par les données NHANES). Les curseurs ont donc ici moins d'effet qu'habituellement. N'en concluez pas qu'ils sont sans importance.",
+"u9b350": "Sans le plancher (théorique et non calibré, seulement pour montrer le sens) la variation serait de",
+"wtbuwi": "ans."
+});

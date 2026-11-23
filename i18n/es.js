@@ -1542,3 +1542,12 @@ Object.assign(I18N.es, {
 Object.assign(I18N.es, {
 "1oduwv3": "Magnesio: en una revisión de Mah (2021), tres ensayos con 151 personas mayores con insomnio, el tiempo para dormirse se acortó unos 17 minutos frente a placebo (intervalo de confianza del 95%: 7,4–27,3), sin mejora significativa del tiempo total de sueño. Todos los ensayos tenían un riesgo de sesgo moderado a alto y la evidencia era de calidad baja a muy baja, por lo que los autores concluyen que la calidad de la literatura es demasiado baja para una recomendación informada. Añaden que, como el magnesio es barato y de fácil acceso, la evidencia podría respaldar su uso para los síntomas de insomnio."
 });
+Object.assign(I18N.es, {
+"1byw6v4": "Atención: los factores que introdujiste son excepcionalmente buenos, y el modelo limita el cociente de riesgo combinado a un suelo (0,4, una suposición nuestra, no de la investigación). Por eso los cambios en los controles tienen aquí mucho menos efecto de lo habitual. No concluyas de ello que no son importantes."
+});
+Object.assign(I18N.es, {
+"1qlmds": "<button type=\"button\" id=\"simWorse\">¿Y si mis hábitos empeoran? (un paso peor en cada factor)</button> ",
+"1oh1hh4": "Atención: los factores que introdujiste son excepcionalmente buenos y el modelo limita el cociente de riesgo combinado a un suelo (0,4, supuesto nuestro respaldado por datos de NHANES). Por eso los cambios en los controles tienen aquí menos efecto de lo habitual. No concluyas que no sean importantes.",
+"u9b350": "Sin el suelo (teórico y sin calibrar, solo para mostrar la dirección) el cambio sería de",
+"wtbuwi": "años."
+});

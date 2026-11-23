@@ -1544,3 +1544,12 @@ Object.assign(I18N.en, {
 Object.assign(I18N.en, {
 "1oduwv3": "Magnesium: in a review by Mah (2021), three trials with 151 older adults with insomnia, sleep onset time was shortened by about 17 minutes compared with placebo (95% confidence interval: 7.4–27.3), with no significant improvement in total sleep time. All the trials were at moderate to high risk of bias, and the evidence was of low to very low quality, so the authors conclude that the quality of the literature is too low for an informed recommendation. They add that because magnesium is cheap and widely available, the evidence may support its use for insomnia symptoms."
 });
+Object.assign(I18N.en, {
+"1byw6v4": "Note: the factors you entered are exceptionally good, and the model limits the combined hazard ratio to a floor (0.4, our assumption, not from research). So changes in the sliders have much less effect here than usual. Do not conclude from this that they are unimportant."
+});
+Object.assign(I18N.en, {
+"1qlmds": "<button type=\"button\" id=\"simWorse\">What if my habits get worse? (one step worse in each factor)</button> ",
+"1oh1hh4": "Note: the factors you entered are exceptionally good, and the model limits the combined hazard ratio to a floor (0.4, our assumption, supported by NHANES data). So changes in the sliders have less effect here than usual. Do not conclude from this that they are unimportant.",
+"u9b350": "Without the floor (theoretical and uncalibrated, only to show direction) the change would be",
+"wtbuwi": "years."
+});
