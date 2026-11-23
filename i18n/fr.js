@@ -1819,3 +1819,7 @@ Object.assign(I18N.fr, {
 Object.assign(I18N.fr, {
 "1ir2yoi": " (non coché : c'est une valeur ancienne, et on ne sait pas quand la valeur du formulaire a été mesurée. Cochez pour la remplacer)"
 });
+Object.assign(I18N.fr, {
+"1tu9oun": "Avant de commencer : règles de sécurité",
+"1jtcfp6": "Selon la recommandation britannique, il vaut mieux ne pas dépasser régulièrement 14 unités par semaine et répartir la consommation uniformément sur trois jours ou plus. Une unité britannique correspond à 8 grammes, donc 14 unités font environ 112 grammes, soit environ 8 boissons selon la définition utilisée ici (environ 14 grammes par boisson), et non 14 boissons. Dans l'étude de Wood (Lancet 2018), le risque de décès était le plus bas autour de 100 grammes par semaine ou moins (environ 7 boissons). C'est une étude observationnelle sur la mortalité, et elle ne garantit pas que cette quantité soit sans danger pour vous. Moins, c'est mieux."
+});

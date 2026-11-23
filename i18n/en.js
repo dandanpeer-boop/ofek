@@ -1821,3 +1821,7 @@ Object.assign(I18N.en, {
 Object.assign(I18N.en, {
 "1ir2yoi": " (not ticked: this is an old value, and it is unknown when the value in the form was measured. Tick it if you want to replace it)"
 });
+Object.assign(I18N.en, {
+"1tu9oun": "Before you start: safety rules",
+"1jtcfp6": "According to the UK guidance, it is best not to regularly exceed 14 units a week, and to spread drinking evenly over three days or more. A UK unit is 8 grams, so 14 units is about 112 grams, which is about 8 drinks by the definition used here (about 14 grams per drink), not 14 drinks. In the Wood study (Lancet 2018) the risk of death was lowest at around 100 grams per week or less (about 7 drinks). This is an observational study of mortality, and it does not guarantee that this amount is safe for you. Less is better."
+});
