@@ -214,9 +214,11 @@ ul.gsrc li { margin-bottom: 4px; overflow-wrap: anywhere; }
 .rng { display: flex; align-items: center; gap: 8px; }
 .rng input { flex: 1; min-width: 0; accent-color: var(--accent); direction: ltr; }
 .rng output { font-variant-numeric: tabular-nums; font-weight: 700; white-space: nowrap; font-size: 14px; }
+.rends { grid-column: 2; display: flex; justify-content: space-between; gap: 12px; margin-top: -10px; font-size: 12px; }
+.rends span { max-width: 48%; }
 .rng span { font-size: 12px; color: var(--muted); white-space: nowrap; }
 .sim > button { margin-top: 10px; padding: 8px 18px; min-height: 40px; }
-@media (max-width: 520px) { .simrow { grid-template-columns: 1fr; gap: 4px; } }
+@media (max-width: 520px) { .simrow { grid-template-columns: 1fr; gap: 4px; } .rends { grid-column: 1; margin-top: 0; } }
 .hrnote { display: block; font-size: 13.5px; color: var(--accent); margin-top: 2px; }
 @media print { .nav, .privacy-chip, .site-top, .site-foot { display: none; } body { background: #fff; } .card { border: 0; padding: 0; } }
 

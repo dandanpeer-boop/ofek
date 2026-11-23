@@ -1068,7 +1068,8 @@
       var cur = data[id] || '', o = opts(id), idx = o.map(function (x) { return x[0]; }).indexOf(cur);
       if (SIM_ORD[id] && idx >= 0) {
         return '<div class="simrow"><label for="s_' + id + '">' + esc(label) + '</label><div class="rng"><input type="range" id="s_' + id + '" data-sim="' + id +
-          '" data-ord="1" min="0" max="' + (o.length - 1) + '" step="1" value="' + idx + '"><output id="o_' + id + '"></output></div></div>';
+          '" data-ord="1" min="0" max="' + (o.length - 1) + '" step="1" value="' + idx + '"><output id="o_' + id + '"></output></div>' +
+          '<div class="rends small muted" dir="ltr" aria-hidden="true"><span dir="auto">' + esc(o[0][1]) + '</span><span dir="auto">' + esc(o[o.length - 1][1]) + '</span></div></div>';
       }
       return '<div class="simrow"><label for="s_' + id + '">' + esc(label) + '</label><select id="s_' + id + '" data-sim="' + id + '">' +
         (cur ? '' : L('<option value="">לא צוין</option>')) +
