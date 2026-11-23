@@ -23,7 +23,7 @@
 <meta property="og:image:alt" content="כמה שנים מחזירה הפסקת עישון? ואלכוהול: איפה הגבול — אופק">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://myyearsleft.com/icons/og-he.png">
-<script type="application/ld+json">{"@context":"https://schema.org","url":"https://myyearsleft.com/habits/","name":"כמה שנים מחזירה הפסקת עישון? ואלכוהול: איפה הגבול — אופק","description":"כמה שנים מחזירה הפסקת עישון, ואיפה עובר הגבול באלכוהול. מדריך מבוסס מחקר, עם קישור לכל מקור.","inLanguage":"he","@type":"Article","headline":"עישון ואלכוהול","dateModified":"2026-11-22","author":{"@type":"Organization","name":"אופק","url":"https://myyearsleft.com/"},"publisher":{"@type":"Organization","name":"אופק","url":"https://myyearsleft.com/"},"isAccessibleForFree":true,"citation":["https://doi.org/10.1056/NEJMsa1211128","https://doi.org/10.1016/S0140-6736(18)30134-X","https://doi.org/10.1016/S0140-6736(18)31310-2","https://www.who.int/news-room/fact-sheets/detail/tobacco"]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","url":"https://myyearsleft.com/habits/","name":"כמה שנים מחזירה הפסקת עישון? ואלכוהול: איפה הגבול — אופק","description":"כמה שנים מחזירה הפסקת עישון, ואיפה עובר הגבול באלכוהול. מדריך מבוסס מחקר, עם קישור לכל מקור.","inLanguage":"he","@type":"Article","headline":"עישון ואלכוהול","dateModified":"2026-11-23","author":{"@type":"Organization","name":"אופק","url":"https://myyearsleft.com/"},"publisher":{"@type":"Organization","name":"אופק","url":"https://myyearsleft.com/"},"isAccessibleForFree":true,"citation":["https://doi.org/10.1056/NEJMsa1211128","https://doi.org/10.1016/S0140-6736(18)30134-X","https://doi.org/10.1016/S0140-6736(18)31310-2","https://www.who.int/news-room/fact-sheets/detail/tobacco"]}</script>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-103LHLBQ17"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-103LHLBQ17');</script>
 
@@ -92,6 +92,12 @@
   // התקנה כאפליקציה ועבודה בלי אינטרנט (רק בכתובת http/https)
   if (!('serviceWorker' in navigator) || !/^https?:$/.test(location.protocol)) return;
   navigator.serviceWorker.register(ROOT + 'sw.js').catch(function () { /* האתר עובד גם בלי זה */ });
+  // אפליקציה מותקנת: לשמור מראש את כל דפי השפה הזו, כדי שיעבדו גם בלי אינטרנט (גולשים רגילים לא מורידים שום דבר מראש)
+  if ((window.matchMedia && window.matchMedia('(display-mode: standalone)').matches) || navigator.standalone) {
+    navigator.serviceWorker.ready.then(function (reg) {
+      setTimeout(function () { if (reg.active) reg.active.postMessage({ type: 'precache', url: new URL('../pages.json', location.href).href }); }, 4000);
+    });
+  }
   var btn = document.getElementById('install'), deferred = null;
   window.addEventListener('beforeinstallprompt', function (e) { e.preventDefault(); deferred = e; btn.hidden = false; });
   btn.onclick = function () { if (!deferred) return; deferred.prompt(); deferred = null; btn.hidden = true; };

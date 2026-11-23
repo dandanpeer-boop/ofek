@@ -26,7 +26,7 @@
 <script type="application/ld+json">{"@context":"https://schema.org","url":"https://myyearsleft.com/fr/calculator/","name":"Calculateur d'espérance de vie : combien d'années me reste-t-il ? Gratuit, sans inscription — Ofek","description":"Saisissez votre âge, vos habitudes et vos analyses de sang et obtenez une estimation fondée sur la table de mortalité de l'Organisation mondiale de la santé et sur des rapports de risque issus d'études. Tout se calcule dans votre navigateur. Une estimation statistique, pas un avis médical.","inLanguage":"fr","@type":"WebApplication","applicationCategory":"HealthApplication","operatingSystem":"Any","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"publisher":{"@type":"Organization","name":"Ofek","url":"https://myyearsleft.com/fr/"}}</script>
 
 <link rel="stylesheet" href="../../styles.css">
-<link rel="manifest" href="../../manifest.webmanifest">
+<link rel="manifest" href="../../fr/manifest.webmanifest">
 <meta name="theme-color" content="#0e6b68">
 <link rel="icon" href="../../icons/icon-192.png">
 <link rel="apple-touch-icon" href="../../icons/icon-180.png">
@@ -97,6 +97,12 @@
   // התקנה כאפליקציה ועבודה בלי אינטרנט (רק בכתובת http/https)
   if (!('serviceWorker' in navigator) || !/^https?:$/.test(location.protocol)) return;
   navigator.serviceWorker.register(ROOT + 'sw.js').catch(function () { /* האתר עובד גם בלי זה */ });
+  // אפליקציה מותקנת: לשמור מראש את כל דפי השפה הזו, כדי שיעבדו גם בלי אינטרנט (גולשים רגילים לא מורידים שום דבר מראש)
+  if ((window.matchMedia && window.matchMedia('(display-mode: standalone)').matches) || navigator.standalone) {
+    navigator.serviceWorker.ready.then(function (reg) {
+      setTimeout(function () { if (reg.active) reg.active.postMessage({ type: 'precache', url: new URL('../../fr/pages.json', location.href).href }); }, 4000);
+    });
+  }
   var btn = document.getElementById('install'), deferred = null;
   window.addEventListener('beforeinstallprompt', function (e) { e.preventDefault(); deferred = e; btn.hidden = false; });
   btn.onclick = function () { if (!deferred) return; deferred.prompt(); deferred = null; btn.hidden = true; };

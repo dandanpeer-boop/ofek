@@ -28,7 +28,7 @@
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-103LHLBQ17');</script>
 
 <link rel="stylesheet" href="../../styles.css">
-<link rel="manifest" href="../../manifest.webmanifest">
+<link rel="manifest" href="../../en/manifest.webmanifest">
 <meta name="theme-color" content="#0e6b68">
 <link rel="icon" href="../../icons/icon-192.png">
 <link rel="apple-touch-icon" href="../../icons/icon-180.png">
@@ -94,6 +94,12 @@
   // התקנה כאפליקציה ועבודה בלי אינטרנט (רק בכתובת http/https)
   if (!('serviceWorker' in navigator) || !/^https?:$/.test(location.protocol)) return;
   navigator.serviceWorker.register(ROOT + 'sw.js').catch(function () { /* האתר עובד גם בלי זה */ });
+  // אפליקציה מותקנת: לשמור מראש את כל דפי השפה הזו, כדי שיעבדו גם בלי אינטרנט (גולשים רגילים לא מורידים שום דבר מראש)
+  if ((window.matchMedia && window.matchMedia('(display-mode: standalone)').matches) || navigator.standalone) {
+    navigator.serviceWorker.ready.then(function (reg) {
+      setTimeout(function () { if (reg.active) reg.active.postMessage({ type: 'precache', url: new URL('../../en/pages.json', location.href).href }); }, 4000);
+    });
+  }
   var btn = document.getElementById('install'), deferred = null;
   window.addEventListener('beforeinstallprompt', function (e) { e.preventDefault(); deferred = e; btn.hidden = false; });
   btn.onclick = function () { if (!deferred) return; deferred.prompt(); deferred = null; btn.hidden = true; };

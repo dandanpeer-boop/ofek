@@ -92,6 +92,12 @@
   // התקנה כאפליקציה ועבודה בלי אינטרנט (רק בכתובת http/https)
   if (!('serviceWorker' in navigator) || !/^https?:$/.test(location.protocol)) return;
   navigator.serviceWorker.register(ROOT + 'sw.js').catch(function () { /* האתר עובד גם בלי זה */ });
+  // אפליקציה מותקנת: לשמור מראש את כל דפי השפה הזו, כדי שיעבדו גם בלי אינטרנט (גולשים רגילים לא מורידים שום דבר מראש)
+  if ((window.matchMedia && window.matchMedia('(display-mode: standalone)').matches) || navigator.standalone) {
+    navigator.serviceWorker.ready.then(function (reg) {
+      setTimeout(function () { if (reg.active) reg.active.postMessage({ type: 'precache', url: new URL('../pages.json', location.href).href }); }, 4000);
+    });
+  }
   var btn = document.getElementById('install'), deferred = null;
   window.addEventListener('beforeinstallprompt', function (e) { e.preventDefault(); deferred = e; btn.hidden = false; });
   btn.onclick = function () { if (!deferred) return; deferred.prompt(); deferred = null; btn.hidden = true; };

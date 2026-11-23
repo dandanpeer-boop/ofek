@@ -3,7 +3,7 @@
  * אסטרטגיה: קודם רשת (כדי לקבל עדכונים), ואם אין רשת — מהמטמון.
  * הוא מטפל רק בקובצי האפליקציה עצמה. נתוני המשתמש אינם עוברים דרכו ואינם נשמרים בו.
  */
-var CACHE = 'ofek-v62';
+var CACHE = 'ofek-v63';
 var FILES = ['./', 'index.html', 'styles.css', 'i18n.js', 'app.js', 'model.js', 'data.js', 'labs.js', 'garmin.js', 'guide.js', 'content.js', 'site.js', 'coach.js',
   'fonts/Heebo-400.ttf', 'fonts/Heebo-500.ttf', 'fonts/Heebo-700.ttf', 'fonts/Rubik-500.ttf', 'fonts/Rubik-600.ttf', 'fonts/Rubik-700.ttf', 'vendor/pdf.min.js', 'vendor/pdf.worker.min.js', 'manifest.webmanifest',
   'icons/icon-192.png', 'icons/icon-512.png', 'icons/icon-180.png'];
@@ -16,6 +16,24 @@ self.addEventListener('activate', function (e) {
   e.waitUntil(caches.keys().then(function (keys) {
     return Promise.all(keys.filter(function (k) { return k !== CACHE; }).map(function (k) { return caches.delete(k); }));
   }).then(function () { return self.clients.claim(); }));
+});
+
+// שמירה מראש של דפי האתר באפליקציה המותקנת: הדף שולח הודעה עם כתובת רשימת הדפים של השפה.
+// מדלג על מה שכבר שמור, ושגיאה בקובץ בודד לא עוצרת את השאר.
+self.addEventListener('message', function (e) {
+  if (!e.data || e.data.type !== 'precache' || typeof e.data.url !== 'string') return;
+  e.waitUntil(fetch(e.data.url, { cache: 'no-cache' }).then(function (r) { return r.json(); }).then(function (list) {
+    return caches.open(CACHE).then(function (c) {
+      return list.reduce(function (p, u) {
+        return p.then(function () {
+          return c.match(u).then(function (hit) {
+            if (hit) return;
+            return fetch(u, { cache: 'no-cache' }).then(function (res) { if (res && res.ok) return c.put(u, res); }).catch(function () { /* ממשיכים */ });
+          });
+        });
+      }, Promise.resolve());
+    });
+  }).catch(function () { /* אין רשת או קובץ לא תקין: לא קריטי */ }));
 });
 
 self.addEventListener('fetch', function (e) {
