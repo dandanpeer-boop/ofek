@@ -56,7 +56,7 @@ function SiteURL(page, id, lang) {
   if (page === 'topic') return p + id + '/';
   if (page === 'about') return p + 'about/';
   if (page === 'sources') return p + 'sources/';
-  if (page === 'coach') return p + (id === 'smoking' ? 'smoking-coach/' : id === 'weight' ? 'weight-coach/' : 'sleep-coach/');
+  if (page === 'coach') return p + (id === 'smoking' ? 'smoking-coach/' : id === 'weight' ? 'weight-coach/' : id === 'alcohol' ? 'alcohol-coach/' : 'sleep-coach/');
   if (page === 'calc') return p + 'calculator/';
   return p || './';
 }

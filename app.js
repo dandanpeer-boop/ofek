@@ -868,7 +868,7 @@
     leg: '<circle cx="60" cy="16" r="7"/><path d="M60 24V52L60 82M60 52L76 58L74 74M60 32L98 40"/><path class="ctx" d="M102 28V82"/>',
     heel: '<circle cx="66" cy="16" r="7"/><path d="M66 24V52L52 82M66 52L64 82M66 34L46 38M66 34L86 38M50 82H62M64 82H76"/><path class="ctx" d="M6 82H118"/>'
   };
-  var EXIMG = { sit: [455, 560], wall: [560, 533], bridge: [560, 245], row: [560, 398] }; // איורים חדשים (img/ex-*.webp)
+  var EXIMG = { sit: [455, 560], wall: [560, 533], bridge: [560, 245], row: [560, 398], leg: [492, 560], heel: [499, 560] }; // איורים חדשים (img/ex-*.webp)
   function exFig(key, cap) {
     if (EXIMG[key]) return '<figure class="exfig"><img src="/img/ex-' + key + '.webp" width="' + EXIMG[key][0] + '" height="' + EXIMG[key][1] + '" alt="' + esc(cap) + '" loading="lazy"><figcaption>' + esc(cap) + '</figcaption></figure>';
     return '<figure class="exfig"><svg viewBox="0 0 120 90" role="img" aria-label="' + esc(cap) + '" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">' + EXFIG[key] + '</svg><figcaption>' + esc(cap) + '</figcaption></figure>';
@@ -893,6 +893,7 @@
       items.map(li).join('') + '</ul>' +
       '<details class="exfigs"><summary>' + L('איורים לדוגמאות') + '</summary><div class="exgrid">' +
         exFig('sit', L('קימה וישיבה מכיסא')) + exFig('wall', L('שכיבות סמיכה על קיר')) + exFig('bridge', L('גשר עכוז')) + exFig('row', L('חתירה עם גומיית התנגדות')) +
+        (old ? exFig('leg', L('עמידה על רגל אחת ליד משענת')) + exFig('heel', L('הליכה עקב-אגודל')) : '') +
         '</div>' + L('<p class="small muted">איורים סכמטיים, לא הדרכה לביצוע. אם משהו לא ברור או כואב, שווה לשאול מאמן/ת או פיזיותרפיסט/ית.</p>') + '</details>' +
       (chronic ? L('<p class="small">יש לך מצב כרוני (סוכרת או לחץ דם), ולכן כדאי לשאול את הרופא/ה איזו עצימות מתאימה לך לפני שמגבירים.</p>') : '') +
       L('<p class="small muted">כאב בחזה, סחרחורת או קוצר נשימה חריג באמצע מאמץ הם סימן לעצור ולפנות לרופא/ה. זה מידע כללי ולא ייעוץ רפואי.</p>') +

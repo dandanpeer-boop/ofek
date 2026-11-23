@@ -363,12 +363,119 @@ var WeightCoach = (function () {
   return { mount: mount, plan: plan, QUESTIONS: QUESTIONS };
 })();
 
+/* מאמן הפחתת אלכוהול: שאלון קצר ותוכנית הפחתה. זה כלי להפחתה ולא תוכנית גמילה: גמילה פתאומית אחרי שתייה כבדה עלולה להיות מסוכנת.
+   מי שהתשובות שלו מצביעות על שתייה כבדה, על שתייה בבוקר, או על תסמיני גמילה בעבר, מקבל מסך הפניה לרופא/ה ולא תוכנית.
+   הספים (מעל 25 משקאות בשבוע, 6 משקאות ומעלה באירוע כל יום) הם החלטת תכנון שמרנית ולא סף ממקור, ולא נבדקו על ידי רופא/ה.
+   הראיות ב-research/proposals/2026-11-23-coach-alcohol.md. אין הוראות גמילה, תרופות או מינונים, אין קו סיוע לא מאומת. רץ בדפדפן, לא שולח ולא שומר דבר. */
+var AlcoholCoach = (function () {
+  'use strict';
+  function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
+
+  var QUESTIONS = [
+    { id: 'week', type: 'one', q: L('בערך כמה משקאות אלכוהוליים בשבוע? (מנה = כוס יין, בקבוק בירה קטן או כוסית משקה חריף)'), o: [
+      ['le7', L('עד 7')], ['8to14', L('8–14')], ['15to25', L('15–25')], ['gt25', L('יותר מ-25')]] },
+    { id: 'binge', type: 'one', q: L('באיזו תדירות אתה שותה שישה משקאות או יותר באירוע אחד?'), o: [
+      ['never', L('אף פעם')], ['monthly', L('פחות מפעם בשבוע')], ['weekly', L('פעם בשבוע בערך')], ['daily', L('כל יום או כמעט כל יום')]] },
+    { id: 'past', type: 'one', q: L('האם בעבר, כשהפחתת או הפסקת לשתות, קרה לך אחד מאלה: רעד בידיים, הזעה, חרדה חזקה, בחילה, הזיות, בלבול או פרכוס?'), o: [
+      ['yes', L('כן')], ['no', L('לא')]] },
+    { id: 'morning', type: 'one', q: L('האם קורה שאתה שותה בבוקר כדי להרגיע רעד או חרדה, או כדי להתחיל את היום?'), o: [
+      ['yes', L('כן')], ['no', L('לא')]] },
+    { id: 'flags', type: 'multi', q: L('האם אחד מאלה נכון לגביך?'), o: [
+      ['preg', L('אני בהריון או מתכננת הריון')],
+      ['meds', L('אני נוטל/ת תרופות מרשם, במיוחד לשינה, לחרדה, לכאב או לאפילפסיה')],
+      ['mood', L('יש לי כרגע דיכאון או חרדה קשים')],
+      ['harm', L('עולות לי מחשבות על פגיעה עצמית')]] }
+  ];
+
+  var answers = {};
+  function formHTML() {
+    return QUESTIONS.map(function (q) {
+      return '<fieldset class="cq"><legend>' + esc(q.q) + '</legend>' + q.o.map(function (o) {
+        return '<label class="copt"><input type="' + (q.type === 'one' ? 'radio' : 'checkbox') + '" name="' + q.id + '" value="' + o[0] + '"> <span>' + esc(o[1]) + '</span></label>';
+      }).join('') + '</fieldset>';
+    }).join('');
+  }
+  function collect(root) {
+    var a = {};
+    QUESTIONS.forEach(function (q) {
+      var els = root.querySelectorAll('input[name="' + q.id + '"]:checked'), v = [];
+      for (var i = 0; i < els.length; i++) v.push(els[i].value);
+      a[q.id] = q.type === 'one' ? (v[0] || '') : v;
+    });
+    return a;
+  }
+  function has(a, id, v) { return (a[id] || []).indexOf(v) >= 0; }
+  function para(t) { return t ? '<p>' + esc(t) + '</p>' : ''; }
+  function block(title, bodies) { return '<li><h3>' + esc(title) + '</h3>' + bodies.map(para).join('') + '</li>'; }
+
+  function plan(a) {
+    var f = function (v) { return has(a, 'flags', v); };
+    var route = a.past === 'yes' || a.morning === 'yes' || a.week === 'gt25' || a.binge === 'daily';
+    var out = '<div class="cplan"><h2>' + esc(L('התוכנית שלך')) + '</h2>' +
+      '<p class="muted">' + esc(L('לפי התשובות שלך. זה כלי להפחתה ולא תוכנית גמילה. זה מידע כללי, לא אבחנה ולא תחליף לרופא/ה.')) + '</p>';
+
+    if (f('harm')) out += '<section class="csafe"><h2>' + esc(L('אם עולות מחשבות על פגיעה עצמית')) + '</h2>' + para(L('אתם לא לבד, ויש עזרה. פנו עכשיו לאדם קרוב או לרופא/ה. אם יש סכנה מיידית, פנו למיון או למד"א.')) + '</section>';
+    if (f('preg')) out += '<section class="csafe"><h2>' + esc(L('הריון')) + '</h2>' + para(L('אם את בהריון או מתכננת הריון, ההנחיה הבריטית אומרת שהדרך הבטוחה ביותר היא לא לשתות בכלל. אם קשה לך להפסיק, ספרי על כך לרופא/ה או למיילדת. זה חלק רגיל מהשיחה, ואין צורך להתבייש.')) + '</section>';
+
+    if (route) {
+      out += '<section class="csafe"><h2>' + esc(L('לפני שמפחיתים: כדאי לדבר עם רופא/ה')) + '</h2>' +
+        para(L('לפי מה שסיפרת, ייתכן שהגוף רגיל לאלכוהול. אצל חלק מהאנשים, הפחתה חדה או הפסקה פתאומית עלולה לגרום לרעד, להזעה, לבלבול, להזיות ואפילו לפרכוסים. אצל מי שחווה את זה בעבר הסיכון גבוה יותר. זה לא אומר שמשהו לא בסדר איתך. זה אומר שכדאי שרופא/ה ילווה את התהליך, כדי שיהיה בטוח.')) +
+        para(L('לכן לא נציג כאן תוכנית להפחתה בכוחות עצמך. הצעד הכי טוב עכשיו: לקבוע תור לרופא/ת המשפחה ולספר בכנות כמה אתה שותה. מגיעה לך עזרה בלי שיפוטיות. הרופא/ה יכול/ה גם להסביר אם יש תרופות שיכולות לעזור, וזו החלטה שלו/ה ולא של האתר.')) +
+        '<p><strong>' + esc(L('בינתיים, אל תפסיקו פתאום לבד אם אתם שותים הרבה כל יום.')) + '</strong></p>' +
+        '<p class="csafe">' + esc(L('רעד חזק, בלבול, הזיות או פרכוס הם מצב חירום. פנו למיון או למד"א.')) + '</p></section>';
+      out += '<div class="cta-row"><button type="button" class="btn ghost" id="coach-reset">' + esc(L('התחלה מחדש')) + '</button></div></div>';
+      return out;
+    }
+    if (f('preg')) {
+      out += '<div class="cta-row"><button type="button" class="btn ghost" id="coach-reset">' + esc(L('התחלה מחדש')) + '</button></div></div>';
+      return out;
+    }
+
+    if (!a.past || !a.morning) out += '<section class="csafe"><h2>' + esc(L('שאלות שדילגתם עליהן')) + '</h2>' + para(L('דילגת על שאלה על ההרגשה כשמפחיתים או על שתייה בבוקר. אם בעבר, כשהפחתת, הרגשת רעד, הזעה חזקה, בלבול או פרכוס, אל תפחית לבד. דבר קודם עם רופא/ה.')) + '</section>';
+    if (f('meds') || f('mood')) out += '<section class="csafe"><h2>' + esc(L('כדאי לשוחח עם רופא/ה')) + '</h2>' + para(L('אם אתם נוטלים תרופות מרשם או שיש לכם דיכאון או חרדה קשים, כדאי לשוחח על ההפחתה עם הרופא/ה, כי שתייה ותרופות עשויות להשפיע זו על זו.')) + '</section>';
+
+    var light = a.week === 'le7' && (a.binge === 'never' || a.binge === 'monthly' || !a.binge);
+    out += para(light ? L('הצריכה שלך נמוכה יחסית. הנה כמה כלים למקרה שבכל זאת רוצים להפחית.') : L('אפשר להתחיל בקטן. אלה צעדים שכדאי להכיר.'));
+
+    var steps = [];
+    steps.push([L('גבול מראש ומעקב'), [L('בניתוח של 34 מחקרים (15,197 משתתפים) שיחה קצרה על שתייה הפחיתה את הצריכה בכ-20 גרם אלכוהול בשבוע בממוצע אחרי שנה. זה צעד צנוע, אבל הוא מראה שגם שינוי קטן עובד. אפשר לקבוע גבול לפני שיוצאים, ולרשום בסוף היום כמה שתיתם. אנחנו לא יודעים אם הרישום עצמו עוזר, אבל זה בסיס נוח לשינוי.')]]);
+    steps.push([L('גבול סביר ופיזור'), [L('לפי ההנחיה הבריטית, כדאי לא לעבור 14 יחידות בשבוע (כ-112 גרם אלכוהול טהור), ולפזר את השתייה על שלושה ימים לפחות. במחקר Wood (Lancet 2018) הסיכון לתמותה היה הנמוך ביותר עד כ-100 גרם בשבוע. פחות עדיף.')]]);
+    steps.push([L('ימים בלי אלכוהול'), [L('כמה ימים קבועים בשבוע בלי אלכוהול, למשל ימים שקל לכם. זו המלצה מקובלת בהנחיות, ולא מחקר שמוכיח שהיא עדיפה על דרכים אחרות.')]]);
+    steps.push([L('דברים קטנים שעוזרים'), [L('אפשר לאכול ולשתות כוס מים לפני, להחליף כל כוס שנייה בכוס בלי אלכוהול, לבחור כוס קטנה יותר או משקה חלש יותר, ולספר לחבר או לבן זוג שאתם מפחיתים. אלה טיפים מההנחיות ולא ממחקרים שבדקו כל טיפ בנפרד. לא כל טיפ מתאים לכולם, אפשר לבחור אחד או שניים.')]]);
+    steps.push([L('שינה ומתי לפנות לרופא/ה'), [L('אלכוהול בערב עלול לפגוע באיכות השינה. אם בזמן ההפחתה מופיעים חרדה חזקה בבוקר, הזעה, רעד, בחילה או הקאות, צרו קשר עם רופא/ה. אם מופיעים רעד חזק, בלבול, הזיות או פרכוס, זה מצב חירום: פנו למיון או למד"א.')]]);
+
+    out += '<section><h2>' + esc(L('מה לנסות')) + '</h2><ol class="clist">' + steps.map(function (x) { return block(x[0], x[1]); }).join('') + '</ol></section>' +
+      para(L('כל צעד קטן נחשב. אם לא הצלחתם, זו לא כישלון אלא מידע על מה קשה לכם. אפשר לחזור לכאן בכל שלב.')) +
+      '<p><a href="' + esc(SiteURL('topic', 'habits')) + '">' + esc(L('למדריך ההרגלים המלא, עם כל המקורות')) + '</a></p>' +
+      '<div class="cta-row"><button type="button" class="btn ghost" id="coach-reset">' + esc(L('התחלה מחדש')) + '</button></div></div>';
+    return out;
+  }
+
+  function mount(root) {
+    root.innerHTML = '<form class="coachform" id="coach-form">' + formHTML() +
+      '<p class="small muted">' + esc(L('אפשר לדלג על שאלות. התשובות לא נשלחות לשום מקום ולא נשמרות.')) + '</p>' +
+      '<div class="cta-row"><button type="submit" class="btn primary">' + esc(L('בנו לי תוכנית')) + '</button></div></form><div id="coach-out" aria-live="polite"></div>';
+    var form = document.getElementById('coach-form'), out = document.getElementById('coach-out');
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      answers = collect(form);
+      out.innerHTML = plan(answers);
+      form.style.display = 'none';
+      out.scrollIntoView();
+      document.getElementById('coach-reset').addEventListener('click', function () {
+        out.innerHTML = ''; form.reset(); form.style.display = ''; form.scrollIntoView();
+      });
+    });
+  }
+  return { mount: mount, plan: plan, QUESTIONS: QUESTIONS };
+})();
+
 (function () {
   function go() {
     var el = document.getElementById('coach');
     if (!el) return;
     var id = document.body.getAttribute('data-topic');
-    if (id === 'smoking') SmokingCoach.mount(el); else if (id === 'weight') WeightCoach.mount(el); else SleepCoach.mount(el);
+    if (id === 'smoking') SmokingCoach.mount(el); else if (id === 'weight') WeightCoach.mount(el); else if (id === 'alcohol') AlcoholCoach.mount(el); else SleepCoach.mount(el);
   }
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', go); else go();
 })();
