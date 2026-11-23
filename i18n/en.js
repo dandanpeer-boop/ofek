@@ -1553,3 +1553,6 @@ Object.assign(I18N.en, {
 "u9b350": "Without the floor (theoretical and uncalibrated, only to show direction) the change would be",
 "wtbuwi": "years."
 });
+Object.assign(I18N.en, {
+"1aswv8v": "Low-dose CT for lung cancer: based on the smoking and age you entered (ages 50–80, current smoker or quit within the last 15 years). The guidelines are for people who smoked heavily over many years, and the amount smoked is not asked here, so it is worth checking with your doctor whether it applies to you."
+});

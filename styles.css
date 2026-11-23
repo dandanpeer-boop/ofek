@@ -460,6 +460,7 @@ a { color: var(--accent); }
 .exfigs summary { cursor: pointer; font-weight: 600; color: var(--accent); padding: 4px 0; }
 .exgrid { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 12px; margin: 10px 0; }
 .exfig { margin: 0; text-align: center; }
+.exfig img { width: 100%; height: auto; max-height: 150px; object-fit: contain; border-radius: 8px; background: #fff; }
 .exfig svg { width: 100%; height: auto; max-height: 120px; color: var(--ink, currentColor); }
 .exfig .ctx { stroke: currentColor; opacity: .35; stroke-width: 2.5; }
 .exfig figcaption { font-size: .85rem; color: var(--muted); margin-top: 4px; }

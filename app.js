@@ -599,7 +599,7 @@
       var rel = first ? (last - first) / Math.abs(first) : 0, dir = TREND_DIR[T.id] || 0;
       var cls = Math.abs(rel) < 0.03 || !dir ? '' : (rel * dir > 0 ? 'pos' : 'neg');
       var word = Math.abs(rel) < 0.03 ? L('יציב') : (rel > 0 ? L('עלייה') : L('ירידה')) + L(' של ') + Math.round(Math.abs(rel) * 100) + '%';
-      rows += '<div class="trow"><div class="name">' + esc(T.label) + '<div class="det">' + dlabel(pts[0].date) + ' ← ' + dlabel(pts[pts.length - 1].date) + '</div></div>' +
+      rows += '<div class="trow"><div class="name">' + esc(T.label) + '<div class="det"><span dir="ltr">' + dlabel(pts[0].date) + ' – ' + dlabel(pts[pts.length - 1].date) + '</span></div></div>' +
         '<div dir="ltr">' + spark(pts.map(function (d) { return d.values[T.id]; }), cls) + '</div>' +
         '<div class="tval"><span dir="ltr">' + first + ' → ' + last + '</span><div class="det ' + cls + '">' + word + '</div></div></div>';
     });
@@ -864,7 +864,9 @@
     leg: '<circle cx="60" cy="16" r="7"/><path d="M60 24V52L60 82M60 52L76 58L74 74M60 32L98 40"/><path class="ctx" d="M102 28V82"/>',
     heel: '<circle cx="66" cy="16" r="7"/><path d="M66 24V52L52 82M66 52L64 82M66 34L46 38M66 34L86 38M50 82H62M64 82H76"/><path class="ctx" d="M6 82H118"/>'
   };
+  var EXIMG = { sit: [455, 560], wall: [560, 533], bridge: [560, 245], row: [560, 398] }; // איורים חדשים (img/ex-*.webp)
   function exFig(key, cap) {
+    if (EXIMG[key]) return '<figure class="exfig"><img src="/img/ex-' + key + '.webp" width="' + EXIMG[key][0] + '" height="' + EXIMG[key][1] + '" alt="' + esc(cap) + '" loading="lazy"><figcaption>' + esc(cap) + '</figcaption></figure>';
     return '<figure class="exfig"><svg viewBox="0 0 120 90" role="img" aria-label="' + esc(cap) + '" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">' + EXFIG[key] + '</svg><figcaption>' + esc(cap) + '</figcaption></figure>';
   }
 
@@ -887,7 +889,6 @@
       items.map(li).join('') + '</ul>' +
       '<details class="exfigs"><summary>' + L('איורים לדוגמאות') + '</summary><div class="exgrid">' +
         exFig('sit', L('קימה וישיבה מכיסא')) + exFig('wall', L('שכיבות סמיכה על קיר')) + exFig('bridge', L('גשר עכוז')) + exFig('row', L('חתירה עם גומיית התנגדות')) +
-        (old ? exFig('leg', L('עמידה על רגל אחת ליד משענת')) + exFig('heel', L('הליכה עקב-אגודל')) : '') +
         '</div>' + L('<p class="small muted">איורים סכמטיים, לא הדרכה לביצוע. אם משהו לא ברור או כואב, שווה לשאול מאמן/ת או פיזיותרפיסט/ית.</p>') + '</details>' +
       (chronic ? L('<p class="small">יש לך מצב כרוני (סוכרת או לחץ דם), ולכן כדאי לשאול את הרופא/ה איזו עצימות מתאימה לך לפני שמגבירים.</p>') : '') +
       L('<p class="small muted">כאב בחזה, סחרחורת או קוצר נשימה חריג באמצע מאמץ הם סימן לעצור ולפנות לרופא/ה. זה מידע כללי ולא ייעוץ רפואי.</p>') +
@@ -909,7 +910,7 @@
     if (a >= 45 && a <= 75) screen.push(L('סקר לסרטן המעי הגס: בגילים 45–75 (בחלק מהמדינות מגיל 50), בדיקת דם סמוי בצואה או קולונוסקופיה.'));
     if (fem && a >= 40 && a <= 74) screen.push(L('ממוגרפיה: לנשים בגילים 40–74 (בחלק מהמדינות מגיל 50), כל שנה עד שנתיים.'));
     if (fem && a >= 25 && a <= 65) screen.push(L('סקר לסרטן צוואר הרחם (בדיקת HPV או פאפ): לנשים בגילים 25–65 בערך, לפי ההנחיות במדינה.'));
-    if ((inp.smoking === 'current' || (inp.smoking === 'former' && !(inp.quitAge < a - 15))) && a >= 50 && a <= 80) screen.push(L('CT במינון נמוך לסרטן ריאה: למי שעישן הרבה, בהווה או ב-15 השנים האחרונות, בגילים 50–80.'));
+    if ((inp.smoking === 'current' || (inp.smoking === 'former' && !(inp.quitAge < a - 15))) && a >= 50 && a <= 80) screen.push(L('CT במינון נמוך לסרטן ריאה: לפי העישון והגיל שהזנת (בגילים 50–80, בהווה או ב-15 השנים האחרונות). ההנחיות מיועדות למי שעישן הרבה לאורך שנים, וכמות העישון לא נשאלת כאן, ולכן כדאי לברר עם הרופא/ה אם זה מתאים לך.'));
     if (!labs.length && !screen.length) return '';
     var li = function (t) { return '<li>' + esc(t) + '</li>'; };
     return L('<div class="tests"><h3>בדיקות ששווה לשאול עליהן את הרופא/ה</h3><p class="small muted">לפי הגיל שלך ומה שהזנת. ההנחיות משתנות בין מדינות, וזו רשימה לשיחה עם הרופא/ה, לא הפניה.</p>') +

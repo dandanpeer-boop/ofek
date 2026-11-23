@@ -306,3 +306,22 @@ var SiteRender = (function () {
     if (location.hash === '#topics') { var el = document.getElementById('topics'); if (el) el.scrollIntoView(); }
   }
 })();
+
+// טווחי מספרים (4–7, 15–25) מתהפכים בטקסט עברי (RTL). עוטפים אותם במבודד LTR, בכל עמוד ובכל שינוי בעמוד. לא נוגע בשפות LTR.
+(function () {
+  if (typeof document === 'undefined' || typeof LANGS === 'undefined' || LANGS[LANG].dir !== 'rtl') return;
+  var RE = /(\d+(?:[.,]\d+)?\s?[–\-]\s?\d+(?:[.,]\d+)?)/g, busy = false;
+  function fix(root) {
+    var w = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, null), n, list = [];
+    while ((n = w.nextNode())) {
+      var p = n.parentNode && n.parentNode.nodeName;
+      if (p === 'SCRIPT' || p === 'STYLE' || p === 'TEXTAREA') continue;
+      if (RE.test(n.nodeValue) && n.nodeValue.indexOf('⁦') < 0) list.push(n);
+      RE.lastIndex = 0;
+    }
+    list.forEach(function (t) { t.nodeValue = t.nodeValue.replace(RE, '⁦$1⁩'); });
+  }
+  function run() { if (busy) return; busy = true; try { fix(document.body); } finally { busy = false; } }
+  run();
+  new MutationObserver(function () { if (!busy) { busy = true; setTimeout(function () { busy = false; run(); }, 0); } }).observe(document.body, { childList: true, subtree: true, characterData: true });
+})();

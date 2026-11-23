@@ -1551,3 +1551,6 @@ Object.assign(I18N.fr, {
 "u9b350": "Sans le plancher (théorique et non calibré, seulement pour montrer le sens) la variation serait de",
 "wtbuwi": "ans."
 });
+Object.assign(I18N.fr, {
+"1aswv8v": "Scanner thoracique à faible dose pour le cancer du poumon : d'après le tabagisme et l'âge saisis (50–80 ans, fumeur actuel ou arrêt depuis moins de 15 ans). Les recommandations visent les personnes ayant beaucoup fumé pendant des années ; la quantité n'est pas demandée ici, il vaut donc la peine de vérifier avec votre médecin si cela vous concerne."
+});

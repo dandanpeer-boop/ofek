@@ -1551,3 +1551,6 @@ Object.assign(I18N.es, {
 "u9b350": "Sin el suelo (teórico y sin calibrar, solo para mostrar la dirección) el cambio sería de",
 "wtbuwi": "años."
 });
+Object.assign(I18N.es, {
+"1aswv8v": "TC de baja dosis para cáncer de pulmón: según el tabaquismo y la edad que introdujiste (50–80 años, fumador actual o que dejó de fumar hace menos de 15 años). Las guías son para quienes fumaron mucho durante años, y aquí no se pregunta la cantidad, por lo que conviene consultar con tu médico si te corresponde."
+});
