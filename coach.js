@@ -121,7 +121,117 @@ var SleepCoach = (function () {
   return { mount: mount, plan: plan, QUESTIONS: QUESTIONS };
 })();
 
+/* מאמן עישון: שאלון קצר ותוכנית מבוססת מחקר. רץ כולו בדפדפן, לא שולח ולא שומר דבר.
+   הראיות מפורטות ב-research/proposals/2026-11-23-coach-smoking.md. אינו נותן אבחנה, ואינו ממליץ על תרופת מרשם מסוימת או מינון.
+   קו הסיוע הטלפוני: HOTLINE נשאר null עד שדן מאמת את המספר והשעות באתר gov.il. */
+var SmokingCoach = (function () {
+  'use strict';
+  var HOTLINE = null; // למלא רק אחרי אימות רשמי, למשל { num: '...', hours: '...' }
+  function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
+
+  var QUESTIONS = [
+    { id: 'cigs', type: 'one', q: L('בערך כמה סיגריות ביום?'), o: [['lt10', L('פחות מ-10')], ['mid', L('10–20')], ['gt20', L('יותר מ-20')]] },
+    { id: 'first', type: 'one', q: L('כמה זמן אחרי ההתעוררות אתה מעשן את הראשונה?'), o: [['soon', L('עד חצי שעה')], ['later', L('יותר מחצי שעה')]] },
+    { id: 'tries', type: 'one', q: L('האם ניסית להפסיק בעבר?'), o: [['never', L('לא')], ['relapse', L('כן, וחזרתי לעשן')], ['hard', L('כן, והיו תסמיני גמילה קשים')]] },
+    { id: 'why', type: 'multi', q: L('מה הסיבה לכך שאתה חושב על זה עכשיו? אפשר לסמן כמה.'), o: [
+      ['health', L('הבריאות שלי')], ['money', L('כסף')], ['family', L('המשפחה')], ['other', L('סיבה אחרת')]] },
+    { id: 'trig', type: 'multi', q: L('מתי הכי קשה בלי סיגריה? אפשר לסמן כמה.'), o: [
+      ['meal', L('אחרי ארוחה')], ['coffee', L('עם קפה')], ['stress', L('בלחץ')], ['social', L('בחברה או עם אלכוהול')],
+      ['bored', L('משעמום')], ['drive', L('בנהיגה')]] },
+    { id: 'flags', type: 'multi', q: L('האם אחד מאלה נכון לגביך?'), o: [
+      ['preg', L('אני בהריון, מתכננת הריון או מניקה')], ['heart', L('יש לי מחלת לב, או שהיה לי אירוע לבבי')],
+      ['mental', L('אני נוטל/ת תרופות נפשיות או מטופל/ת בגלל מצב נפשי')], ['chronic', L('יש לי מחלה כרונית אחרת')]] },
+    { id: 'ready', type: 'one', q: L('עד כמה אתה מוכן להפסיק?'), o: [['decided', L('כבר החלטתי')], ['thinking', L('שוקל')], ['curious', L('רק מתעניין')]] }
+  ];
+
+  var answers = {};
+  function formHTML() {
+    return QUESTIONS.map(function (q) {
+      return '<fieldset class="cq"><legend>' + esc(q.q) + '</legend>' + q.o.map(function (o) {
+        return '<label class="copt"><input type="' + (q.type === 'one' ? 'radio' : 'checkbox') + '" name="' + q.id + '" value="' + o[0] + '"> <span>' + esc(o[1]) + '</span></label>';
+      }).join('') + '</fieldset>';
+    }).join('');
+  }
+  function collect(root) {
+    var a = {};
+    QUESTIONS.forEach(function (q) {
+      var els = root.querySelectorAll('input[name="' + q.id + '"]:checked'), v = [];
+      for (var i = 0; i < els.length; i++) v.push(els[i].value);
+      a[q.id] = q.type === 'one' ? (v[0] || '') : v;
+    });
+    return a;
+  }
+  function has(a, id, v) { return (a[id] || []).indexOf(v) >= 0; }
+  function para(t) { return t ? '<p>' + esc(t) + '</p>' : ''; }
+  function block(title, bodies) { return '<li><h3>' + esc(title) + '</h3>' + bodies.map(para).join('') + '</li>'; }
+
+  var TRIG = {
+    meal: L('אחרי ארוחה: לקום מהשולחן מיד ולעשות משהו אחר, כמו לצחצח שיניים או לשטוף כלים.'),
+    coffee: L('עם קפה: לשנות את ההרגל (תה, מקום אחר, שעה אחרת), כי הקפה הוא טריגר קבוע.'),
+    stress: L('בלחץ: להכין מראש תגובה אחרת לרגע הלחץ, כמו הליכה קצרה, מים או כמה נשימות איטיות.'),
+    social: L('בחברה או עם אלכוהול: לספר לחברים שאתם מפסיקים, ובהתחלה להימנע ממצבים שבהם הכי קשה.'),
+    bored: L('משעמום: לתכנן פעילות קטנה מראש, כמו הליכה או טלפון לחבר.'),
+    drive: L('בנהיגה: להוציא את הסיגריות והמצית מהרכב ולהכין מסטיק או משהו אחר בהישג יד.')
+  };
+
+  function plan(a) {
+    var safety = [], steps = [], f = function (v) { return has(a, 'flags', v); };
+    if (f('preg')) safety.push([L('הריון והנקה'), [L('בהריון ובהנקה כדאי להיוועץ ברופא/ה או באחות לפני כל טיפול. ליווי בשיחות מומלץ, ובנוגע לתרופות אין כיום די ראיות לבטיחות או לתועלת בהריון.')]]);
+    if (f('heart')) safety.push([L('מחלת לב'), [L('אם יש לכם מחלת לב, קבלו ייעוץ רפואי לפני תחליפי ניקוטין או תרופות. בסקירת Cochrane נרשמו בתחליפי ניקוטין יותר כאבי חזה ודפיקות לב.')]]);
+    if (f('mental')) safety.push([L('בריאות הנפש'), [L('אם אתם נוטלים תרופות נפשיות או מטופלים בגלל מצב נפשי, התייעצו עם הרופא/ה לפני שמתחילים, כדי שילוו אתכם בתהליך.')]]);
+    if (f('chronic')) safety.push([L('מחלה כרונית'), [L('עם מחלה כרונית כדאי לשלב רופא/ה בתהליך מההתחלה, כדי שיתאים את הצעדים והטיפול למצב שלכם.')]]);
+    if (a.cigs === 'gt20' || a.first === 'soon' || a.tries === 'hard')
+      safety.push([L('כדאי לשלב רופא/ה מההתחלה'), [L('לפי התשובות שלך, כדאי לשלב רופא/ה בתהליך מההתחלה. זה לא אבחנה, אלא המלצה כללית כשהעישון כבד או כשהיו קשיים בניסיון קודם.')]]);
+
+    var reasons = (a.why || []).filter(function (r) { return r !== 'other'; });
+    var intro = a.ready === 'curious' ? L('אין חובה להחליט עכשיו. אפשר להתחיל בהיכרות עם האפשרויות ולחזור כשתרצו.') :
+      a.ready === 'decided' ? L('ההחלטה כבר אצלכם, והצעדים הבאים עוזרים להפוך אותה לתוכנית.') : L('לשקול זה צעד ראשון. אלה הצעדים שכדאי להכיר.');
+
+    steps.push([L('לא עושים את זה לבד'), [
+      L('ליווי מקצועי מעלה את הסיכוי להפסיק. בסקירות Cochrane, ייעוץ אישי היה יעיל בכ-1.6 פעמים מאשר מגע מינימלי, ושילוב של ליווי ותרופה היה יעיל בכ-1.8 פעמים מייעוץ קצר או טיפול רגיל. אלה יחסי סיכוי להצלחה, ולא אחוז ההצלחה עצמו. אפשר לבחור מה שנוח: פגישה, קבוצה או שיחות טלפון.'),
+      HOTLINE ? L('קו סיוע טלפוני: ') + HOTLINE.num + ' (' + HOTLINE.hours + ')' : L('אפשר לשאול בקופת החולים על שירותי ליווי לגמילה מעישון.')]]);
+    steps.push([L('תחליפי ניקוטין'), [L('תחליפי ניקוטין (מדבקות, מסטיקים, לכסניות) מעלים את הסיכוי להפסיק בכ-1.5 פעמים. שילוב של מדבקה עם צורה מהירת פעולה עבד טוב יותר מצורה אחת. כדאי לשאול רוקח/ה או רופא/ה איך להשתמש בהם.')]]);
+    steps.push([L('שיחה עם רופא/ה על תרופות'), [L('קיימות גם תרופות מרשם לגמילה. בסקירות הן נמצאו יעילות, וחלקן יעילות יותר מתחליפי ניקוטין לבדם, אבל הן מתאימות רק לחלק מהאנשים, ולכן זו שיחה עם רופא/ה. אנחנו לא ממליצים על תרופה מסוימת ולא על מינון.')]]);
+    var trig = (a.trig || []).filter(function (k) { return TRIG[k]; }).map(function (k) { return TRIG[k]; });
+    steps.push([L('לתכנן את הרגעים הקשים'), [L('רוב הקושי מגיע ברגעים קבועים. כדאי להחליט מראש מה תעשו במקום סיגריה. אלה רעיונות מעשיים, ולא תוצאות של מחקר:')].concat(trig.length ? trig : [L('בחרו שניים או שלושה רגעים קשים והכינו לכל אחד מהם תגובה אחרת.')])]);
+    steps.push([L('אם החלקתם'), [L('החלקה לא מבטלת את מה שהשגתם עד עכשיו, ואפשר לנסות שוב. כדאי לדבר עם יועץ או רופא/ה: תרופות נבדקו גם למניעת חזרה, ואילו תוכנית התנהגותית נוספת לבדה לא הוכחה כמוסיפה.')]]);
+    steps.push([L('מה זה שווה'), [L('במחקר של Jha (NEJM, 2013) מי שהפסיק לעשן בגיל 45–54 הרוויח כ-6 שנים, ומי שהפסיק לפני גיל 40 נמנע מכ-90% מעודף הסיכון.')]]);
+
+    var out = '<div class="cplan"><h2>' + esc(L('התוכנית שלך')) + '</h2>' +
+      '<p class="muted">' + esc(L('לפי התשובות שלך. זה מידע כללי מבוסס מחקר, לא אבחנה ולא תחליף לרופא/ה.')) + '</p>' + para(intro);
+    if (reasons.length) out += para(L('מה שהניע אותך: ') + reasons.map(function (r) { return { health: L('הבריאות'), money: L('כסף'), family: L('המשפחה') }[r]; }).join(', ') + '.');
+    if (safety.length) out += '<section class="csafe"><h2>' + esc(L('קודם כול: כדאי לבדוק עם רופא/ה')) + '</h2><ul class="clist">' + safety.map(function (x) { return block(x[0], x[1]); }).join('') + '</ul></section>';
+    out += '<section><h2>' + esc(L('מה לנסות')) + '</h2><ol class="clist">' + steps.map(function (x) { return block(x[0], x[1]); }).join('') + '</ol></section>';
+    out += para(L('שאלות על סיגריה אלקטרונית או על תרופה מסוימת: כדאי לשוחח עם רופא/ה. אנחנו לא ממליצים עליהן כאן.')) +
+      '<p><a href="' + esc(SiteURL('topic', 'habits')) + '">' + esc(L('למדריך ההרגלים המלא, עם כל המקורות')) + '</a></p>' +
+      '<div class="cta-row"><button type="button" class="btn ghost" id="coach-reset">' + esc(L('התחלה מחדש')) + '</button></div></div>';
+    return out;
+  }
+
+  function mount(root) {
+    root.innerHTML = '<form class="coachform" id="coach-form">' + formHTML() +
+      '<p class="small muted">' + esc(L('אפשר לדלג על שאלות. התשובות לא נשלחות לשום מקום ולא נשמרות.')) + '</p>' +
+      '<div class="cta-row"><button type="submit" class="btn primary">' + esc(L('בנו לי תוכנית')) + '</button></div></form><div id="coach-out" aria-live="polite"></div>';
+    var form = document.getElementById('coach-form'), out = document.getElementById('coach-out');
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      answers = collect(form);
+      out.innerHTML = plan(answers);
+      form.style.display = 'none';
+      out.scrollIntoView();
+      document.getElementById('coach-reset').addEventListener('click', function () {
+        out.innerHTML = ''; form.reset(); form.style.display = ''; form.scrollIntoView();
+      });
+    });
+  }
+  return { mount: mount, plan: plan, QUESTIONS: QUESTIONS };
+})();
+
 (function () {
-  function go() { var el = document.getElementById('coach'); if (el) SleepCoach.mount(el); }
+  function go() {
+    var el = document.getElementById('coach');
+    if (!el) return;
+    if (document.body.getAttribute('data-topic') === 'smoking') SmokingCoach.mount(el); else SleepCoach.mount(el);
+  }
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', go); else go();
 })();
