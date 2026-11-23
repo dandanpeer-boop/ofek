@@ -3,7 +3,7 @@
  * אסטרטגיה: קודם רשת (כדי לקבל עדכונים), ואם אין רשת — מהמטמון.
  * הוא מטפל רק בקובצי האפליקציה עצמה. נתוני המשתמש אינם עוברים דרכו ואינם נשמרים בו.
  */
-var CACHE = 'ofek-v73';
+var CACHE = 'ofek-v74';
 var FILES = ['./', 'index.html', 'styles.css', 'i18n.js', 'app.js', 'model.js', 'data.js', 'labs.js', 'garmin.js', 'guide.js', 'content.js', 'site.js', 'coach.js',
   'fonts/Heebo-400.ttf', 'fonts/Heebo-500.ttf', 'fonts/Heebo-700.ttf', 'fonts/Rubik-500.ttf', 'fonts/Rubik-600.ttf', 'fonts/Rubik-700.ttf', 'vendor/pdf.min.js', 'vendor/pdf.worker.min.js', 'manifest.webmanifest',
   'icons/icon-192.png', 'icons/icon-512.png', 'icons/icon-180.png'];
