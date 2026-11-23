@@ -1556,3 +1556,16 @@ Object.assign(I18N.en, {
 Object.assign(I18N.en, {
 "1aswv8v": "Low-dose CT for lung cancer: based on the smoking and age you entered (ages 50–80, current smoker or quit within the last 15 years). The guidelines are for people who smoked heavily over many years, and the amount smoked is not asked here, so it is worth checking with your doctor whether it applies to you."
 });
+Object.assign(I18N.en, {
+"1ti5s4e": "\" role=\"img\" aria-label=\"Survival curve: the chance of reaching each age\">",
+"1kb6jra": "One factor with a small effect (up to 0.1 year)",
+"1iw1lzo": " factors with a small effect (up to 0.1 year each)",
+"1stjpi7": "<div class=\"tests\"><h3>Tests worth raising with your doctor</h3><p class=\"small muted\">Based on your age and what you entered. Guidelines vary between countries; this is a list for a conversation with your doctor, not a referral.</p>",
+"1lt2qbg": "<h3>Try it yourself</h3><p class=\"small muted\">Move the sliders and see right away how each change affects life expectancy.</p>",
+"ad5a8e": "<div class=\"sim\" id=\"simBox\"><div class=\"simout\" aria-live=\"polite\"><div><span class=\"muted small\">Life expectancy in this scenario</span><b id=\"simAge\">",
+"163iijf": "<h3>The chance of reaching each age</h3><div dir=\"ltr\">"
+});
+Object.assign(I18N.en, {
+"124mhti": "Chamomile, the natural source of apigenin: in a meta-analysis of 10 trials with 772 participants (2024), the PSQI score fell by 1.88 points (95% CI: 0.31–3.46, with high heterogeneity), but sleep duration and sleep efficiency did not improve. No controlled trial of apigenin alone for sleep was found in the literature; the only trial that came up in the search tested a mixture of several ingredients.",
+"1kb9jx8": "Phosphatidylserine and myo-inositol: no randomized controlled trial of phosphatidylserine for sleep in adults was found in the literature. For myo-inositol there is one trial in pregnant women (2022) and none in the general population. That means there is no evidence yet, not that they do not work. There is also no known research on a combination of all these supplements together."
+});

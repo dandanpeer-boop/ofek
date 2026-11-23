@@ -704,7 +704,7 @@
       for (var i = 0; i < curve.length && a0 + i <= a1; i++) d += (i ? 'L' : 'M') + x(a0 + i).toFixed(1) + ' ' + y(curve[i]).toFixed(1);
       return d;
     }
-    var s = '<svg viewBox="0 0 ' + W + ' ' + H + L('" role="img" aria-label="עקומת הישרדות: הסיכוי להיות בחיים בכל גיל">');
+    var s = '<svg viewBox="0 0 ' + W + ' ' + H + L('" role="img" aria-label="עקומת הישרדות: הסיכוי להגיע לכל גיל">');
     [0, 0.25, 0.5, 0.75, 1].forEach(function (p) {
       s += '<line x1="' + PL + '" x2="' + (W - R) + '" y1="' + y(p) + '" y2="' + y(p) + '" stroke="var(--line)"/>' +
         '<text x="' + (PL - 8) + '" y="' + (y(p) + 4) + '" text-anchor="end">' + Math.round(p * 100) + '%</text>';
@@ -719,13 +719,17 @@
     var list = r.contributions;
     if (!list.length) return L('<p class="muted">לא הוזנו נתונים מעבר לגיל, מין ומדינה, ולכן ההערכה זהה לממוצע. חזרו לטופס והוסיפו פרטים כדי לקבל הערכה אישית.</p>');
     var max = Math.max.apply(null, list.map(function (c) { return Math.abs(c.years); }).concat([0.5]));
-    return list.map(function (c) {
+    function row(c) {
       var w = Math.abs(c.years) / max * 50, pos = c.years >= 0;
       var cls = Math.abs(c.years) < 0.05 ? '' : pos ? 'pos' : 'neg';
       var bar = '<div class="bar ' + (pos ? 'pos' : 'neg') + '" style="' + (pos ? 'left:50%' : 'right:50%') + ';width:' + w.toFixed(1) + '%"></div>';
       return '<div class="frow"><div class="name">' + esc(c.label) + '<div class="det">' + esc(c.detail) + '</div></div>' +
         '<div class="track">' + bar + '</div><div class="val ' + cls + '">' + signed(c.years) + L(' שנים</div></div>');
-    }).join('');
+    }
+    // גורמים עם השפעה זניחה (פחות מ-0.15 שנה, כלומר מוצגים כ-0.0 או 0.1) מקופלים, כדי לא להציף את הרשימה
+    var big = list.filter(function (c) { return Math.abs(c.years) >= 0.15; }), small = list.filter(function (c) { return Math.abs(c.years) < 0.15; });
+    if (!small.length || !big.length) return list.map(row).join('');
+    return big.map(row).join('') + '<details class="frowmore"><summary>' + (small.length === 1 ? L('גורם אחד עם השפעה קטנה (עד 0.1 שנה)') : small.length + L(' גורמים עם השפעה קטנה (עד 0.1 שנה כל אחד)')) + '</summary>' + small.map(row).join('') + '</details>';
   }
 
   // ---------- סימולטור "מה אם" ----------
@@ -913,7 +917,7 @@
     if ((inp.smoking === 'current' || (inp.smoking === 'former' && !(inp.quitAge < a - 15))) && a >= 50 && a <= 80) screen.push(L('CT במינון נמוך לסרטן ריאה: לפי העישון והגיל שהזנת (בגילים 50–80, בהווה או ב-15 השנים האחרונות). ההנחיות מיועדות למי שעישן הרבה לאורך שנים, וכמות העישון לא נשאלת כאן, ולכן כדאי לברר עם הרופא/ה אם זה מתאים לך.'));
     if (!labs.length && !screen.length) return '';
     var li = function (t) { return '<li>' + esc(t) + '</li>'; };
-    return L('<div class="tests"><h3>בדיקות ששווה לשאול עליהן את הרופא/ה</h3><p class="small muted">לפי הגיל שלך ומה שהזנת. ההנחיות משתנות בין מדינות, וזו רשימה לשיחה עם הרופא/ה, לא הפניה.</p>') +
+    return L('<div class="tests"><h3>בדיקות שכדאי להעלות מול הרופא/ה</h3><p class="small muted">לפי הגיל שלך ומה שהזנת. ההנחיות משתנות בין מדינות, וזו רשימה לשיחה עם הרופא/ה, לא הפניה.</p>') +
       (labs.length ? L('<h4>בדיקות דם ומדידות</h4>') + '<ul>' + labs.map(li).join('') + '</ul>' : '') +
       (screen.length ? L('<h4>גילוי מוקדם של סרטן</h4>') + '<ul>' + screen.map(li).join('') + '</ul>' : '') +
       L('<p class="small muted">בכוונה לא כללנו בדיקות שאין לגביהן המלצה לכלל האוכלוסייה, כמו ויטמין D או טסטוסטרון.</p></div>');
@@ -1063,8 +1067,8 @@
     rows += sel('activity', L('פעילות גופנית בשבוע')) + sel('alcohol', L('אלכוהול בשבוע')) + sel('fruitveg', L('פירות וירקות ביום')) + sel('sitting', L('שעות ישיבה ביום')) + sel('sleep', L('שעות שינה')) + sel('isolated', L('מפגשים חברתיים')) + sel('lonely', L('תחושת בדידות תכופה')) + (inp.vo2max ? '' : sel('walkPace', L('קצב הליכה')));
     if (inp.sbp) rows += range('sbp', L('לחץ דם סיסטולי'), 100, 200, Math.round(inp.sbp), L('ממ"כ'));
     if (inp.tc) rows += range('tc', L('כולסטרול כללי'), 120, 350, Math.round(inp.tc), L('מ"ג/ד"ל'));
-    return L('<h3>נסו בעצמכם</h3><p class="small muted">הזיזו את הסרגלים וראו מיד כמה שנים כל שינוי מוסיף או מוריד, לשני הכיוונים.</p>') +
-      L('<div class="sim" id="simBox"><div class="simout" aria-live="polite"><div><span class="muted small">ההערכה בתרחיש הזה</span><b id="simAge">') + fmt(r.personal.expectedAge) + '</b></div>' +
+    return L('<h3>נסו בעצמכם</h3><p class="small muted">הזיזו את הסרגלים וראו מיד איך כל שינוי משפיע על תוחלת החיים.</p>') +
+      L('<div class="sim" id="simBox"><div class="simout" aria-live="polite"><div><span class="muted small">תוחלת החיים בתרחיש זה</span><b id="simAge">') + fmt(r.personal.expectedAge) + '</b></div>' +
       L('<div id="simDelta" class="simdelta">ללא שינוי</div></div>') + rows + '<p class="small muted" id="simFloor" hidden></p>' +
       (LifeModel.limitsOf(inp).lower ? L('<button type="button" id="simWorse">מה אם ההרגלים יחמירו? (צעד אחד לרעה בכל גורם)</button> ') : '') +
       L('<button type="button" id="simReset">איפוס</button></div>');
@@ -1241,7 +1245,7 @@
       trendsHTML(inp, r) +
       othersHTML() +
 
-      L('<h3>הסיכוי להיות בחיים בכל גיל</h3><div dir="ltr">') + survivalChart(r) + '</div>' +
+      L('<h3>הסיכוי להגיע לכל גיל</h3><div dir="ltr">') + survivalChart(r) + '</div>' +
       L('<div class="legend"><span><i></i>ההערכה שלך</span><span><i class="base"></i>ממוצע: ') + esc(who) + '</span></div>' +
 
       (notes.length ? L('<h3>הערות</h3><ul class="notes">') + notes.map(function (t) { return '<li>' + esc(t) + '</li>'; }).join('') + '</ul>' : '') +

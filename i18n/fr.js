@@ -1554,3 +1554,16 @@ Object.assign(I18N.fr, {
 Object.assign(I18N.fr, {
 "1aswv8v": "Scanner thoracique à faible dose pour le cancer du poumon : d'après le tabagisme et l'âge saisis (50–80 ans, fumeur actuel ou arrêt depuis moins de 15 ans). Les recommandations visent les personnes ayant beaucoup fumé pendant des années ; la quantité n'est pas demandée ici, il vaut donc la peine de vérifier avec votre médecin si cela vous concerne."
 });
+Object.assign(I18N.fr, {
+"1ti5s4e": "\" role=\"img\" aria-label=\"Courbe de survie : la probabilité d'atteindre chaque âge\">",
+"1kb6jra": "Un facteur à effet faible (jusqu'à 0,1 an)",
+"1iw1lzo": " facteurs à effet faible (jusqu'à 0,1 an chacun)",
+"1stjpi7": "<div class=\"tests\"><h3>Examens à aborder avec votre médecin</h3><p class=\"small muted\">Selon votre âge et vos réponses. Les recommandations varient selon les pays ; c'est une liste pour en discuter avec votre médecin, pas une prescription.</p>",
+"1lt2qbg": "<h3>Essayez vous-même</h3><p class=\"small muted\">Déplacez les curseurs et voyez tout de suite comment chaque changement influe sur l'espérance de vie.</p>",
+"ad5a8e": "<div class=\"sim\" id=\"simBox\"><div class=\"simout\" aria-live=\"polite\"><div><span class=\"muted small\">Espérance de vie dans ce scénario</span><b id=\"simAge\">",
+"163iijf": "<h3>La probabilité d'atteindre chaque âge</h3><div dir=\"ltr\">"
+});
+Object.assign(I18N.fr, {
+"124mhti": "Camomille, source naturelle d'apigénine : dans une méta-analyse de 10 essais avec 772 participants (2024), le score PSQI a baissé de 1,88 point (IC à 95 % : 0,31–3,46, avec une forte hétérogénéité), mais la durée et l'efficacité du sommeil ne se sont pas améliorées. Aucun essai contrôlé de l'apigénine seule pour le sommeil n'a été trouvé dans la littérature ; le seul essai apparu dans la recherche testait un mélange de plusieurs ingrédients.",
+"1kb9jx8": "Phosphatidylsérine et myo-inositol : aucun essai contrôlé randomisé de la phosphatidylsérine pour le sommeil chez l'adulte n'a été trouvé dans la littérature. Pour le myo-inositol, il existe un essai chez des femmes enceintes (2022) et aucun dans la population générale. Cela signifie qu'il n'y a pas encore de preuves, pas qu'ils ne fonctionnent pas. Aucune recherche connue ne porte non plus sur une combinaison de tous ces compléments."
+});

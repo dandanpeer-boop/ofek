@@ -496,3 +496,6 @@ a { color: var(--accent); }
 .clist li { margin: 0 0 14px; }
 .clist h3 { margin: 0 0 4px; font-size: 17px; }
 .csafe { border-inline-start: 4px solid #c0392b; padding: 4px 14px; margin: 14px 0; background: color-mix(in srgb, #c0392b 8%, transparent); border-radius: 8px; }
+
+.frowmore { margin-top: 6px; }
+.frowmore summary { cursor: pointer; color: var(--accent); font-size: .9rem; padding: 6px 0; }

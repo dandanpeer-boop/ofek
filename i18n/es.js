@@ -1554,3 +1554,16 @@ Object.assign(I18N.es, {
 Object.assign(I18N.es, {
 "1aswv8v": "TC de baja dosis para cáncer de pulmón: según el tabaquismo y la edad que introdujiste (50–80 años, fumador actual o que dejó de fumar hace menos de 15 años). Las guías son para quienes fumaron mucho durante años, y aquí no se pregunta la cantidad, por lo que conviene consultar con tu médico si te corresponde."
 });
+Object.assign(I18N.es, {
+"1ti5s4e": "\" role=\"img\" aria-label=\"Curva de supervivencia: la probabilidad de llegar a cada edad\">",
+"1kb6jra": "Un factor con un efecto pequeño (hasta 0,1 años)",
+"1iw1lzo": " factores con un efecto pequeño (hasta 0,1 años cada uno)",
+"1stjpi7": "<div class=\"tests\"><h3>Pruebas que conviene plantear a su médico</h3><p class=\"small muted\">Según su edad y lo que introdujo. Las guías varían entre países; es una lista para hablar con su médico, no una derivación.</p>",
+"1lt2qbg": "<h3>Pruébalo tú</h3><p class=\"small muted\">Mueve los controles y mira al instante cómo afecta cada cambio a la esperanza de vida.</p>",
+"ad5a8e": "<div class=\"sim\" id=\"simBox\"><div class=\"simout\" aria-live=\"polite\"><div><span class=\"muted small\">Esperanza de vida en este escenario</span><b id=\"simAge\">",
+"163iijf": "<h3>La probabilidad de llegar a cada edad</h3><div dir=\"ltr\">"
+});
+Object.assign(I18N.es, {
+"124mhti": "Manzanilla, la fuente natural de apigenina: en un metanálisis de 10 ensayos con 772 participantes (2024), la puntuación PSQI bajó 1,88 puntos (IC 95 %: 0,31–3,46, con alta heterogeneidad), pero la duración y la eficiencia del sueño no mejoraron. No se encontró en la literatura ningún ensayo controlado de apigenina sola para el sueño; el único ensayo que apareció en la búsqueda probó una mezcla de varios ingredientes.",
+"1kb9jx8": "Fosfatidilserina y mioinositol: no se encontró en la literatura ningún ensayo controlado aleatorizado de fosfatidilserina para el sueño en adultos. Para el mioinositol hay un ensayo en mujeres embarazadas (2022) y ninguno en la población general. Eso significa que aún no hay evidencia, no que no funcionen. Tampoco se conoce investigación sobre una combinación de todos estos suplementos juntos."
+});
