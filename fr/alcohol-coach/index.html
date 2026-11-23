@@ -52,7 +52,7 @@
     <select class="langsel" aria-label="Langue" onchange="location.href=this.value"><option value="../../alcohol-coach/">עברית</option><option value="../../en/alcohol-coach/">English</option><option value="../../es/alcohol-coach/">Español</option><option value="../../fr/alcohol-coach/" selected>Français</option></select>
   </div>
 </header>
-<div id="site"><article class="page"><p class="eyebrow">Alcool</p><h1>Coach de réduction de l'alcool</h1><p class="lead">Quelques questions sur vous et un plan fondé sur la recherche pour réduire la consommation, avec les sources. Sans jugement. C'est un outil pour réduire, pas un programme de sevrage.</p><p class="trustline">Ceci n'est ni un diagnostic ni un avis médical. Nous ne donnons ni instructions de sevrage, ni médicaments, ni doses. Toute personne qui boit beaucoup est orientée vers un médecin. En cas de doute, demandez à un médecin.</p><div id="coach" class="coach"></div><noscript><p>Le coach nécessite JavaScript. Vous pouvez lire le guide des habitudes à la place.</p></noscript><p><a href="../../fr/habits/">Vers le guide complet des habitudes, avec toutes les sources</a></p></article></div>
+<div id="site"><article class="page"><p class="eyebrow">Alcool</p><h1>Coach de réduction de l'alcool</h1><p class="lead">Quelques questions sur vous et un plan fondé sur la recherche pour réduire la consommation, avec les sources. Sans jugement. C'est un outil pour réduire, pas un programme de sevrage.</p><p class="trustline">Ceci n'est ni un diagnostic ni un avis médical. Nous ne donnons ni instructions de sevrage, ni médicaments, ni doses. Toute personne qui boit beaucoup est orientée vers un médecin. En cas de doute, demandez à un médecin.</p><div id="coach" class="coach"></div><noscript><p>Le coach nécessite JavaScript. Vous pouvez lire le guide des habitudes à la place. Si vous buvez beaucoup tous les jours, n'arrêtez pas brusquement sans médecin. Des tremblements forts, de la confusion, des hallucinations ou une convulsion sont une urgence : rendez-vous aux urgences ou appelez les secours.</p></noscript><p><a href="../../fr/habits/">Vers le guide complet des habitudes, avec toutes les sources</a></p></article></div>
 <div class="wrap" id="calcWrap" hidden>
   <main id="app"></main>
 </div>
@@ -92,6 +92,10 @@
   // התקנה כאפליקציה ועבודה בלי אינטרנט (רק בכתובת http/https)
   if (!('serviceWorker' in navigator) || !/^https?:$/.test(location.protocol)) return;
   navigator.serviceWorker.register(ROOT + 'sw.js').catch(function () { /* האתר עובד גם בלי זה */ });
+  // שמירת הדף הנוכחי במטמון (הפעם הראשונה נטענת לפני שה-service worker פעיל), כדי שהוא ייפתח גם בלי רשת
+  navigator.serviceWorker.ready.then(function (reg) {
+    setTimeout(function () { if (reg.active) reg.active.postMessage({ type: 'cachepage', url: location.origin + location.pathname }); }, 2500);
+  });
   // אפליקציה מותקנת: לשמור מראש את כל דפי השפה הזו, כדי שיעבדו גם בלי אינטרנט (גולשים רגילים לא מורידים שום דבר מראש)
   if ((window.matchMedia && window.matchMedia('(display-mode: standalone)').matches) || navigator.standalone) {
     navigator.serviceWorker.ready.then(function (reg) {

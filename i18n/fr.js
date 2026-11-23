@@ -1767,3 +1767,55 @@ Object.assign(I18N.fr, {
 "1f6lw2c": "Coach de réduction de l'alcool : un plan personnel fondé sur la recherche",
 "9pehjg": "Quelques questions sur votre consommation d'alcool et un plan de réduction fondé sur la recherche, avec les sources. Tout se passe dans le navigateur, rien n'est enregistré et vos réponses ne sont jamais envoyées."
 });
+Object.assign(I18N.fr, {
+"1yhamz": "Le coach nécessite JavaScript. Vous pouvez lire le guide des habitudes à la place. Si vous buvez beaucoup tous les jours, n'arrêtez pas brusquement sans médecin. Des tremblements forts, de la confusion, des hallucinations ou une convulsion sont une urgence : rendez-vous aux urgences ou appelez les secours.",
+"l75emr": "Environ combien de boissons alcoolisées buvez-vous par semaine ? (Une boisson = un verre de vin, une petite bière ou un petit verre d'alcool fort, soit environ 14 grammes d'alcool)",
+"1dchmvw": "Sur combien de jours par semaine buvez-vous de l'alcool ?",
+"7ukprk": "Un ou deux jours",
+"1u9znih": "Trois à cinq jours",
+"1rjfcqu": "Six ou sept jours",
+"kxfi77": "Je n'ai jamais réduit ni arrêté",
+"suh386": "Problèmes de santé et médicaments : l'une de ces situations vous concerne-t-elle ?",
+"a3fxkm": "J'ai une maladie du foie",
+"1518ljt": "J'ai de l'épilepsie, ou j'ai déjà eu une convulsion",
+"snt2ic": "J'ai déjà été hospitalisé(e) ou j'ai fait un sevrage à cause de l'alcool",
+"ywkarf": "J'ai une forte envie de boire, ou j'ai essayé plusieurs fois de réduire sans y arriver",
+"1t44i1o": "Je prends des médicaments calmants, pour dormir ou contre l'anxiété (par exemple des benzodiazépines)",
+"10uqiod": "Je prends des antidouleurs puissants, ou je consomme des drogues",
+"1rsshym": "Je prends des antidépresseurs ou un autre médicament régulier",
+"1449hsx": "Que faire maintenant",
+"p20azm": "Ce coach est réservé aux adultes. Si vous êtes jeune, il vaut mieux en parler à votre médecin ou à un conseiller. Si quelque chose de dangereux se passe en ce moment, rendez-vous aux urgences ou appelez les secours.",
+"17mq8ya": "Vous avez partagé quelque chose d'important",
+"u6spbg": "Avoir des pensées de se faire du mal n'est pas quelque chose que vous devez porter seul(e), et vous pouvez recevoir de l'aide même si vous ne savez pas exactement ce qui se passe. Si vous êtes en danger immédiat, ou si vous sentez que vous pourriez vous faire du mal ce soir : rendez-vous aux urgences les plus proches ou appelez les secours, ou demandez à un proche de rester avec vous.",
+"fv964k": "Vous pouvez aussi parler maintenant à quelqu'un : ERAN, premiers secours émotionnels, par téléphone au 1201 (et par chat sur eran.org.il).",
+"1lsm7sm": "Si possible, éloignez ce qui pourrait servir à vous blesser, et il vaut mieux ne pas boire ce soir si vous vous sentez ainsi. Parlez aussi de ces pensées à votre médecin traitant.",
+"jfusa1": "Si vous êtes enceinte ou prévoyez une grossesse, la recommandation britannique dit que le plus sûr est de ne pas boire du tout. Si vous avez bu de petites quantités avant de savoir que vous étiez enceinte, la recommandation indique que le risque est probablement faible. Si c'est difficile d'arrêter, parlez-en à votre médecin ou à une sage-femme. Cela fait partie de la conversation et il n'y a pas de honte à avoir.",
+"xftfrk": "Si vous buvez beaucoup, n'arrêtez pas brusquement seule : consultez rapidement un médecin ou une sage-femme. C'est urgent, car un arrêt brutal peut aussi être dangereux pendant la grossesse.",
+"13jj8tt": "Nous n'affichons pas ici de plan de réduction pendant la grossesse.",
+"191gs1q": "D'après ce que vous nous dites, votre corps est peut-être habitué à l'alcool, ou une situation rend dangereuse une réduction faite seul(e). Chez certaines personnes, une réduction brutale ou un arrêt soudain peut provoquer des tremblements, de la transpiration, de la confusion, des hallucinations et même des convulsions, et le risque est plus élevé chez celles qui l'ont déjà vécu. Cela ne signifie pas que vous avez fait quelque chose de mal. Cela signifie qu'il vaut mieux qu'un médecin accompagne le processus.",
+"xp9jp": "Nous n'affichons donc pas de plan pour réduire seul(e). La meilleure étape maintenant : prendre rendez-vous avec votre médecin traitant et lui dire honnêtement combien vous buvez, et quels médicaments et problèmes de santé vous avez. Le médecin peut aussi expliquer s'il existe des médicaments utiles ; c'est sa décision, pas celle du site.",
+"1ovxayt": "Mélanger l'alcool avec des calmants, des somnifères ou des antidouleurs puissants, ou avec des drogues, peut être dangereux même en quantités relativement faibles. N'arrêtez pas un médicament et ne changez pas la dose sans médecin, et demandez à votre médecin ou pharmacien s'il est sûr de boire avec.",
+"70itor": "Si vous avez une maladie du foie, de l'épilepsie ou une convulsion passée, ou une hospitalisation ou un sevrage antérieur à cause de l'alcool, il est particulièrement important qu'un médecin accompagne la réduction.",
+"be4sae": "En attendant, n'arrêtez pas brusquement sans médecin, même si vous vous sentez bien.",
+"5kz04n": "Si des tremblements, une forte transpiration ou de la confusion apparaissent quand vous ne buvez pas, consultez un médecin le jour même.",
+"vs189c": "Avant de commencer : une règle de sécurité",
+"11l7lrr": "Si vous buvez tous les jours, ou si vous vous sentiez mal quand vous ne buviez pas, n'arrêtez pas brusquement sans médecin, même si vous vous sentez bien.",
+"xmn512": "Si, pendant la réduction, apparaissent une forte anxiété le matin, de la transpiration, des tremblements, des nausées ou des vomissements : arrêtez de réduire et consultez un médecin le jour même.",
+"9i411z": "Bon à savoir",
+"1kjwk08": "Toutes les questions de sécurité n'ont pas reçu de réponse, ou vous n'avez pas encore essayé de réduire, donc on ne peut pas savoir comment votre corps réagira. Si vous buvez beaucoup ou tous les jours, ou si des tremblements ou de la transpiration apparaissent quand vous ne buvez pas, parlez d'abord à un médecin.",
+"i82spb": "Médicaments",
+"puv3q0": "Si vous prenez des médicaments sur ordonnance, demandez à votre médecin ou pharmacien s'il est sûr de boire avec. Avec certains médicaments, le mélange avec l'alcool peut être dangereux, même si vous ne buvez pas beaucoup. N'arrêtez pas et ne changez pas un médicament sans en parler à votre médecin.",
+"fry8fg": "Dans des essais de brèves conversations avec des personnes qui boivent à risque sans être dépendantes de l'alcool, la consommation a baissé d'environ 20 grammes par semaine en moyenne après un an (34 études, 15 197 participants), par rapport à un groupe témoin. On n'a pas testé si un outil en ligne fonctionne de la même façon. C'est un pas modeste qui montre qu'un petit changement est possible. Vous pouvez fixer une limite avant de sortir et noter en fin de journée combien vous avez bu. Nous ne savons pas si le fait de noter aide en soi.",
+"1en92ca": "Selon la recommandation britannique, il vaut mieux ne pas dépasser régulièrement 14 unités par semaine et répartir la consommation uniformément sur trois jours ou plus. Une unité britannique correspond à 8 grammes, donc 14 unités font environ 112 grammes, soit environ 8 boissons selon la définition utilisée ici (environ 14 grammes par boisson), et non 14 boissons. Dans l'étude de Wood (Lancet 2018), le risque de décès était le plus bas autour de 100 grammes par semaine ou moins (environ 7 boissons). Moins, c'est mieux.",
+"609udp": "Consommation quotidienne",
+"190gyg4": "Si vous buvez tous les jours, ne faites pas des jours sans alcool d'un coup. Si vous voulez réduire, faites-le progressivement et avec un médecin, et n'arrêtez pas brusquement.",
+"7qhn6r": "Vous pouvez manger et boire un verre d'eau avant, remplacer un verre sur deux par une boisson sans alcool, choisir un verre plus petit ou une boisson plus légère, et dire à un ami ou à votre partenaire que vous réduisez. Ce sont des conseils issus des recommandations, pas d'études ayant testé chaque conseil séparément. Tous ne conviennent pas à tout le monde ; vous pouvez en choisir un ou deux. L'alcool le soir peut perturber le sommeil, surtout dans la seconde moitié de la nuit. Si vous buvez pour vous détendre ou pour dormir, dites-le à votre médecin : il existe d'autres moyens.",
+"1ndgmn1": "Chaque petit pas compte. Si cela n'a pas marché, ce n'est pas un échec mais une information sur ce qui est difficile pour vous. Et si c'est difficile, vous pouvez demander de l'aide ; ce n'est pas un signe de faiblesse. Si vous avez du mal à réduire encore et encore, il vaut mieux en parler à un médecin."
+});
+Object.assign(I18N.fr, {
+"wae16r": " (cette valeur ne sera pas utilisée : il y a une analyse plus récente du ",
+"khor94": " dans le même envoi)"
+});
+Object.assign(I18N.fr, {
+"1ir2yoi": " (non coché : c'est une valeur ancienne, et on ne sait pas quand la valeur du formulaire a été mesurée. Cochez pour la remplacer)"
+});

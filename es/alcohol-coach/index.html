@@ -52,7 +52,7 @@
     <select class="langsel" aria-label="Idioma" onchange="location.href=this.value"><option value="../../alcohol-coach/">עברית</option><option value="../../en/alcohol-coach/">English</option><option value="../../es/alcohol-coach/" selected>Español</option><option value="../../fr/alcohol-coach/">Français</option></select>
   </div>
 </header>
-<div id="site"><article class="page"><p class="eyebrow">Alcohol</p><h1>Coach para reducir el alcohol</h1><p class="lead">Unas preguntas sobre ti y un plan basado en la investigación para reducir el consumo, con fuentes. Sin juzgar. Es una herramienta para reducir, no un programa de desintoxicación.</p><p class="trustline">Esto no es un diagnóstico ni asesoramiento médico. No damos instrucciones de desintoxicación, medicamentos ni dosis. Quien bebe mucho es derivado a un médico. Ante la duda, consulta a un médico.</p><div id="coach" class="coach"></div><noscript><p>El coach necesita JavaScript. Puedes leer la guía de hábitos en su lugar.</p></noscript><p><a href="../../es/habits/">A la guía completa de hábitos, con todas las fuentes</a></p></article></div>
+<div id="site"><article class="page"><p class="eyebrow">Alcohol</p><h1>Coach para reducir el alcohol</h1><p class="lead">Unas preguntas sobre ti y un plan basado en la investigación para reducir el consumo, con fuentes. Sin juzgar. Es una herramienta para reducir, no un programa de desintoxicación.</p><p class="trustline">Esto no es un diagnóstico ni asesoramiento médico. No damos instrucciones de desintoxicación, medicamentos ni dosis. Quien bebe mucho es derivado a un médico. Ante la duda, consulta a un médico.</p><div id="coach" class="coach"></div><noscript><p>El coach necesita JavaScript. Puedes leer la guía de hábitos en su lugar. Si bebes mucho todos los días, no lo dejes de golpe sin un médico. Un temblor fuerte, confusión, alucinaciones o una convulsión son una emergencia: ve a urgencias o llama a la ambulancia.</p></noscript><p><a href="../../es/habits/">A la guía completa de hábitos, con todas las fuentes</a></p></article></div>
 <div class="wrap" id="calcWrap" hidden>
   <main id="app"></main>
 </div>
@@ -92,6 +92,10 @@
   // התקנה כאפליקציה ועבודה בלי אינטרנט (רק בכתובת http/https)
   if (!('serviceWorker' in navigator) || !/^https?:$/.test(location.protocol)) return;
   navigator.serviceWorker.register(ROOT + 'sw.js').catch(function () { /* האתר עובד גם בלי זה */ });
+  // שמירת הדף הנוכחי במטמון (הפעם הראשונה נטענת לפני שה-service worker פעיל), כדי שהוא ייפתח גם בלי רשת
+  navigator.serviceWorker.ready.then(function (reg) {
+    setTimeout(function () { if (reg.active) reg.active.postMessage({ type: 'cachepage', url: location.origin + location.pathname }); }, 2500);
+  });
   // אפליקציה מותקנת: לשמור מראש את כל דפי השפה הזו, כדי שיעבדו גם בלי אינטרנט (גולשים רגילים לא מורידים שום דבר מראש)
   if ((window.matchMedia && window.matchMedia('(display-mode: standalone)').matches) || navigator.standalone) {
     navigator.serviceWorker.ready.then(function (reg) {

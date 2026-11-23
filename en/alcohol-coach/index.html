@@ -54,7 +54,7 @@
     <select class="langsel" aria-label="Language" onchange="location.href=this.value"><option value="../../alcohol-coach/">עברית</option><option value="../../en/alcohol-coach/" selected>English</option><option value="../../es/alcohol-coach/">Español</option><option value="../../fr/alcohol-coach/">Français</option></select>
   </div>
 </header>
-<div id="site"><article class="page"><p class="eyebrow">Alcohol</p><h1>Alcohol-reduction coach</h1><p class="lead">A few questions about you, and a research-based plan for cutting down drinking, with sources. No judgment. This is a tool for cutting down, not a withdrawal programme.</p><p class="trustline">This is not a diagnosis or medical advice. We do not give withdrawal instructions, medications or doses. Anyone who drinks heavily is referred to a doctor. When in doubt, ask a doctor.</p><div id="coach" class="coach"></div><noscript><p>The coach requires JavaScript. You can read the habits guide instead.</p></noscript><p><a href="../../en/habits/">To the full habits guide, with all the sources</a></p></article></div>
+<div id="site"><article class="page"><p class="eyebrow">Alcohol</p><h1>Alcohol-reduction coach</h1><p class="lead">A few questions about you, and a research-based plan for cutting down drinking, with sources. No judgment. This is a tool for cutting down, not a withdrawal programme.</p><p class="trustline">This is not a diagnosis or medical advice. We do not give withdrawal instructions, medications or doses. Anyone who drinks heavily is referred to a doctor. When in doubt, ask a doctor.</p><div id="coach" class="coach"></div><noscript><p>The coach needs JavaScript. You can read the habits guide instead. If you drink heavily every day, do not stop all at once without a doctor. Severe shaking, confusion, hallucinations or a seizure are an emergency: go to the emergency room or call the ambulance service.</p></noscript><p><a href="../../en/habits/">To the full habits guide, with all the sources</a></p></article></div>
 <div class="wrap" id="calcWrap" hidden>
   <main id="app"></main>
 </div>
@@ -94,6 +94,10 @@
   // התקנה כאפליקציה ועבודה בלי אינטרנט (רק בכתובת http/https)
   if (!('serviceWorker' in navigator) || !/^https?:$/.test(location.protocol)) return;
   navigator.serviceWorker.register(ROOT + 'sw.js').catch(function () { /* האתר עובד גם בלי זה */ });
+  // שמירת הדף הנוכחי במטמון (הפעם הראשונה נטענת לפני שה-service worker פעיל), כדי שהוא ייפתח גם בלי רשת
+  navigator.serviceWorker.ready.then(function (reg) {
+    setTimeout(function () { if (reg.active) reg.active.postMessage({ type: 'cachepage', url: location.origin + location.pathname }); }, 2500);
+  });
   // אפליקציה מותקנת: לשמור מראש את כל דפי השפה הזו, כדי שיעבדו גם בלי אינטרנט (גולשים רגילים לא מורידים שום דבר מראש)
   if ((window.matchMedia && window.matchMedia('(display-mode: standalone)').matches) || navigator.standalone) {
     navigator.serviceWorker.ready.then(function (reg) {

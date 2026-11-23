@@ -54,7 +54,7 @@
     <select class="langsel" aria-label="שפה" onchange="location.href=this.value"><option value="../alcohol-coach/" selected>עברית</option><option value="../en/alcohol-coach/">English</option><option value="../es/alcohol-coach/">Español</option><option value="../fr/alcohol-coach/">Français</option></select>
   </div>
 </header>
-<div id="site"><article class="page"><p class="eyebrow">אלכוהול</p><h1>מאמן הפחתת אלכוהול</h1><p class="lead">כמה שאלות עליך, ותוכנית מבוססת מחקר להפחתת שתייה, עם מקורות. בלי שיפוט. זה כלי להפחתה ולא תוכנית גמילה.</p><p class="trustline">זה לא אבחנה ולא ייעוץ רפואי. אנחנו לא נותנים הוראות גמילה, תרופות או מינונים. מי ששותה הרבה מופנה לרופא/ה. בכל ספק, רופא/ה.</p><div id="coach" class="coach"></div><noscript><p>המאמן דורש JavaScript. אפשר לקרוא את מדריך ההרגלים במקומו.</p></noscript><p><a href="../habits/">למדריך ההרגלים המלא, עם כל המקורות</a></p></article></div>
+<div id="site"><article class="page"><p class="eyebrow">אלכוהול</p><h1>מאמן הפחתת אלכוהול</h1><p class="lead">כמה שאלות עליך, ותוכנית מבוססת מחקר להפחתת שתייה, עם מקורות. בלי שיפוט. זה כלי להפחתה ולא תוכנית גמילה.</p><p class="trustline">זה לא אבחנה ולא ייעוץ רפואי. אנחנו לא נותנים הוראות גמילה, תרופות או מינונים. מי ששותה הרבה מופנה לרופא/ה. בכל ספק, רופא/ה.</p><div id="coach" class="coach"></div><noscript><p>המאמן דורש JavaScript. אפשר לקרוא את מדריך ההרגלים במקומו. אם אתם שותים הרבה כל יום, אל תפסיקו בבת אחת בלי רופא/ה. רעד חזק, בלבול, הזיות או פרכוס הם מצב חירום: פנו למיון או למד"א.</p></noscript><p><a href="../habits/">למדריך ההרגלים המלא, עם כל המקורות</a></p></article></div>
 <div class="wrap" id="calcWrap" hidden>
   <main id="app"></main>
 </div>
@@ -93,6 +93,10 @@
   // התקנה כאפליקציה ועבודה בלי אינטרנט (רק בכתובת http/https)
   if (!('serviceWorker' in navigator) || !/^https?:$/.test(location.protocol)) return;
   navigator.serviceWorker.register(ROOT + 'sw.js').catch(function () { /* האתר עובד גם בלי זה */ });
+  // שמירת הדף הנוכחי במטמון (הפעם הראשונה נטענת לפני שה-service worker פעיל), כדי שהוא ייפתח גם בלי רשת
+  navigator.serviceWorker.ready.then(function (reg) {
+    setTimeout(function () { if (reg.active) reg.active.postMessage({ type: 'cachepage', url: location.origin + location.pathname }); }, 2500);
+  });
   // אפליקציה מותקנת: לשמור מראש את כל דפי השפה הזו, כדי שיעבדו גם בלי אינטרנט (גולשים רגילים לא מורידים שום דבר מראש)
   if ((window.matchMedia && window.matchMedia('(display-mode: standalone)').matches) || navigator.standalone) {
     navigator.serviceWorker.ready.then(function (reg) {

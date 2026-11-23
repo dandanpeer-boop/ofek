@@ -98,6 +98,10 @@
   // התקנה כאפליקציה ועבודה בלי אינטרנט (רק בכתובת http/https)
   if (!('serviceWorker' in navigator) || !/^https?:$/.test(location.protocol)) return;
   navigator.serviceWorker.register(ROOT + 'sw.js').catch(function () { /* האתר עובד גם בלי זה */ });
+  // שמירת הדף הנוכחי במטמון (הפעם הראשונה נטענת לפני שה-service worker פעיל), כדי שהוא ייפתח גם בלי רשת
+  navigator.serviceWorker.ready.then(function (reg) {
+    setTimeout(function () { if (reg.active) reg.active.postMessage({ type: 'cachepage', url: location.origin + location.pathname }); }, 2500);
+  });
   // אפליקציה מותקנת: לשמור מראש את כל דפי השפה הזו, כדי שיעבדו גם בלי אינטרנט (גולשים רגילים לא מורידים שום דבר מראש)
   if ((window.matchMedia && window.matchMedia('(display-mode: standalone)').matches) || navigator.standalone) {
     navigator.serviceWorker.ready.then(function (reg) {

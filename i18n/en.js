@@ -1769,3 +1769,55 @@ Object.assign(I18N.en, {
 "1f6lw2c": "Alcohol-reduction coach: a research-based personal plan",
 "9pehjg": "A few questions about your drinking, and a research-based plan for cutting down, with sources. All in the browser, nothing saved and your answers are never sent."
 });
+Object.assign(I18N.en, {
+"1yhamz": "The coach needs JavaScript. You can read the habits guide instead. If you drink heavily every day, do not stop all at once without a doctor. Severe shaking, confusion, hallucinations or a seizure are an emergency: go to the emergency room or call the ambulance service.",
+"l75emr": "Roughly how many alcoholic drinks do you have per week? (A drink = a glass of wine, a small bottle of beer or a shot of spirits, about 14 grams of alcohol)",
+"1dchmvw": "On how many days a week do you drink alcohol?",
+"7ukprk": "One or two days",
+"1u9znih": "Three to five days",
+"1rjfcqu": "Six or seven days",
+"kxfi77": "I have never cut down or stopped",
+"suh386": "Medical conditions and medicines: does any of these apply to you?",
+"a3fxkm": "I have liver disease",
+"1518ljt": "I have epilepsy, or I have ever had a seizure",
+"snt2ic": "I have been hospitalised or had a detox in the past because of alcohol",
+"ywkarf": "I have a strong craving to drink, or I have tried to cut down several times and could not",
+"1t44i1o": "I take sedative, sleeping or anxiety medicines (for example benzodiazepines)",
+"10uqiod": "I take strong pain medicines, or I use drugs",
+"1rsshym": "I take antidepressants or another regular medicine",
+"1449hsx": "What to do now",
+"p20azm": "This coach is for adults only. If you are young, it is worth talking to your doctor or a counsellor. If something dangerous is happening right now, go to the emergency room or call the ambulance service.",
+"17mq8ya": "You shared something important",
+"u6spbg": "Thoughts of harming yourself are not something you have to carry alone, and you can get help even if you are not sure what exactly is going on. If you are in immediate danger now, or you feel you might harm yourself tonight: go to the nearest emergency room or call the ambulance service, or ask someone close to you to stay with you.",
+"fv964k": "You can also talk to someone right now: ERAN, emotional first aid, by phone on 1201 (and by chat on eran.org.il).",
+"1lsm7sm": "If you can, move away anything you could use to hurt yourself, and it is best not to drink tonight if you feel this way. Also tell your family doctor about these thoughts.",
+"jfusa1": "If you are pregnant or planning a pregnancy, the UK guidance says the safest approach is not to drink at all. If you drank small amounts before you knew you were pregnant, the guidance says the risk is likely to be low. If it is hard to stop, tell your doctor or midwife. This is a normal part of the conversation and there is nothing to be ashamed of.",
+"xftfrk": "If you drink a lot, do not stop all at once on your own: see a doctor or midwife soon. This is urgent, because stopping suddenly can be dangerous in pregnancy too.",
+"13jj8tt": "We will not show a plan for cutting down during pregnancy.",
+"191gs1q": "From what you told us, your body may be used to alcohol, or there may be a condition that makes cutting down on your own unsafe. In some people, cutting down sharply or stopping suddenly can cause shaking, sweating, confusion, hallucinations and even seizures, and the risk is higher in people who have had this before. This does not mean you did anything wrong. It means a doctor should guide the process.",
+"xp9jp": "So we are not showing a plan for cutting down on your own. The best step now: book an appointment with your family doctor and tell them honestly how much you drink, and which medicines and medical conditions you have. The doctor can also explain whether there are medicines that could help; that is the doctor's decision, not the website's.",
+"1ovxayt": "Mixing alcohol with sedative, sleeping or strong pain medicines, or with drugs, can be dangerous even in relatively small amounts. Do not stop a medicine or change a dose without a doctor, and ask your doctor or pharmacist whether it is safe to drink with them.",
+"70itor": "If you have liver disease, epilepsy or a past seizure, or a past hospitalisation or detox because of alcohol, it is especially important that a doctor guides the reduction.",
+"be4sae": "In the meantime, do not stop all at once without a doctor, even if you feel well.",
+"5kz04n": "If shaking, heavy sweating or confusion appear when you are not drinking, see a doctor the same day.",
+"vs189c": "Before you start: one safety rule",
+"11l7lrr": "If you drink every day, or you used to feel unwell when you did not drink, do not stop all at once without a doctor, even if you feel well.",
+"xmn512": "If while cutting down you get strong anxiety in the morning, sweating, shaking, nausea or vomiting: stop cutting down and see a doctor the same day.",
+"9i411z": "Good to know",
+"1kjwk08": "Not all the safety questions were answered, or you have not yet tried to cut down, so it is impossible to know how your body will react. If you drink a lot or every day, or shaking or sweating appear when you do not drink, talk to a doctor first.",
+"i82spb": "Medicines",
+"puv3q0": "If you take prescription medicines, ask your doctor or pharmacist whether it is safe to drink with them. With some medicines, mixing with alcohol can be dangerous, even if you do not drink much. Do not stop or change a medicine without talking to your doctor.",
+"fry8fg": "In trials of brief conversations with people who drink at risky levels but are not dependent on alcohol, consumption fell by about 20 grams per week on average after a year (34 studies, 15,197 participants), compared with a control group. It was not tested whether an online tool works the same way. This is a modest step that shows a small change is possible. You can set a limit before going out and write down at the end of the day how much you drank. We do not know whether the writing down itself helps.",
+"1en92ca": "According to the UK guidance, it is best not to regularly exceed 14 units a week, and to spread drinking evenly over three days or more. A UK unit is 8 grams, so 14 units is about 112 grams, which is about 8 drinks by the definition used here (about 14 grams per drink), not 14 drinks. In the Wood study (Lancet 2018) the risk of death was lowest at around 100 grams per week or less (about 7 drinks). Less is better.",
+"609udp": "Daily drinking",
+"190gyg4": "If you drink every day, do not make alcohol-free days all at once. If you want to cut down, do it gradually and with a doctor, and do not stop all at once.",
+"7qhn6r": "You can eat and drink a glass of water beforehand, replace every second drink with a non-alcoholic one, choose a smaller glass or a weaker drink, and tell a friend or partner that you are cutting down. These are tips from the guidance, not from studies that tested each tip separately. Not every tip suits everyone; you can pick one or two. Alcohol in the evening can disrupt sleep, especially in the second half of the night. If you drink to relax or to sleep, tell your doctor: there are other ways.",
+"1ndgmn1": "Every small step counts. If it did not work, that is not a failure but information about what is hard for you. And if it is hard, you can ask for help; that is not a sign of weakness. If you struggle to cut down again and again, it is worth talking to a doctor."
+});
+Object.assign(I18N.en, {
+"wae16r": " (this value will not be used: there is a newer test from ",
+"khor94": " in the same upload)"
+});
+Object.assign(I18N.en, {
+"1ir2yoi": " (not ticked: this is an old value, and it is unknown when the value in the form was measured. Tick it if you want to replace it)"
+});

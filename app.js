@@ -411,6 +411,13 @@
       return h;
     }
 
+    // ערך מקובץ ישן (מעל 12 חודשים) לא יחליף אוטומטית ערך שכבר בטופס ואין לו תאריך ידוע (הוקלד ידנית או נשאר מהזנה קודמת): ייתכן שהוא חדש יותר
+    function holdOld(date, r) {
+      var cur = data[r.id], cut = new Date(); cut.setFullYear(cut.getFullYear() - 1);
+      var cutS = cut.getFullYear() + '-' + String(cut.getMonth() + 1).padStart(2, '0') + '-' + String(cut.getDate()).padStart(2, '0');
+      return !!date && date < cutS && cur !== undefined && cur !== '' && !(data.labDates && data.labDates[r.id]) && Number(cur) !== r.value;
+    }
+
     // שלב אישור: הערכים שנקראו מוצגים לבדיקה, והטופס מתמלא רק אחרי שהמשתמש לוחץ "אישור". אפשר לתקן מספר או להסיר סימון מערך שגוי.
     function reviewHTML(good) {
       var h = L('<p><b>בדקו כל ערך מול המסמך ואשרו.</b> הטופס יתמלא רק אחרי שתלחצו "אישור ומילוי הטופס". אפשר לתקן מספר, או להסיר את הסימון מערך שאינו נכון.</p>') +
@@ -419,7 +426,7 @@
         h += '<div class="review"><div class="revhead"><b dir="auto">' + esc(g.name) + '</b> <label class="small">' + L('תאריך הבדיקה: ') +
           '<input type="date" data-gdate="' + gi + '" value="' + esc(g.date) + '" max="' + todayISO() + '"></label><span class="small nodatenote" data-dn="' + gi + '"></span></div><ul class="revlist">';
         g.found.forEach(function (r, i) {
-          h += '<li><label class="revrow"><input type="checkbox" checked data-g="' + gi + '" data-i="' + i + '" aria-label="' + esc(r.label) + '"> <span>' + esc(r.label) + '</span></label> ' +
+          h += '<li><label class="revrow"><input type="checkbox"' + (holdOld(g.date, r) ? '' : ' checked') + ' data-g="' + gi + '" data-i="' + i + '" aria-label="' + esc(r.label) + '"> <span>' + esc(r.label) + '</span></label> ' +
             '<input type="number" step="any" dir="ltr" class="revval" data-g="' + gi + '" data-i="' + i + '" value="' + r.value + '"> ' + esc(r.unit) +
             (r.converted ? L(' (הומר מיחידות אחרות)') : '') +
             '<div class="small revnote" data-n="' + gi + '-' + i + '"></div>' +
@@ -462,7 +469,17 @@
         var dEl = out.querySelector('input[data-gdate="' + gi + '"]'), date = dEl ? dEl.value : g.date;
         var cur = data[r.id], has = cur !== undefined && cur !== '', newest = '';
         if (!has) return '';
+        var cbx = out.querySelector('input[type=checkbox][data-g="' + gi + '"][data-i="' + g.found.indexOf(r) + '"]');
+        if (date && cbx && !cbx.checked && holdOld(date, r)) return L('בטופס כרגע: ') + esc(cur) + L(' (לא סומן: זה ערך ישן, ולא ידוע מתי נמדד הערך שבטופס. סמנו אם תרצו להחליף)');
         (data.labDocs || []).forEach(function (d) { if (d.date && d.date > newest && d.found.some(function (x) { return x.id === r.id; })) newest = d.date; });
+        // קבצים אחרים באותה העלאה (עדיין לא אושרו): אם באחד מהם יש את אותו ערך בתאריך חדש יותר, הוא זה שייכנס לטופס
+        var pendingNewer = '';
+        good.forEach(function (o, oi) {
+          if (o === g) return;
+          var oe = out.querySelector('input[data-gdate="' + oi + '"]'), od = oe ? oe.value : o.date;
+          if (od && od > pendingNewer && o.found.some(function (x) { return x.id === r.id; })) pendingNewer = od;
+        });
+        if (date && pendingNewer && pendingNewer > date && pendingNewer > newest) return L('בטופס כרגע: ') + esc(cur) + L(' (הערך הזה לא ייכנס: יש בדיקה חדשה יותר מ-') + heDate(pendingNewer) + L(' באותה העלאה)');
         if (date) {
           if (newest && newest > date) return L('בטופס כרגע: ') + esc(cur) + L(' (יישאר: קיימת בדיקה חדשה יותר מ-') + heDate(newest) + ')';
           return Number(cur) !== r.value ? L('בטופס כרגע: ') + esc(cur) + L(' (יוחלף)') : '';

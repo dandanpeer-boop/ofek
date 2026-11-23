@@ -1767,3 +1767,55 @@ Object.assign(I18N.es, {
 "1f6lw2c": "Coach para reducir el alcohol: un plan personal basado en la investigación",
 "9pehjg": "Unas preguntas sobre tu consumo de alcohol y un plan para reducirlo basado en la investigación, con fuentes. Todo en el navegador, sin guardar nada y sin enviar tus respuestas."
 });
+Object.assign(I18N.es, {
+"1yhamz": "El coach necesita JavaScript. Puedes leer la guía de hábitos en su lugar. Si bebes mucho todos los días, no lo dejes de golpe sin un médico. Un temblor fuerte, confusión, alucinaciones o una convulsión son una emergencia: ve a urgencias o llama a la ambulancia.",
+"l75emr": "Aproximadamente, ¿cuántas bebidas alcohólicas tomas por semana? (Una bebida = una copa de vino, una cerveza pequeña o un chupito de licor, unos 14 gramos de alcohol)",
+"1dchmvw": "¿En cuántos días a la semana bebes alcohol?",
+"7ukprk": "Uno o dos días",
+"1u9znih": "De tres a cinco días",
+"1rjfcqu": "Seis o siete días",
+"kxfi77": "Nunca he reducido ni dejado de beber",
+"suh386": "Condiciones médicas y medicamentos: ¿alguna de estas te corresponde?",
+"a3fxkm": "Tengo una enfermedad del hígado",
+"1518ljt": "Tengo epilepsia, o alguna vez he tenido una convulsión",
+"snt2ic": "En el pasado me hospitalizaron o hice una desintoxicación por el alcohol",
+"ywkarf": "Tengo unas ganas fuertes de beber, o intenté reducir varias veces y no pude",
+"1t44i1o": "Tomo medicamentos sedantes, para dormir o para la ansiedad (por ejemplo, benzodiacepinas)",
+"10uqiod": "Tomo analgésicos fuertes, o consumo drogas",
+"1rsshym": "Tomo antidepresivos u otro medicamento de uso regular",
+"1449hsx": "Qué hacer ahora",
+"p20azm": "Este coach es solo para adultos. Si eres joven, conviene hablar con tu médico o con un orientador. Si ahora mismo ocurre algo peligroso, ve a urgencias o llama a la ambulancia.",
+"17mq8ya": "Has compartido algo importante",
+"u6spbg": "Tener pensamientos de hacerte daño no es algo que tengas que llevar solo/a, y puedes recibir ayuda aunque no estés seguro/a de qué te pasa exactamente. Si estás en peligro inmediato, o sientes que podrías hacerte daño esta noche: ve a urgencias o llama a la ambulancia, o pide a alguien cercano que se quede contigo.",
+"fv964k": "También puedes hablar ahora mismo con alguien: ERAN, primeros auxilios emocionales, por teléfono al 1201 (y por chat en eran.org.il).",
+"1lsm7sm": "Si puedes, aleja lo que podrías usar para hacerte daño, y lo mejor es no beber esta noche si te sientes así. Cuéntale también estos pensamientos a tu médico de familia.",
+"jfusa1": "Si estás embarazada o planeas un embarazo, la guía británica dice que lo más seguro es no beber nada. Si bebiste pequeñas cantidades antes de saber que estabas embarazada, la guía dice que el riesgo probablemente es bajo. Si te cuesta dejarlo, díselo a tu médico o a tu matrona. Es una parte normal de la conversación y no hay nada de qué avergonzarse.",
+"xftfrk": "Si bebes mucho, no lo dejes de golpe por tu cuenta: acude pronto a un médico o a una matrona. Es urgente, porque dejarlo de golpe también puede ser peligroso durante el embarazo.",
+"13jj8tt": "No mostraremos aquí un plan de reducción durante el embarazo.",
+"191gs1q": "Por lo que cuentas, es posible que tu cuerpo esté acostumbrado al alcohol, o que haya una condición que hace inseguro reducir por tu cuenta. En algunas personas, reducir de forma brusca o dejarlo de golpe puede causar temblores, sudoración, confusión, alucinaciones e incluso convulsiones, y el riesgo es mayor en quien ya lo ha vivido. Esto no significa que hayas hecho algo mal. Significa que conviene que un médico acompañe el proceso.",
+"xp9jp": "Por eso no mostramos un plan para reducir por tu cuenta. Lo mejor ahora: pedir cita con tu médico de familia y contarle con sinceridad cuánto bebes y qué medicamentos y condiciones médicas tienes. El médico también puede explicar si hay medicamentos que podrían ayudar; esa decisión es del médico, no del sitio web.",
+"1ovxayt": "Combinar alcohol con sedantes, medicamentos para dormir o analgésicos fuertes, o con drogas, puede ser peligroso incluso en cantidades relativamente pequeñas. No dejes un medicamento ni cambies la dosis sin un médico, y pregunta a tu médico o farmacéutico si es seguro beber con ellos.",
+"70itor": "Si tienes una enfermedad del hígado, epilepsia o una convulsión en el pasado, o una hospitalización o desintoxicación previa por el alcohol, es especialmente importante que un médico acompañe la reducción.",
+"be4sae": "Mientras tanto, no lo dejes de golpe sin un médico, aunque te sientas bien.",
+"5kz04n": "Si aparecen temblores, sudoración fuerte o confusión cuando no bebes, acude a un médico ese mismo día.",
+"vs189c": "Antes de empezar: una regla de seguridad",
+"11l7lrr": "Si bebes todos los días, o antes te sentías mal cuando no bebías, no lo dejes de golpe sin un médico, aunque te sientas bien.",
+"xmn512": "Si mientras reduces aparecen ansiedad fuerte por la mañana, sudoración, temblores, náuseas o vómitos: deja de reducir y acude a un médico ese mismo día.",
+"9i411z": "Conviene saber",
+"1kjwk08": "No se respondieron todas las preguntas de seguridad, o todavía no has intentado reducir, así que no se puede saber cómo reaccionará tu cuerpo. Si bebes mucho o todos los días, o aparecen temblores o sudoración cuando no bebes, habla primero con un médico.",
+"i82spb": "Medicamentos",
+"puv3q0": "Si tomas medicamentos con receta, pregunta a tu médico o farmacéutico si es seguro beber con ellos. Con algunos medicamentos, mezclarlos con alcohol puede ser peligroso, aunque no bebas mucho. No dejes ni cambies un medicamento sin hablar con tu médico.",
+"fry8fg": "En ensayos de conversaciones breves con personas que beben de forma arriesgada pero no son dependientes del alcohol, el consumo bajó unos 20 gramos por semana de media después de un año (34 estudios, 15 197 participantes), en comparación con un grupo de control. No se probó si una herramienta en línea funciona igual. Es un paso modesto que muestra que un cambio pequeño es posible. Puedes fijar un límite antes de salir y anotar al final del día cuánto bebiste. No sabemos si anotarlo ayuda por sí mismo.",
+"1en92ca": "Según la guía británica, conviene no superar de forma habitual las 14 unidades a la semana y repartir el consumo de manera uniforme en tres días o más. Una unidad británica son 8 gramos, así que 14 unidades son unos 112 gramos, es decir, unas 8 bebidas según la definición de aquí (unos 14 gramos por bebida), no 14 bebidas. En el estudio de Wood (Lancet 2018) el riesgo de muerte fue más bajo alrededor de 100 gramos por semana o menos (unas 7 bebidas). Menos es mejor.",
+"609udp": "Beber a diario",
+"190gyg4": "Si bebes todos los días, no hagas días sin alcohol de golpe. Si quieres reducir, hazlo poco a poco y con un médico, y no lo dejes de golpe.",
+"7qhn6r": "Puedes comer y beber un vaso de agua antes, cambiar una de cada dos bebidas por una sin alcohol, elegir un vaso más pequeño o una bebida más suave, y contarle a un amigo o a tu pareja que estás reduciendo. Son consejos de las guías, no de estudios que probaran cada consejo por separado. No todos sirven para todos; puedes elegir uno o dos. El alcohol por la noche puede alterar el sueño, sobre todo en la segunda mitad de la noche. Si bebes para relajarte o para dormir, cuéntaselo a tu médico: hay otras formas.",
+"1ndgmn1": "Cada pequeño paso cuenta. Si no funcionó, no es un fracaso sino información sobre lo que te resulta difícil. Y si es difícil, puedes pedir ayuda; no es señal de debilidad. Si te cuesta reducir una y otra vez, conviene hablar con un médico."
+});
+Object.assign(I18N.es, {
+"wae16r": " (este valor no se usará: hay un análisis más reciente del ",
+"khor94": " en la misma carga)"
+});
+Object.assign(I18N.es, {
+"1ir2yoi": " (sin marcar: es un valor antiguo y no se sabe cuándo se midió el valor del formulario. Márcalo si quieres reemplazarlo)"
+});
