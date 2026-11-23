@@ -170,6 +170,7 @@ var SiteRender = (function () {
         (t.answer ? '<p class="topic-answer"><b>' + L('התשובה הקצרה:') + '</b> ' + esc(t.answer) + '</p>' : '') +
         '<p class="topic-lead">' + esc(t.lead) + '</p>' +
         (t.id === 'sleep' ? '<p><a class="btn ghost" href="' + SiteURL('coach', 'sleep') + '">' + L('למאמן השינה: תוכנית אישית') + '</a></p>' : '') +
+        (t.id === 'weight' ? '<p><a class="btn ghost" href="' + SiteURL('coach', 'weight') + '">' + L('למאמן המשקל והתזונה: תוכנית אישית') + '</a></p>' : '') +
         (t.id === 'habits' ? '<p><a class="btn ghost" href="' + SiteURL('coach', 'smoking') + '">' + L('למאמן הגמילה מעישון: תוכנית אישית') + '</a></p>' : '') +
         '<p class="topic-meta">' + t.mins + ' ' + L('דקות קריאה') + ' · ' + t.sources.length + ' ' + L('מקורות') + '</p>' +
       '</div></header>' +
@@ -249,12 +250,18 @@ var SiteRender = (function () {
 
   /* ---------- מאמן שינה: הקליפה הסטטית; השאלון עצמו נבנה ב-coach.js ---------- */
   function coach(id) {
-    var sm = id === 'smoking';
-    return '<article class="page"><p class="eyebrow">' + (sm ? L('עישון') : L('שינה')) + '</p><h1>' + (sm ? L('מאמן גמילה מעישון') : L('מאמן שינה')) + '</h1>' +
-      '<p class="lead">' + (sm ? L('כמה שאלות עליך, ותוכנית מבוססת מחקר לגמילה מעישון, עם מקורות. בלי שיפוט.') : L('כמה שאלות על השינה שלך, ותוכנית מבוססת מחקר. כל הפסקאות לקוחות ממדריך השינה, עם קישור לכל מקור.')) + '</p>' +
-      '<p class="trustline">' + (sm ? L('זה לא אבחנה ולא ייעוץ רפואי. אנחנו לא ממליצים על תרופת מרשם מסוימת או על מינונים. בכל ספק, רופא/ה.') : L('זה לא אבחנה ולא ייעוץ רפואי. אנחנו לא ממליצים על תרופות מרשם או מינונים. בכל ספק, רופא/ה.')) + '</p>' +
-      '<div id="coach" class="coach"></div><noscript><p>' + (sm ? L('המאמן דורש JavaScript. אפשר לקרוא את מדריך ההרגלים במקומו.') : L('המאמן דורש JavaScript. אפשר לקרוא את מדריך השינה במקומו.')) + '</p></noscript>' +
-      '<p><a href="' + SiteURL('topic', sm ? 'habits' : 'sleep') + '">' + (sm ? L('למדריך ההרגלים המלא, עם כל המקורות') : L('למדריך השינה המלא, עם כל המקורות')) + '</a></p></article>';
+    var C = {
+      sleep: { eb: L('שינה'), h1: L('מאמן שינה'), lead: L('כמה שאלות על השינה שלך, ותוכנית מבוססת מחקר. כל הפסקאות לקוחות ממדריך השינה, עם קישור לכל מקור.'),
+        trust: L('זה לא אבחנה ולא ייעוץ רפואי. אנחנו לא ממליצים על תרופות מרשם או מינונים. בכל ספק, רופא/ה.'), ns: L('המאמן דורש JavaScript. אפשר לקרוא את מדריך השינה במקומו.'), topic: 'sleep', link: L('למדריך השינה המלא, עם כל המקורות') },
+      smoking: { eb: L('עישון'), h1: L('מאמן גמילה מעישון'), lead: L('כמה שאלות עליך, ותוכנית מבוססת מחקר לגמילה מעישון, עם מקורות. בלי שיפוט.'),
+        trust: L('זה לא אבחנה ולא ייעוץ רפואי. אנחנו לא ממליצים על תרופת מרשם מסוימת או על מינונים. בכל ספק, רופא/ה.'), ns: L('המאמן דורש JavaScript. אפשר לקרוא את מדריך ההרגלים במקומו.'), topic: 'habits', link: L('למדריך ההרגלים המלא, עם כל המקורות') },
+      weight: { eb: L('משקל'), h1: L('מאמן משקל ותזונה'), lead: L('כמה שאלות עליך, ותוכנית מבוססת מחקר לתזונה ולירידה מתונה במשקל, עם מקורות. בלי שיפוט ובלי הבטחות.'),
+        trust: L('זה לא אבחנה ולא ייעוץ רפואי או תזונתי. אנחנו לא נותנים יעדי קלוריות, תרופות או מינונים. בכל ספק, רופא/ה או דיאטן/ית.'), ns: L('המאמן דורש JavaScript. אפשר לקרוא את מדריך המשקל במקומו.'), topic: 'weight', link: L('למדריך המשקל המלא, עם כל המקורות') }
+    }[id === 'smoking' || id === 'weight' ? id : 'sleep'];
+    return '<article class="page"><p class="eyebrow">' + C.eb + '</p><h1>' + C.h1 + '</h1>' +
+      '<p class="lead">' + C.lead + '</p><p class="trustline">' + C.trust + '</p>' +
+      '<div id="coach" class="coach"></div><noscript><p>' + C.ns + '</p></noscript>' +
+      '<p><a href="' + SiteURL('topic', C.topic) + '">' + C.link + '</a></p></article>';
   }
 
   return { home: home, topic: topic, about: about, sources: sources, coach: coach, byId: byId, esc: esc };

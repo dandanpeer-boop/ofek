@@ -227,11 +227,148 @@ var SmokingCoach = (function () {
   return { mount: mount, plan: plan, QUESTIONS: QUESTIONS };
 })();
 
+/* מאמן משקל ותזונה: שאלון קצר ותוכנית מבוססת מחקר. רץ כולו בדפדפן, לא שולח ולא שומר דבר.
+   הראיות מפורטות ב-research/proposals/2026-11-23-coach-weight-nutrition.md. אין יעדי קלוריות, אין תרופה או מינון, אין הבטחת תוצאה.
+   עוצר (אזהרה בלבד, בלי תוכנית) ב: משקל נמוך, היסטוריה של הפרעת אכילה, סוכרת באינסולין או בסולפונילאוריאה, הריון/הנקה, מחלת כליות,
+   ירידה לא מוסברת במשקל, וגיל מתחת ל-18. BMI מעל 35 הוא אזהרה רכה (הסף הוא הצעה של דן). */
+var WeightCoach = (function () {
+  'use strict';
+  function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
+
+  var QUESTIONS = [
+    { id: 'height', type: 'num', q: L('גובה בסנטימטרים (אפשר לדלג)'), min: 120, max: 230 },
+    { id: 'weight', type: 'num', q: L('משקל בקילוגרמים (אפשר לדלג)'), min: 30, max: 300 },
+    { id: 'goal', type: 'one', q: L('מה המטרה?'), o: [
+      ['lose', L('להוריד משקל')], ['eat', L('לשפר את התזונה, בלי להתמקד במשקל')], ['keep', L('לשמור על המשקל')], ['unsure', L('לא בטוח/ה')]] },
+    { id: 'tries', type: 'one', q: L('האם ניסית להוריד משקל בעבר?'), o: [
+      ['never', L('לא')], ['regain', L('כן, והמשקל חזר')], ['kept', L('כן, ושמרתי על התוצאה')]] },
+    { id: 'drinks', type: 'one', q: L('כמה משקאות ממותקים (קולה, מיץ, משקאות אנרגיה) בדרך כלל ביום?'), o: [
+      ['none', L('כמעט אף אחד')], ['some', L('אחד או שניים')], ['many', L('שלושה או יותר')]] },
+    { id: 'alc', type: 'one', q: L('כמה משקאות אלכוהוליים בשבוע?'), o: [
+      ['none', L('אף אחד')], ['low', L('עד 7')], ['high', L('יותר מ-7')]] },
+    { id: 'proc', type: 'one', q: L('באיזו תדירות אתה אוכל מזון מהיר, חטיפים או מזון מוכן ארוז?'), o: [
+      ['rare', L('לעיתים רחוקות')], ['some', L('כמה פעמים בשבוע')], ['often', L('כמעט כל יום')]] },
+    { id: 'act', type: 'one', q: L('כמה דקות פעילות גופנית בשבוע (הליכה מהירה, ריצה, אופניים)?'), o: [
+      ['low', L('פחות מ-150')], ['mid', L('150–300')], ['high', L('יותר מ-300')]] },
+    { id: 'str', type: 'one', q: L('האם אתה עושה אימוני כוח?'), o: [['yes', L('כן')], ['no', L('לא')]] },
+    { id: 'flags', type: 'multi', q: L('האם אחד מאלה נכון לגביך?'), o: [
+      ['minor', L('אני מתחת לגיל 18')],
+      ['preg', L('אני בהריון, מתכננת הריון או מניקה')],
+      ['insulin', L('יש לי סוכרת ואני מטופל/ת באינסולין או בתרופה מסוימת לסוכרת')],
+      ['kidney', L('יש לי מחלת כליות')],
+      ['loss', L('ירדתי במשקל מהר ובלי סיבה ברורה')],
+      ['ed', L('יש לי או שהיה לי קושי קשה עם אוכל, כמו התקפי אכילה, הקאות, הימנעות קיצונית או ספירת קלוריות כפייתית')]] }
+  ];
+
+  var answers = {};
+  function formHTML() {
+    return QUESTIONS.map(function (q) {
+      if (q.type === 'num') {
+        return '<fieldset class="cq"><legend>' + esc(q.q) + '</legend><input type="number" inputmode="numeric" name="' + q.id + '" min="' + q.min + '" max="' + q.max + '" dir="ltr" style="max-width:8rem"></fieldset>';
+      }
+      return '<fieldset class="cq"><legend>' + esc(q.q) + '</legend>' + q.o.map(function (o) {
+        return '<label class="copt"><input type="' + (q.type === 'one' ? 'radio' : 'checkbox') + '" name="' + q.id + '" value="' + o[0] + '"> <span>' + esc(o[1]) + '</span></label>';
+      }).join('') + '</fieldset>';
+    }).join('');
+  }
+  function collect(root) {
+    var a = {};
+    QUESTIONS.forEach(function (q) {
+      if (q.type === 'num') {
+        var el = root.querySelector('input[name="' + q.id + '"]'), n = el && el.value !== '' ? Number(el.value) : NaN;
+        a[q.id] = isFinite(n) && n >= q.min && n <= q.max ? n : undefined;
+        return;
+      }
+      var els = root.querySelectorAll('input[name="' + q.id + '"]:checked'), v = [];
+      for (var i = 0; i < els.length; i++) v.push(els[i].value);
+      a[q.id] = q.type === 'one' ? (v[0] || '') : v;
+    });
+    return a;
+  }
+  function has(a, id, v) { return (a[id] || []).indexOf(v) >= 0; }
+  function para(t) { return t ? '<p>' + esc(t) + '</p>' : ''; }
+  function block(title, bodies) { return '<li><h3>' + esc(title) + '</h3>' + bodies.map(para).join('') + '</li>'; }
+
+  function plan(a) {
+    var f = function (v) { return has(a, 'flags', v); };
+    var bmi = a.height && a.weight ? a.weight / Math.pow(a.height / 100, 2) : null;
+    var safety = [], stop = false;
+    if (f('minor')) { stop = true; safety.push([L('המאמן הזה מיועד למבוגרים'), [L('המאמן הזה מיועד למבוגרים בלבד. בגיל צעיר כדאי להתייעץ עם רופא/ת הילדים או עם דיאטן/ית.')]]); }
+    if (bmi !== null && bmi < 18.5) { stop = true; safety.push([L('משקל נמוך'), [L('לפי הגובה והמשקל שהזנת, המשקל נמצא מתחת לטווח התקין. במצב כזה ירידה במשקל אינה מומלצת, ויש גם סיבות רפואיות שגורמות למשקל נמוך. כדאי לדבר עם רופא/ה לפני כל שינוי.')]]); }
+    if (f('ed')) { stop = true; safety.push([L('קושי עם אוכל'), [L('אם יש או היה לכם קושי עם אוכל, דיאטות מגבילות וספירת קלוריות עלולות להזיק. אנחנו לא מציגים כאן תוכנית ירידה. אפשר לפנות לרופא/ה, לדיאטן/ית או למטפל/ת המתמחים בנושא. אם זה דחוף, פנו לשירותי חירום.')]]); }
+    if (f('insulin')) { stop = true; safety.push([L('סוכרת וטיפול תרופתי'), [L('כשמטופלים באינסולין או בתרופה מסוימת לסוכרת, שינוי בתזונה או ירידה במשקל עלולים לדרוש התאמת טיפול. אין לשנות לבד. כדאי להתייעץ עם הרופא/ה המטפל/ת לפני כן.')]]); }
+    if (f('preg')) { stop = true; safety.push([L('הריון והנקה'), [L('בהריון ובהנקה נדרשות המלצות מותאמות. אנחנו לא מציגים כאן תוכנית ירידה. כדאי להתייעץ עם רופא/ה או דיאטן/ית.')]]); }
+    if (f('kidney')) { stop = true; safety.push([L('מחלת כליות'), [L('במחלת כליות יש מגבלות תזונתיות, בעיקר סביב חלבון, שדורשות התאמה אישית. כדאי להתייעץ עם רופא/ה או דיאטן/ית כליות לפני שינוי.')]]); }
+    if (f('loss')) { stop = true; safety.push([L('ירידה מהירה בלי סיבה'), [L('ירידה במשקל בלי כוונה ובלי סיבה ברורה היא סיבה לבדיקה רפואית. המאמן הזה אינו מתאים למצב כזה.')]]); }
+
+    var out = '<div class="cplan"><h2>' + esc(L('התוכנית שלך')) + '</h2>' +
+      '<p class="muted">' + esc(L('לפי התשובות שלך. זה מידע כללי מבוסס מחקר, לא אבחנה ולא תחליף לרופא/ה או לדיאטן/ית.')) + '</p>';
+    if (stop) {
+      out += '<section class="csafe"><h2>' + esc(L('קודם כול: כדאי לדבר עם איש מקצוע')) + '</h2><ul class="clist">' + safety.map(function (x) { return block(x[0], x[1]); }).join('') + '</ul></section>' +
+        para(L('לכן אנחנו לא מציגים תוכנית. המאמן הזה כללי, ולא מחליף ייעוץ אישי.')) +
+        '<div class="cta-row"><button type="button" class="btn ghost" id="coach-reset">' + esc(L('התחלה מחדש')) + '</button></div></div>';
+      return out;
+    }
+
+    var lose = a.goal === 'lose', soft = [];
+    if (bmi !== null && bmi > 35) soft.push([L('ייעוץ מקצועי יכול לעזור'), [L('כשהמשקל גבוה יותר, ייעוץ מקצועי עשוי להועיל, כולל תוכניות מובנות עם ליווי ואפשרויות נוספות. אפשר להשתמש בהצעות כאן בנוסף לשיחה עם רופא/ה, ולא במקומה.')]]);
+    var steps = [];
+    if (lose) {
+      steps.push([L('מתחילים ביעד קטן'), [L('אפשר להתחיל בקטן. במחקרים, ירידה של 3% עד 5% מהמשקל, אם היא נשמרת, כבר קשורה לשיפור בסוכר, בטריגליצרידים ובלחץ הדם. הירידה לרוב מתחילה מהר ומתמתנת אחרי כחצי שנה, וזה נורמלי ולא כישלון.'),
+        L('הנחיות בריאות בריטיות מציינות קצב של כחצי ועד קילוגרם בשבוע כקצב סביר, ומזהירות מירידה פתאומית בדיאטות. אין צורך למהר.')]]);
+    }
+    steps.push([L('תזונה שאפשר להתמיד בה'), [L('אין עדות שדיאטה אחת מנצחת. בסקירת Cochrane שהשוותה דיאטות דלות פחמימות לדיאטות מאוזנות, ההבדל בירידה במשקל היה קטן, בערך קילוגרם או פחות. מה שחשוב הוא דפוס שמתאים לך ושאפשר להמשיך בו לאורך זמן.'),
+      L('בניסוי PREDIMED, אנשים בסיכון לבבי גבוה שאכלו תזונה ים-תיכונית עם שמן זית כתית או אגוזים חוו פחות אירועי לב ושבץ. הניסוי לא נועד להוריד משקל, ולכן אנחנו לא מבטיחים ירידה, אבל זה דפוס עם ראיות לבריאות הלב.')]]);
+    if (a.act !== 'high' || a.str === 'no') {
+      var mv = [L('ההנחיות ממליצות על לפחות 150 דקות בשבוע של פעילות בינונית, כמו הליכה מהירה. כדי לשמור על משקל שירד לאורך שנים מדברים על 200 עד 300 דקות בשבוע. אפשר להתחיל מ-10 דקות ולהוסיף.')];
+      if (a.str === 'no') mv.push(L('כשיורדים במשקל, חלק מהירידה היא מסת שריר. בניסוי במבוגרים מבוגרים עם עודף משקל, מי שהוסיפו אימוני כוח איבדו פחות מסת שריר (2% עד 3% לעומת 5% באימון אירובי בלבד). לגבי כמות החלבון בזמן דיאטה אין לנו נתון מאומת, ולכן כדאי להתייעץ עם דיאטן/ית.'));
+      steps.push([L('תנועה ואימוני כוח'), mv]);
+    }
+    if (a.drinks === 'some' || a.drinks === 'many' || a.alc === 'low' || a.alc === 'high') {
+      var dr = [];
+      if (a.drinks === 'some' || a.drinks === 'many') dr.push(L('מי ששותה בדרך כלל 1–2 משקאות ממותקים ביום היה בסיכון גבוה ב-26% לפתח סוכרת סוג 2 (מחקרי תצפית). החלפה במים, סודה או תה לא ממותק היא אחד הצעדים הקלים להתחיל בהם.'));
+      if (a.alc === 'low' || a.alc === 'high') dr.push(L('לאלכוהול יש כ-7 קלוריות לגרם. כוס יין (175 מ"ל) יכולה להכיל עד 158 קלוריות, ופינט בירה עד 222. הקשר בין שתייה לעלייה במשקל במחקרים אינו עקבי, והוא ברור יותר בשתייה מרובה.'));
+      steps.push([L('משקאות'), dr]);
+    }
+    if (a.proc === 'often' || a.proc === 'some') steps.push([L('מזון אולטרה-מעובד, בזהירות'), [L('בניסוי אשפוז קטן של 20 מבוגרים, מי שאכלו דיאטה עתירת מזון אולטרה-מעובד אכלו כ-500 קלוריות ביום יותר ועלו כ-0.9 ק"ג בשבועיים. רוב הראיות האחרות הן מחקרי תצפית באיכות נמוכה, ואין עדיין הוכחה שהמעבוד עצמו הוא הסיבה. אפשר לשים לב כמה מהאוכל מוכן, ארוז וקל לאכול ממנו הרבה.')]]);
+    if (a.goal === 'keep' || a.tries === 'regain' || lose) steps.push([L('שמירה על המשקל'), [L('הירידה היא החצי הקל. ההנחיות ממליצות על תוכנית שמירה של לפחות שנה, עם שקילה תכופה ופעילות גבוהה יותר. אם ניסיתם בעבר והמשקל חזר, זו תופעה מוכרת ולא תכונה שלכם.')]]);
+    steps = steps.slice(0, 5);
+
+    if (safety.length || soft.length) out += '<section class="csafe"><h2>' + esc(L('כדאי לשים לב')) + '</h2><ul class="clist">' + soft.map(function (x) { return block(x[0], x[1]); }).join('') + '</ul></section>';
+    out += '<section><h2>' + esc(L('מה לנסות')) + '</h2><ol class="clist">' + steps.map(function (x) { return block(x[0], x[1]); }).join('') + '</ol></section>';
+    if (lose) out += para(L('דיאטות של החלפת ארוחות בכ-800 קלוריות ביום נעשות רק במסגרת רפואית עם ניטור, לפי הנחיית AHA. אל תנסו זאת לבד.'));
+    if (bmi !== null && bmi >= 30) out += para(L('קיימות גם תרופות להשמנה. הן נרשמות רק על ידי רופא/ה. לפי הנחיית AHA/ACC/TOS (דעת מומחים), אפשר לשקול תרופה כתוספת לשינוי אורח חיים כש-BMI הוא 30 ומעלה, או 27 ומעלה עם מצב רפואי נלווה. זו אינה המלצה אישית, ואנחנו לא ממליצים על תרופה או מינון.'));
+    out += para(L('המאמן הזה כללי, ולא מחליף ייעוץ אישי. אם יש לכם מצב רפואי, אתם נוטלים תרופות או שאתם לא בטוחים, כדאי להתייעץ עם רופא/ה או דיאטן/ית לפני שמשנים משמעותית את התזונה.')) +
+      '<p><a href="' + esc(SiteURL('topic', 'weight')) + '">' + esc(L('למדריך המשקל המלא, עם כל המקורות')) + '</a></p>' +
+      '<div class="cta-row"><button type="button" class="btn ghost" id="coach-reset">' + esc(L('התחלה מחדש')) + '</button></div></div>';
+    return out;
+  }
+
+  function mount(root) {
+    root.innerHTML = '<form class="coachform" id="coach-form">' + formHTML() +
+      '<p class="small muted">' + esc(L('אפשר לדלג על שאלות. התשובות לא נשלחות לשום מקום ולא נשמרות.')) + '</p>' +
+      '<div class="cta-row"><button type="submit" class="btn primary">' + esc(L('בנו לי תוכנית')) + '</button></div></form><div id="coach-out" aria-live="polite"></div>';
+    var form = document.getElementById('coach-form'), out = document.getElementById('coach-out');
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      answers = collect(form);
+      out.innerHTML = plan(answers);
+      form.style.display = 'none';
+      out.scrollIntoView();
+      document.getElementById('coach-reset').addEventListener('click', function () {
+        out.innerHTML = ''; form.reset(); form.style.display = ''; form.scrollIntoView();
+      });
+    });
+  }
+  return { mount: mount, plan: plan, QUESTIONS: QUESTIONS };
+})();
+
 (function () {
   function go() {
     var el = document.getElementById('coach');
     if (!el) return;
-    if (document.body.getAttribute('data-topic') === 'smoking') SmokingCoach.mount(el); else SleepCoach.mount(el);
+    var id = document.body.getAttribute('data-topic');
+    if (id === 'smoking') SmokingCoach.mount(el); else if (id === 'weight') WeightCoach.mount(el); else SleepCoach.mount(el);
   }
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', go); else go();
 })();
