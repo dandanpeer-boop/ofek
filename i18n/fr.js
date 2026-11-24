@@ -1923,3 +1923,14 @@ Object.assign(I18N.fr, {
 "1m24pcw": "Garmin VO2max",
 "1wvhn77": "Calcul local dans votre navigateur"
 });
+
+Object.assign(I18N.fr, {
+"v1kc76": "Un calculateur qui estime combien d’années vous pouvez espérer vivre, et ce que vous pouvez changer pour en gagner davantage.",
+"1xwcuw4": "De nombreuses études montrent ce qui raccourcit la vie et ce qui la prolonge. Le calculateur montre ce que cela change pour vous, et les guides expliquent ce que vous pouvez modifier."
+});
+
+Object.assign(I18N.fr, {
+"954kd": "Combien d’années pouvez-vous espérer vivre ?",
+"3yz31c": "Le calculateur part de la table de mortalité officielle de l’Organisation mondiale de la santé (par âge, sexe et pays), et l’ajuste selon votre mode de vie, vos antécédents familiaux et vos analyses de sang. Les ajustements reposent sur de grandes études.",
+"d29kc": "Quelques questions qui influencent le plus le résultat, environ une minute. Vous pourrez ajouter des détails après avoir vu le résultat."
+});

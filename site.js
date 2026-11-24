@@ -52,10 +52,7 @@ var SiteRender = (function () {
     '<path d="M30 40 C150 42 230 60 300 110 S420 220 490 250" fill="none" stroke="var(--accent)" stroke-width="4" stroke-linecap="round"/>' +
     '<line x1="30" y1="270" x2="490" y2="270" stroke="var(--line-art)" stroke-width="2" opacity=".5"/>' +
     '<circle cx="300" cy="110" r="8" fill="var(--sun1)" stroke="var(--accent)" stroke-width="3"/>' +
-    '</svg>' +
-    '<div class="hero-tags">' +
-    '<span>' + L('PDF בדיקות דם') + '</span><span>' + L('Garmin VO2max') + '</span><span>' + L('חישוב מקומי בדפדפן') + '</span>' +
-    '</div></div>';
+    '</svg></div>';
 
   /* ---------- עמוד הבית ---------- */
   function topicCard(t) {
@@ -89,8 +86,8 @@ var SiteRender = (function () {
       '<section class="hero"><div class="hero-in">' +
         '<div class="hero-text">' +
           '<p class="eyebrow">' + L('מדע פשוט לחיים ארוכים') + '</p>' +
-          '<h1>' + L('כמה שנים עוד לפניך?') + '<br><span class="h1sub">' + L('מחשבון תוחלת חיים של דקה: הערכה וטווח, ומה אפשר לשנות כדי להוסיף עוד.') + '</span>' + '</h1>' +
-          '<p class="hero-lead">' + L('המחקר כבר יודע מה מקצר חיים ומה מאריך אותם. החישוב מראה מה זה אומר עליך, והמדריכים מראים מה לשנות.') + '</p>' +
+          '<h1>' + L('כמה שנים עוד לפניך?') + '<br><span class="h1sub">' + L('מחשבון שמעריך כמה שנים צפויות לך, ומה אפשר לשנות כדי להוסיף עוד.') + '</span>' + '</h1>' +
+          '<p class="hero-lead">' + L('מחקרים רבים מראים מה מקצר חיים ומה מאריך אותם. המחשבון מראה איך זה נוגע לך, והמדריכים מסבירים מה אפשר לשנות.') + '</p>' +
           '<div class="cta-row"><a class="btn primary" href="' + SiteURL('calc') + '" data-calc-cta>' + icon('calc') + '<span>' + calcLabel(L('לחישוב, כדקה')) + '</span></a>' +
           '<a class="btn ghost" href="' + SiteURL('topics') + '">' + icon('book') + L('למדריכים') + '</a></div>' +
           '<ul class="trust"><li>' + icon('lock', 'sm') + L('בלי הרשמה, הנתונים נשארים במכשיר') + '</li><li>' + icon('check', 'sm') + L('כל מספר עם מקור מחקרי') + '</li></ul>' +

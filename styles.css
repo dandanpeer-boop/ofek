@@ -280,8 +280,6 @@ a { color: var(--accent); }
 .hero-text { text-align: start; }
 .hero-art { background: var(--card, #fff); border: 1px solid var(--line, #e3e8ea); border-radius: 28px; box-shadow: var(--shadow); padding: 22px 22px 18px; }
 .hero-art svg { width: 100%; height: auto; display: block; }
-.hero-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
-.hero-tags span { font-size: 13px; padding: 5px 12px; border-radius: 999px; background: var(--sky1); color: var(--ink); border: 1px solid var(--line-art); }
 .trust { list-style: none; padding: 0; margin: 22px 0 0; display: flex; flex-wrap: wrap; gap: 8px 22px; color: var(--muted); font-size: 14px; }
 .trust li { display: inline-flex; align-items: center; gap: 6px; }
 @media (max-width: 860px) { .hero-in { grid-template-columns: 1fr; gap: 28px; padding: 32px 16px 40px; } .hero-art { padding: 16px; } }

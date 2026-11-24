@@ -1923,3 +1923,14 @@ Object.assign(I18N.es, {
 "1m24pcw": "Garmin VO2max",
 "1wvhn77": "Cálculo local en tu navegador"
 });
+
+Object.assign(I18N.es, {
+"v1kc76": "Una calculadora que estima cuántos años puedes esperar vivir y qué puedes cambiar para vivir más.",
+"1xwcuw4": "Muchos estudios muestran qué acorta la vida y qué la alarga. La calculadora muestra cómo te afecta a ti, y las guías explican qué puedes cambiar."
+});
+
+Object.assign(I18N.es, {
+"954kd": "¿Cuántos años puedes esperar vivir?",
+"3yz31c": "La calculadora parte de la tabla de mortalidad oficial de la Organización Mundial de la Salud (por edad, sexo y país) y la ajusta según tu estilo de vida, tus antecedentes familiares y tus análisis de sangre. Los ajustes se basan en grandes estudios.",
+"d29kc": "Unas pocas preguntas que más afectan al resultado, alrededor de un minuto para rellenarlas. Puedes añadir detalles después de ver el resultado."
+});

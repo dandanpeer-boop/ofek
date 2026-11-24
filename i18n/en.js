@@ -1925,3 +1925,14 @@ Object.assign(I18N.en, {
 "1m24pcw": "Garmin VO2max",
 "1wvhn77": "Calculated locally in your browser"
 });
+
+Object.assign(I18N.en, {
+"v1kc76": "A calculator that estimates how many years you can expect, and what you can change to add more.",
+"1xwcuw4": "Many studies show what shortens life and what extends it. The calculator shows how this applies to you, and the guides explain what you can change."
+});
+
+Object.assign(I18N.en, {
+"954kd": "How many years can you expect?",
+"3yz31c": "The calculator starts from the official World Health Organization life table (by age, sex and country), and adjusts it for your lifestyle, family history and blood tests. The adjustments are based on large studies.",
+"d29kc": "A few questions that affect the result most, about a minute to fill in. You can add details after you see the result."
+});
