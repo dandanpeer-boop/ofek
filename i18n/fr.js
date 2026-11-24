@@ -1917,3 +1917,9 @@ Object.assign(I18N.fr, {
 "18v2xhl": "Dans une étude observationnelle américaine de Jha (NEJM, 2013), les personnes qui ont arrêté de fumer à 25–34 ans ont vécu en moyenne environ 10 ans de plus, à 35–44 ans environ 9, à 45–54 ans environ 6 et à 55–64 ans environ 4, par rapport à celles qui ont continué à fumer. Arrêter avant 40 ans a été associé au fait d'éviter environ 90 % de l'excès de risque de décès.",
 "191h8vw": "Pendant la grossesse et l'allaitement, nous ne donnons pas ici de recommandation générale sur les substituts nicotiniques ou les médicaments. La décision se prend avec un médecin ou une sage-femme. Ne commencez pas de substituts nicotiniques ni de médicament avant de leur en parler. En attendant, l'accompagnement par la parole est un pas par lequel on peut commencer."
 });
+
+Object.assign(I18N.fr, {
+"5j4m0i": "PDF d’analyses de sang",
+"1m24pcw": "Garmin VO2max",
+"1wvhn77": "Calcul local dans votre navigateur"
+});

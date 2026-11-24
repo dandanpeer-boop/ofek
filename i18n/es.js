@@ -1917,3 +1917,9 @@ Object.assign(I18N.es, {
 "18v2xhl": "En un estudio observacional estadounidense de Jha (NEJM, 2013), quienes dejaron de fumar a los 25–34 años vivieron de media unos 10 años más, a los 35–44 unos 9, a los 45–54 unos 6 y a los 55–64 unos 4, en comparación con quienes siguieron fumando. Dejarlo antes de los 40 se asoció con evitar cerca del 90 % del exceso de riesgo de muerte.",
 "191h8vw": "En el embarazo y la lactancia no hay aquí una recomendación general sobre sustitutos de nicotina o medicamentos. La decisión se toma con un médico o una matrona. No empieces sustitutos de nicotina ni un medicamento antes de hablar con ellos. Mientras tanto, el apoyo mediante conversación es un paso con el que se puede empezar."
 });
+
+Object.assign(I18N.es, {
+"5j4m0i": "PDF de análisis de sangre",
+"1m24pcw": "Garmin VO2max",
+"1wvhn77": "Cálculo local en tu navegador"
+});

@@ -123,7 +123,7 @@ var LifeModel = (function () {
 
   // ---------- 2. עזרי גורמי סיכון ----------
 
-  function dsep(s) { return (typeof LANG !== 'undefined' && (LANG === 'es' || LANG === 'fr')) ? String(s).replace('.', ',') : String(s); }
+  function dsep(s) { return (typeof LANG !== 'undefined' && (LANG === 'es' || LANG === 'fr' || LANG === 'ru')) ? String(s).replace('.', ',') : String(s); }
 
   function clamp(x, lo, hi) { return Math.max(lo, Math.min(hi, x)); }
   function isNum(x) { return typeof x === 'number' && isFinite(x); }

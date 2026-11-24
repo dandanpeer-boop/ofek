@@ -1919,3 +1919,9 @@ Object.assign(I18N.en, {
 "18v2xhl": "In an observational American study by Jha (NEJM, 2013), people who quit smoking at age 25–34 lived on average about 10 years longer, at 35–44 about 9, at 45–54 about 6 and at 55–64 about 4, compared with those who kept smoking. Quitting before age 40 was linked to avoiding about 90% of the excess risk of death.",
 "191h8vw": "In pregnancy and breastfeeding there is no general recommendation here on nicotine replacement or medicines. The decision is made with a doctor or midwife. Do not start nicotine replacement or a medicine before talking to them. In the meantime, support through talking is a step you can start with."
 });
+
+Object.assign(I18N.en, {
+"5j4m0i": "PDF lab results",
+"1m24pcw": "Garmin VO2max",
+"1wvhn77": "Calculated locally in your browser"
+});

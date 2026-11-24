@@ -266,10 +266,14 @@ a { color: var(--accent); }
 .hero h1 .h1sub { display: block; font-size: .5em; line-height: 1.25; font-weight: 600; color: var(--muted); margin-top: 10px; letter-spacing: 0; }
 .hero-lead { font-size: clamp(17px, 2vw, 20px); color: var(--muted); max-width: 34em; }
 .hero-lead b { color: var(--ink); }
-.hero-art { width: 100%; height: auto; display: block; border-radius: 28px; box-shadow: var(--shadow); }
+.hero-text { text-align: start; }
+.hero-art { background: var(--card, #fff); border: 1px solid var(--line, #e3e8ea); border-radius: 28px; box-shadow: var(--shadow); padding: 22px 22px 18px; }
+.hero-art svg { width: 100%; height: auto; display: block; }
+.hero-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
+.hero-tags span { font-size: 13px; padding: 5px 12px; border-radius: 999px; background: var(--sky1); color: var(--ink); border: 1px solid var(--line-art); }
 .trust { list-style: none; padding: 0; margin: 22px 0 0; display: flex; flex-wrap: wrap; gap: 8px 22px; color: var(--muted); font-size: 14px; }
 .trust li { display: inline-flex; align-items: center; gap: 6px; }
-@media (max-width: 860px) { .hero-in { grid-template-columns: 1fr; gap: 28px; padding: 32px 16px 40px; } .hero-art { max-height: 260px; object-fit: cover; } }
+@media (max-width: 860px) { .hero-in { grid-template-columns: 1fr; gap: 28px; padding: 32px 16px 40px; } .hero-art { padding: 16px; } }
 
 /* רצועת 14 שנים */
 .band { background: var(--band); color: var(--band-ink); }

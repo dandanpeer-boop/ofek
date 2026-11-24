@@ -43,19 +43,19 @@ var SiteRender = (function () {
     return '<svg class="ic ' + (cls || '') + '" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' + (ICONS[name] || '') + '</svg>';
   }
 
+  /* כרטיס המוצר בדף הבית: עקומת הישרדות כללית (בלי מספרים) ושלוש תגיות בידול */
   var HERO_ART =
-    '<svg class="hero-art" viewBox="0 0 520 360" aria-hidden="true">' +
-    '<defs><linearGradient id="sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="var(--sky1)"/><stop offset="1" stop-color="var(--sky2)"/></linearGradient>' +
-    '<radialGradient id="sun" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="var(--sun1)"/><stop offset="1" stop-color="var(--sun2)"/></radialGradient></defs>' +
-    '<rect width="520" height="360" rx="28" fill="url(#sky)"/>' +
-    '<circle cx="300" cy="230" r="150" fill="var(--sun2)" opacity=".18"/>' +
-    '<circle cx="300" cy="230" r="86" fill="url(#sun)"/>' +
-    '<path d="M0 238 C90 200 170 214 250 228 S420 250 520 214 V360 H0Z" fill="var(--hill1)"/>' +
-    '<path d="M0 276 C110 246 210 262 300 274 S450 290 520 262 V360 H0Z" fill="var(--hill2)"/>' +
-    '<path d="M0 314 C120 296 240 306 340 314 S470 324 520 306 V360 H0Z" fill="var(--hill3)"/>' +
-    '<g fill="none" stroke="var(--line-art)" stroke-width="2" stroke-linecap="round" opacity=".55">' +
-    '<path d="M70 92 q14 -10 28 0 q14 -10 28 0"/><path d="M118 62 q10 -7 20 0 q10 -7 20 0"/></g>' +
-    '</svg>';
+    '<div class="hero-art" aria-hidden="true">' +
+    '<svg viewBox="0 0 520 300" role="presentation">' +
+    '<defs><linearGradient id="survfill" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="var(--accent)" stop-opacity=".28"/><stop offset="1" stop-color="var(--accent)" stop-opacity="0"/></linearGradient></defs>' +
+    '<path d="M30 40 C150 42 230 60 300 110 S420 220 490 250 V270 H30Z" fill="url(#survfill)"/>' +
+    '<path d="M30 40 C150 42 230 60 300 110 S420 220 490 250" fill="none" stroke="var(--accent)" stroke-width="4" stroke-linecap="round"/>' +
+    '<line x1="30" y1="270" x2="490" y2="270" stroke="var(--line-art)" stroke-width="2" opacity=".5"/>' +
+    '<circle cx="300" cy="110" r="8" fill="var(--sun1)" stroke="var(--accent)" stroke-width="3"/>' +
+    '</svg>' +
+    '<div class="hero-tags">' +
+    '<span>' + L('PDF בדיקות דם') + '</span><span>' + L('Garmin VO2max') + '</span><span>' + L('חישוב מקומי בדפדפן') + '</span>' +
+    '</div></div>';
 
   /* ---------- עמוד הבית ---------- */
   function topicCard(t) {

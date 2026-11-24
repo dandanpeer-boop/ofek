@@ -28,7 +28,9 @@ var LANGS = {
   en: { name: 'English', dir: 'ltr', locale: 'en-US', country: 'USA', path: 'en/' },
   es: { name: 'Español', dir: 'ltr', locale: 'es-ES', country: 'ESP', path: 'es/' },
   fr: { name: 'Français', dir: 'ltr', locale: 'fr-FR', country: 'FRA', path: 'fr/' },
-  de: { name: 'Deutsch', dir: 'ltr', locale: 'de-DE', country: 'DEU', path: 'de/' }
+  de: { name: 'Deutsch', dir: 'ltr', locale: 'de-DE', country: 'DEU', path: 'de/' },
+  ru: { name: 'Русский', dir: 'ltr', locale: 'ru-RU', country: 'ISR', path: 'ru/' },
+  ar: { name: 'العربية', dir: 'rtl', locale: 'ar-u-nu-latn', country: 'ISR', path: 'ar/' }
 };
 
 /* שמות המדינות בלוחות התמותה מגיעים בעברית; בשפות אחרות הדפדפן מתרגם אותם לפי קוד המדינה */
