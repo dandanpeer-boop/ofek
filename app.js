@@ -1235,15 +1235,16 @@
       return '<div class="stat"><b>' + pct(p['reach' + t]) + L('</b><span>סיכוי להגיע לגיל ') + t + '</span></div>';
     }).join('');
 
-    app.innerHTML = '<div class="card">' +
+    app.innerHTML = '<div class="card"><div class="rc-grid">' +
+      '<div class="rc-top">' +
       L('<div class="hero"><div class="muted">תוחלת החיים המשוערת שלך</div><div class="big">') + fmt(p.expectedAge) + '</div>' +
       L('<div class="sub">עוד כ-') + Math.round(p.remaining) + L(' שנים, עד סביבות שנת ') + year + '</div>' +
       '<div class="delta">' + deltaTxt + '</div>' +
       L('<div class="sub" style="margin-top:6px">חצי מהאנשים עם נתונים כמו שלך חיים עד גיל שבין <b>') + Math.round(p.p25) + L(' ל-') + Math.round(p.p75) + '</b></div>' +
       L('<div class="sharerow"><button type="button" class="sharebtn" id="share">שיתוף התוצאה</button><span class="small muted" id="sharestat" role="status"></span></div>') + '</div>' +
-      refineHTML() +
-      DISCLAIMER +
-
+      refineHTML() + '</div>' +
+      '<div class="rc-disc">' + DISCLAIMER + '</div>' +
+      '<div class="rc-left">' +
       bioAgeHTML(r) +
 
       L('<h3>הטווח, לא רק המספר</h3>') +
@@ -1260,7 +1261,8 @@
       L('<h3>מה מוסיף ומה מוריד שנים</h3>') +
       L('<p class="small muted">השפעת כל גורם בשנים, ביחס לממוצע האוכלוסייה. הסכום שווה להפרש הכולל מהממוצע.') + L(' הקשרים סטטיסטיים ולא בהכרח סיבתיים, ולכן זו אינה הבטחה לרווח בפועל.</p>') +
       factorRows(r) +
-
+      '</div>' +
+      '<div class="rc-right">' +
       trendsHTML(inp, r) +
       othersHTML() +
 
@@ -1271,6 +1273,8 @@
 
       improveHTML(inp, r) +
       simHTML(inp, r) +
+      '</div>' +
+      '<div class="rc-foot">' +
       guideHTML(inp, r) +
       '<p style="margin-top:14px"><a href="' + SiteURL('topics') + '">' + L('לכל המדריכים באתר: תזונה, צום, סוכר, תנועה, קשרים חברתיים ועוד') + (LANGS[LANG].dir === 'rtl' ? ' ←' : ' →') + '</a></p>' +
 
@@ -1279,7 +1283,7 @@
       L('<p class="small"><b>מגבלות:</b> המחקרים הם תצפיתיים ומראים קשר סטטיסטי, לא בהכרח סיבתיות. המודל אינו מכיר מחלות קיימות, תרופות, גנטיקה אישית או תאונות, ואינו מביא בחשבון שיפורים עתידיים ברפואה. לוח התמותה משקף את התמותה של היום, ולכן לצעירים ההערכה נוטה להיות שמרנית.</p></details>') +
       L('<details><summary>המקורות ויחסי הסיכון ששימשו</summary><p class="small muted" style="margin-top:8px">ליד כל מקור מופיע יחס הסיכון (HR) ששימש במודל. מעל 1 פירושו סיכון גבוה יותר, ומתחת ל-1 נמוך יותר. אלה הערכים מהמחקר, לפני הנרמול לממוצע האוכלוסייה ולפני ההיחלשות בגיל מבוגר.</p><ol>') + SOURCES.map(function (s) { return '<li>' + s + '</li>'; }).join('') + '</ol></details>' +
 
-      L('<div class="nav"><button id="back">עריכת הנתונים</button><button class="primary" id="print">הדפסה / שמירה כ-PDF</button></div></div>');
+      L('<div class="nav"><button id="back">עריכת הנתונים</button><button class="primary" id="print">הדפסה / שמירה כ-PDF</button></div></div></div></div>');
 
     wireSim(inp, r);
     wireShare(inp, r);

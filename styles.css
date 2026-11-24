@@ -220,7 +220,18 @@ ul.gsrc li { margin-bottom: 4px; overflow-wrap: anywhere; }
 .sim > button { margin-top: 10px; padding: 8px 18px; min-height: 40px; }
 @media (max-width: 520px) { .simrow { grid-template-columns: 1fr; gap: 4px; } .rends { grid-column: 1; margin-top: 0; } }
 .hrnote { display: block; font-size: 13.5px; color: var(--accent); margin-top: 2px; }
-@media print { .nav, .privacy-chip, .site-top, .site-foot { display: none; } body { background: #fff; } .card { border: 0; padding: 0; } }
+@media print { .nav, .privacy-chip, .site-top, .site-foot { display: none; } body { background: #fff; } .card { border: 0; padding: 0; } .rc-grid { display: block; } }
+/* תוצאה: שני טורים בדסקטופ בלבד (במובייל הזרימה הרגילה, בסדר המקורי) */
+@media (min-width: 980px) {
+  #calcWrap:has(.rc-grid) { max-width: 1120px; }
+  .rc-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); column-gap: 36px; align-items: start; }
+  .rc-top { grid-column: 1 / -1; grid-row: 1; }
+  .rc-disc { grid-column: 1 / -1; grid-row: 2; }
+  .rc-left { grid-column: 1; grid-row: 3; }
+  .rc-right { grid-column: 2; grid-row: 3; }
+  .rc-foot { grid-column: 1 / -1; grid-row: 4; }
+  .rc-left > :first-child, .rc-right > :first-child { margin-top: 0; }
+}
 
 /* ================= האתר ================= */
 h1, h2, h3, .logo, .btn, .bignum, .eyebrow, .tcard-title, .fact b { font-family: "Rubik", "Heebo", "Segoe UI", Arial, sans-serif; }
