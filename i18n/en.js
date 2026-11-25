@@ -2245,3 +2245,13 @@ Object.assign(I18N.en, {
 Object.assign(I18N.en, {
 "1jmp25n": "All the layers: what goes into the calculation and what does not"
 });
+
+Object.assign(I18N.en, {
+"13ac1ey": "<div class=\"hero\"><div class=\"muted\">An estimate for people with a profile like yours</div><div class=\"big\">",
+"lfgzhd": "<div class=\"sub\">On average, people with data like yours live about ",
+"oqeui7": "Show me what I can improve first",
+"szen7s": "Your estimate is ready",
+"ll3vpt": "You chose to see what can be improved first. You can show the estimate in years at any moment, and you do not have to.",
+"1q638vw": "Show the estimate",
+"ds29g6": "Edit the data"
+});

@@ -160,6 +160,7 @@
     ]
   }];
   var mode = data._mode === 'quick' ? 'quick' : 'full';
+  var hideNum = false; // המשתמש בחר לראות קודם מה אפשר לשפר; ההערכה בשנים מוצגת רק בלחיצה (לא נשמר)
   function steps() { return mode === 'quick' ? QUICK : STEPS; }
   function setMode(m) { mode = m; data._mode = m; }
 
@@ -290,7 +291,8 @@
     app.innerHTML = '<div class="card">' + prog +
       (S.length > 1 ? L('<div class="step-label">שלב ') + step + L(' מתוך ') + S.length + '</div>' : '') + '<h2>' + esc(s.title) + '</h2><p class="muted">' + esc(s.intro) + '</p>' +
       fieldsHTML(s.fields) +
-      L('<div class="nav"><button id="back">חזרה</button><button class="primary" id="next">') + (step === S.length ? L('חשבו את ההערכה') : L('המשך')) + '</button></div></div>';
+      L('<div class="nav"><button id="back">חזרה</button><button class="primary" id="next">') + (step === S.length ? L('חשבו את ההערכה') : L('המשך')) + '</button>' +
+      (step === S.length ? '<button id="nextimp">' + L('הראו לי קודם מה אפשר לשפר') + '</button>' : '') + '</div></div>';
 
     app.querySelectorAll('[data-id]').forEach(function (el) {
       el.addEventListener(el.type === 'number' ? 'input' : 'change', function () {
@@ -323,7 +325,9 @@
     wireUpload();
     wireGarmin();
     document.getElementById('back').onclick = function () { step--; render(); };
-    document.getElementById('next').onclick = function () { if (validate(s)) { step++; render(); } };
+    document.getElementById('next').onclick = function () { if (validate(s)) { if (step === S.length) hideNum = false; step++; render(); } };
+    var ni = document.getElementById('nextimp');
+    if (ni) ni.onclick = function () { if (validate(s)) { hideNum = true; step++; render(); } };
   }
 
   // ---------- שליפת ערכים ממסמך בדיקות ----------
@@ -1069,7 +1073,7 @@
     return L('<div class="refine"><div><b>ההערכה מבוססת על השאלות העיקריות.</b> <span class="small muted">היסטוריה משפחתית, הרגלים נוספים ובדיקות דם ידייקו אותה ויצמצמו את הטווח.</span></div><button type="button" id="refine">לדייק את ההערכה</button></div>');
   }
 
-  function improveHTML(inp, r) {
+  function improveHTML(inp, r, noTotal) {
     var list = improvements(inp, r);
     var head = L('<h3>איך אפשר לשפר את ההערכה</h3>');
     if (!list.length) {
@@ -1083,7 +1087,7 @@
           '<div class="impbar"><div style="width:' + (x.gain / max * 100).toFixed(1) + '%"></div></div>' +
           (TIPS[x.id] ? '<div class="small muted">' + esc(TIPS[x.id]) + '</div>' : '') + '</div>';
       }).join('') +
-      (list.length > 1 ? L('<div class="impall"><div>כל השינויים יחד: <b class="pos" dir="ltr">') + signed(total - r.personal.expectedAge) + L(' שנים</b>, עד גיל <b>') + fmt(total) + '</b>' +
+      (list.length > 1 && !noTotal ? L('<div class="impall"><div>כל השינויים יחד: <b class="pos" dir="ltr">') + signed(total - r.personal.expectedAge) + L(' שנים</b>, עד גיל <b>') + fmt(total) + '</b>' +
         L('<div class="small muted">הסכום קטן מחיבור השורות, כי ההשפעות חופפות זו לזו.</div></div><button type="button" id="simAll">הצגה בסרגלים</button></div>') : '') +
       L('<p class="small muted">אלה קשרים סטטיסטיים ממחקרי תצפית. הם מראים שאנשים עם ההרגלים האלה חיים בממוצע יותר, לא שהשינוי מבטיח את התוספת לאדם מסוים.</p>');
   }
@@ -1259,7 +1263,22 @@
     return n;
   }
 
+  function renderResultHidden() {
+    var inp = collect(), r = LifeModel.compute(inp);
+    app.innerHTML = '<div class="card"><div class="rc-grid"><div class="rc-top">' +
+      '<div class="hero"><div class="muted">' + L('ההערכה מוכנה') + '</div>' +
+      '<p style="margin:8px 0 0">' + L('בחרת לראות קודם מה אפשר לשפר. את ההערכה בשנים אפשר להציג בכל רגע, ואין חובה.') + '</p>' +
+      '<div class="sharerow"><button type="button" class="primary" id="shownum">' + L('הצגת ההערכה') + '</button></div></div></div>' +
+      '<div class="rc-disc">' + DISCLAIMER + '</div>' +
+      '<div class="rc-left">' + improveHTML(inp, r, true) + '</div>' +
+      '<div class="rc-foot">' + guideHTML(inp, r) +
+      '<div class="nav"><button id="back">' + L('עריכת הנתונים') + '</button></div></div></div></div>';
+    document.getElementById('back').onclick = function () { hideNum = false; step = 1; render(); };
+    document.getElementById('shownum').onclick = function () { hideNum = false; render(); };
+  }
+
   function renderResult() {
+    if (hideNum) { renderResultHidden(); return; }
     var inp = collect(), r = LifeModel.compute(inp);
     var p = r.personal, b = r.baseline, diff = p.expectedAge - b.expectedAge;
     var year = new Date().getFullYear() + Math.round(p.remaining);
@@ -1275,14 +1294,15 @@
 
     app.innerHTML = '<div class="card"><div class="rc-grid">' +
       '<div class="rc-top">' +
-      L('<div class="hero"><div class="muted">תוחלת החיים המשוערת שלך</div><div class="big">') + fmt(p.expectedAge) + '</div>' +
-      L('<div class="sub">עוד כ-') + Math.round(p.remaining) + L(' שנים, עד סביבות שנת ') + year + '</div>' +
+      L('<div class="hero"><div class="muted">הערכה לאנשים עם פרופיל כמו שלך</div><div class="big">') + fmt(p.expectedAge) + '</div>' +
+      L('<div class="sub">בממוצע, אנשים עם נתונים כמו שלך חיים עוד כ-') + Math.round(p.remaining) + L(' שנים, עד סביבות שנת ') + year + '</div>' +
       '<div class="delta">' + deltaTxt + '</div>' +
       L('<div class="sub" style="margin-top:6px">חצי מהאנשים עם נתונים כמו שלך חיים עד גיל שבין <b>') + Math.round(p.p25) + L(' ל-') + Math.round(p.p75) + '</b></div>' +
       L('<div class="sharerow"><button type="button" class="sharebtn" id="share">שיתוף התוצאה</button><span class="small muted" id="sharestat" role="status"></span></div>') + '</div>' +
       refineHTML() + '</div>' +
       '<div class="rc-disc">' + DISCLAIMER + '</div>' +
       '<div class="rc-left">' +
+      improveHTML(inp, r) +
       bioAgeHTML(r) +
 
       L('<h3>הטווח, לא רק המספר</h3>') +
@@ -1309,7 +1329,6 @@
 
       (notes.length ? L('<h3>הערות</h3><ul class="notes">') + notes.map(function (t) { return '<li>' + esc(t) + '</li>'; }).join('') + '</ul>' : '') +
 
-      improveHTML(inp, r) +
       simHTML(inp, r) +
       '</div>' +
       '<div class="rc-foot">' +

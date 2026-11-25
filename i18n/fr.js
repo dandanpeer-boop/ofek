@@ -2243,3 +2243,13 @@ Object.assign(I18N.fr, {
 Object.assign(I18N.fr, {
 "1jmp25n": "Toutes les couches : ce qui entre dans le calcul et ce qui n'y entre pas"
 });
+
+Object.assign(I18N.fr, {
+"13ac1ey": "<div class=\"hero\"><div class=\"muted\">Une estimation pour les personnes ayant un profil comme le vôtre</div><div class=\"big\">",
+"lfgzhd": "<div class=\"sub\">En moyenne, les personnes ayant des données comme les vôtres vivent encore environ ",
+"oqeui7": "Montrez-moi d'abord ce que je peux améliorer",
+"szen7s": "Votre estimation est prête",
+"ll3vpt": "Vous avez choisi de voir d'abord ce qui peut être amélioré. Vous pouvez afficher l'estimation en années à tout moment, sans obligation.",
+"1q638vw": "Afficher l'estimation",
+"ds29g6": "Modifier les données"
+});
