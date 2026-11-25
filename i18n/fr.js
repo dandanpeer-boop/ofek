@@ -1961,3 +1961,7 @@ Object.assign(I18N.fr, {
 "1c9iapj": "Tout cocher",
 "3vs3ny": " fichiers sans analyses reconnues (afficher la liste)"
 });
+
+Object.assign(I18N.fr, {
+"13n440r": "Lors d’une vérification préliminaire sur les données américaines NHANES (environ 23 500 adultes, suivi de 10 ans), le modèle distinguait bien les personnes à risque élevé et faible, mais prédisait en moyenne 15 à 20 % de décès de plus que ceux observés. Nous avons donc ajouté un calibrage : le rapport de risque combiné est multiplié par 0,75, progressivement selon le nombre de facteurs saisis (aucun calibrage jusqu’à deux facteurs, calibrage complet à partir de huit). Le calibrage a été estimé sur les mêmes données ; ce n’est donc pas une vérification indépendante, il n’a pas été examiné par un actuaire et n’a pas été fait sur une population israélienne. Il relève l’estimation d’environ 0,5 à 1 an pour qui a saisi quatre facteurs, et d’environ 2 ans pour qui en a saisi beaucoup ; l’estimation absolue est donc moins sûre que la comparaison entre habitudes."
+});

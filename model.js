@@ -24,7 +24,11 @@ var LifeModel = (function () {
     fracVascular: 0.30,     // חלק התמותה ממחלות לב וכלי דם (WHO: כ-32% בעולם)
     fracIHD: 0.15,          // חלק התמותה ממחלת לב איסכמית (WHO: כ-16% בעולם)
     activityOverlap: 0.5,   // משקל הפעילות כשהוזן גם VO2max (חפיפה; שיפוט)
-    bmiMediation: 0.7       // כשיש גם לחץ דם, סוכר ושומנים — חלק מהשפעת ה-BMI כבר נספר דרכם
+    bmiMediation: 0.7,      // כשיש גם לחץ דם, סוכר ושומנים — חלק מהשפעת ה-BMI כבר נספר דרכם
+    // כיול (החלטת דן, 25.11.2026; הצעה: research/proposals/2026-11-21-normalization-calibration.md): בתיקוף על NHANES (O/E=0.82) ה-HR המשולב
+    // מנבא יותר מוות מהנצפה. מכפילים את ה-HR המשולב ב-calK, בהדרגה לפי מספר הגורמים: אפס עד calFrom גורמים, מלא מ-calTo ומעלה.
+    // k נאמד באותם נתוני NHANES (אומדן בתוך המדגם), ולא נבדק על ידי אקטואר או על אוכלוסייה ישראלית.
+    calK: 0.75, calFrom: 2, calTo: 8
   };
 
   // ---------- 1. בסיס: לוח תמותה ----------
@@ -537,9 +541,15 @@ var LifeModel = (function () {
     };
   }
 
+  /** הסטת הכיול ביומן ה-HR: log(k) כפול רמפה לפי מספר הגורמים שהוזנו (כל הגורמים, לא רק אלה שבמסכה, כדי שפירוק השנים יישאר סכום מדויק) */
+  function calShift(factors) {
+    var ramp = clamp((factors.length - ASSUME.calFrom) / (ASSUME.calTo - ASSUME.calFrom), 0, 1);
+    return Math.log(ASSUME.calK) * ramp;
+  }
+
   function combinedLogHR(factors, mask) {
-    var raw = rawLogHR(factors, mask);
-    return function (a) { return clamp(raw(a), Math.log(ASSUME.minHR), Math.log(ASSUME.maxHR)); };
+    var raw = rawLogHR(factors, mask), sh = calShift(factors);
+    return function (a) { return clamp(raw(a), Math.log(ASSUME.minHR), Math.log(ASSUME.maxHR)) + sh; };
   }
 
   // חלוקת ההפרש בשנים בין הגורמים (קירוב לערכי שפלי): ממוצע התרומה השולית של כל
@@ -632,8 +642,8 @@ var LifeModel = (function () {
 
   /** תוחלת חיים בלי הרצפה התחתונה על היחס המשולב (רק התקרה נשארת). תיאורטי ולא מכויל: לשימוש בסימולטור בלבד, להראות כיוון וגודל כשהרצפה חוסמת. */
   function estimateUncapped(inp) {
-    var mu = baseHazard(inp.country, inp.sex), age = Math.floor(inp.age), raw = rawLogHR(buildFactors(inp).factors, null);
-    return age + survival(mu, age, function (a) { return Math.min(raw(a), Math.log(ASSUME.maxHR)); }).remaining;
+    var mu = baseHazard(inp.country, inp.sex), age = Math.floor(inp.age), fs = buildFactors(inp).factors, raw = rawLogHR(fs, null), sh = calShift(fs);
+    return age + survival(mu, age, function (a) { return Math.min(raw(a), Math.log(ASSUME.maxHR)) + sh; }).remaining;
   }
 
   return { phenoAge: phenoAge, estimate: estimate, estimateUncapped: estimateUncapped, limitsOf: limitsOf, compute: compute, baseHazard: baseHazard, survival: survival, egfr: egfr, ASSUME: ASSUME };

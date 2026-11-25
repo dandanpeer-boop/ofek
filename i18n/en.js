@@ -1963,3 +1963,7 @@ Object.assign(I18N.en, {
 "1c9iapj": "Tick all values",
 "3vs3ny": " files without recognized tests (show the list)"
 });
+
+Object.assign(I18N.en, {
+"13n440r": "In a preliminary check we ran on US NHANES data (about 23,500 adults, 10-year follow-up) the model separated high-risk from low-risk people well, but on average predicted about 15 to 20 percent more deaths than were observed. We therefore added a calibration: the combined risk ratio is multiplied by 0.75, gradually according to the number of factors entered (no calibration up to two factors, full calibration from eight factors). The calibration was estimated on the same data, so it is not an independent check; it has not been reviewed by an actuary and was not done on an Israeli population. It raises the estimate by roughly 0.5 to 1 year for someone who entered four factors, and by about 2 years for someone who entered many, so the absolute estimate is less certain than the comparison between habits."
+});

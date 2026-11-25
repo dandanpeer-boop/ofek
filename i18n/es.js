@@ -1961,3 +1961,7 @@ Object.assign(I18N.es, {
 "1c9iapj": "Marcar todos los valores",
 "3vs3ny": " archivos sin análisis reconocidos (mostrar la lista)"
 });
+
+Object.assign(I18N.es, {
+"13n440r": "En una comprobación preliminar con datos estadounidenses de NHANES (unos 23.500 adultos, seguimiento de 10 años), el modelo distinguió bien a las personas de alto y bajo riesgo, pero predijo de media entre un 15 y un 20 % más de muertes de las observadas. Por eso añadimos una calibración: la razón de riesgos combinada se multiplica por 0,75, de forma gradual según el número de factores introducidos (sin calibración hasta dos factores, calibración completa desde ocho). La calibración se estimó con los mismos datos, así que no es una comprobación independiente; no ha sido revisada por un actuario ni se hizo con población israelí. Aumenta la estimación en torno a 0,5 a 1 año para quien introdujo cuatro factores, y unos 2 años para quien introdujo muchos, por lo que la estimación absoluta es menos segura que la comparación entre hábitos."
+});
