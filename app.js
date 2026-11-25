@@ -653,7 +653,9 @@
         return LifeModel.estimate(x);
       });
       var diff = ages[ages.length - 1] - ages[0];
-      est = L('<div class="trendest"><div class="small muted">ההערכה לפי כל בדיקה, בגילך הנוכחי וכשכל שאר הנתונים קבועים</div><div class="estrow">') +
+      // כשכל ההערכות זהות כי הגורמים כבר ברצפה, שורת מספרים זהים נראית כמו תקלה: מציגים רק את ההסבר
+      var flatFloor = ages.every(function (a) { return Math.abs(a - ages[0]) < 0.05; }) && LifeModel.limitsOf(inp).lower;
+      est = flatFloor ? '<div class="trendest"><div>' + L('הגורמים שהזנת טובים עד כדי כך שהמודל מגיע לגבול התחתון של הסיכון, ולכן שינויים בערכי הבדיקות לא משנים את ההערכה. זה לא אומר שהבדיקות לא חשובות.') + '</div></div>' : L('<div class="trendest"><div class="small muted">ההערכה לפי כל בדיקה, בגילך הנוכחי וכשכל שאר הנתונים קבועים</div><div class="estrow">') +
         dates.map(function (d, i) { return '<div><b>' + fmt(ages[i]) + '</b><span>' + dlabel(d.date) + '</span></div>'; }).join('<i aria-hidden="true">←</i>') + '</div>' +
         '<div>' + (Math.abs(diff) < 0.05 ? (LifeModel.limitsOf(inp).lower ? L('הגורמים שהזנת טובים עד כדי כך שהמודל מגיע לגבול התחתון של הסיכון, ולכן שינויים בערכי הבדיקות לא משנים את ההערכה. זה לא אומר שהבדיקות לא חשובות.') : L('הבדיקות לא שינו את ההערכה.')) : L('השינוי בבדיקות ') + (diff > 0 ? L('הוסיף') : L('הוריד')) +
           ' <b class="' + (diff > 0 ? 'pos' : 'neg') + '" dir="ltr">' + signed(diff) + L('</b> שנים להערכה.')) + '</div></div>';
