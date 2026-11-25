@@ -1934,3 +1934,8 @@ Object.assign(I18N.es, {
 "3yz31c": "La calculadora parte de la tabla de mortalidad oficial de la Organización Mundial de la Salud (por edad, sexo y país) y la ajusta según tu estilo de vida, tus antecedentes familiares y tus análisis de sangre. Los ajustes se basan en grandes estudios.",
 "d29kc": "Unas pocas preguntas que más afectan al resultado, alrededor de un minuto para rellenarlas. Puedes añadir detalles después de ver el resultado."
 });
+
+Object.assign(I18N.es, {
+"182rauq": "<h1>¿Cuántos años puedes esperar vivir?</h1>",
+"12uapv": "<p>La calculadora parte de la tabla de mortalidad oficial de la Organización Mundial de la Salud (por edad, sexo y país) y la ajusta según tu estilo de vida, tus antecedentes familiares y tus análisis de sangre. Los ajustes se basan en grandes estudios.</p>"
+});

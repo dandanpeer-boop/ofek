@@ -1936,3 +1936,8 @@ Object.assign(I18N.en, {
 "3yz31c": "The calculator starts from the official World Health Organization life table (by age, sex and country), and adjusts it for your lifestyle, family history and blood tests. The adjustments are based on large studies.",
 "d29kc": "A few questions that affect the result most, about a minute to fill in. You can add details after you see the result."
 });
+
+Object.assign(I18N.en, {
+"182rauq": "<h1>How many years can you expect?</h1>",
+"12uapv": "<p>The calculator starts from the official World Health Organization life table (by age, sex and country), and adjusts it for your lifestyle, family history and blood tests. The adjustments are based on large studies.</p>"
+});
