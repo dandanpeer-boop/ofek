@@ -2261,3 +2261,9 @@ Object.assign(I18N.en, {
 "1l0s2t": "Not included in the calculation. The result screen explains why.",
 "nx2rvw": "You noted that a parent died young (before 70) from a non-external cause. The calculator only counts parental longevity (a parent who lived past 80), not early death, so this did not change the number. There is evidence of a link between a parent's age at death and their children's mortality, but we have not verified an effect size that can be used in the calculation. The estimate here may be slightly optimistic. The cause of death matters more than the age: it is worth telling a doctor."
 });
+
+Object.assign(I18N.en, {
+"xmqso6": "A family history of breast, ovarian or colorectal cancer is not included in the calculation. It mostly concerns your personal risk of the disease itself, and less the average life expectancy. If a first-degree relative was diagnosed before age 50, that is a stronger reason to ask a doctor about earlier screening and genetic counseling.",
+"101uzv3": "<p class=\"small muted\"><b>What about healthy years?</b> The calculator estimates life expectancy only, not healthy life expectancy. In a large American study of health professionals (Li et al., BMJ 2020), four or five healthy habits at age 50 were associated with about 8 more years free of cancer, heart disease and diabetes in men, and about 11 years in women. This is an observational link in a different population, and it is not included in the number.</p>",
+"19r2hy5": "<b>Healthy years (not in the model):</b> Li Y. et al. Healthy lifestyle and life expectancy free of cancer, cardiovascular disease, and type 2 diabetes: prospective cohort study. <i>BMJ</i> 2020;368:l6669. <span class=\"hrnote\">At age 50, four or five healthy habits: 31.1 disease-free years in men (vs 23.5 with none), 34.4 in women (vs 23.7). Not used in the calculation</span>"
+});

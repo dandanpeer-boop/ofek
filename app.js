@@ -1076,8 +1076,9 @@
   function improveHTML(inp, r, noTotal) {
     var list = improvements(inp, r);
     var head = L('<h3>איך אפשר לשפר את ההערכה</h3>');
+    var healthNote = L('<p class="small muted"><b>ומה לגבי שנים בריאות?</b> המחשבון מחשב תוחלת חיים בלבד, לא תוחלת בריאות. במחקר אמריקאי גדול של אנשי מקצועות הבריאות (Li ועמיתים, BMJ 2020), ארבעה או חמישה הרגלים בריאים בגיל 50 היו קשורים לכ-8 שנים נוספות ללא סרטן, מחלת לב וסוכרת בגברים, ולכ-11 שנים בנשים. זה קשר תצפיתי באוכלוסייה אחרת, ואינו נכלל במספר.</p>');
     if (!list.length) {
-      return head + L('<p class="muted">לפי הנתונים שהזנת, אין שינוי בהרגלים שהמודל מעריך שיוסיף יותר מעשירית שנה. אפשר לבדוק תרחישים בעצמך בסרגלים שלמטה.</p>');
+      return head + L('<p class="muted">לפי הנתונים שהזנת, אין שינוי בהרגלים שהמודל מעריך שיוסיף יותר מעשירית שנה. אפשר לבדוק תרחישים בעצמך בסרגלים שלמטה.</p>') + healthNote;
     }
     var all = {}; list.forEach(function (x) { Object.assign(all, x.over); });
     var total = LifeModel.estimate(Object.assign({}, inp, all)), max = list[0].gain;
@@ -1089,7 +1090,8 @@
       }).join('') +
       (list.length > 1 && !noTotal ? L('<div class="impall"><div>כל השינויים יחד: <b class="pos" dir="ltr">') + signed(total - r.personal.expectedAge) + L(' שנים</b>, עד גיל <b>') + fmt(total) + '</b>' +
         L('<div class="small muted">הסכום קטן מחיבור השורות, כי ההשפעות חופפות זו לזו.</div></div><button type="button" id="simAll">הצגה בסרגלים</button></div>') : '') +
-      L('<p class="small muted">אלה קשרים סטטיסטיים ממחקרי תצפית. הם מראים שאנשים עם ההרגלים האלה חיים בממוצע יותר, לא שהשינוי מבטיח את התוספת לאדם מסוים.</p>');
+      L('<p class="small muted">אלה קשרים סטטיסטיים ממחקרי תצפית. הם מראים שאנשים עם ההרגלים האלה חיים בממוצע יותר, לא שהשינוי מבטיח את התוספת לאדם מסוים.</p>') +
+      healthNote;
   }
 
   // ---------- סרגלים: "נסו בעצמכם" ----------
@@ -1253,7 +1255,7 @@
     if (r.derived.phenoAge !== undefined) n.push(L('כשמחושב גיל ביולוגי, CRP ותפקוד הכליות כבר כלולים בו, ולכן הם לא מופיעים כגורמים נפרדים.'));
     if (r.derived.egfr !== undefined && r.derived.egfr < 60) n.push(L('ה-eGFR המחושב מהקריאטינין שלך (') + Math.round(r.derived.egfr) + L(') נמוך מ-60. תוצאה בודדת אינה אבחנה, אבל כדאי להראות אותה לרופא או לרופאה.'));
     if (r.derived.cholRatio !== undefined) n.push(L('יחס כולסטרול כללי ל-HDL שלך: ') + fmt(r.derived.cholRatio) + L('. לפי Prospective Studies Collaboration, היחס הזה הוא המנבא הטוב ביותר מבין מדדי הכולסטרול לתמותה ממחלת לב.'));
-    if (h.indexOf('breast') >= 0 || h.indexOf('colon') >= 0) n.push(L('סיפור משפחתי של סרטן שד, שחלה או מעי גס לא נכלל במספר, אבל הוא סיבה טובה לשאול רופא או רופאה על בדיקות סקר מוקדמות ועל ייעוץ גנטי.'));
+    if (h.indexOf('breast') >= 0 || h.indexOf('colon') >= 0) n.push(L('סיפור משפחתי של סרטן שד, שחלה או מעי גס לא נכלל בחישוב. הוא נוגע בעיקר לסיכון האישי למחלה עצמה, ופחות לתוחלת החיים הממוצעת. אם קרוב מדרגה ראשונה אובחן לפני גיל 50, זו סיבה חזקה יותר לשאול רופא או רופאה על בדיקות סקר מוקדמות ועל ייעוץ גנטי.'));
     if (h.indexOf('fh') >= 0) n.push(L('כולסטרול גבוה משפחתי (FH) הוא מצב תורשתי שמעלה מאוד את הסיכון למחלת לב מוקדמת, והוא ניתן לטיפול. אם לא נבדקת, שווה לבדוק.'));
     if (h.indexOf('t2d') >= 0 || h.indexOf('alz') >= 0) n.push(L('סוכרת סוג 2 ואלצהיימר במשפחה מעלים את הסיכון האישי למחלות אלה, אך לא מצאתי להם יחס סיכונים מבוסס לתמותה כללית, ולכן הם לא נכללו במספר.'));
     var earlyP = ['mother', 'father'].some(function (k) { var p = data[k]; return p && p.status === 'dead' && p.cause !== 'external' && num(p.age) !== undefined && num(p.age) < 70; });
@@ -1387,6 +1389,7 @@
     L('<b>טריגליצרידים:</b> Liu J. et al. Effects of blood triglycerides on cardiovascular and all-cause mortality. <i>Lipids Health Dis</i> 2013;12:159. <span class="hrnote">במודל: 1.12 לכל 88.6 מ"ג/ד"ל (1 mmol/L)</span>'),
     L('<b>Lp(a):</b> Langsted A. et al. High lipoprotein(a) and high risk of mortality. <i>Eur Heart J</i> 2019;40:2760–70. <span class="hrnote">במודל: 1.05 לכל 50 מ"ג/ד"ל</span>'),
     L('<b>GGT:</b> Kunutsor S.K. et al. Liver enzymes and risk of all-cause mortality in general populations. <i>Int J Epidemiol</i> 2014;43:187–201. <span class="hrnote">במודל: 1.07 לכל 5 יחידות, עד 1.6 לכל היותר</span>'),
+    L('<b>שנים בריאות (לא נכלל במודל):</b> Li Y. et al. Healthy lifestyle and life expectancy free of cancer, cardiovascular disease, and type 2 diabetes: prospective cohort study. <i>BMJ</i> 2020;368:l6669. <span class="hrnote">בגיל 50, ארבעה או חמישה הרגלים בריאים: 31.1 שנים ללא מחלה בגברים (לעומת 23.5 ללא הרגלים), 34.4 בנשים (לעומת 23.7). לא משמש בחישוב</span>'),
     L('<b>בדיקת סבירות לשילוב הגורמים:</b> Li Y. et al. Impact of Healthy Lifestyle Factors on Life Expectancies in the US Population. <i>Circulation</i> 2018;138:345–55.')
   ];
 
