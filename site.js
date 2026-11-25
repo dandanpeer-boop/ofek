@@ -146,6 +146,10 @@ var SiteRender = (function () {
         '</div></div>' +
       '</div></section>' +
 
+      (LANG === 'he' ? '<section class="sec"><div class="sec-head"><p class="eyebrow">בקרוב</p><h2>יש לך בדיקות דם, ולא ברור מה בהן?</h2>' +
+        '<p>אנחנו בודקים אם כדאי לבנות מסמך אישי שמסדר את הבדיקות: ערכים, מגמות לאורך שנים ושאלות לרופא, הכול בפרטיות מלאה. עדיין לא פתוח, ועדיין לא גובים כלום.</p>' +
+        '<p><a class="btn ghost" href="' + SiteURL('home') + 'soon/">לראות דוגמה ולהגיד אם זה מעניין</a></p></div></section>' : '') +
+
       '<section class="sec"><div class="sec-head"><p class="eyebrow">' + L('להתחיל השבוע') + '</p><h2>' + L('שבעה צעדים קטנים לשבוע הקרוב') + '</h2>' +
         '<p class="muted">' + L('צעד אחד ביום. כל אחד מהם מוביל למדריך המלא.') + '</p></div>' +
         '<ol class="week">' + week().map(function (w) {

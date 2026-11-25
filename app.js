@@ -207,6 +207,7 @@
         L('<label class="filebtn"><input type="file" id="labfile" multiple accept="application/pdf,.pdf,.txt,text/plain"><span>בחירת קובצי PDF</span></label>') +
         L('<details><summary>או הדבקת טקסט מתוך הבדיקות</summary><textarea id="labtext" rows="5" dir="auto" aria-label="טקסט הבדיקות"></textarea>') +
         L('<button type="button" id="labparse">שליפת ערכים מהטקסט</button></details>') +
+        (LANG === 'he' ? '<p class="small muted">רוצים מסמך מסודר שמסכם את הבדיקות, עם מגמות ושאלות לרופא? <a href="' + ROOT + 'soon/">בואו לראות מה מתוכנן</a>.</p>' : '') +
         '<div id="labdocs"></div><div id="labresult" aria-live="polite"></div></div>';
     }
     if (f.type === 'garmin') {
