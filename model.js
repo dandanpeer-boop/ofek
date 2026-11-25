@@ -224,7 +224,7 @@ var LifeModel = (function () {
       // שכיחות משוערת באוכלוסייה (גברים: 25% מעשנים, 28% לשעבר; נשים: 15%, 18%)
       var popSmoke = sex === 'f' ? 0.67 + 0.18 * 1.35 + 0.15 * 3.0 : 0.47 + 0.28 * 1.35 + 0.25 * 2.8;
       var hr = 1, det = L('מעולם לא עישנת');
-      if (inp.smoking === 'current') { hr = hrCur; det = L('מעשן/ת כיום'); }
+      if (inp.smoking === 'current') { hr = hrCur; det = L('עישון כיום'); }
       else if (inp.smoking === 'former') {
         var q = isNum(inp.quitAge) ? inp.quitAge : 45;
         // חלק עודף הסיכון שנמנע לפי גיל ההפסקה (נגזר משנות החיים שהורווחו ב-Jha 2013)
@@ -330,10 +330,10 @@ var LifeModel = (function () {
       var dDet = diabetic ? (inp.diabetes === 'yes' ? L('סוכרת מאובחנת') : L('ערכים בטווח הסוכרת')) : L('ללא סוכרת');
       add('diabetes', L('סוכר / סוכרת'), dDet, function (a) { return lnD * attStd(a); });
       if (!diabetic && ((isNum(inp.glucose) && inp.glucose >= 100) || (isNum(inp.hba1c) && inp.hba1c >= 5.7))) {
-        notes.push(L('ערכי הסוכר שלך בטווח ה"טרום-סוכרת". מחקר ERFC מצא עלייה של כ-10% בסיכון לכל 18 מ"ג/ד"ל מעל 100, והיא נכללת בחישוב (אם הוזן גלוקוז). שווה לעקוב עם רופא/ת המשפחה.'));
+        notes.push(L('ערכי הסוכר שלך בטווח ה"טרום-סוכרת". מחקר ERFC מצא עלייה של כ-10% בסיכון לכל 18 מ"ג/ד"ל מעל 100, והיא נכללת בחישוב (אם הוזן גלוקוז). שווה לעקוב עם רופא או רופאת המשפחה.'));
       }
       if (diabetic && inp.diabetes !== 'yes') {
-        notes.push(L('הערכים שהזנת (גלוקוז בצום 126 ומעלה או HbA1c 6.5% ומעלה) נמצאים בטווח שמוגדר סוכרת. אם לא אובחנת — כדאי לפנות לרופא/ה.'));
+        notes.push(L('הערכים שהזנת (גלוקוז בצום 126 ומעלה או HbA1c 6.5% ומעלה) נמצאים בטווח שמוגדר סוכרת. אם לא אובחנת — כדאי לפנות לרופא או לרופאה.'));
       }
     }
 
@@ -378,7 +378,7 @@ var LifeModel = (function () {
 
     // --- CRP: Emerging Risk Factors Collaboration, Lancet 2010 ---
     if (isNum(inp.crp)) {
-      if (inp.crp > 10) notes.push(L('CRP מעל 10 מ"ג/ל׳ מעיד בדרך כלל על דלקת או זיהום חולפים, ולא על הסיכון ארוך הטווח. הערך הוגבל ל-10 בחישוב; מומלץ להזין תוצאה מבדיקה שנעשתה כשהיית בריא/ה.'));
+      if (inp.crp > 10) notes.push(L('CRP מעל 10 מ"ג/ל׳ מעיד בדרך כלל על דלקת או זיהום חולפים, ולא על הסיכון ארוך הטווח. הערך הוגבל ל-10 בחישוב; מומלץ להזין תוצאה מבדיקה שנעשתה בזמן שאין דלקת או זיהום.'));
       var crp = clamp(inp.crp, 0.2, 10);
       // 1.34 לכל עלייה של סטיית תקן אחת בלוג CRP (בערך פי 3), אחרי תקנון מלא
       var lnC = Math.log(1.34) * Math.log(crp / 1.5) / Math.log(3);
@@ -432,7 +432,7 @@ var LifeModel = (function () {
     if (inp.marital) {
       var rrU = sex === 'f' ? 1.22 : 1.46;
       var lnM = Math.log((inp.marital === 'single' ? rrU : 1) / (1 + 0.4 * (rrU - 1))); // כ-40% מהמבוגרים אינם בזוגיות
-      add('marital', L('מצב משפחתי'), inp.marital === 'single' ? L('ללא בן/בת זוג') : L('נשוי/אה או בזוגיות'), function (a) { return lnM * attStd(a); });
+      add('marital', L('מצב משפחתי'), inp.marital === 'single' ? L('ללא בן או בת זוג') : L('בנישואין או בזוגיות'), function (a) { return lnM * attStd(a); });
     }
 
     // --- טריגליצרידים: Liu et al., Lipids Health Dis 2013 ---
@@ -519,7 +519,7 @@ var LifeModel = (function () {
     if (gp.length >= 2) {
       var G = gp.reduce(function (s, x) { return s + x; }, 0) / gp.length;
       ln += 0.5 * Math.log(0.83) * (clamp(G, 60, 100) - 75) / 10;
-      parts.push(L('ממוצע סבים/סבתות: ') + Math.round(G));
+      parts.push(L('ממוצע סבים וסבתות: ') + Math.round(G));
       any = true;
     }
     if (!any) return null;
@@ -549,7 +549,8 @@ var LifeModel = (function () {
 
   function combinedLogHR(factors, mask) {
     var raw = rawLogHR(factors, mask), sh = calShift(factors);
-    return function (a) { return clamp(raw(a), Math.log(ASSUME.minHR), Math.log(ASSUME.maxHR)) + sh; };
+    // תקרה לפני הכיול (כמו עד כה); הרצפה אחרי הכיול, כדי שהיחס הסופי לא ירד מתחת ל-minHR (26.11.2026, החלטת דן)
+    return function (a) { return Math.max(Math.min(raw(a), Math.log(ASSUME.maxHR)) + sh, Math.log(ASSUME.minHR)); };
   }
 
   // חלוקת ההפרש בשנים בין הגורמים (קירוב לערכי שפלי): ממוצע התרומה השולית של כל
@@ -610,11 +611,11 @@ var LifeModel = (function () {
     }
 
     // האם החישוב נגע בגבולות ה-HR המשולב (בכל גיל עד 40 שנה קדימה)
-    var rawFn = rawLogHR(built.factors, null), limits = { upper: false, lower: false };
+    var rawFn = rawLogHR(built.factors, null), limits = { upper: false, lower: false }, shLim = calShift(built.factors);
     for (var la = age; la < Math.min(MAX_AGE, age + 40); la += 5) {
       var lr = rawFn(la);
       if (lr > Math.log(ASSUME.maxHR)) limits.upper = true;
-      if (lr < Math.log(ASSUME.minHR)) limits.lower = true;
+      if (lr + shLim < Math.log(ASSUME.minHR)) limits.lower = true;
     }
 
     return {
@@ -631,11 +632,11 @@ var LifeModel = (function () {
 
   // האם היחס המשולב נוגע בגבולות (0.4 / 8) בגיל הנוכחי או עד 40 שנה קדימה. קל יותר מ-compute (בלי פירוק לשנים), לשימוש הסימולטור.
   function limitsOf(inp) {
-    var rawFn = rawLogHR(buildFactors(inp).factors, null), age = Math.floor(inp.age), lim = { upper: false, lower: false };
+    var fs2 = buildFactors(inp).factors, rawFn = rawLogHR(fs2, null), age = Math.floor(inp.age), lim = { upper: false, lower: false }, shLim = calShift(fs2);
     for (var la = age; la < Math.min(MAX_AGE, age + 40); la += 5) {
       var lr = rawFn(la);
       if (lr > Math.log(ASSUME.maxHR)) lim.upper = true;
-      if (lr < Math.log(ASSUME.minHR)) lim.lower = true;
+      if (lr + shLim < Math.log(ASSUME.minHR)) lim.lower = true;
     }
     return lim;
   }

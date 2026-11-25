@@ -515,3 +515,19 @@ a { color: var(--accent); }
 
 .frowmore { margin-top: 6px; }
 .frowmore summary { cursor: pointer; color: var(--accent); font-size: .9rem; padding: 6px 0; }
+
+/* ⓘ: פרטים סטטיסטיים (רווח סמך, HR, גודל מדגם) שמוצגים בריחוף או במגע */
+.topic-main p, .fact p, .cplan p { position: relative; }
+.ci { display: inline-block; margin-inline: 3px; padding: 0 2px; color: var(--muted); font-size: .85em; line-height: 1; cursor: help; border-radius: 4px; }
+.ci:hover, .ci:focus { color: inherit; outline: none; }
+.ci:focus-visible { outline: 2px solid currentColor; outline-offset: 2px; }
+.ci-tip { display: none; position: absolute; inset-inline: 0; margin-top: 1.5em; z-index: 6; padding: 8px 12px; border-radius: 10px; background: #1f2937; color: #fff; font-size: 14px; font-weight: 400; line-height: 1.5; text-align: start; box-shadow: 0 6px 20px rgba(0,0,0,.2); }
+.ci:hover .ci-tip, .ci:focus .ci-tip { display: block; }
+
+/* טקסט מתחת לעקומה בכרטיס הגיבור */
+.hero-art-copy { margin-top: 14px; padding-top: 14px; border-top: 1px solid var(--line, #e3e8ea); text-align: start; }
+.hero-art-title { margin: 0 0 8px; font-weight: 700; font-size: 17px; }
+.hero-art-copy ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
+.hero-art-copy li { position: relative; padding-inline-start: 22px; font-size: 15px; line-height: 1.5; }
+.hero-art-copy li::before { content: ""; position: absolute; inset-inline-start: 0; top: .55em; width: 9px; height: 9px; border-radius: 50%; background: var(--accent); }
+.hero-art-note { margin: 12px 0 0; font-size: 13px; color: var(--muted); }

@@ -30,7 +30,7 @@
   var step = 0;                    // 0 = פתיחה, 1..4 = שלבי הטופס, 5 = תוצאה
 
   var DISCLAIMER = L('<div class="disclaimer"><strong>חשוב לדעת:</strong> זו הערכה סטטיסטית לצורכי סקרנות בלבד. ') +
-    L('היא מתארת ממוצעים של קבוצות גדולות של אנשים, לא את העתיד של אדם מסוים. היא אינה אבחנה רפואית, אינה ייעוץ רפואי ואינה תחליף לרופא/ה.') +
+    L('היא מתארת ממוצעים של קבוצות גדולות של אנשים, לא את העתיד של אדם מסוים. היא אינה אבחנה רפואית, אינה ייעוץ רפואי ואינה תחליף לרופא או לרופאה.') +
     L(' ההערכה נשענת על מחקרים תצפיתיים, שמראים קשר סטטיסטי ולא בהכרח סיבתי, ולכן שינוי הרגל אינו מבטיח את ההפרש המוצג.</div>');
 
   // ---------- הגדרת הטופס ----------
@@ -53,8 +53,8 @@
         ] },
         { id: 'waist', type: 'num', label: L('היקף מותניים'), hint: L('רשות. בגובה הטבור, בעמידה, אחרי נשיפה רגילה. עוזר להבחין בין שריר לשומן, ש-BMI לבדו לא רואה.'), unit: L('ס"מ'), min: 50, max: 200 },
         { id: 'eduYears', type: 'choice', label: L('השכלה'), options: [['9', L('עד 10 שנות לימוד')], ['12', L('תיכון')], ['14', L('על-תיכונית')], ['15', L('תואר ראשון')], ['17', L('תואר שני')], ['20', L('דוקטורט')]] },
-        { id: 'marital', type: 'choice', label: L('מצב משפחתי'), options: [['married', L('נשוי/אה או בזוגיות קבועה')], ['single', L('ללא בן/בת זוג')]] },
-        { id: 'srh', type: 'choice', label: L('איך היית מגדיר/ה את מצב הבריאות שלך באופן כללי?'), hint: L('שאלה אחת שמנבאת תמותה טוב יותר מהרבה בדיקות.'), options: [['excellent', L('מצוינת')], ['good', L('טובה')], ['fair', L('בינונית')], ['poor', L('גרועה')]] },
+        { id: 'marital', type: 'choice', label: L('מצב משפחתי'), options: [['married', L('בנישואין או בזוגיות קבועה')], ['single', L('ללא בן או בת זוג')]] },
+        { id: 'srh', type: 'choice', label: L('איך הבריאות שלך באופן כללי?'), hint: L('שאלה אחת שמנבאת תמותה טוב יותר מהרבה בדיקות.'), options: [['excellent', L('מצוינת')], ['good', L('טובה')], ['fair', L('בינונית')], ['poor', L('גרועה')]] },
         { id: 'conditions', type: 'multi', label: L('האם אובחנה אצלך אחת מהמחלות האלה?'), hint: L('סוכרת נשאלת בשלב בדיקות הדם.'), options: [['mi', L('התקף לב')], ['stroke', L('אירוע מוחי')], ['cancer', L('סרטן')], ['copd', L('מחלת ריאות כרונית (COPD)')], ['other', L('מחלה קשה אחרת')]] },
         { id: 'meds', type: 'multi', label: L('תרופות קבועות'), options: [['bp', L('ללחץ דם')], ['statin', L('לכולסטרול (סטטינים)')]] }
       ]
@@ -62,11 +62,11 @@
     {
       title: L('אורח חיים'), intro: L('הגורמים שהכי קל לשנות, ושחלקם משפיעים יותר מכל השאר.'),
       fields: [
-        { id: 'smoking', type: 'choice', label: L('עישון'), options: [['never', L('מעולם לא עישנתי')], ['former', L('עישנתי והפסקתי')], ['current', L('מעשן/ת כיום')]] },
+        { id: 'smoking', type: 'choice', label: L('עישון'), options: [['never', L('מעולם לא עישנתי')], ['former', L('עישנתי והפסקתי')], ['current', L('עישון כיום')]] },
         { id: 'quitAge', type: 'num', label: L('באיזה גיל הפסקת לעשן?'), unit: L('שנים'), min: 10, max: 100, showIf: function () { return data.smoking === 'former'; } },
-        { id: 'alcohol', type: 'choice', label: L('אלכוהול'), hint: L('מנה = כוס יין, בקבוק בירה קטן או כוסית משקה חריף.'), options: [['none', L('לא שותה')], ['light', L('עד 7 מנות בשבוע')], ['mod', '8–14'], ['heavy', '15–25'], ['vheavy', L('מעל 25')]] },
+        { id: 'alcohol', type: 'choice', label: L('אלכוהול'), hint: L('מנה = כוס יין, בקבוק בירה קטן או כוסית משקה חריף, כ-14 גרם אלכוהול.'), options: [['none', L('לא שותה')], ['light', L('עד 7 מנות בשבוע')], ['mod', '8–14'], ['heavy', '15–25'], ['vheavy', L('מעל 25')]] },
         { id: 'activity', type: 'choice', label: L('פעילות גופנית בשבוע'), hint: L('הליכה מהירה, ריצה, שחייה, אופניים וכדומה. דקת פעילות עצימה שווה שתי דקות מתונות.'), options: [['none', L('כמעט בכלל לא')], ['low', L('פחות מ-150 דקות')], ['rec', L('150–300 דקות')], ['high', L('300–450 דקות')], ['vhigh', L('מעל 450 דקות')]] },
-        { id: 'walkPace', type: 'choice', label: L('איך היית מתאר/ת את קצב ההליכה הרגיל שלך?'), hint: L('לפי התחושה שלך. אם יש לך מדידת VO2max משעון כושר, היא תשמש במקום.'), options: [['brisk', L('מהיר')], ['average', L('ממוצע')], ['slow', L('איטי')]] },
+        { id: 'walkPace', type: 'choice', label: L('מה קצב ההליכה הרגיל שלך?'), hint: L('לפי התחושה שלך. אם יש לך מדידת VO2max משעון כושר, היא תשמש במקום.'), options: [['brisk', L('מהיר')], ['average', L('ממוצע')], ['slow', L('איטי')]] },
         { id: 'sleep', type: 'choice', label: L('שעות שינה בלילה, בממוצע'), options: [['short', L('פחות מ-6')], ['normal', L('6 עד 9')], ['long', L('מעל 9')]] },
         { id: 'fruitveg', type: 'choice', label: L('מנות פירות וירקות ביום'), hint: L('מנה = פרי בינוני או כוס ירקות חתוכים.'), options: [['1', '0–1'], ['2', '2'], ['3', '3'], ['4', '4'], ['5', L('5 ומעלה')]] },
         { id: 'sitting', type: 'choice', label: L('שעות ישיבה ביום'), hint: L('עבודה, נסיעות ומסכים יחד.'), options: [['3', L('פחות מ-4')], ['5.5', '4–7'], ['9', '8–10'], ['12', L('11 ומעלה')]] },
@@ -238,7 +238,7 @@
     if (f.type === 'person') {
       var p = data[f.id] || {};
       return '<div class="person" data-person="' + f.id + '"><div class="lbl">' + esc(f.label) + '</div><div class="person-grid">' +
-        '<select data-p="status" aria-label="' + esc(f.label) + L(' — מצב"><option value="">לא ידוע</option><option value="alive"') + (p.status === 'alive' ? ' selected' : '') + L('>בחיים</option><option value="dead"') + (p.status === 'dead' ? ' selected' : '') + L('>נפטר/ה</option></select>') +
+        '<select data-p="status" aria-label="' + esc(f.label) + L(' — מצב"><option value="">לא ידוע</option><option value="alive"') + (p.status === 'alive' ? ' selected' : '') + L('>בחיים</option><option value="dead"') + (p.status === 'dead' ? ' selected' : '') + L('>לא בחיים</option></select>') +
         '<input type="number" inputmode="numeric" data-p="age" min="0" max="120" placeholder="' + (p.status === 'dead' ? L('גיל בפטירה') : L('גיל')) + '" aria-label="' + esc(f.label) + L(' — גיל" value="') + esc(p.age === undefined ? '' : p.age) + '"' + (p.status ? '' : ' hidden') + '>' +
         '<select data-p="cause" aria-label="' + esc(f.label) + L(' — סיבת הפטירה"') + (p.status === 'dead' ? '' : ' hidden') + L('><option value="natural">ממחלה או מזקנה</option><option value="external"') + (p.cause === 'external' ? ' selected' : '') + L('>תאונה, מלחמה או אלימות</option></select>') +
         '</div><div class="err" id="e_' + f.id + '"></div><div class="softwarn" id="w_' + f.id + '"></div></div>';
@@ -613,7 +613,7 @@
     var out = list.filter(function (x) { return x.o.status !== 'ok'; }).length;
     return L('<h3>ערכים נוספים מהבדיקות</h3><details class="others"') + (out ? ' open' : '') + '><summary>' + list.length + L(' ערכים נוספים נמצאו במסמכים') +
       (out ? L(', מתוכם <b class="neg">') + out + L(' מחוץ לטווח</b>') : L(', כולם בטווח')) + '</summary>' +
-      L('<p class="small muted">הערכים האלה אינם נכללים בחישוב תוחלת החיים. הטווח הוא זה שמופיע במסמך עצמו, והקריאה אוטומטית ועלולה לטעות; ערך מחוץ לטווח הוא סיבה לשאול את הרופא/ה, לא אבחנה.</p>') +
+      L('<p class="small muted">הערכים האלה אינם נכללים בחישוב תוחלת החיים. הטווח הוא זה שמופיע במסמך עצמו, והקריאה אוטומטית ועלולה לטעות; ערך מחוץ לטווח הוא סיבה לשאול את הרופא או הרופאה, לא אבחנה.</p>') +
       list.map(function (x) {
         var o = x.o, st = o.status === 'ok' ? L('<span class="chip">בטווח</span>') : '<span class="chip bad">' + (o.status === 'high' ? L('גבוה') : L('נמוך')) + '</span>';
         return '<div class="orow"><span class="oname" dir="auto">' + esc(o.name) + '</span><b dir="ltr">' + o.value + '</b><span class="small muted" dir="ltr">' + o.lo + ' – ' + o.hi + '</span>' + st + '</div>';
@@ -649,7 +649,7 @@
       var diff = ages[ages.length - 1] - ages[0];
       est = L('<div class="trendest"><div class="small muted">ההערכה לפי כל בדיקה, בגילך הנוכחי וכשכל שאר הנתונים קבועים</div><div class="estrow">') +
         dates.map(function (d, i) { return '<div><b>' + fmt(ages[i]) + '</b><span>' + dlabel(d.date) + '</span></div>'; }).join('<i aria-hidden="true">←</i>') + '</div>' +
-        '<div>' + (Math.abs(diff) < 0.05 ? L('הבדיקות לא שינו את ההערכה.') : L('השינוי בבדיקות ') + (diff > 0 ? L('הוסיף') : L('הוריד')) +
+        '<div>' + (Math.abs(diff) < 0.05 ? (LifeModel.limitsOf(inp).lower ? L('הגורמים שהזנת טובים עד כדי כך שהמודל מגיע לגבול התחתון של הסיכון, ולכן שינויים בערכי הבדיקות לא משנים את ההערכה. זה לא אומר שהבדיקות לא חשובות.') : L('הבדיקות לא שינו את ההערכה.')) : L('השינוי בבדיקות ') + (diff > 0 ? L('הוסיף') : L('הוריד')) +
           ' <b class="' + (diff > 0 ? 'pos' : 'neg') + '" dir="ltr">' + signed(diff) + L('</b> שנים להערכה.')) + '</div></div>';
     }
     return L('<h3>מגמות בבדיקות הדם</h3><p class="small muted">השוואה בין ') + dates.length + L(' בדיקות. ירוק מסמן שינוי לכיוון שקשור בסיכון נמוך יותר, אדום לכיוון ההפוך. הבדלים קטנים בין בדיקות הם טבעיים ואינם בהכרח מגמה.</p>') +
@@ -847,18 +847,18 @@
   // מתי כדאי לפנות לרופא/ה לפני כל דבר אחר. ספים לפי ההנחיות המקובלות.
   function referrals(inp, r) {
     var out = [], s = inp.sbp, d = inp.dbp, bpTxt = s && d ? s + '/' + d : String(s || d);
-    if (s >= 180 || d >= 120) out.push(L('לחץ הדם שהזנת (') + bpTxt + L(') גבוה מאוד. כדאי לפנות לרופא/ה בהקדם.'));
-    else if (s >= 140 || d >= 90) out.push(L('לחץ הדם שהזנת (') + bpTxt + L(') בטווח של יתר לחץ דם. כדאי למדוד שוב בבית כמה ימים, ולהראות את התוצאות לרופא/ת המשפחה.'));
-    if (inp.diabetes !== 'yes' && (inp.glucose >= 126 || inp.hba1c >= 6.5)) out.push(L('ערך הסוכר שהזנת בטווח של סוכרת. אבחנה דורשת בדיקה חוזרת, ולכן כדאי לפנות לרופא/ת המשפחה.'));
-    if (inp.ldl >= 190 || (inp.ldl === undefined && inp.tc >= 300)) out.push(L('ערך הכולסטרול שהזנת גבוה מאוד, ומתאים לבירור של כולסטרול גבוה משפחתי. כדאי לפנות לרופא/ת המשפחה.'));
-    if (r.derived.egfr !== undefined && r.derived.egfr < 60) out.push(L('תפקוד הכליות המחושב (eGFR ') + Math.round(r.derived.egfr) + L(') נמוך מ-60. כדאי לחזור על הבדיקה ולהראות אותה לרופא/ה.'));
-    if (inp.acr >= 30) out.push(L('יש חלבון בשתן (מעל 30 מ"ג/ג). כדאי לחזור על הבדיקה ולהראות אותה לרופא/ה.'));
+    if (s >= 180 || d >= 120) out.push(L('לחץ הדם שהזנת (') + bpTxt + L(') גבוה מאוד. כדאי לפנות לרופא או לרופאה בהקדם.'));
+    else if (s >= 140 || d >= 90) out.push(L('לחץ הדם שהזנת (') + bpTxt + L(') בטווח של יתר לחץ דם. כדאי למדוד שוב בבית כמה ימים, ולהראות את התוצאות לרופא או לרופאת המשפחה.'));
+    if (inp.diabetes !== 'yes' && (inp.glucose >= 126 || inp.hba1c >= 6.5)) out.push(L('ערך הסוכר שהזנת בטווח של סוכרת. אבחנה דורשת בדיקה חוזרת, ולכן כדאי לפנות לרופא או לרופאת המשפחה.'));
+    if (inp.ldl >= 190 || (inp.ldl === undefined && inp.tc >= 300)) out.push(L('ערך הכולסטרול שהזנת גבוה מאוד, ומתאים לבירור של כולסטרול גבוה משפחתי. כדאי לפנות לרופא או לרופאת המשפחה.'));
+    if (r.derived.egfr !== undefined && r.derived.egfr < 60) out.push(L('תפקוד הכליות המחושב (eGFR ') + Math.round(r.derived.egfr) + L(') נמוך מ-60. כדאי לחזור על הבדיקה ולהראות אותה לרופא או לרופאה.'));
+    if (inp.acr >= 30) out.push(L('יש חלבון בשתן (מעל 30 מ"ג/ג). כדאי לחזור על הבדיקה ולהראות אותה לרופא או לרופאה.'));
     return out;
   }
 
   // צעד ראשון וקונקרטי לכל שינוי, והמדריך באתר שמרחיב עליו
   var FIRST = {
-    smoking: [L('לקבוע תאריך הפסקה בשבועיים הקרובים, ולפנות לרופא/ת המשפחה או לקו לגמילה. טיפול תרופתי ותמיכה מעלים מאוד את סיכויי ההצלחה.'), 'habits'],
+    smoking: [L('לקבוע תאריך הפסקה בשבועיים הקרובים, ולפנות לרופא או לרופאת המשפחה, או לקו לגמילה. טיפול תרופתי ותמיכה מעלים מאוד את סיכויי ההצלחה.'), 'habits'],
     bmi: [L('לרשום שבוע אחד מה אוכלים, בלי לשנות כלום. אחר כך להחליף משקה ממותק או חטיף אחד ביום במשהו פשוט יותר.'), 'nutrition'],
     activity: [L('הליכה מהירה של 30 דקות, חמישה ימים בשבוע. אפשר להתחיל ב-10 דקות אחרי כל ארוחה.'), 'movement'],
     walkpace: [L('בהליכה היומית, להגביר את הקצב עד שקשה לשיר אבל עדיין אפשר לדבר.'), 'movement'],
@@ -867,8 +867,8 @@
     fruitveg: [L('להוסיף ירק לכל ארוחה ופרי אחד כנשנוש. זה כבר ארבע מנות ביום.'), 'nutrition'],
     sitting: [L('לקום לשתיים-שלוש דקות כל חצי שעה עד שעה, למשל בכל שיחת טלפון.'), 'movement'],
     social: [L('לקבוע שיחה או מפגש קבועים עם אדם אחד, ביום ובשעה קבועים בשבוע.'), 'social'],
-    bp: [L('למדוד לחץ דם בבית כמה ימים, לרשום ולהראות לרופא/ת המשפחה.'), 'numbers'],
-    chol: [L('לקבוע תור לרופא/ת המשפחה כדי לדבר על הערכים. בינתיים, להחליף שומן מן החי בשמן זית ואגוזים.'), 'numbers'],
+    bp: [L('למדוד לחץ דם בבית כמה ימים, לרשום ולהראות לרופא או לרופאת המשפחה.'), 'numbers'],
+    chol: [L('לקבוע תור לרופא או לרופאת המשפחה כדי לדבר על הערכים. בינתיים, להחליף שומן מן החי בשמן זית ואגוזים.'), 'numbers'],
     glucose: [L('לוותר על משקאות ממותקים ולהוסיף הליכה של 10–15 דקות אחרי ארוחות. לחזור על הבדיקה בעוד כמה חודשים.'), 'sugar']
   };
 
@@ -880,7 +880,7 @@
     var arrow = LANGS[LANG].dir === 'rtl' ? ' ←' : ' →';
     var h = L('<div class="plan"><h3>הצעדים הראשונים שלך</h3>');
     if (refs.length) {
-      h += L('<div class="planref"><b>לפני הכול: שווה לדבר עם רופא/ה</b><ul>') + refs.map(function (t) { return '<li>' + esc(t) + '</li>'; }).join('') + '</ul></div>';
+      h += L('<div class="planref"><b>לפני הכול: שווה לדבר עם רופא או רופאה</b><ul>') + refs.map(function (t) { return '<li>' + esc(t) + '</li>'; }).join('') + '</ul></div>';
     }
     if (top.length) {
       h += L('<p class="small muted">שלושת השינויים שהמודל מעריך שישפיעו אצלך הכי הרבה, ולכל אחד צעד ראשון שאפשר להתחיל כבר השבוע.</p><ol class="plansteps">') +
@@ -932,9 +932,9 @@
       '<details class="exfigs"><summary>' + L('איורים לדוגמאות') + '</summary><div class="exgrid">' +
         exFig('sit', L('קימה וישיבה מכיסא')) + exFig('wall', L('שכיבות סמיכה על קיר')) + exFig('bridge', L('גשר עכוז')) + exFig('row', L('חתירה עם גומיית התנגדות')) +
         (old ? exFig('leg', L('עמידה על רגל אחת ליד משענת')) + exFig('heel', L('הליכה עקב-אגודל')) : '') +
-        '</div>' + L('<p class="small muted">איורים סכמטיים, לא הדרכה לביצוע. אם משהו לא ברור או כואב, שווה לשאול מאמן/ת או פיזיותרפיסט/ית.</p>') + '</details>' +
-      (chronic ? L('<p class="small">יש לך מצב כרוני (סוכרת או לחץ דם), ולכן כדאי לשאול את הרופא/ה איזו עצימות מתאימה לך לפני שמגבירים.</p>') : '') +
-      L('<p class="small muted">כאב בחזה, סחרחורת או קוצר נשימה חריג באמצע מאמץ הם סימן לעצור ולפנות לרופא/ה. זה מידע כללי ולא ייעוץ רפואי.</p>') +
+        '</div>' + L('<p class="small muted">איורים סכמטיים, לא הדרכה לביצוע. אם משהו לא ברור או כואב, שווה לשאול מאמן או מאמנת או פיזיותרפיסט או פיזיותרפיסטית.</p>') + '</details>' +
+      (chronic ? L('<p class="small">יש לך מצב כרוני (סוכרת או לחץ דם), ולכן כדאי לשאול את הרופא או הרופאה איזו עצימות מתאימה לך לפני שמגבירים.</p>') : '') +
+      L('<p class="small muted">כאב בחזה, סחרחורת או קוצר נשימה חריג באמצע מאמץ הם סימן לעצור ולפנות לרופא או לרופאה. זה מידע כללי ולא ייעוץ רפואי.</p>') +
       '<a class="small" href="' + SiteURL('topic', 'movement') + '">' + L('למדריך: תנועה וכושר') + arrow + '</a></div>';
   }
 
@@ -953,10 +953,10 @@
     if (a >= 45 && a <= 75) screen.push(L('סקר לסרטן המעי הגס: בגילים 45–75 (בחלק מהמדינות מגיל 50), בדיקת דם סמוי בצואה או קולונוסקופיה.'));
     if (fem && a >= 40 && a <= 74) screen.push(L('ממוגרפיה: לנשים בגילים 40–74 (בחלק מהמדינות מגיל 50), כל שנה עד שנתיים.'));
     if (fem && a >= 25 && a <= 65) screen.push(L('סקר לסרטן צוואר הרחם (בדיקת HPV או פאפ): לנשים בגילים 25–65 בערך, לפי ההנחיות במדינה.'));
-    if ((inp.smoking === 'current' || (inp.smoking === 'former' && !(inp.quitAge < a - 15))) && a >= 50 && a <= 80) screen.push(L('CT במינון נמוך לסרטן ריאה: לפי העישון והגיל שהזנת (בגילים 50–80, בהווה או ב-15 השנים האחרונות). ההנחיות מיועדות למי שעישן הרבה לאורך שנים, וכמות העישון לא נשאלת כאן, ולכן כדאי לברר עם הרופא/ה אם זה מתאים לך.'));
+    if ((inp.smoking === 'current' || (inp.smoking === 'former' && !(inp.quitAge < a - 15))) && a >= 50 && a <= 80) screen.push(L('CT במינון נמוך לסרטן ריאה: לפי העישון והגיל שהזנת (בגילים 50–80, בהווה או ב-15 השנים האחרונות). ההנחיות מיועדות למי שעישן הרבה לאורך שנים, וכמות העישון לא נשאלת כאן, ולכן כדאי לברר עם הרופא או הרופאה אם זה מתאים לך.'));
     if (!labs.length && !screen.length) return '';
     var li = function (t) { return '<li>' + esc(t) + '</li>'; };
-    return L('<div class="tests"><h3>בדיקות שכדאי להעלות מול הרופא/ה</h3><p class="small muted">לפי הגיל שלך ומה שהזנת. ההנחיות משתנות בין מדינות, וזו רשימה לשיחה עם הרופא/ה, לא הפניה.</p>') +
+    return L('<div class="tests"><h3>בדיקות שכדאי להעלות מול הרופא או הרופאה</h3><p class="small muted">לפי הגיל שלך ומה שהזנת. ההנחיות משתנות בין מדינות, וזו רשימה לשיחה עם הרופא או הרופאה, לא הפניה.</p>') +
       (labs.length ? L('<h4>בדיקות דם ומדידות</h4>') + '<ul>' + labs.map(li).join('') + '</ul>' : '') +
       (screen.length ? L('<h4>גילוי מוקדם של סרטן</h4>') + '<ul>' + screen.map(li).join('') + '</ul>' : '') +
       L('<p class="small muted">בכוונה לא כללנו בדיקות שאין לגביהן המלצה לכלל האוכלוסייה, כמו ויטמין D או טסטוסטרון.</p></div>');
@@ -988,9 +988,9 @@
     var li = function (t) { return '<li>' + esc(t) + '</li>'; };
     var blank = '<div class="docline"></div><div class="docline"></div><div class="docline"></div><div class="docline"></div>';
     return '<div class="card docreport">' +
-      L('<h2>דוח הכנה לפגישה עם הרופא/ה</h2>') +
+      L('<h2>דוח הכנה לפגישה עם הרופא או הרופאה</h2>') +
       '<p class="small muted">' + new Date().toLocaleDateString(LANGS[LANG].locale) + ' · myyearsleft.com</p>' +
-      L('<p class="small muted">הנתונים הוזנו על ידי המשתמש/ת ולא אומתו. זה אינו אבחנה רפואית, אלא דף להכנת השיחה. הוא נוצר בדפדפן שלך בלבד.</p>') +
+      L('<p class="small muted">הנתונים הוזנו על ידי מי שמילא את הטופס ולא אומתו. זה אינו אבחנה רפואית, אלא דף להכנת השיחה. הוא נוצר בדפדפן שלך בלבד.</p>') +
       L('<h3>הנתונים שהזנתי</h3>') + '<table class="doctable">' + rows.join('') + '</table>' +
       L('<h3>ערכים שכדאי לדון בהם</h3>') +
       (refs.length ? '<ul>' + refs.map(li).join('') + '</ul>' : L('<p class="small">לא זוהו ערכים חריגים לפי ספי ההפניה הרגילים, על סמך מה שהוזן.</p>')) +
@@ -1102,7 +1102,7 @@
         '" min="' + min + '" max="' + max + '" step="1" value="' + val + '"><output id="o_' + id + '" dir="ltr"></output><span>' + esc(unit) + '</span></div></div>';
     }
     var rows = '';
-    if (inp.smoking === 'current') rows += L('<div class="simrow"><label for="s_quit">עישון</label><select id="s_quit" data-sim="quit"><option value="">ממשיך/ה לעשן</option><option value="1">מפסיק/ה לעשן עכשיו</option></select></div>');
+    if (inp.smoking === 'current') rows += L('<div class="simrow"><label for="s_quit">עישון</label><select id="s_quit" data-sim="quit"><option value="">ממשיכים לעשן</option><option value="1">מפסיקים לעשן עכשיו</option></select></div>');
     if (inp.height && inp.weight) rows += range('weight', L('משקל'), Math.max(35, Math.round(inp.weight - 50)), Math.round(inp.weight + 30), Math.round(inp.weight), L('ק"ג'));
     rows += sel('activity', L('פעילות גופנית בשבוע')) + sel('alcohol', L('אלכוהול בשבוע')) + sel('fruitveg', L('פירות וירקות ביום')) + sel('sitting', L('שעות ישיבה ביום')) + sel('sleep', L('שעות שינה')) + sel('isolated', L('מפגשים חברתיים')) + sel('lonely', L('תחושת בדידות תכופה')) + (inp.vo2max ? '' : sel('walkPace', L('קצב הליכה')));
     if (inp.sbp) rows += range('sbp', L('לחץ דם סיסטולי'), 100, 200, Math.round(inp.sbp), L('ממ"כ'));
@@ -1191,8 +1191,8 @@
     alcohol: L('לפי Wood 2018, הסיכון הנמוך ביותר הוא בצריכה של עד כ-100 גרם אלכוהול בשבוע (כ-7 מנות).'),
     sleep: L('שינה קצרה מאוד או ארוכה מאוד קשורה בתמותה גבוהה יותר; לעיתים היא סימן לבעיה אחרת ששווה לבדוק.'),
     fruitveg: L('כל מנה נוספת של פירות וירקות ביום, עד חמש, קשורה בירידה של כ-5% בסיכון.'),
-    bp: L('לחץ דם גבוה ניתן לטיפול יעיל. שווה למדוד שוב ולדבר עם רופא/ת המשפחה.'),
-    chol: L('ערכי כולסטרול גבוהים ניתנים לאיזון בתזונה ובטיפול. שווה להתייעץ עם רופא/ת המשפחה.'),
+    bp: L('לחץ דם גבוה ניתן לטיפול יעיל. שווה למדוד שוב ולדבר עם רופא או רופאת המשפחה.'),
+    chol: L('ערכי כולסטרול גבוהים ניתנים לאיזון בתזונה ובטיפול. שווה להתייעץ עם רופא או רופאת המשפחה.'),
     sitting: L('ישיבה ממושכת קשורה בתמותה גבוהה יותר, בעיקר מעל 7 שעות ביום. פעילות גופנית מקזזת חלק מההשפעה.'),
     social: L('קשרים חברתיים הם גורם בריאותי של ממש, בסדר גודל דומה לגורמי סיכון מוכרים אחרים.'),
     walkpace: L('קצב הליכה הוא בעיקר מדד לכושר. הוא משתפר עם פעילות אירובית קבועה, כמו הליכה מהירה, אופניים או שחייה.'),
@@ -1214,13 +1214,13 @@
     if (flagged.length) n.unshift(L('ערכים חריגים שכדאי לוודא שהוזנו נכון: ') + flagged.join(', ') + L('. אם יש טעות, אפשר לתקן ב"עריכת הנתונים".'));
     var h = data.hered || [], o = data.origin || [];
     var cnd = data.conditions || [], meds = data.meds || [];
-    if (cnd.indexOf('cancer') >= 0 || cnd.indexOf('copd') >= 0 || cnd.indexOf('other') >= 0) n.unshift(L('ציינת סרטן, מחלת ריאות כרונית או מחלה קשה אחרת. אלה לא נכללו במספר: ההשפעה שלהן תלויה מאוד בסוג, בשלב ובטיפול, והמודל בנוי על האוכלוסייה הכללית. לכן ההערכה כאן כנראה אופטימית מדי עבורך, והרופא/ה המטפל/ת הוא הכתובת.'));
+    if (cnd.indexOf('cancer') >= 0 || cnd.indexOf('copd') >= 0 || cnd.indexOf('other') >= 0) n.unshift(L('ציינת סרטן, מחלת ריאות כרונית או מחלה קשה אחרת. אלה לא נכללו במספר: ההשפעה שלהן תלויה מאוד בסוג, בשלב ובטיפול, והמודל בנוי על האוכלוסייה הכללית. לכן ההערכה כאן כנראה אופטימית מדי עבורך, והרופא או הרופאה המטפלים הוא הכתובת.'));
     if (cnd.indexOf('mi') >= 0 || cnd.indexOf('stroke') >= 0) n.push(L('התקף לב ואירוע מוחי נכללו במספר לפי ממוצע של כל מי שעבר אירוע כזה (ERFC 2015). המצב האישי, הזמן שעבר מאז והטיפול יכולים לשנות את התמונה במידה רבה.'));
     if (meds.indexOf('bp') >= 0 && r.contributions.some(function (c) { return c.id === 'bp'; })) n.push(L('לחץ הדם שהזנת נמדד תחת טיפול תרופתי. המודל משתמש בערך הנמדד; מי שמאוזן בעזרת תרופות נמצא בדרך כלל בסיכון מעט גבוה יותר ממי שיש לו אותו ערך ללא טיפול.'));
     if (meds.indexOf('statin') >= 0 && r.contributions.some(function (c) { return c.id === 'chol'; })) n.push(L('ערכי הכולסטרול שהזנת נמדדו תחת טיפול בסטטינים, והמודל משתמש בערך הנמדד.'));
     var hN = num(data.height), wN = num(data.weight), wa = num(data.waist), bmiN = hN && wN ? wN / Math.pow(hN / 100, 2) : null;
     if (bmiN !== null && bmiN > 25 && bmiN < 30 && wa !== undefined && wa < (data.sex === 'f' ? 80 : 94)) n.push(L('ה-BMI שלך מעל 25, אבל היקף המותניים בטווח התקין. זה מתאים יותר למסת שריר מאשר לעודף שומן, ולכן לא מוצגת המלצה לרדת במשקל. היקף המותניים כבר מקזז חלק מההשפעה של ה-BMI בחישוב.'));
-    if (r.limits && r.limits.upper) n.push(L('השילוב שהזנת מגיע לגבול העליון של המודל, ולכן ההערכה פחות בטוחה. כדאי לדבר על כך עם רופא/ה.'));
+    if (r.limits && r.limits.upper) n.push(L('השילוב שהזנת מגיע לגבול העליון של המודל, ולכן ההערכה פחות בטוחה. כדאי לדבר על כך עם רופא או רופאה.'));
     // הודעת רצפה הוסרה (20.11.2026): הרצפה 0.40 נפגשת כבר אצל לא-מעשן בכושר טוב, והיא לא מכוילת. הדגל limits.lower נשאר ב-compute למידע.
     if (expiredLabs.length) {
       n.unshift(L('ערכי בדיקות שהתאריך שלהם מוקדם מ-24 חודשים לא נכללו בחישוב: ') + expiredLabs.map(function (x) { return LabParser.nameOf(x.id) + ' (' + heDate(x.date) + ')'; }).join(', ') +
@@ -1238,14 +1238,14 @@
     }
         if (r.derived.phenoMissing) n.push(L('כדי לחשב גיל ביולוגי חסרים עוד: ') + r.derived.phenoMissing.join(', ') + '.');
     if (r.derived.phenoAge !== undefined) n.push(L('כשמחושב גיל ביולוגי, CRP ותפקוד הכליות כבר כלולים בו, ולכן הם לא מופיעים כגורמים נפרדים.'));
-    if (r.derived.egfr !== undefined && r.derived.egfr < 60) n.push(L('ה-eGFR המחושב מהקריאטינין שלך (') + Math.round(r.derived.egfr) + L(') נמוך מ-60. תוצאה בודדת אינה אבחנה, אבל כדאי להראות אותה לרופא/ה.'));
+    if (r.derived.egfr !== undefined && r.derived.egfr < 60) n.push(L('ה-eGFR המחושב מהקריאטינין שלך (') + Math.round(r.derived.egfr) + L(') נמוך מ-60. תוצאה בודדת אינה אבחנה, אבל כדאי להראות אותה לרופא או לרופאה.'));
     if (r.derived.cholRatio !== undefined) n.push(L('יחס כולסטרול כללי ל-HDL שלך: ') + fmt(r.derived.cholRatio) + L('. לפי Prospective Studies Collaboration, היחס הזה הוא המנבא הטוב ביותר מבין מדדי הכולסטרול לתמותה ממחלת לב.'));
-    if (h.indexOf('breast') >= 0 || h.indexOf('colon') >= 0) n.push(L('סיפור משפחתי של סרטן שד, שחלה או מעי גס לא נכלל במספר, אבל הוא סיבה טובה לשאול רופא/ה על בדיקות סקר מוקדמות ועל ייעוץ גנטי.'));
+    if (h.indexOf('breast') >= 0 || h.indexOf('colon') >= 0) n.push(L('סיפור משפחתי של סרטן שד, שחלה או מעי גס לא נכלל במספר, אבל הוא סיבה טובה לשאול רופא או רופאה על בדיקות סקר מוקדמות ועל ייעוץ גנטי.'));
     if (h.indexOf('fh') >= 0) n.push(L('כולסטרול גבוה משפחתי (FH) הוא מצב תורשתי שמעלה מאוד את הסיכון למחלת לב מוקדמת, והוא ניתן לטיפול. אם לא נבדקת, שווה לבדוק.'));
     if (h.indexOf('t2d') >= 0 || h.indexOf('alz') >= 0) n.push(L('סוכרת סוג 2 ואלצהיימר במשפחה מעלים את הסיכון האישי למחלות אלה, אך לא מצאתי להם יחס סיכונים מבוסס לתמותה כללית, ולכן הם לא נכללו במספר.'));
     if (o.length) {
       n.push(L('מוצא: המוצא לא שינה את המספר. ההבדלים בתוחלת החיים בין קבוצות מוצא נובעים בעיקר ממדינת המגורים, מהשכלה ומאורח חיים, שכבר נכללים בחישוב, ואין יחס סיכונים עצמאי ומבוסס למוצא עצמו.'));
-      if (o.indexOf('ashk') >= 0) n.push(L('בקרב יהודים אשכנזים, כ-1 מכל 40 נושא/ת מוטציה בגנים BRCA1/2, שמעלה את הסיכון לסרטן שד, שחלה וערמונית. אפשר לשאול את רופא/ת המשפחה על בדיקה גנטית.'));
+      if (o.indexOf('ashk') >= 0) n.push(L('בקרב יהודים אשכנזים, כ-1 מכל 40 נושאים מוטציה בגנים BRCA1/2, שמעלה את הסיכון לסרטן שד, שחלה וערמונית. אפשר לשאול את רופא או רופאת המשפחה על בדיקה גנטית.'));
     }
     return n;
   }
@@ -1309,7 +1309,7 @@
 
       L('<h3>איך זה מחושב</h3>') +
       L('<details><summary>השיטה בקצרה</summary><p class="small" style="margin-top:8px">נקודת הבסיס היא לוח התמותה של ארגון הבריאות העולמי לשנת ') + LIFE_TABLE_YEAR + L(' (השנה האחרונה לפני הקורונה), לפי מדינה ומין. כל גורם סיכון מתורגם ליחס סיכונים (Hazard Ratio) מתוך מחקר מפורסם, מנורמל לממוצע האוכלוסייה, ומכפיל את קצב התמותה בכל גיל. יחסי הסיכון נחלשים בגיל מבוגר, כפי שנמצא במחקרים. מכיוון שגורמי הסיכון מתואמים זה עם זה, הגורם החזק ביותר נספר במלואו והאחרים במשקל מופחת, והיחס המשולב מוגבל לטווח 0.4–8.</p>') +
-      L('<p class="small"><b>מגבלות:</b> המחקרים הם תצפיתיים ומראים קשר סטטיסטי, לא בהכרח סיבתיות. המודל אינו מכיר מחלות קיימות, תרופות, גנטיקה אישית או תאונות, ואינו מביא בחשבון שיפורים עתידיים ברפואה. לוח התמותה משקף את התמותה של היום, ולכן לצעירים ההערכה נוטה להיות שמרנית.</p></details>') +
+      L('טבלת התמותה משקפת את התמותה של היום, ולא שיפורים עתידיים ברפואה. לכן ההערכה לצעירים כנראה שמרנית, כלומר נמוכה מדי.') +
       L('<details><summary>המקורות ויחסי הסיכון ששימשו</summary><p class="small muted" style="margin-top:8px">ליד כל מקור מופיע יחס הסיכון (HR) ששימש במודל. מעל 1 פירושו סיכון גבוה יותר, ומתחת ל-1 נמוך יותר. אלה הערכים מהמחקר, לפני הנרמול לממוצע האוכלוסייה ולפני ההיחלשות בגיל מבוגר.</p><ol>') + SOURCES.map(function (s) { return '<li>' + s + '</li>'; }).join('') + '</ol></details>' +
 
       L('<div class="nav"><button id="back">עריכת הנתונים</button><button class="primary" id="print">הדפסה / שמירה כ-PDF</button></div></div></div></div>');
@@ -1320,7 +1320,7 @@
     var rf = document.getElementById('refine'); if (rf) rf.onclick = function () { setMode('full'); step = 1; render(); };
     document.getElementById('print').onclick = function () { window.print(); };
     var pb = document.getElementById('print'), db = document.createElement('button');
-    db.textContent = L('דוח הכנה לרופא/ה'); db.id = 'docrep'; pb.parentNode.insertBefore(db, pb);
+    db.textContent = L('דוח הכנה לרופא או לרופאה'); db.id = 'docrep'; pb.parentNode.insertBefore(db, pb);
     db.onclick = function () {
       app.innerHTML = doctorReport(inp, r); window.scrollTo(0, 0);
       document.getElementById('docback').onclick = renderResult;
@@ -1330,7 +1330,7 @@
 
   var SOURCES = [
     L('<b>בסיס:</b> WHO Global Health Observatory, Life tables by country, 2019 (nqx, ex).'),
-    L('<b>עישון:</b> Jha P. et al. 21st-Century Hazards of Smoking and Benefits of Cessation in the United States. <i>NEJM</i> 2013;368:341–50. <span class="hrnote">במודל: מעשן/ת: 2.8 בגברים, 3.0 בנשים. הפסקת עישון: 1.0 בגיל 25–34, 1.2 ב-35–44, 1.5 ב-45–54, 1.7 ב-55–64; מעל 65: 1.9 (הנחה)</span>'),
+    L('<b>עישון:</b> Jha P. et al. 21st-Century Hazards of Smoking and Benefits of Cessation in the United States. <i>NEJM</i> 2013;368:341–50. <span class="hrnote">במודל: עישון כיום: 2.8 בגברים, 3.0 בנשים. הפסקת עישון: 1.0 בגיל 25–34, 1.2 ב-35–44, 1.5 ב-45–54, 1.7 ב-55–64; מעל 65: 1.9 (הנחה)</span>'),
     L('<b>BMI:</b> Global BMI Mortality Collaboration. Body-mass index and all-cause mortality: individual-participant-data meta-analysis of 239 prospective studies. <i>Lancet</i> 2016;388:776–86. <span class="hrnote">במודל: מתחת ל-18.5: 1.51 · 18.5–20: 1.13 · 25–27.5: 1.07 · 27.5–30: 1.20 · 30–35: 1.45 · 35–40: 1.94 · 40+: 2.76 (ייחוס: 20–25). העקומה קרובה לזו של נשים; לגברים ההשפעה מעל BMI 21 מוגברת פי 1.43 בלוג, כי במאמר הסיכון בגברים גבוה יותר (השמנה דרגה 1: 1.70 לעומת 1.37 בנשים)</span>'),
     L('<b>פעילות גופנית:</b> Arem H. et al. Leisure Time Physical Activity and Mortality. <i>JAMA Intern Med</i> 2015;175:959–67. <span class="hrnote">במודל: פחות מ-150 דק׳ בשבוע: 0.80 · 150–300: 0.69 · 300–450: 0.63 · מעל 450: 0.61 (ייחוס: ללא פעילות)</span>'),
     L('<b>אלכוהול:</b> Wood A.M. et al. Risk thresholds for alcohol consumption. <i>Lancet</i> 2018;391:1513–23. <span class="hrnote">במודל: 8–14 מנות בשבוע: 1.05 · 15–25: 1.16 · מעל 25: 1.57 (נגזר מהפרשי תוחלת החיים במחקר)</span>'),
@@ -1353,7 +1353,7 @@
     L('<b>היקף מותניים:</b> Cerhan J.R. et al. A Pooled Analysis of Waist Circumference and Mortality in 650,000 Adults. <i>Mayo Clin Proc</i> 2014;89:335–45. <span class="hrnote">במודל: 1.07 בגברים, 1.09 בנשים, לכל 5 ס"מ</span>'),
     L('<b>כושר אירובי:</b> Kodama S. et al. Cardiorespiratory Fitness as a Quantitative Predictor of All-Cause Mortality. <i>JAMA</i> 2009;301:2024–35. ערכי ייחוס: Kaminsky L.A. et al. (FRIEND Registry). <i>Mayo Clin Proc</i> 2015;90:1515–23. <span class="hrnote">במודל: 0.87 לכל MET (3.5 מ"ל/ק"ג/דקה) של VO2max מעל החציון לגיל ולמין</span>'),
     L('<b>ישיבה:</b> Chau J.Y. et al. Daily Sitting Time and All-Cause Mortality: A Meta-Analysis. <i>PLoS One</i> 2013;8:e80000. <span class="hrnote">במודל: 1.02 לכל שעה ביום בין 3 ל-7 שעות, 1.05 לכל שעה מעל 7</span>'),
-    L('<b>מצב משפחתי:</b> Wang Y. et al. Sex differences in the association between marital status and the risk of cardiovascular, cancer, and all-cause mortality. <i>Glob Health Res Policy</i> 2020;5:4. <span class="hrnote">במודל: ללא בן/בת זוג: 1.46 בגברים, 1.22 בנשים</span>'),
+    L('<b>מצב משפחתי:</b> Wang Y. et al. Sex differences in the association between marital status and the risk of cardiovascular, cancer, and all-cause mortality. <i>Glob Health Res Policy</i> 2020;5:4. <span class="hrnote">במודל: ללא בן או בת זוג: 1.46 בגברים, 1.22 בנשים</span>'),
     L('<b>טריגליצרידים:</b> Liu J. et al. Effects of blood triglycerides on cardiovascular and all-cause mortality. <i>Lipids Health Dis</i> 2013;12:159. <span class="hrnote">במודל: 1.12 לכל 88.6 מ"ג/ד"ל (1 mmol/L)</span>'),
     L('<b>Lp(a):</b> Langsted A. et al. High lipoprotein(a) and high risk of mortality. <i>Eur Heart J</i> 2019;40:2760–70. <span class="hrnote">במודל: 1.05 לכל 50 מ"ג/ד"ל</span>'),
     L('<b>GGT:</b> Kunutsor S.K. et al. Liver enzymes and risk of all-cause mortality in general populations. <i>Int J Epidemiol</i> 2014;43:187–201. <span class="hrnote">במודל: 1.07 לכל 5 יחידות, עד 1.6 לכל היותר</span>'),
