@@ -2193,3 +2193,8 @@ Object.assign(I18N.es, {
 "1401jsg": "Y quedarse en torno a 7 bebidas estándar como máximo (unos 14 gramos de alcohol cada una), o menos.",
 "bqw8h5": "Cómo empezar: fijar una fecha para dejar de fumar y contársela a personas cercanas, y acudir a la caja de salud para un taller de deshabituación y los medicamentos incluidos en la cobertura básica. Con el alcohol: contar las copas por semana, mantenerse en torno a 7 bebidas estándar como máximo (unos 14 gramos de alcohol cada una) y fijar algunos días a la semana sin alcohol."
 });
+
+Object.assign(I18N.es, {
+"1eqfd63": ". Los valores antiguos (más de 24 meses) están marcados y no se cuentan.",
+"nmny18": "<span class=\"chip\">Valor antiguo</span>"
+});

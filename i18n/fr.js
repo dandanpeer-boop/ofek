@@ -2193,3 +2193,8 @@ Object.assign(I18N.fr, {
 "1401jsg": "Et rester jusqu'à environ 7 verres standard (environ 14 grammes d'alcool chacun), voire moins.",
 "bqw8h5": "Comment commencer : fixer une date pour arrêter de fumer et en parler à des proches, et s'adresser à sa caisse de santé pour un atelier de sevrage et les médicaments inclus dans le panier de soins. Pour l'alcool : compter ses verres par semaine, rester jusqu'à environ 7 verres standard (environ 14 grammes d'alcool chacun) et prévoir quelques jours fixes par semaine sans alcool."
 });
+
+Object.assign(I18N.fr, {
+"1eqfd63": ". Les valeurs anciennes (plus de 24 mois) sont signalées et non comptées.",
+"nmny18": "<span class=\"chip\">Valeur ancienne</span>"
+});

@@ -601,22 +601,28 @@
       pts.map(function (q) { return '<circle cx="' + q[0].toFixed(1) + '" cy="' + q[1].toFixed(1) + '" r="2.5" fill="' + col + '"/>'; }).join('') + '</svg>';
   }
 
-  /** ערכים שנמצאו במסמכים ואינם חלק מהמודל — הערך העדכני ביותר לכל בדיקה */
+  /** ערכים שנמצאו במסמכים ואינם חלק מהמודל — הערך העדכני ביותר לכל בדיקה. אותה בדיקה עם שמות שונים במעבדות שונות נספרת פעם אחת. ערך ישן (מעל 24 חודשים) מסומן ואינו נספר כחריג */
+  function otherKey(name) {
+    var n = String(name).toLowerCase();
+    if (/\balt\b|\bgpt\b/.test(n)) return 'alt';
+    if (/\bast\b|\bgot\b/.test(n)) return 'ast';
+    return n.replace(/[^a-z0-9֐-׿]+/g, ' ').trim();
+  }
   function othersHTML() {
     var docs = (data.labDocs || []).slice().sort(function (a, b) { return (a.date || '') < (b.date || '') ? -1 : 1; });
-    var map = {};
-    docs.forEach(function (d) { (d.other || []).forEach(function (o) { map[o.name.toLowerCase()] = { o: o, date: d.date }; }); });
+    var map = {}, cut = LabParser.monthsBefore(todayISO(), 24);
+    docs.forEach(function (d) { (d.other || []).forEach(function (o) { map[otherKey(o.name)] = { o: o, date: d.date, old: !!d.date && d.date < cut }; }); });
     var list = Object.keys(map).map(function (k) { return map[k]; });
     if (!list.length) return '';
     var rank = { high: 0, low: 0, ok: 1 };
-    list.sort(function (a, b) { return rank[a.o.status] - rank[b.o.status]; });
-    var out = list.filter(function (x) { return x.o.status !== 'ok'; }).length;
+    list.sort(function (a, b) { return (a.old ? 2 : 0) + rank[a.o.status] - ((b.old ? 2 : 0) + rank[b.o.status]); });
+    var out = list.filter(function (x) { return x.o.status !== 'ok' && !x.old; }).length, oldN = list.filter(function (x) { return x.old; }).length;
     return L('<h3>ערכים נוספים מהבדיקות</h3><details class="others"') + (out ? ' open' : '') + '><summary>' + list.length + L(' ערכים נוספים נמצאו במסמכים') +
-      (out ? L(', מתוכם <b class="neg">') + out + L(' מחוץ לטווח</b>') : L(', כולם בטווח')) + '</summary>' +
+      (out ? L(', מתוכם <b class="neg">') + out + L(' מחוץ לטווח</b>') : L(', כולם בטווח')) + (oldN ? L('. ערכים ישנים (מעל 24 חודשים) מסומנים ואינם נספרים.') : '') + '</summary>' +
       L('<p class="small muted">הערכים האלה אינם נכללים בחישוב תוחלת החיים. הטווח הוא זה שמופיע במסמך עצמו, והקריאה אוטומטית ועלולה לטעות; ערך מחוץ לטווח הוא סיבה לשאול את הרופא או הרופאה, לא אבחנה.</p>') +
       list.map(function (x) {
-        var o = x.o, st = o.status === 'ok' ? L('<span class="chip">בטווח</span>') : '<span class="chip bad">' + (o.status === 'high' ? L('גבוה') : L('נמוך')) + '</span>';
-        return '<div class="orow"><span class="oname" dir="auto">' + esc(o.name) + '</span><b dir="ltr">' + o.value + '</b><span class="small muted" dir="ltr">' + o.lo + ' – ' + o.hi + '</span>' + st + '</div>';
+        var o = x.o, st = x.old ? L('<span class="chip">ערך ישן</span>') : o.status === 'ok' ? L('<span class="chip">בטווח</span>') : '<span class="chip bad">' + (o.status === 'high' ? L('גבוה') : L('נמוך')) + '</span>';
+        return '<div class="orow"' + (x.old ? ' style="opacity:.6"' : '') + '><span class="oname" dir="auto">' + esc(o.name) + (x.date ? ' <span class="small muted" dir="ltr">' + esc(heDate(x.date)) + '</span>' : '') + '</span><b dir="ltr">' + o.value + '</b><span class="small muted" dir="ltr">' + o.lo + ' – ' + o.hi + '</span>' + st + '</div>';
       }).join('') + '</details>';
   }
 

@@ -2195,3 +2195,8 @@ Object.assign(I18N.en, {
 "1401jsg": "And stay within about 7 standard drinks (about 14 grams of alcohol each), or fewer.",
 "bqw8h5": "How to start: set a date to quit smoking and tell people close to you, and contact your health fund about a quit-smoking workshop and the medications included in the health basket. For alcohol: count your drinks each week, stay within about 7 standard drinks (about 14 grams of alcohol each), and set a few fixed days a week without alcohol."
 });
+
+Object.assign(I18N.en, {
+"1eqfd63": ". Old values (over 24 months) are marked and not counted.",
+"nmny18": "<span class=\"chip\">Old value</span>"
+});
