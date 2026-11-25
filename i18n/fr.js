@@ -2198,3 +2198,48 @@ Object.assign(I18N.fr, {
 "1eqfd63": ". Les valeurs anciennes (plus de 24 mois) sont signalées et non comptées.",
 "nmny18": "<span class=\"chip\">Valeur ancienne</span>"
 });
+
+Object.assign(I18N.fr, {
+"jzqi4q": "L'âge biologique n'est pas un chiffre unique",
+"15zxlq3": "Le calculateur calcule l'âge biologique à partir des analyses de sang uniquement. Mais aucun chiffre unique ne résume l'âge biologique d'une personne. Il existe plusieurs indices, et chacun montre quelque chose de différent : le sang, la condition physique, l'équilibre et la force, le corps et le niveau moléculaire. Nous n'avons pas trouvé de méthode testée sur la mortalité qui combine toutes les couches en un seul chiffre, ni de façon établie de les pondérer. C'est pourquoi seul un profil descriptif est présenté ici, sans score ni pondérations.",
+"7x4ung": "Ce que dit chaque couche",
+"h3z4vs": "Sang. L'âge phénotypique (PhenoAge) est calculé à partir de neuf valeurs d'une analyse de sang courante, et il est déjà inclus dans le calcul du site. Dans l'étude d'origine, il prédisait la mortalité à peine mieux que l'âge seul (aire sous la courbe 0,88 contre 0,86). Il a été testé dans une population américaine, et une analyse faite pendant une maladie aiguë le fausse.",
+"umwlhm": "Condition physique. La capacité cardio-respiratoire est l'un des marqueurs les plus forts étudiés. Dans l'étude de Mandsager (2018), les personnes à très faible condition physique avaient un risque de mortalité 5,04 fois plus élevé (intervalle de confiance 4,10–6,20) que celles de condition physique d'élite. C'est une association, pas la preuve qu'améliorer la condition physique réduit le risque, et les auteurs le précisent. Entre groupes voisins (en dessous de la moyenne contre au-dessus de la moyenne), le rapport de risque était de 1,41, comme celui du tabagisme dans cette étude, et le tabagisme y était mesuré grossièrement. Les valeurs de référence par âge et par sexe proviennent de l'étude FRIEND (Kaminsky 2015), pour des tests sur tapis roulant uniquement.",
+"1ce8ed8": "Équilibre. Dans l'étude d'Araujo (2022, 51 à 75 ans), les personnes qui n'ont pas réussi à tenir 10 secondes sur une jambe avaient un risque de mortalité plus élevé (rapport de risque 1,84, intervalle de confiance 1,23–2,78). C'est un indice de type « réussi ou non », pas un score, et il n'a donc pas de chiffre sur le site.",
+"1xsffu6": "Force. Une faible force de préhension est associée à une mortalité plus élevée dans plusieurs grandes études (environ 1,16 par 5 kg en moins dans l'étude PURE, Leong 2015). C'est un marqueur, pas une cause : aucun essai n'a montré que renforcer la préhension réduit la mortalité. Les preuves sur les pompes sont trop faibles (37 événements chez des pompiers hommes, et un critère cardiaque plutôt que la mortalité), elles n'ont donc pas de score.",
+"3h7f9": "Corps. Le tour de taille prédit la mortalité même après prise en compte de l'IMC (Cerhan 2014). Les valeurs de référence courantes (94 cm pour les hommes et 80 pour les femmes, ainsi que 102 et 88) viennent de travaux européens et de définitions de l'IDF et des NIH, et varient selon les origines. Elles ne sont pas une frontière entre bonne et mauvaise santé, et votre propre valeur se comprend mieux avec un médecin. Nous n'avons pas trouvé de preuve claire qu'un examen DEXA apporte plus que le tour de taille.",
+"1x9hd77": "Niveau moléculaire. Les horloges épigénétiques et la longueur des télomères sont très étudiées, mais chez une seule personne elles sont bruitées. En répétant l'analyse du même sang, l'écart technique a atteint 8,6 ans pour une horloge (médiane 2,4 ans ; Higgins-Chen 2022). C'est pourquoi le site n'a pas de score de ce type.",
+"pi54yp": "Ce qui entre dans le calcul et ce qui n'y entre pas",
+"wa3rgz": "Le calcul du site comprend : l'âge biologique à partir du sang (PhenoAge) lorsque les neuf valeurs de la dernière année sont présentes, la VO2max si elle est saisie, la vitesse de marche et le tour de taille. Il ne comprend pas : les tests à domicile ci-dessous, un examen DEXA, la graisse viscérale, les horloges épigénétiques et les télomères. Il n'y a ni score global ni pondérations.",
+"cyge0h": "Avant d'essayer des tests à la maison : quand ne pas les faire",
+"5z9dvz": "Ne faites aucun des tests à domicile si l'un de ces points vous concerne, et demandez d'abord l'avis d'un médecin ou d'un kinésithérapeute.",
+"a41vs3": "Douleur ou oppression thoracique à l'effort, ou diagnostic de maladie cardiaque. Hypertension artérielle non contrôlée. Vertiges, évanouissement ou instabilité en se levant. Une chute au cours de la dernière année. Grossesse. Ostéoporose. Chirurgie ou fracture récente, ou nouvelle blessure d'une articulation ou du dos.",
+"yp4c7c": "Arrêtez immédiatement si une douleur, des vertiges ou un essoufflement inhabituel apparaissent.",
+"x64zfl": "Tests que l'on peut faire à la maison",
+"11e8hzo": "Les résultats sont influencés par la fatigue, les douleurs articulaires et l'entraînement : ils ne sont donc pas une mesure précise. Ils sont destinés à ouvrir une conversation avec un médecin ou un kinésithérapeute, pas à comparer ni à obtenir un score. Ils n'ont pas de score, et aucune de leurs valeurs n'entre dans le calcul. Tout ce qui figure ici est une information générale, pas un avis médical.",
+"veney5": "Tour de taille. Se mesure à hauteur du nombril, après une expiration normale. C'est un indice de graisse abdominale, pas un diagnostic. Une valeur qui vous inquiète est une raison d'en parler à un médecin.",
+"1qbjcmf": "Tension artérielle à domicile. Avec un appareil homologué, pendant plusieurs jours de suite. Elle montre un profil, pas un diagnostic. Des valeurs élevées qui reviennent méritent d'être montrées à un médecin.",
+"tdah27": "Cinq levers de chaise. Une chaise stable, sans roulettes, contre un mur. Cela montre la force des jambes ce jour-là. Difficulté inhabituelle ou vertiges : arrêter et demander l'avis d'un médecin.",
+"mx64s0": "Équilibre sur une jambe. À côté d'un mur ou d'une table lourde, pas à côté d'une chaise à roulettes. Cela montre une image de l'équilibre du jour, pas le risque de chute. Une personne qui est tombée au cours de la dernière année ne fait pas ce test.",
+"1c34qjg": "Pompes contre le mur. Pas jusqu'à l'échec, et sans retenir sa respiration. Douleur à l'épaule ou à la poitrine : arrêter.",
+"11qtbjy": "Marche à un rythme confortable. Ce n'est pas un test maximal. Une personne qui prend des médicaments modifiant la fréquence cardiaque, ou par temps chaud : passer ce test. Il donne une estimation grossière de la condition physique, pas de la VO2max.",
+"hc6u56": "Préhension. Seulement si l'on dispose d'un dynamomètre de main. C'est une estimation grossière, à ne pas comparer avec des tableaux.",
+"1u3m6qj": "Tests privés coûteux : ce que disent les preuves",
+"a8hnez": "Beaucoup de gens entendent parler de tests privés et se demandent s'ils valent la peine. Nous ne les recommandons pas et nous ne mettons pas en garde contre eux. Voici ce qui a été trouvé, et la question à poser à un médecin : le résultat changera-t-il une décision que je dois prendre ?",
+"1p5kw5g": "Horloge épigénétique. En répétant l'analyse du même sang, des écarts allant jusqu'à 8,6 ans ont été trouvés (médiane 2,4 ; Higgins-Chen 2022), de sorte que l'écart entre personnes est parfois plus petit que le bruit.",
+"19beqbw": "Examen DEXA. Un examen de la composition corporelle qui implique une faible dose de rayonnement. Nous n'avons pas trouvé de preuve claire qu'il prédise la mortalité au-delà du tour de taille.",
+"o76u1q": "Capteur de glucose en continu pour les personnes sans diabète. Nous n'avons pas trouvé d'essai montrant une amélioration des résultats de santé.",
+"1cl9q4t": "Avant de payer pour un test de ce type, il vaut la peine de demander à un médecin ce qu'il changerait aux décisions.",
+"12rdhnc": "Quand consulter un médecin",
+"18m8hyi": "Une douleur à la poitrine, des vertiges ou un évanouissement sont une raison de consulter un médecin, et non d'attendre un test à domicile. Des valeurs élevées qui reviennent lors des mesures à domicile (tension artérielle, tour de taille) sont aussi une raison d'en parler.",
+"17iu9om": "Mandsager 2018 : capacité cardio-respiratoire et mortalité (JAMA Netw Open)",
+"114dq30": "Kaminsky 2015 : valeurs de référence de la capacité cardio-respiratoire, FRIEND (Mayo Clin Proc)",
+"1wxd5n1": "Araujo 2022 : équilibre sur une jambe et survie (Br J Sports Med)",
+"1nbm5tx": "Leong 2015 : force de préhension et prédiction de la mortalité, PURE (Lancet)",
+"opvsk4": "Cerhan 2014 : tour de taille et mortalité chez 650 000 adultes (Mayo Clin Proc)",
+"1gnmzw7": "Higgins-Chen 2022 : fiabilité des horloges épigénétiques (Nat Aging)"
+});
+
+Object.assign(I18N.fr, {
+"1jmp25n": "Toutes les couches : ce qui entre dans le calcul et ce qui n'y entre pas"
+});

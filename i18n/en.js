@@ -2200,3 +2200,48 @@ Object.assign(I18N.en, {
 "1eqfd63": ". Old values (over 24 months) are marked and not counted.",
 "nmny18": "<span class=\"chip\">Old value</span>"
 });
+
+Object.assign(I18N.en, {
+"jzqi4q": "Biological age is not a single number",
+"15zxlq3": "The calculator computes biological age from blood tests only. But no single number summarises a person's biological age. There are several signs, and each shows something different: blood, fitness, balance and strength, the body, and the molecular level. We did not find a method tested on mortality that combines all the layers into one number, and there is no established way to weight them. So only a descriptive profile is shown here, with no score and no weights.",
+"7x4ung": "What each layer says",
+"h3z4vs": "Blood. Phenotypic age (PhenoAge) is calculated from nine values in a standard blood test, and it is already included in the site's calculation. In the original study it predicted mortality only slightly better than age alone (area under the curve 0.88 versus 0.86). It was tested in a US population, and a test taken during an acute illness distorts it.",
+"umwlhm": "Fitness. Cardiorespiratory fitness is one of the strongest markers studied. In the study by Mandsager (2018), people with very low fitness had a mortality risk 5.04 times higher (confidence interval 4.10–6.20) than people with elite fitness. This is an association, not proof that raising fitness lowers risk, and the authors say so. Between neighbouring fitness groups (below average versus above average) the hazard ratio was 1.41, the same as for smoking in that study, and smoking was measured crudely there. Reference values by age and sex come from the FRIEND study (Kaminsky 2015), for treadmill tests only.",
+"1ce8ed8": "Balance. In the study by Araujo (2022, ages 51–75), people who could not stand on one leg for 10 seconds had a higher mortality risk (hazard ratio 1.84, confidence interval 1.23–2.78). This is a pass-or-fail sign, not a score, so it has no number on the site.",
+"1xsffu6": "Strength. Weak grip is linked to higher mortality in several large studies (about 1.16 per 5 kg lower in the PURE study, Leong 2015). It is a marker, not a cause: no trial has shown that strengthening grip lowers mortality. The evidence for push-ups is too weak (37 events in male firefighters, and a heart outcome rather than mortality), so they have no score.",
+"3h7f9": "Body. Waist circumference predicts mortality even after accounting for BMI (Cerhan 2014). The common reference values (94 cm for men and 80 for women, and also 102 and 88) come from European studies and from IDF and NIH definitions, and they vary by ancestry. They are not a line between healthy and sick, and your own value is best understood together with a doctor. We did not find clear evidence that a DEXA scan adds to waist circumference.",
+"1x9hd77": "Molecular level. Epigenetic clocks and telomere length are heavily researched, but in a single person they are noisy. On repeat testing of the same blood, the technical deviation reached up to 8.6 years in one clock (median 2.4 years; Higgins-Chen 2022). So the site has no such score.",
+"pi54yp": "What goes into the calculation and what does not",
+"wa3rgz": "The calculation on the site includes: biological age from blood (PhenoAge) when all nine values from the last year are present, VO2max if entered, walking pace and waist circumference. It does not include: the home tests below, a DEXA scan, visceral fat, epigenetic clocks and telomeres. There is no overall score and no weights.",
+"cyge0h": "Before trying tests at home: when not to do them",
+"5z9dvz": "Do not do any of the home tests if any of these applies to you, and ask a doctor or a physiotherapist first.",
+"a41vs3": "Chest pain or pressure on exertion, or a diagnosis of heart disease. Uncontrolled high blood pressure. Dizziness, fainting or unsteadiness when standing up. A fall in the past year. Pregnancy. Osteoporosis. Recent surgery or fracture, or a new joint or back injury.",
+"yp4c7c": "Stop immediately if pain, dizziness or unusual shortness of breath appears.",
+"x64zfl": "Tests you can do at home",
+"11e8hzo": "The results are affected by tiredness, joint pain and practice, so they are not an accurate measure. They are meant to start a conversation with a doctor or a physiotherapist, not to compare or to get a score. They have no score, and no value from them goes into the calculation. Everything here is general information, not medical advice.",
+"veney5": "Waist circumference. Measure at navel height, after a normal exhale. It is a sign of belly fat, not a diagnosis. A value that worries you is a reason to talk to a doctor.",
+"1qbjcmf": "Home blood pressure. With an approved device, over several days in a row. It shows a pattern, not a diagnosis. High values that keep recurring are worth showing to a doctor.",
+"tdah27": "Five chair stands. A stable chair without wheels, against a wall. It shows leg strength on that day. Unusual difficulty or dizziness: stop and ask a doctor.",
+"mx64s0": "One-leg stand. Next to a wall or a heavy table, not next to a chair on wheels. It shows a picture of balance on that day, not the risk of falling. Anyone who fell in the past year should not do this test.",
+"1c34qjg": "Wall push-ups. Not to failure, and without holding your breath. Pain in the shoulder or chest: stop.",
+"11qtbjy": "Comfortable-pace walk. This is not a maximal test. Anyone taking medication that changes heart rate, or in hot weather: skip it. It gives a rough estimate of fitness, not VO2max.",
+"hc6u56": "Grip. Only if you have a grip dynamometer. It is a rough estimate, and should not be compared with tables.",
+"1u3m6qj": "Expensive private tests: what the evidence says",
+"a8hnez": "Many people hear about private tests and ask whether they are worth it. We neither recommend them nor warn against them. Here is what was found, and the question worth asking a doctor: will the result change any decision of mine?",
+"1p5kw5g": "Epigenetic clock. On repeat testing of the same blood, differences of up to 8.6 years were found (median 2.4; Higgins-Chen 2022), so the gap between people is sometimes smaller than the noise.",
+"19beqbw": "DEXA scan. A body composition test that involves a small dose of radiation. We did not find clear evidence that it predicts mortality beyond waist circumference.",
+"o76u1q": "Continuous glucose monitor for people without diabetes. We did not find a trial showing an improvement in health outcomes.",
+"1cl9q4t": "Before paying for a test like this, it is worth asking a doctor what it would change in decisions.",
+"12rdhnc": "When to see a doctor",
+"18m8hyi": "Chest pain, dizziness or fainting are a reason to see a doctor, not to wait for a home test. Also, high values that keep recurring on home measurement (blood pressure, waist circumference) are a reason to talk.",
+"17iu9om": "Mandsager 2018: cardiorespiratory fitness and mortality (JAMA Netw Open)",
+"114dq30": "Kaminsky 2015: reference values for cardiorespiratory fitness, FRIEND (Mayo Clin Proc)",
+"1wxd5n1": "Araujo 2022: one-leg stand and survival (Br J Sports Med)",
+"1nbm5tx": "Leong 2015: grip strength and mortality prediction, PURE (Lancet)",
+"opvsk4": "Cerhan 2014: waist circumference and mortality in 650,000 adults (Mayo Clin Proc)",
+"1gnmzw7": "Higgins-Chen 2022: reliability of epigenetic clocks (Nat Aging)"
+});
+
+Object.assign(I18N.en, {
+"1jmp25n": "All the layers: what goes into the calculation and what does not"
+});

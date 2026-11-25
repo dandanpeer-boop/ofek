@@ -2198,3 +2198,48 @@ Object.assign(I18N.es, {
 "1eqfd63": ". Los valores antiguos (más de 24 meses) están marcados y no se cuentan.",
 "nmny18": "<span class=\"chip\">Valor antiguo</span>"
 });
+
+Object.assign(I18N.es, {
+"jzqi4q": "La edad biológica no es un solo número",
+"15zxlq3": "La calculadora calcula la edad biológica solo a partir de análisis de sangre. Pero ningún número único resume la edad biológica de una persona. Hay varios indicios, y cada uno muestra algo distinto: la sangre, la condición física, el equilibrio y la fuerza, el cuerpo y el nivel molecular. No encontramos un método validado con mortalidad que combine todas las capas en un solo número, ni una forma establecida de ponderarlas. Por eso aquí solo se muestra un perfil descriptivo, sin puntuación ni ponderaciones.",
+"7x4ung": "Qué dice cada capa",
+"h3z4vs": "Sangre. La edad fenotípica (PhenoAge) se calcula a partir de nueve valores de un análisis de sangre habitual, y ya está incluida en el cálculo del sitio. En el estudio original predijo la mortalidad solo un poco mejor que la edad sola (área bajo la curva 0,88 frente a 0,86). Se probó en población de EE. UU., y un análisis hecho durante una enfermedad aguda la distorsiona.",
+"umwlhm": "Condición física. La capacidad cardiorrespiratoria es uno de los marcadores más fuertes estudiados. En el estudio de Mandsager (2018), las personas con condición física muy baja tenían un riesgo de mortalidad 5,04 veces mayor (intervalo de confianza 4,10–6,20) que las de condición física de élite. Es una asociación, no una prueba de que mejorar la condición física reduzca el riesgo, y los autores lo señalan. Entre grupos de condición física vecinos (por debajo del promedio frente a por encima del promedio) la razón de riesgo fue 1,41, igual que la del tabaquismo en ese estudio, y el tabaquismo se midió allí de forma burda. Los valores de referencia por edad y sexo son del estudio FRIEND (Kaminsky 2015), solo para pruebas en cinta.",
+"1ce8ed8": "Equilibrio. En el estudio de Araujo (2022, de 51 a 75 años), quienes no lograron mantenerse 10 segundos sobre una pierna tuvieron mayor riesgo de mortalidad (razón de riesgo 1,84, intervalo de confianza 1,23–2,78). Es un indicio de «lo logró o no», no una puntuación, por lo que no tiene un número en el sitio.",
+"1xsffu6": "Fuerza. Un agarre débil se asocia con mayor mortalidad en varios estudios grandes (aproximadamente 1,16 por cada 5 kg menos en el estudio PURE, Leong 2015). Es un marcador, no una causa: ningún ensayo ha mostrado que fortalecer el agarre reduzca la mortalidad. La evidencia sobre las flexiones es demasiado débil (37 eventos en bomberos varones, y un resultado cardíaco en lugar de mortalidad), por lo que no tienen puntuación.",
+"3h7f9": "Cuerpo. El perímetro de cintura predice la mortalidad incluso después de tener en cuenta el IMC (Cerhan 2014). Los valores de referencia habituales (94 cm para hombres y 80 para mujeres, y también 102 y 88) proceden de trabajos europeos y de definiciones de la IDF y los NIH, y varían según el origen étnico. No son una frontera entre sano y enfermo, y conviene entender tu propio valor junto con un médico o una médica. No encontramos evidencia clara de que una exploración DEXA aporte algo más que el perímetro de cintura.",
+"1x9hd77": "Nivel molecular. Los relojes epigenéticos y la longitud de los telómeros se investigan mucho, pero en una sola persona son ruidosos. Al repetir el análisis de la misma sangre, la desviación técnica llegó a 8,6 años en un reloj (mediana 2,4 años; Higgins-Chen 2022). Por eso el sitio no tiene una puntuación así.",
+"pi54yp": "Qué entra en el cálculo y qué no",
+"wa3rgz": "El cálculo del sitio incluye: la edad biológica a partir de la sangre (PhenoAge) cuando están los nueve valores del último año, el VO2max si se introdujo, el ritmo de marcha y el perímetro de cintura. No incluye: las pruebas caseras de abajo, una exploración DEXA, la grasa visceral, los relojes epigenéticos y los telómeros. No hay puntuación global ni ponderaciones.",
+"cyge0h": "Antes de probar pruebas en casa: cuándo no hacerlas",
+"5z9dvz": "No hagas ninguna de las pruebas caseras si algo de lo siguiente te corresponde, y pregunta antes a un médico o una médica, o a un fisioterapeuta.",
+"a41vs3": "Dolor u opresión en el pecho al esfuerzo, o un diagnóstico de enfermedad cardíaca. Presión arterial alta no controlada. Mareo, desmayo o inestabilidad al ponerse de pie. Una caída en el último año. Embarazo. Osteoporosis. Cirugía o fractura reciente, o una lesión nueva en una articulación o en la espalda.",
+"yp4c7c": "Detente de inmediato si aparece dolor, mareo o falta de aire inusual.",
+"x64zfl": "Pruebas que se pueden hacer en casa",
+"11e8hzo": "Los resultados se ven afectados por el cansancio, el dolor articular y la práctica, por lo que no son una medida exacta. Están pensados para iniciar una conversación con un médico o una médica, o con un fisioterapeuta, no para comparar ni para obtener una puntuación. No tienen puntuación y ningún valor de ellas entra en el cálculo. Todo lo de aquí es información general, no asesoramiento médico.",
+"veney5": "Perímetro de cintura. Se mide a la altura del ombligo, tras una espiración normal. Es un indicio de grasa abdominal, no un diagnóstico. Un valor que te preocupe es motivo para hablar con un médico o una médica.",
+"1qbjcmf": "Presión arterial en casa. Con un aparato homologado, durante varios días seguidos. Muestra un patrón, no un diagnóstico. Si los valores altos se repiten, conviene enseñárselos a un médico o una médica.",
+"tdah27": "Cinco levantadas de una silla. Una silla estable, sin ruedas, pegada a la pared. Muestra la fuerza de las piernas ese día. Si hay una dificultad inusual o mareo: detenerse y consultar a un médico o una médica.",
+"mx64s0": "Apoyo sobre una pierna. Junto a una pared o una mesa pesada, no junto a una silla con ruedas. Muestra una imagen del equilibrio de ese día, no el riesgo de caída. Quien se haya caído en el último año no debe hacer esta prueba.",
+"1c34qjg": "Flexiones en la pared. No hasta el fallo, y sin contener la respiración. Dolor en el hombro o en el pecho: detenerse.",
+"11qtbjy": "Caminata a ritmo cómodo. No es una prueba máxima. Quien tome medicamentos que cambian la frecuencia cardíaca, o con calor: omitirla. Da una estimación aproximada de la condición física, no del VO2max.",
+"hc6u56": "Agarre. Solo si se dispone de un dinamómetro de mano. Es una estimación aproximada y no debe compararse con tablas.",
+"1u3m6qj": "Pruebas privadas caras: qué dice la evidencia",
+"a8hnez": "Mucha gente oye hablar de pruebas privadas y pregunta si valen la pena. Ni las recomendamos ni advertimos contra ellas. Esto es lo que se encontró, y la pregunta que conviene hacer a un médico o una médica: ¿el resultado cambiará alguna decisión mía?",
+"1p5kw5g": "Reloj epigenético. Al repetir el análisis de la misma sangre se encontraron diferencias de hasta 8,6 años (mediana 2,4; Higgins-Chen 2022), de modo que la diferencia entre personas a veces es menor que el ruido.",
+"19beqbw": "Exploración DEXA. Una prueba de composición corporal que implica una pequeña dosis de radiación. No encontramos evidencia clara de que prediga la mortalidad más allá del perímetro de cintura.",
+"o76u1q": "Monitor continuo de glucosa para personas sin diabetes. No encontramos ningún ensayo que muestre una mejora en resultados de salud.",
+"1cl9q4t": "Antes de pagar por una prueba así, conviene preguntar a un médico o una médica qué cambiaría en las decisiones.",
+"12rdhnc": "Cuándo acudir a un médico o una médica",
+"18m8hyi": "El dolor en el pecho, el mareo o el desmayo son motivo para acudir a un médico o una médica, y no para esperar a una prueba casera. También lo son los valores altos que se repiten en las mediciones caseras (presión arterial, perímetro de cintura): son motivo para hablar.",
+"17iu9om": "Mandsager 2018: capacidad cardiorrespiratoria y mortalidad (JAMA Netw Open)",
+"114dq30": "Kaminsky 2015: valores de referencia de la capacidad cardiorrespiratoria, FRIEND (Mayo Clin Proc)",
+"1wxd5n1": "Araujo 2022: apoyo sobre una pierna y supervivencia (Br J Sports Med)",
+"1nbm5tx": "Leong 2015: fuerza de agarre y predicción de la mortalidad, PURE (Lancet)",
+"opvsk4": "Cerhan 2014: perímetro de cintura y mortalidad en 650 000 adultos (Mayo Clin Proc)",
+"1gnmzw7": "Higgins-Chen 2022: fiabilidad de los relojes epigenéticos (Nat Aging)"
+});
+
+Object.assign(I18N.es, {
+"1jmp25n": "Todas las capas: qué entra en el cálculo y qué no"
+});
