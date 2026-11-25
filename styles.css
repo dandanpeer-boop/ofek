@@ -531,3 +531,11 @@ a { color: var(--accent); }
 .hero-art-copy li { position: relative; padding-inline-start: 22px; font-size: 15px; line-height: 1.5; }
 .hero-art-copy li::before { content: ""; position: absolute; inset-inline-start: 0; top: .55em; width: 9px; height: 9px; border-radius: 50%; background: var(--accent); }
 .hero-art-note { margin: 12px 0 0; font-size: 13px; color: var(--muted); }
+
+/* דוגמה לחוברת (דף soon/sample/): כל "עמוד" ככרטיס; בהדפסה כל עמוד על דף נפרד */
+.booklet .sheet { border: 1px solid var(--line, #2a3a39); border-radius: 14px; padding: 20px; margin-top: 20px; }
+@media print {
+  .site-top, .site-foot, .booklet .cta-row { display: none !important; }
+  .booklet .sheet { break-after: page; border: 1px solid #999; }
+  .booklet .sheet:last-of-type { break-after: auto; }
+}

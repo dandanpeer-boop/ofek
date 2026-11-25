@@ -286,14 +286,55 @@ var SiteRender = (function () {
         '<li>' + L('רשימת שאלות להביא לרופא/ה.') + '</li></ul></section>' +
       '<section><h2>' + L('פרטיות') + '</h2><p>' + L('הקריאה נעשית בדפדפן שלך בלבד. הקובץ לא עולה לשרת ושום נתון בריאותי לא נשלח לשום מקום.') + '</p></section>' +
       '<section><h2>' + L('מה זה לא') + '</h2><p>' + L('זה מידע כללי ולא אבחנה ולא ייעוץ רפואי. את הפירוש הרפואי נותן רופא/ה.') + '</p></section>' +
-      '<section class="soon-box"><h2>' + L('עדיין לא פתוח') + '</h2><p>' + L('אנחנו בודקים אם יש בזה צורך לפני שבונים. מתכננים תשלום חד-פעמי קטן, בסביבות 39 ₪. עדיין לא גובים כלום.') + '</p>' +
+      '<p><a class="btn ghost" href="sample/">אפשר לראות דוגמה לחוברת (נתונים בדויים)</a></p>' + '<section class="soon-box"><h2>' + L('עדיין לא פתוח') + '</h2><p>' + L('אנחנו בודקים אם יש בזה צורך לפני שבונים. מתכננים תשלום חד-פעמי קטן, בסביבות 39 ₪. עדיין לא גובים כלום.') + '</p>' +
       '<p><button type="button" class="btn primary" id="soon-yes">' + L('מעניין אותי') + '</button></p>' +
       '<p id="soon-thanks" class="muted" hidden>' + L('תודה! נספר רק כמה אנשים לחצו. לא נשמר שום פרט עליך ואין איך לחזור אליך. כשזה יהיה מוכן, זה יופיע באתר.') + '</p></section>' +
       '<div class="cta-row"><a class="btn ghost" href="' + SiteURL('calc') + '">' + icon('calc') + L('למחשבון החינמי') + '</a></div>' +
       '</article>';
   }
 
-  return { home: home, topic: topic, about: about, sources: sources, coach: coach, soon: soon, byId: byId, esc: esc };
+  /* ---------- דוגמה לחוברת אישית (פרו). נתונים בדויים לגמרי. נבנה רק עם SOON=1, עברית בלבד ---------- */
+  function soonsample() {
+    function spark(vals) {
+      var W = 120, H = 34, p = 4, mn = Math.min.apply(null, vals), mx = Math.max.apply(null, vals), sp = mx - mn || 1;
+      var pts = vals.map(function (v, i) { return (p + i * (W - 2 * p) / (vals.length - 1)).toFixed(1) + ',' + (H - p - (v - mn) / sp * (H - 2 * p)).toFixed(1); });
+      return '<svg viewBox="0 0 ' + W + ' ' + H + '" class="spark" aria-hidden="true"><polyline fill="none" stroke="var(--accent)" stroke-width="2" stroke-linejoin="round" points="' + pts.join(' ') + '"/></svg>';
+    }
+    var rows = [
+      ['LDL', 'כולסטרול רע', [141, 133, 128, 124, 119], '119 mg/dL', 'קצת מעל היעד המקובל', 'warn', 'יש ירידה עקבית בחמש בדיקות.'],
+      ['HDL', 'כולסטרול טוב', [46, 49, 50, 52, 53], '53 mg/dL', 'בטווח', 'ok', 'יציב ועולה מעט.'],
+      ['TG', 'טריגליצרידים', [162, 150, 131, 120, 108], '108 mg/dL', 'בטווח', 'ok', 'ירידה של כ-33% מאז הבדיקה הראשונה.'],
+      ['GLU', 'גלוקוז בצום', [96, 98, 99, 101, 104], '104 mg/dL', 'מעט מעל הטווח', 'warn', 'עלייה איטית בארבע שנים. שווה לבדוק HbA1c.'],
+      ['CRE', 'קריאטינין', [0.93, 0.91, 0.92, 0.9, 0.9], '0.90 mg/dL', 'בטווח', 'ok', 'יציב.'],
+      ['ALT', 'ALT (אנזים כבד)', [24, 31, 27, 22, 25], '25 U/L', 'בטווח', 'ok', 'יציב.']
+    ];
+    var tbl = rows.map(function (r) {
+      return '<tr><td><b>' + r[1] + '</b><div class="small muted" dir="ltr">' + r[0] + '</div></td><td dir="ltr">' + spark(r[2]) + '</td><td dir="ltr"><b>' + r[3] + '</b></td><td><span class="chip' + (r[5] === 'warn' ? ' bad' : '') + '">' + r[4] + '</span><div class="small muted">' + r[6] + '</div></td></tr>';
+    }).join('');
+    return '<article class="page booklet"><p class="eyebrow">דוגמה</p><h1>החוברת האישית שלך</h1>' +
+      '<p class="lead">כך תיראה החוברת. <b>כל הנתונים כאן בדויים</b>: אדם דמיוני בן 50. החוברת האמיתית נבנית מהבדיקות שלך, בדפדפן שלך, וניתן להדפיס או לשמור אותה כ-PDF.</p>' +
+      '<section class="sheet"><p class="eyebrow">עמוד 1 · תקציר</p><h2>מה בלט בבדיקות</h2><ul class="notes">' +
+        '<li>שלוש בדיקות השומנים (LDL, HDL וטריגליצרידים) השתפרו לאורך חמש שנים. LDL ירד מ-141 ל-119.</li>' +
+        '<li>גלוקוז בצום עלה לאט מ-96 ל-104 בארבע שנים. זה עדיין לא סוכרת, אבל זו מגמה שכדאי לעקוב אחריה.</li>' +
+        '<li>תפקודי כבד וכליות יציבים ובטווח.</li></ul>' +
+        '<p class="small muted">זה סיכום מידע ולא אבחנה. הפירוש הרפואי נשאר אצל הרופא/ה.</p></section>' +
+      '<section class="sheet"><p class="eyebrow">עמוד 2 · הערכים והמגמות</p><h2>חמש בדיקות אחרונות</h2><div class="srcwrap"><table class="srctable"><thead><tr><th>בדיקה</th><th>מגמה</th><th>אחרון</th><th>מצב</th></tr></thead><tbody>' + tbl + '</tbody></table></div></section>' +
+      '<section class="sheet"><p class="eyebrow">עמוד 3 · לפגישה עם הרופא/ה</p><h2>שאלות שכדאי להביא</h2><ol class="notes">' +
+        '<li>הגלוקוז שלי עלה לאט בארבע שנים. האם כדאי לבדוק HbA1c, ומתי לחזור על הבדיקה?</li>' +
+        '<li>ה-LDL שלי יורד אבל עדיין מעל היעד. מה היעד המתאים לי, בהתחשב בהיסטוריה המשפחתית?</li>' +
+        '<li>האם יש בדיקה שחסרה לי לפי הגיל והסיכון שלי?</li></ol>' +
+        '<p class="small muted">השאלות הן הצעה לשיחה, ולא המלצה על טיפול.</p></section>' +
+      '<section class="sheet"><p class="eyebrow">עמוד 4 · צעדים להתחיל מהם</p><h2>תוכנית קצרה, מבוססת מחקר</h2><ul class="notes">' +
+        '<li><b>תנועה:</b> לשאוף ל-150 דקות בשבוע של פעילות מתונה, ולהוסיף שני אימוני כוח.</li>' +
+        '<li><b>תזונה:</b> להפחית סוכרים מוספים ולהעדיף סיבים, כמו ירקות, קטניות ודגנים מלאים.</li>' +
+        '<li><b>שינה:</b> שעות קבועות והורדת מסכים בשעה האחרונה.</li>' +
+        '<li><b>מעקב:</b> לחזור על גלוקוז ושומנים בעוד שנה, או לפי הרופא/ה.</li></ul>' +
+        '<p class="small muted">כל צעד מלווה בחוברת האמיתית בקישור למחקר שעומד מאחוריו, ובדרגת הוודאות שלו.</p></section>' +
+      '<section class="sheet"><h2>מה זה לא</h2><p>זה מידע כללי ולא אבחנה ולא ייעוץ רפואי. אין כאן המלצה על תרופות או מינונים.</p></section>' +
+      '<div class="cta-row"><a class="btn primary" href="../">חזרה</a> <button type="button" class="btn ghost" onclick="window.print()">הדפסה</button></div></article>';
+  }
+
+  return { home: home, topic: topic, about: about, sources: sources, coach: coach, soon: soon, soonsample: soonsample, byId: byId, esc: esc };
 })();
 
 /* ---------- בדפדפן: ציור העמוד וחיבור הסימונים ---------- */
