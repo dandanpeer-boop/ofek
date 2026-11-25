@@ -1941,3 +1941,25 @@ Object.assign(I18N.en, {
 "182rauq": "<h1>How many years can you expect?</h1>",
 "12uapv": "<p>The calculator starts from the official World Health Organization life table (by age, sex and country), and adjusts it for your lifestyle, family history and blood tests. The adjustments are based on large studies.</p>"
 });
+
+Object.assign(I18N.en, {
+"1pscwpj": "<div class=\"nav\"><button id=\"back\">Edit data</button><button class=\"primary\" id=\"print\">Print / save as PDF</button></div></div></div></div>",
+"16ykpxj": "<div class=\"nav\"><button id=\"docback\">Back to results</button><button class=\"primary\" id=\"docprint\">Print / save as PDF</button></div>",
+"wstu0f": "Out-of-range values to double-check: ",
+"1skmclo": ". If there is a mistake, you can fix it under \"Edit data\"."
+});
+
+Object.assign(I18N.en, {
+"7yk8yt": "Test values dated more than 24 months ago were not included in the calculation: ",
+"t1wwqb": ". To include them, upload a recent test or enter a current value by hand.",
+"oxt08n": "These test values have no known date (typed in by hand or left over from an earlier entry): ",
+"1istzw9": ". They were included in the calculation. If they are old, the estimate is less accurate. Uploading the test from its file saves its date.",
+"zqq0nq": " · old value, will not be included (",
+"1xdn7dn": "<p class=\"small\"><b>Summary:</b> read ",
+"plp8yb": " files: ",
+"ltwdjk": " with recognized tests, ",
+"1rlmaag": " without recognized tests or could not be read.</p>",
+"b4d1q7": " values were not ticked by default: they are old (over 12 months) and the form already has a value with no date. You can tick them to replace it.",
+"1c9iapj": "Tick all values",
+"3vs3ny": " files without recognized tests (show the list)"
+});

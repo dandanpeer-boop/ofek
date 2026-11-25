@@ -1939,3 +1939,25 @@ Object.assign(I18N.es, {
 "182rauq": "<h1>¿Cuántos años puedes esperar vivir?</h1>",
 "12uapv": "<p>La calculadora parte de la tabla de mortalidad oficial de la Organización Mundial de la Salud (por edad, sexo y país) y la ajusta según tu estilo de vida, tus antecedentes familiares y tus análisis de sangre. Los ajustes se basan en grandes estudios.</p>"
 });
+
+Object.assign(I18N.es, {
+"1pscwpj": "<div class=\"nav\"><button id=\"back\">Editar datos</button><button class=\"primary\" id=\"print\">Imprimir / guardar como PDF</button></div></div></div></div>",
+"16ykpxj": "<div class=\"nav\"><button id=\"docback\">Volver a los resultados</button><button class=\"primary\" id=\"docprint\">Imprimir / guardar como PDF</button></div>",
+"wstu0f": "Valores fuera de rango que conviene revisar: ",
+"1skmclo": ". Si hay un error, puedes corregirlo en \"Editar datos\"."
+});
+
+Object.assign(I18N.es, {
+"7yk8yt": "Los valores con fecha de hace más de 24 meses no se incluyeron en el cálculo: ",
+"t1wwqb": ". Para incluirlos, sube un análisis reciente o introduce un valor actual a mano.",
+"oxt08n": "Estos valores no tienen fecha conocida (escritos a mano o conservados de una entrada anterior): ",
+"1istzw9": ". Se incluyeron en el cálculo. Si son antiguos, la estimación es menos precisa. Al subir el análisis desde su archivo se guarda su fecha.",
+"zqq0nq": " · valor antiguo, no se incluirá (",
+"1xdn7dn": "<p class=\"small\"><b>Resumen:</b> se leyeron ",
+"plp8yb": " archivos: ",
+"ltwdjk": " con análisis reconocidos, ",
+"1rlmaag": " sin análisis reconocidos o que no se pudieron leer.</p>",
+"b4d1q7": " valores no se marcaron por defecto: son antiguos (más de 12 meses) y el formulario ya tiene un valor sin fecha. Puedes marcarlos para reemplazarlo.",
+"1c9iapj": "Marcar todos los valores",
+"3vs3ny": " archivos sin análisis reconocidos (mostrar la lista)"
+});

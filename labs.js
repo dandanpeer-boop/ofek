@@ -267,7 +267,36 @@ var LabParser = (function () {
     });
   }
 
-  return { parse: parse, parseSupport: function (text) { return parse(text, SUPPORT); }, parseOther: parseOther, findDate: findDate, readPdf: readPdf, TESTS: TESTS };
+  /* ערכי בדיקות שפג תוקפם: ערך שתאריכו (לפי data.labDates) מוקדם מ-N חודשים לפני todayISO, והוא עדיין הערך שהגיע מהקובץ
+   * (אם המשתמש תיקן ידנית, הערך נחשב עדכני). Lp(a) לא פג, כי הוא כמעט קבוע לאורך החיים. מחזיר [{id, date}] */
+  var EXPIRING = ['tc', 'hdl', 'ldl', 'tg', 'glucose', 'hba1c', 'creatinine', 'crp', 'albumin', 'alp', 'wbc', 'lymph', 'mcv', 'rdw', 'ggt', 'acr'];
+  function monthsBefore(todayISO, months) {
+    var p = String(todayISO).split('-'), y = +p[0], m = +p[1] - 1, d = Math.min(+p[2], 28);
+    var t = y * 12 + m - months;
+    return Math.floor(t / 12) + '-' + String(t % 12 + 1).padStart(2, '0') + '-' + String(d).padStart(2, '0');
+  }
+  function expiredValues(data, todayISO, months) {
+    var cut = monthsBefore(todayISO, months), out = [];
+    EXPIRING.forEach(function (id) {
+      var d = data.labDates && data.labDates[id];
+      if (d && data[id] !== undefined && data[id] !== '' && data.labVals && String(data[id]) === data.labVals[id] && d < cut) out.push({ id: id, date: d });
+    });
+    return out;
+  }
+  /* ערכי בדיקות שיש בטופס אבל אין להם תאריך ידוע (הוקלדו ידנית או נשארו מהזנה קודמת) */
+  function undatedValues(data) {
+    var out = [];
+    EXPIRING.forEach(function (id) {
+      var has = data[id] !== undefined && data[id] !== '' && data[id] !== null;
+      var dated = data.labDates && data.labDates[id] && data.labVals && String(data[id]) === data.labVals[id];
+      if (has && !dated) out.push(id);
+    });
+    return out;
+  }
+  function nameOf(id) { var T = TESTS.filter(function (t) { return t.id === id; })[0]; return T ? T.label : id; }
+
+  return { parse: parse, parseSupport: function (text) { return parse(text, SUPPORT); }, parseOther: parseOther, findDate: findDate, readPdf: readPdf, TESTS: TESTS,
+    expiredValues: expiredValues, undatedValues: undatedValues, monthsBefore: monthsBefore, nameOf: nameOf };
 })();
 
 if (typeof module !== 'undefined') module.exports = LabParser;

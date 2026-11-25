@@ -451,7 +451,9 @@
           el.addEventListener('input', function () { el.classList.remove('fromfile'); if (tag.parentNode) tag.parentNode.removeChild(tag); });
         }
         var ld = data.labDates && data.labDates[id];
-        tag.textContent = L('מולא מקובץ') + (ld && ld < cutS ? L(' · ערך ישן (') + heDate(ld) + ')' : '');
+        var exp = ld && LabParser.expiredValues(data, todayISO(), 24).some(function (x) { return x.id === id; });
+        tag.textContent = L('מולא מקובץ') + (ld && ld < cutS ? (exp ? L(' · ערך ישן, לא ייכלל בחישוב (') : L(' · ערך ישן (')) + heDate(ld) + ')' : '');
+        tag.classList.toggle('warn', !!exp);
       });
     }
 
@@ -514,8 +516,15 @@
 
     function report(results) {
       var good = results.filter(function (r) { return r.ok; }), bad = results.filter(function (r) { return !r.ok; });
-      var html = good.length ? reviewHTML(good) : '';
+      var held = 0;
+      good.forEach(function (g) { g.found.forEach(function (r) { if (holdOld(g.date, r)) held++; }); });
+      var html = L('<p class="small"><b>סיכום:</b> נקראו ') + results.length + L(' קבצים: ') + good.length + L(' עם בדיקות שזוהו, ') + bad.length + L(' בלי בדיקות מוכרות או שלא נקראו.</p>');
+      if (held) html += '<p class="small">' + held + L(' ערכים לא סומנו כברירת מחדל: הם ישנים (מעל 12 חודשים), ובטופס כבר יש ערך ללא תאריך. אפשר לסמן אותם ולהחליף.') + '</p><p><button type="button" class="btn ghost" id="labselall">' + L('סימון כל הערכים') + '</button></p>';
+      var unrec = bad.filter(function (r) { return !r.error && !r.scanned; }), grouped = unrec.length > 1 || (unrec.length === 1 && good.length > 0);
+      html += good.length ? reviewHTML(good) : '';
+      if (grouped) html += '<details class="rawtext"><summary>' + unrec.length + L(' קבצים בלי בדיקות מוכרות (הצגת הרשימה)') + '</summary><ul>' + unrec.map(function (r) { return '<li dir="auto">' + esc(r.name) + '</li>'; }).join('') + '</ul></details>';
       bad.forEach(function (r) {
+        if (grouped && !r.error && !r.scanned) return;
         html += '<p>' + esc(r.name) + ': ' + (r.error ? (r.error === 'ScriptLoadError' ? L('רכיב קריאת ה-PDF לא נטען. אם הדף פתוח בכתובת localhost, השרת המקומי כנראה כבוי: פתחו את הקובץ index.html ישירות בלחיצה כפולה, או הפעילו את השרת מחדש ורעננו.')
           : /Password/.test(r.error) ? L('הקובץ מוגן בסיסמה ולא נפתח. נסו שוב והקלידו את הסיסמה (בדרך כלל מספר תעודת הזהות).')
           : L('לא הצלחתי לקרוא את הקובץ; ייתכן שהוא פגום או שאינו PDF. (פרט טכני: ') + esc(r.error) + ')')
@@ -526,6 +535,10 @@
       if (bad.length) html += L('<p><b>אפשר גם למלא את הערכים ידנית.</b> כל קובץ שהמערכת לא הצליחה לקרוא אפשר לדלג עליו ולהקליד את התוצאות בשדות שבטופס. אף ערך אינו חובה.</p>');
       msg(html, good.length ? 'ok' : 'warn');
       if (good.length) wireReview(good);
+      var sa = document.getElementById('labselall');
+      if (sa) sa.onclick = function () {
+        out.querySelectorAll('input[type=checkbox][data-g]').forEach(function (cb) { cb.checked = true; cb.dispatchEvent(new Event('change')); });
+      };
     }
 
     file.onchange = function () {
@@ -540,6 +553,8 @@
     };
     document.getElementById('labparse').onclick = function () { report([addDoc(L('טקסט שהודבק'), document.getElementById('labtext').value, false)]); };
     drawDocs();
+    // תגיות תאריך גם בטעינה מחדש של הטופס (לא רק מיד אחרי העלאה)
+    markFromFile(Object.keys(data.labDates || {}).filter(function (id) { return data.labVals && String(data[id]) === data.labVals[id]; }));
   }
 
   // ---------- ייבוא מ-Garmin ----------
@@ -667,15 +682,21 @@
 
   // ---------- איסוף הקלט למודל ----------
 
-  var staleLabs = [];
+  var staleLabs = [], expiredLabs = [], undatedLabs = [];
   function collect() {
     var inp = { country: data.country, sex: data.sex, age: num(data.age) };
     ['height', 'weight', 'eduYears', 'quitAge', 'fruitveg', 'sbp', 'tc', 'hdl', 'ldl', 'glucose', 'hba1c', 'creatinine', 'crp', 'albumin', 'alp', 'wbc', 'lymph', 'mcv', 'rdw', 'waist', 'sitting', 'rhr', 'vo2max', 'dbp', 'tg', 'ggt', 'acr', 'lpa']
       .forEach(function (k) { inp[k] = num(data[k]); });
     ['smoking', 'alcohol', 'activity', 'walkPace', 'sleep', 'lonely', 'isolated', 'diabetes', 'famHeart', 'srh', 'marital'].forEach(function (k) { inp[k] = data[k] || undefined; });
     // גיל ביולוגי: כל תשעת הערכים צריכים להיות מחלון של 12 חודשים. ערך שהוקלד ידנית (שונה מהערך מהקובץ) נחשב עדכני.
+    // תוקף מול היום: ערך בדיקה שתאריכו ידוע ומוקדם מ-24 חודשים לא נכנס לחישוב בכלל (גם לא גיל ביולוגי).
+    expiredLabs = LabParser.expiredValues(data, todayISO(), 24);
+    expiredLabs.forEach(function (x) { inp[x.id] = undefined; });
+    undatedLabs = LabParser.undatedValues(data);
+    var expiredIds = expiredLabs.map(function (x) { return x.id; });
     var ph = ['albumin', 'creatinine', 'glucose', 'crp', 'lymph', 'mcv', 'rdw', 'alp', 'wbc'], dated = [], ref = '';
     ph.forEach(function (k) {
+      if (expiredIds.indexOf(k) >= 0) return;
       var d = data.labDates && data.labDates[k];
       if (d && data.labVals && String(data[k]) === data.labVals[k]) { dated.push({ id: k, date: d }); if (d > ref) ref = d; }
     });
@@ -1201,6 +1222,14 @@
     if (bmiN !== null && bmiN > 25 && bmiN < 30 && wa !== undefined && wa < (data.sex === 'f' ? 80 : 94)) n.push(L('ה-BMI שלך מעל 25, אבל היקף המותניים בטווח התקין. זה מתאים יותר למסת שריר מאשר לעודף שומן, ולכן לא מוצגת המלצה לרדת במשקל. היקף המותניים כבר מקזז חלק מההשפעה של ה-BMI בחישוב.'));
     if (r.limits && r.limits.upper) n.push(L('השילוב שהזנת מגיע לגבול העליון של המודל, ולכן ההערכה פחות בטוחה. כדאי לדבר על כך עם רופא/ה.'));
     // הודעת רצפה הוסרה (20.11.2026): הרצפה 0.40 נפגשת כבר אצל לא-מעשן בכושר טוב, והיא לא מכוילת. הדגל limits.lower נשאר ב-compute למידע.
+    if (expiredLabs.length) {
+      n.unshift(L('ערכי בדיקות שהתאריך שלהם מוקדם מ-24 חודשים לא נכללו בחישוב: ') + expiredLabs.map(function (x) { return LabParser.nameOf(x.id) + ' (' + heDate(x.date) + ')'; }).join(', ') +
+        L('. כדי שייכללו, אפשר להעלות בדיקה עדכנית או להזין ערך עדכני ידנית.'));
+    }
+    if (undatedLabs.length) {
+      n.push(L('לערכי הבדיקות האלה אין תאריך ידוע (הוקלדו או נשארו מהזנה קודמת): ') + undatedLabs.map(function (id) { return LabParser.nameOf(id); }).join(', ') +
+        L('. הם נכללו בחישוב. אם הם ישנים, ההערכה פחות מדויקת. העלאת הבדיקה מהקובץ שומרת את התאריך שלה.'));
+    }
     if (staleLabs.length && r.derived.phenoAge === undefined) {
       n.push(L('הגיל הביולוגי לא חושב, כי הערכים שהועלו אינם מאותה תקופה (חלון של 12 חודשים). ערכים ישנים: ') + staleLabs.map(function (x) {
         var T = LabParser.TESTS.filter(function (t) { return t.id === x.id; })[0];

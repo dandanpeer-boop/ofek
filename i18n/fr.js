@@ -1939,3 +1939,25 @@ Object.assign(I18N.fr, {
 "182rauq": "<h1>Combien d’années pouvez-vous espérer vivre ?</h1>",
 "12uapv": "<p>Le calculateur part de la table de mortalité officielle de l’Organisation mondiale de la santé (par âge, sexe et pays), et l’ajuste selon votre mode de vie, vos antécédents familiaux et vos analyses de sang. Les ajustements reposent sur de grandes études.</p>"
 });
+
+Object.assign(I18N.fr, {
+"1pscwpj": "<div class=\"nav\"><button id=\"back\">Modifier les données</button><button class=\"primary\" id=\"print\">Imprimer / enregistrer en PDF</button></div></div></div></div>",
+"16ykpxj": "<div class=\"nav\"><button id=\"docback\">Retour aux résultats</button><button class=\"primary\" id=\"docprint\">Imprimer / enregistrer en PDF</button></div>",
+"wstu0f": "Valeurs hors norme à vérifier : ",
+"1skmclo": ". En cas d’erreur, vous pouvez la corriger dans « Modifier les données »."
+});
+
+Object.assign(I18N.fr, {
+"7yk8yt": "Les valeurs datant de plus de 24 mois n’ont pas été incluses dans le calcul : ",
+"t1wwqb": ". Pour les inclure, importez une analyse récente ou saisissez une valeur actuelle à la main.",
+"oxt08n": "Ces valeurs n’ont pas de date connue (saisies à la main ou conservées d’une saisie précédente) : ",
+"1istzw9": ". Elles ont été incluses dans le calcul. Si elles sont anciennes, l’estimation est moins précise. Importer l’analyse depuis son fichier enregistre sa date.",
+"zqq0nq": " · valeur ancienne, non incluse (",
+"1xdn7dn": "<p class=\"small\"><b>Résumé :</b> ",
+"plp8yb": " fichiers lus : ",
+"ltwdjk": " avec des analyses reconnues, ",
+"1rlmaag": " sans analyses reconnues ou illisibles.</p>",
+"b4d1q7": " valeurs n’ont pas été cochées par défaut : elles sont anciennes (plus de 12 mois) et le formulaire contient déjà une valeur sans date. Vous pouvez les cocher pour la remplacer.",
+"1c9iapj": "Tout cocher",
+"3vs3ny": " fichiers sans analyses reconnues (afficher la liste)"
+});
