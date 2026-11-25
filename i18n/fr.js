@@ -2253,3 +2253,9 @@ Object.assign(I18N.fr, {
 "1q638vw": "Afficher l'estimation",
 "ds29g6": "Modifier les données"
 });
+
+Object.assign(I18N.fr, {
+"luae6e": "Non inclus dans le calcul, mais figurera dans les remarques.",
+"1l0s2t": "Non inclus dans le calcul. L'écran de résultat explique pourquoi.",
+"nx2rvw": "Vous avez indiqué qu'un parent est décédé jeune (avant 70 ans) d'une cause non externe. Le calculateur ne compte que la longévité des parents (un parent ayant vécu au-delà de 80 ans), pas le décès précoce ; cette information n'a donc pas modifié le chiffre. Il existe des indices d'un lien entre l'âge au décès d'un parent et la mortalité de ses enfants, mais nous n'avons pas vérifié une taille d'effet utilisable dans le calcul. L'estimation peut être légèrement optimiste. La cause du décès compte plus que l'âge : il est utile d'en parler à un médecin."
+});

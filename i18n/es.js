@@ -2253,3 +2253,9 @@ Object.assign(I18N.es, {
 "1q638vw": "Mostrar la estimación",
 "ds29g6": "Editar los datos"
 });
+
+Object.assign(I18N.es, {
+"luae6e": "No se incluye en el cálculo, pero aparecerá en las notas.",
+"1l0s2t": "No se incluye en el cálculo. La pantalla de resultados explica por qué.",
+"nx2rvw": "Indicaste que un progenitor falleció joven (antes de los 70) por una causa no externa. La calculadora solo cuenta la longevidad de los padres (un progenitor que vivió más de 80 años), no la muerte temprana, por lo que este dato no cambió el número. Hay indicios de una relación entre la edad de fallecimiento de un progenitor y la mortalidad de sus hijos, pero no hemos verificado un tamaño de efecto que pueda usarse en el cálculo. La estimación puede ser algo optimista. La causa de la muerte importa más que la edad: conviene comentarla con un médico."
+});

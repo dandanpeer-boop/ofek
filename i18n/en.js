@@ -2255,3 +2255,9 @@ Object.assign(I18N.en, {
 "1q638vw": "Show the estimate",
 "ds29g6": "Edit the data"
 });
+
+Object.assign(I18N.en, {
+"luae6e": "Not included in the calculation, but it will appear in the notes.",
+"1l0s2t": "Not included in the calculation. The result screen explains why.",
+"nx2rvw": "You noted that a parent died young (before 70) from a non-external cause. The calculator only counts parental longevity (a parent who lived past 80), not early death, so this did not change the number. There is evidence of a link between a parent's age at death and their children's mortality, but we have not verified an effect size that can be used in the calculation. The estimate here may be slightly optimistic. The cause of death matters more than the age: it is worth telling a doctor."
+});
