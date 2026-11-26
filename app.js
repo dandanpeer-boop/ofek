@@ -1077,7 +1077,7 @@
   function improveHTML(inp, r, noTotal) {
     var list = improvements(inp, r);
     var head = L('<h3>איך אפשר לשפר את ההערכה</h3>');
-    var healthNote = L('<p class="small muted"><b>ומה לגבי שנים בריאות?</b> המחשבון מחשב תוחלת חיים בלבד, לא תוחלת בריאות. במחקר אמריקאי גדול של אנשי מקצועות הבריאות (Li ועמיתים, BMJ 2020), ארבעה או חמישה הרגלים בריאים בגיל 50 היו קשורים לכ-8 שנים נוספות ללא סרטן, מחלת לב וסוכרת בגברים, ולכ-11 שנים בנשים. זה קשר תצפיתי באוכלוסייה אחרת, ואינו נכלל במספר.</p>');
+    var healthNote = L('<p class="small muted"><b>ומה לגבי שנים בריאות?</b> המחשבון מחשב תוחלת חיים בלבד, לא תוחלת בריאות. בכמה מחקרי עוקבה גדולים באירופה ובארצות הברית (Li, BMJ 2020; Stenholm, Int J Epidemiol 2016; Nyberg, JAMA Intern Med 2020), הרגלים בריאים כמו אי-עישון, משקל תקין ופעילות גופנית היו קשורים לכ-5 עד 11 שנים נוספות ללא מחלה כרונית עיקרית, בהשוואה בין ההרגלים הטובים ביותר לגרועים ביותר. אלה קשרים תצפיתיים, בחלקם בקרב עובדים, ואינם הבטחה לאדם מסוים. איכות חיים במובן הרחב לא נבדקה בהם, והמספר כאן אינו כולל אותם.</p>');
     if (!list.length) {
       return head + L('<p class="muted">לפי הנתונים שהזנת, אין שינוי בהרגלים שהמודל מעריך שיוסיף יותר מעשירית שנה. אפשר לבדוק תרחישים בעצמך בסרגלים שלמטה.</p>') + healthNote;
     }
@@ -1391,6 +1391,8 @@
     L('<b>Lp(a):</b> Langsted A. et al. High lipoprotein(a) and high risk of mortality. <i>Eur Heart J</i> 2019;40:2760–70. <span class="hrnote">במודל: 1.05 לכל 50 מ"ג/ד"ל</span>'),
     L('<b>GGT:</b> Kunutsor S.K. et al. Liver enzymes and risk of all-cause mortality in general populations. <i>Int J Epidemiol</i> 2014;43:187–201. <span class="hrnote">במודל: 1.07 לכל 5 יחידות, עד 1.6 לכל היותר</span>'),
     L('<b>שנים בריאות (לא נכלל במודל):</b> Li Y. et al. Healthy lifestyle and life expectancy free of cancer, cardiovascular disease, and type 2 diabetes: prospective cohort study. <i>BMJ</i> 2020;368:l6669. <span class="hrnote">בגיל 50, ארבעה או חמישה הרגלים בריאים: 31.1 שנים ללא מחלה בגברים (לעומת 23.5 ללא הרגלים), 34.4 בנשים (לעומת 23.7). לא משמש בחישוב</span>'),
+    L('<b>שנים בריאות (לא נכלל במודל):</b> Stenholm S. et al. Smoking, physical inactivity and obesity as predictors of healthy and disease-free life expectancy between ages 50 and 75: a multicohort study. <i>Int J Epidemiol</i> 2016;45:1260–70. <span class="hrnote">ללא גורמי סיכון מול שניים ומעלה: כ-7.6 (גברים) ו-7.2 (נשים) שנים נוספות בבריאות טובה, ו-5.7 ו-5.2 שנים ללא מחלה כרונית, בין הגילים 50 ל-75. לא משמש בחישוב</span>'),
+    L('<b>שנים בריאות (לא נכלל במודל):</b> Nyberg S.T. et al. Association of Healthy Lifestyle With Years Lived Without Major Chronic Diseases. <i>JAMA Intern Med</i> 2020;180:760–8. <span class="hrnote">ציון אורח חיים הטוב ביותר מול הגרוע ביותר: 9.9 שנים נוספות ללא מחלה כרונית בגברים ו-9.4 בנשים, בין הגילים 40 ל-75 (לפי התקציר). לא משמש בחישוב</span>'),
     L('<b>בדיקת סבירות לשילוב הגורמים:</b> Li Y. et al. Impact of Healthy Lifestyle Factors on Life Expectancies in the US Population. <i>Circulation</i> 2018;138:345–55.')
   ];
 

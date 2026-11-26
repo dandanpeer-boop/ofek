@@ -2271,3 +2271,9 @@ Object.assign(I18N.en, {
 Object.assign(I18N.en, {
 "kgwgny": "<p class=\"small muted\">The number is life expectancy, not healthy life expectancy. The aim is not only more years but good years, so the result also shows what can be improved.</p>"
 });
+
+Object.assign(I18N.en, {
+"aetke": "<p class=\"small muted\"><b>What about healthy years?</b> The calculator estimates life expectancy only, not healthy life expectancy. In several large cohort studies in Europe and the United States (Li, BMJ 2020; Stenholm, Int J Epidemiol 2016; Nyberg, JAMA Intern Med 2020), healthy habits such as not smoking, a healthy weight and physical activity were associated with about 5 to 11 more years free of major chronic disease, when comparing the best habits with the worst. These are observational associations, partly among working populations, and not a promise for any individual. Quality of life in the broad sense was not examined in them, and the number here does not include it.</p>",
+"1l1fo4x": "<b>Healthy years (not in the model):</b> Stenholm S. et al. Smoking, physical inactivity and obesity as predictors of healthy and disease-free life expectancy between ages 50 and 75: a multicohort study. <i>Int J Epidemiol</i> 2016;45:1260–70. <span class=\"hrnote\">No risk factors vs two or more: about 7.6 (men) and 7.2 (women) more years in good health, and 5.7 and 5.2 years free of chronic disease, between ages 50 and 75. Not used in the calculation</span>",
+"bqak7o": "<b>Healthy years (not in the model):</b> Nyberg S.T. et al. Association of Healthy Lifestyle With Years Lived Without Major Chronic Diseases. <i>JAMA Intern Med</i> 2020;180:760–8. <span class=\"hrnote\">Best vs worst lifestyle score: 9.9 more years free of chronic disease in men and 9.4 in women, between ages 40 and 75 (per the abstract). Not used in the calculation</span>"
+});
