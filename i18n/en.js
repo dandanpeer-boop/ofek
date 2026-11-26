@@ -2277,3 +2277,7 @@ Object.assign(I18N.en, {
 "1l1fo4x": "<b>Healthy years (not in the model):</b> Stenholm S. et al. Smoking, physical inactivity and obesity as predictors of healthy and disease-free life expectancy between ages 50 and 75: a multicohort study. <i>Int J Epidemiol</i> 2016;45:1260–70. <span class=\"hrnote\">No risk factors vs two or more: about 7.6 (men) and 7.2 (women) more years in good health, and 5.7 and 5.2 years free of chronic disease, between ages 50 and 75. Not used in the calculation</span>",
 "bqak7o": "<b>Healthy years (not in the model):</b> Nyberg S.T. et al. Association of Healthy Lifestyle With Years Lived Without Major Chronic Diseases. <i>JAMA Intern Med</i> 2020;180:760–8. <span class=\"hrnote\">Best vs worst lifestyle score: 9.9 more years free of chronic disease in men and 9.4 in women, between ages 40 and 75 (per the abstract). Not used in the calculation</span>"
 });
+
+Object.assign(I18N.en, {
+"1eptuu7": "The calculator assumes an average smoker. The number of cigarettes and the years of smoking are not asked, and the risk differs a lot between them."
+});

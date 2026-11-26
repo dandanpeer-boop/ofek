@@ -2275,3 +2275,7 @@ Object.assign(I18N.es, {
 "1l1fo4x": "<b>Años saludables (no incluido en el modelo):</b> Stenholm S. et al. Smoking, physical inactivity and obesity as predictors of healthy and disease-free life expectancy between ages 50 and 75: a multicohort study. <i>Int J Epidemiol</i> 2016;45:1260–70. <span class=\"hrnote\">Sin factores de riesgo frente a dos o más: unos 7,6 (hombres) y 7,2 (mujeres) años más con buena salud, y 5,7 y 5,2 años sin enfermedad crónica, entre los 50 y los 75 años. No se usa en el cálculo</span>",
 "bqak7o": "<b>Años saludables (no incluido en el modelo):</b> Nyberg S.T. et al. Association of Healthy Lifestyle With Years Lived Without Major Chronic Diseases. <i>JAMA Intern Med</i> 2020;180:760–8. <span class=\"hrnote\">Mejor frente a peor puntuación de estilo de vida: 9,9 años más sin enfermedad crónica en hombres y 9,4 en mujeres, entre los 40 y los 75 años (según el resumen). No se usa en el cálculo</span>"
 });
+
+Object.assign(I18N.es, {
+"1eptuu7": "La calculadora supone un fumador medio. No se pregunta el número de cigarrillos ni los años de consumo, y el riesgo varía mucho entre ellos."
+});
