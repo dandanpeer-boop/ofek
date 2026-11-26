@@ -2279,3 +2279,12 @@ Object.assign(I18N.fr, {
 Object.assign(I18N.fr, {
 "1eptuu7": "Le calculateur suppose un fumeur moyen. Le nombre de cigarettes et la durée du tabagisme ne sont pas demandés, et le risque varie beaucoup entre eux."
 });
+
+Object.assign(I18N.fr, {
+"1o7pmbf": "<p class=\"small muted\"><b>Années sans maladie chronique, entre 50 et 75 ans :</b> Dans une étude menée dans quatre pays européens (Stenholm, Int J Epidemiol 2016), les personnes ayant ces facteurs de risque (",
+"3qzeq": "Inactivité physique",
+"3hq4qt": "Obésité (IMC de 30 ou plus)",
+"1445ith": ") ont vécu en moyenne environ ",
+"z4ba79": " années de moins sans maladie chronique majeure (cœur, AVC, cancer, diabète, maladie pulmonaire) que les personnes sans aucun d'entre eux, qui ont vécu environ ",
+"1mlemxy": " années sans maladie sur 25. L'effet de plusieurs facteurs ne s'additionne pas simplement ; il s'agit donc d'une comparaison entre profils et non d'une valeur pour chaque facteur séparément. C'est une association observationnelle, pas une promesse, et elle ne s'ajoute pas au chiffre d'espérance de vie.</p>"
+});

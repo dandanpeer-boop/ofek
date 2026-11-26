@@ -2279,3 +2279,12 @@ Object.assign(I18N.es, {
 Object.assign(I18N.es, {
 "1eptuu7": "La calculadora supone un fumador medio. No se pregunta el número de cigarrillos ni los años de consumo, y el riesgo varía mucho entre ellos."
 });
+
+Object.assign(I18N.es, {
+"1o7pmbf": "<p class=\"small muted\"><b>Años sin enfermedad crónica, entre los 50 y los 75:</b> En un estudio de cuatro países europeos (Stenholm, Int J Epidemiol 2016), las personas con estos factores de riesgo (",
+"3qzeq": "Inactividad física",
+"3hq4qt": "Obesidad (IMC de 30 o más)",
+"1445ith": ") vivieron en promedio unos ",
+"z4ba79": " años menos sin una enfermedad crónica importante (cardiopatía, ictus, cáncer, diabetes, enfermedad pulmonar) que las personas sin ninguno de ellos, que vivieron unos ",
+"1mlemxy": " años sin enfermedad de un total de 25. El efecto de varios factores no se suma de forma simple, por lo que es una comparación entre perfiles y no un valor para cada factor por separado. Es una asociación observacional, no una promesa, y no se suma al número de esperanza de vida.</p>"
+});

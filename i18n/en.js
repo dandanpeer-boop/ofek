@@ -2281,3 +2281,12 @@ Object.assign(I18N.en, {
 Object.assign(I18N.en, {
 "1eptuu7": "The calculator assumes an average smoker. The number of cigarettes and the years of smoking are not asked, and the risk differs a lot between them."
 });
+
+Object.assign(I18N.en, {
+"1o7pmbf": "<p class=\"small muted\"><b>Years without chronic disease, between ages 50 and 75:</b> In a study from four European countries (Stenholm, Int J Epidemiol 2016), people with these risk factors (",
+"3qzeq": "Physical inactivity",
+"3hq4qt": "Obesity (BMI 30 or more)",
+"1445ith": ") lived on average about ",
+"z4ba79": " fewer years without a major chronic disease (heart disease, stroke, cancer, diabetes, lung disease) than people with none of them, who lived about ",
+"1mlemxy": " years free of disease out of 25. The effect of several factors does not simply add up, so this is a comparison between profiles and not a value for each factor on its own. It is an observational association, not a promise, and it is not added to the life expectancy number.</p>"
+});
