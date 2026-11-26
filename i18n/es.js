@@ -2288,3 +2288,9 @@ Object.assign(I18N.es, {
 "z4ba79": " años menos sin una enfermedad crónica importante (cardiopatía, ictus, cáncer, diabetes, enfermedad pulmonar) que las personas sin ninguno de ellos, que vivieron unos ",
 "1mlemxy": " años sin enfermedad de un total de 25. El efecto de varios factores no se suma de forma simple, por lo que es una comparación entre perfiles y no un valor para cada factor por separado. Es una asociación observacional, no una promesa, y no se suma al número de esperanza de vida.</p>"
 });
+
+Object.assign(I18N.es, {
+"1yyxrxm": "¿Y ahora qué?",
+"blmq1y": "Puedes llevar el resultado a la consulta con tu médico o guardarlo.",
+"1t7ac2a": "Imprimir / guardar como PDF"
+});

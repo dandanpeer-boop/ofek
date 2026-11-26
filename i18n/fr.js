@@ -2288,3 +2288,9 @@ Object.assign(I18N.fr, {
 "z4ba79": " années de moins sans maladie chronique majeure (cœur, AVC, cancer, diabète, maladie pulmonaire) que les personnes sans aucun d'entre eux, qui ont vécu environ ",
 "1mlemxy": " années sans maladie sur 25. L'effet de plusieurs facteurs ne s'additionne pas simplement ; il s'agit donc d'une comparaison entre profils et non d'une valeur pour chaque facteur séparément. C'est une association observationnelle, pas une promesse, et elle ne s'ajoute pas au chiffre d'espérance de vie.</p>"
 });
+
+Object.assign(I18N.fr, {
+"1yyxrxm": "Et ensuite ?",
+"blmq1y": "Vous pouvez emporter le résultat à une consultation médicale ou l'enregistrer.",
+"1t7ac2a": "Imprimer / enregistrer en PDF"
+});

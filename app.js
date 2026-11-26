@@ -1288,6 +1288,13 @@
     return n;
   }
 
+  // "מה הלאה?": הכפתורים התחתונים היו רחוקים ונסתרים; כאן הם בולטים ליד "איך אפשר לשפר". החוברת: עברית בלבד, בדיקת ביקוש (ראו דף "בקרוב").
+  function nextStepsHTML() {
+    return '<h3>' + L('מה הלאה?') + '</h3><p class="small muted">' + L('אפשר לקחת את התוצאה לביקור אצל הרופא או הרופאה, או לשמור אותה.') + '</p>' +
+      '<div class="nav" style="justify-content:flex-start;flex-wrap:wrap;gap:10px"><button type="button" class="primary" id="nsdoc">' + L('דוח הכנה לרופא או לרופאה') + '</button><button type="button" id="nsprint">' + L('הדפסה / שמירה כ-PDF') + '</button></div>' +
+      (LANG === 'he' ? '<p class="small muted" style="margin-top:12px">חוברת אישית מעמיקה, בקרוב: ההרגלים, התוצאה והבדיקות שלך במסמך אחד, עם שאלות לרופא. היא עדיין לא פתוחה, ובודקים אם יש בזה עניין. <a href="' + ROOT + 'soon/">לפרטים על החוברת</a></p>' : '');
+  }
+
   function renderResultHidden() {
     var inp = collect(), r = LifeModel.compute(inp);
     app.innerHTML = '<div class="card"><div class="rc-grid"><div class="rc-top">' +
@@ -1328,6 +1335,7 @@
       '<div class="rc-disc">' + DISCLAIMER + '</div>' +
       '<div class="rc-left">' +
       improveHTML(inp, r) +
+      nextStepsHTML() +
       bioAgeHTML(r) +
 
       L('<h3>הטווח, לא רק המספר</h3>') +
@@ -1379,6 +1387,8 @@
       document.getElementById('docback').onclick = renderResult;
       document.getElementById('docprint').onclick = function () { window.print(); };
     };
+    var nsd = document.getElementById('nsdoc'); if (nsd) nsd.onclick = function () { db.onclick(); };
+    var nsp = document.getElementById('nsprint'); if (nsp) nsp.onclick = function () { window.print(); };
   }
 
   var SOURCES = [

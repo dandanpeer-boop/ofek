@@ -2290,3 +2290,9 @@ Object.assign(I18N.en, {
 "z4ba79": " fewer years without a major chronic disease (heart disease, stroke, cancer, diabetes, lung disease) than people with none of them, who lived about ",
 "1mlemxy": " years free of disease out of 25. The effect of several factors does not simply add up, so this is a comparison between profiles and not a value for each factor on its own. It is an observational association, not a promise, and it is not added to the life expectancy number.</p>"
 });
+
+Object.assign(I18N.en, {
+"1yyxrxm": "What next?",
+"blmq1y": "You can take the result to a doctor's visit, or save it.",
+"1t7ac2a": "Print / save as PDF"
+});
