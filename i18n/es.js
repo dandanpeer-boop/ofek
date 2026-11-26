@@ -2294,3 +2294,14 @@ Object.assign(I18N.es, {
 "blmq1y": "Puedes llevar el resultado a la consulta con tu médico o guardarlo.",
 "1t7ac2a": "Imprimir / guardar como PDF"
 });
+
+Object.assign(I18N.es, {
+"mlb8rd": "Dos preguntas breves",
+"tjrs3t": "Totalmente anónimo: solo contamos cuántas personas eligieron cada respuesta. No se guarda ningún dato sobre ti.",
+"1ofnwh7": "¿Entendiste el resultado?",
+"wgjlnm": "En parte",
+"34mmvw": "¿Qué te gustaría ver primero?",
+"1dax4fy": "El número",
+"1n0vxal": "Qué se puede mejorar",
+"wtsnnw": "¡Gracias!"
+});

@@ -1295,6 +1295,31 @@
       (LANG === 'he' ? '<p class="small muted" style="margin-top:12px">חוברת אישית מעמיקה, בקרוב: ההרגלים, התוצאה והבדיקות שלך במסמך אחד, עם שאלות לרופא. היא עדיין לא פתוחה, ובודקים אם יש בזה עניין. <a href="' + ROOT + 'soon/">לפרטים על החוברת</a></p>' : '');
   }
 
+  // סקר מיקרו אנונימי (גרסת פיתוח): שתי לחיצות שנספרות ב-GA כאירועים, בלי שמירת מידע ובלי מזהה.
+  function microSurveyHTML() {
+    function row(q, label, opts) {
+      return '<p style="margin:12px 0 6px"><b>' + label + '</b></p><div class="nav" style="justify-content:flex-start;flex-wrap:wrap;gap:10px">' +
+        opts.map(function (o) { return '<button type="button" data-q="' + q + '" data-a="' + o[0] + '">' + o[1] + '</button>'; }).join('') + '</div>';
+    }
+    return '<div id="msurvey"><h3>' + L('שתי שאלות קצרות') + '</h3><p class="small muted">' + L('אנונימי לגמרי: נספר רק כמה אנשים בחרו כל תשובה. לא נשמר שום פרט עליך.') + '</p>' +
+      row('understood', L('האם הבנת את התוצאה?'), [['yes', L('כן')], ['partly', L('חלקית')], ['no', L('לא')]]) +
+      row('first', L('מה היית רוצה לראות קודם?'), [['number', L('את המספר')], ['improve', L('מה אפשר לשפר')]]) +
+      '<p class="small muted" id="msthanks" hidden>' + L('תודה!') + '</p></div>';
+  }
+
+  function wireMicroSurvey() {
+    var ms = document.getElementById('msurvey'); if (!ms) return;
+    var answered = {};
+    ms.addEventListener('click', function (e) {
+      var b = e.target.closest ? e.target.closest('button[data-q]') : null; if (!b || b.disabled) return;
+      var q = b.getAttribute('data-q'), a = b.getAttribute('data-a');
+      try { if (window.gtag) window.gtag('event', 'survey_' + q, { answer: a }); } catch (x) { /* */ }
+      Array.prototype.forEach.call(ms.querySelectorAll('button[data-q="' + q + '"]'), function (x) { x.disabled = true; x.style.opacity = x === b ? '1' : '0.45'; if (x === b) x.style.fontWeight = '700'; });
+      answered[q] = true;
+      if (answered.understood && answered.first) document.getElementById('msthanks').hidden = false;
+    });
+  }
+
   function renderResultHidden() {
     var inp = collect(), r = LifeModel.compute(inp);
     app.innerHTML = '<div class="card"><div class="rc-grid"><div class="rc-top">' +
@@ -1336,6 +1361,7 @@
       '<div class="rc-left">' +
       improveHTML(inp, r) +
       nextStepsHTML() +
+      microSurveyHTML() +
       bioAgeHTML(r) +
 
       L('<h3>הטווח, לא רק המספר</h3>') +
@@ -1387,6 +1413,7 @@
       document.getElementById('docback').onclick = renderResult;
       document.getElementById('docprint').onclick = function () { window.print(); };
     };
+    wireMicroSurvey();
     var nsd = document.getElementById('nsdoc'); if (nsd) nsd.onclick = function () { db.onclick(); };
     var nsp = document.getElementById('nsprint'); if (nsp) nsp.onclick = function () { window.print(); };
   }

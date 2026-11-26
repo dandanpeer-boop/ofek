@@ -2296,3 +2296,14 @@ Object.assign(I18N.en, {
 "blmq1y": "You can take the result to a doctor's visit, or save it.",
 "1t7ac2a": "Print / save as PDF"
 });
+
+Object.assign(I18N.en, {
+"mlb8rd": "Two short questions",
+"tjrs3t": "Fully anonymous: we only count how many people chose each answer. No detail about you is stored.",
+"1ofnwh7": "Did you understand the result?",
+"wgjlnm": "Partly",
+"34mmvw": "What would you like to see first?",
+"1dax4fy": "The number",
+"1n0vxal": "What can be improved",
+"wtsnnw": "Thank you!"
+});
