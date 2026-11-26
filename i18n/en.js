@@ -2307,3 +2307,15 @@ Object.assign(I18N.en, {
 "1n0vxal": "What can be improved",
 "wtsnnw": "Thank you!"
 });
+
+Object.assign(I18N.en, {
+"o0xvyu": "The site was built by a private individual. There is no insurance company or supplement company behind it, and it has no ads. The calculator and the guides are free and will stay free. We are checking whether there is interest in a small paid personal document, but it does not exist yet and we charge nothing.",
+"12j74ya": "What is not included in the number",
+"p2cno6": "A family history of breast, ovarian or colorectal cancer, diabetes or Alzheimer's appears in the notes only. It mostly concerns the personal risk of the disease itself.",
+"ighxzx": "A parent who died young (before age 70) from a non-external cause is not counted. The calculator only counts parental longevity. The estimate may be slightly optimistic.",
+"1yb33ht": "The number of cigarettes and the years of smoking are not asked, and the calculator assumes an average smoker.",
+"1hkdwb0": "The number is life expectancy, not healthy life expectancy and not quality of life.",
+"2xmiih": "Blood test values older than 24 months are not included, and biological age is calculated only from tests taken within 12 months.",
+"9am1on": "Who checked it",
+"nhn76n": "Every number was checked against the abstract or the full text of the study, and this is stated next to each source. No doctor or actuary has reviewed it yet. For cross-checking we also used several artificial intelligence models, which is not a substitute for human review."
+});

@@ -2305,3 +2305,15 @@ Object.assign(I18N.fr, {
 "1n0vxal": "Ce qui peut être amélioré",
 "wtsnnw": "Merci !"
 });
+
+Object.assign(I18N.fr, {
+"o0xvyu": "Le site a été créé par un particulier. Aucune compagnie d'assurance ni entreprise de compléments alimentaires n'est derrière, et il n'y a pas de publicité. Le calculateur et les guides sont gratuits et le resteront. Nous vérifions s'il y a un intérêt pour un petit document personnel payant, mais il n'existe pas encore et nous ne facturons rien.",
+"12j74ya": "Ce qui n'est pas inclus dans le chiffre",
+"p2cno6": "Les antécédents familiaux de cancer du sein, de l'ovaire ou colorectal, de diabète ou d'Alzheimer figurent seulement dans les remarques. Ils concernent surtout le risque personnel de la maladie elle-même.",
+"ighxzx": "Un parent décédé jeune (avant 70 ans) d'une cause non externe n'est pas compté. Le calculateur ne compte que la longévité des parents. L'estimation peut être légèrement optimiste.",
+"1yb33ht": "Le nombre de cigarettes et la durée du tabagisme ne sont pas demandés, et le calculateur suppose un fumeur moyen.",
+"1hkdwb0": "Le chiffre est l'espérance de vie, pas l'espérance de vie en bonne santé ni la qualité de vie.",
+"2xmiih": "Les valeurs d'analyses sanguines de plus de 24 mois ne sont pas incluses, et l'âge biologique n'est calculé qu'à partir d'analyses faites dans un délai de 12 mois.",
+"9am1on": "Qui l'a vérifié",
+"nhn76n": "Chaque chiffre a été vérifié par rapport au résumé ou au texte intégral de l'étude, et cela est indiqué à côté de chaque source. Aucun médecin ni actuaire ne l'a encore examiné. Pour un recoupement, nous avons aussi utilisé plusieurs modèles d'intelligence artificielle, ce qui ne remplace pas une relecture humaine."
+});

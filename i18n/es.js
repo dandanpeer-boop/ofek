@@ -2305,3 +2305,15 @@ Object.assign(I18N.es, {
 "1n0vxal": "Qué se puede mejorar",
 "wtsnnw": "¡Gracias!"
 });
+
+Object.assign(I18N.es, {
+"o0xvyu": "El sitio fue creado por una persona particular. No hay detrás ninguna aseguradora ni empresa de suplementos, y no tiene anuncios. La calculadora y las guías son gratuitas y seguirán siéndolo. Estamos comprobando si hay interés en un pequeño documento personal de pago, pero todavía no existe y no cobramos nada.",
+"12j74ya": "Qué no se incluye en el número",
+"p2cno6": "Los antecedentes familiares de cáncer de mama, ovario o colorrectal, diabetes o alzhéimer aparecen solo en las notas. Afectan sobre todo al riesgo personal de la enfermedad en sí.",
+"ighxzx": "No se cuenta a un progenitor que falleció joven (antes de los 70) por una causa no externa. La calculadora solo cuenta la longevidad de los padres. La estimación puede ser algo optimista.",
+"1yb33ht": "No se pregunta el número de cigarrillos ni los años de consumo, y la calculadora supone un fumador medio.",
+"1hkdwb0": "El número es la esperanza de vida, no la esperanza de vida saludable ni la calidad de vida.",
+"2xmiih": "Los valores de análisis de sangre con más de 24 meses no se incluyen, y la edad biológica solo se calcula con análisis realizados en un plazo de 12 meses.",
+"9am1on": "Quién lo revisó",
+"nhn76n": "Cada número se comprobó con el resumen o el texto completo del estudio, y así se indica junto a cada fuente. Todavía no lo ha revisado ningún médico ni actuario. Para una comprobación cruzada también usamos varios modelos de inteligencia artificial, lo cual no sustituye una revisión humana."
+});
