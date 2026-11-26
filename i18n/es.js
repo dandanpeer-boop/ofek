@@ -2265,3 +2265,7 @@ Object.assign(I18N.es, {
 "101uzv3": "<p class=\"small muted\"><b>¿Y los años de buena salud?</b> La calculadora estima solo la esperanza de vida, no la esperanza de vida saludable. En un gran estudio estadounidense de profesionales de la salud (Li y cols., BMJ 2020), cuatro o cinco hábitos saludables a los 50 años se asociaron con unos 8 años más sin cáncer, enfermedad cardíaca ni diabetes en los hombres, y unos 11 años en las mujeres. Es una asociación observacional en otra población y no está incluida en el número.</p>",
 "19r2hy5": "<b>Años saludables (no incluido en el modelo):</b> Li Y. et al. Healthy lifestyle and life expectancy free of cancer, cardiovascular disease, and type 2 diabetes: prospective cohort study. <i>BMJ</i> 2020;368:l6669. <span class=\"hrnote\">A los 50 años, cuatro o cinco hábitos saludables: 31,1 años sin enfermedad en hombres (frente a 23,5 sin hábitos), 34,4 en mujeres (frente a 23,7). No se usa en el cálculo</span>"
 });
+
+Object.assign(I18N.es, {
+"kgwgny": "<p class=\"small muted\">El número es la esperanza de vida, no la esperanza de vida saludable. El objetivo no es solo más años sino años buenos, por eso el resultado también muestra qué se puede mejorar.</p>"
+});

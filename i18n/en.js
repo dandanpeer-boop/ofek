@@ -2267,3 +2267,7 @@ Object.assign(I18N.en, {
 "101uzv3": "<p class=\"small muted\"><b>What about healthy years?</b> The calculator estimates life expectancy only, not healthy life expectancy. In a large American study of health professionals (Li et al., BMJ 2020), four or five healthy habits at age 50 were associated with about 8 more years free of cancer, heart disease and diabetes in men, and about 11 years in women. This is an observational link in a different population, and it is not included in the number.</p>",
 "19r2hy5": "<b>Healthy years (not in the model):</b> Li Y. et al. Healthy lifestyle and life expectancy free of cancer, cardiovascular disease, and type 2 diabetes: prospective cohort study. <i>BMJ</i> 2020;368:l6669. <span class=\"hrnote\">At age 50, four or five healthy habits: 31.1 disease-free years in men (vs 23.5 with none), 34.4 in women (vs 23.7). Not used in the calculation</span>"
 });
+
+Object.assign(I18N.en, {
+"kgwgny": "<p class=\"small muted\">The number is life expectancy, not healthy life expectancy. The aim is not only more years but good years, so the result also shows what can be improved.</p>"
+});

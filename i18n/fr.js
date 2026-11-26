@@ -2265,3 +2265,7 @@ Object.assign(I18N.fr, {
 "101uzv3": "<p class=\"small muted\"><b>Et les années en bonne santé ?</b> Le calculateur estime uniquement l'espérance de vie, pas l'espérance de vie en bonne santé. Dans une grande étude américaine de professionnels de santé (Li et coll., BMJ 2020), quatre ou cinq habitudes saines à 50 ans étaient associées à environ 8 années de plus sans cancer, maladie cardiaque ni diabète chez les hommes, et environ 11 ans chez les femmes. C'est une association observationnelle dans une autre population, non incluse dans le chiffre.</p>",
 "19r2hy5": "<b>Années en bonne santé (non inclus dans le modèle) :</b> Li Y. et al. Healthy lifestyle and life expectancy free of cancer, cardiovascular disease, and type 2 diabetes: prospective cohort study. <i>BMJ</i> 2020;368:l6669. <span class=\"hrnote\">À 50 ans, quatre ou cinq habitudes saines : 31,1 années sans maladie chez les hommes (contre 23,5 sans habitudes), 34,4 chez les femmes (contre 23,7). Non utilisé dans le calcul</span>"
 });
+
+Object.assign(I18N.fr, {
+"kgwgny": "<p class=\"small muted\">Le chiffre est l'espérance de vie, pas l'espérance de vie en bonne santé. L'objectif n'est pas seulement plus d'années mais de bonnes années ; le résultat montre donc aussi ce qui peut être amélioré.</p>"
+});
