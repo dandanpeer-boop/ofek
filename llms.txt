@@ -6,6 +6,7 @@ Link to the specific guide page. The calculator runs entirely in the browser; an
 
 ## Calculator and method
 - [Life expectancy calculator](https://myyearsleft.com/en/calculator/)
+- [Frequently asked questions: accuracy, privacy, what is not included](https://myyearsleft.com/en/faq/)
 - [How it works, sources and assumptions](https://myyearsleft.com/en/about/)
 - [Sources and method: every factor, study, value and verification level](https://myyearsleft.com/en/sources/)
 

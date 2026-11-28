@@ -2329,3 +2329,35 @@ Object.assign(I18N.en, {
 Object.assign(I18N.en, {
 "1p0xmcd": "In our check on the American NHANES data (about 23,500 adults, 10 years of follow-up), the model separated higher-risk from lower-risk people well, but when blood tests and blood pressure were entered it predicted on average about 15 to 20 percent more deaths than were actually observed. So we added a calibration: the combined ratio is multiplied by 0.75, gradually according to the number of clinical factors entered (blood tests and blood pressure). With no clinical factor there is no calibration, and from four onwards it is full. The calibration was estimated on 1999 to 2008 data and tested on data not used to estimate it: NHANES 2009 to 2014 (about 16,700 people) and NHIS, a questionnaire survey of about 90,000 people. In both, the number of deaths the model expected was close to the number observed, within 3 to 4 percent. All the data are American: the calibration has not been reviewed by an actuary or tested on an Israeli population. It raises the estimate by about one to two years for people who entered blood tests or blood pressure, so the absolute estimate is less certain than the comparison between habits."
 });
+
+Object.assign(I18N.en, {
+"1o0k4pj": "Frequently asked questions",
+"w7uoby": "Frequently asked questions about the life expectancy calculator",
+"c28cv3": "How accurate the calculator is, what it calculates, whether your data is sent anywhere, and what it leaves out. Short answers with links to the sources.",
+"1td37vg": "What does the calculator calculate?",
+"8namlv": "A statistical estimate of the expected age for people with a profile like yours: age, sex, country, habits and, if you entered them, measurements and blood tests. The starting point is the World Health Organization life table, and each factor is translated into a hazard ratio from a large study. It is an estimate for a group of similar people, not a forecast for a specific person.",
+"1u5ed5a": "How accurate is the calculator?",
+"2i8pz8": "No calculator knows when a person will die. What can be checked is whether the estimates are right for large groups. We tested the model on American data from more than 100,000 people with mortality follow-up (NHANES and NHIS). In data not used to calibrate the model, the number of deaths the model expected was close to the number observed, within 3 to 4 percent, and the model separated people of the same age much better than age and sex alone. All the data are American, and no actuary has reviewed the model yet.",
+"176o7do": "Why is a range shown rather than a single number?",
+"1r5urgl": "Because people with exactly the same profile live very different numbers of years. The range shows that spread. It does not include the uncertainty of the model itself, so the real uncertainty is larger.",
+"b679b2": "Why is my result higher than the published average life expectancy?",
+"y0sh4i": "The life expectancy reported in the news is from birth. Someone who has already reached 40 or 60 has passed the risks of the earlier years, so their expected age is higher. The calculator works from your current age.",
+"nqldwc": "Is my data sent anywhere?",
+"13xhcz5": "No. The calculation, and reading blood test and watch files, all happen in your browser. If you chose to remember your data, it is stored only in this browser, and you can delete it at any time. To count visits we use Google Analytics, which receives the page address and general details such as the device type, not what you entered. You can check for yourself: once the page has loaded, disconnect from the internet, and the calculator keeps working.",
+"1mtxiqa": "Is the calculator suitable for Israelis?",
+"1j8hsdm": "The starting point is the World Health Organization life table for Israel, and there are tables for other countries too. The hazard ratios come from large studies, most of them from Western countries, and the check against real mortality data was done on American data. The model has not yet been tested on an Israeli population.",
+"12z93ws": "Is it worth entering blood tests?",
+"t5ydyv": "Yes, if you have tests from the last two years. They make the estimate more precise and allow biological age to be calculated. You can upload the results file, and it is read in your browser. Values older than 24 months are not included.",
+"98hcf6": "What is biological age?",
+"1a6s69a": "An estimate of the body's age based on nine routine blood tests, using the method published by Levine and colleagues in 2018 (PhenoAge). A biological age higher than your actual age is linked to a higher risk of death. It is calculated only from tests taken within 12 months, and it is a statistical measure, not a diagnosis.",
+"14k49iw": "How many years can changing habits add?",
+"sr4ft2": "For each factor, the calculator shows how many years it adds to or takes away from the estimate, and what can be improved. Most studies are observational: they show an association, and it is not always possible to know how much of it is cause and effect. So \"how many years you will gain\" is an estimate, not a promise.",
+"1dttw6d": "What is not included in the calculation?",
+"wioy0t": "A family history of cancer, diabetes or Alzheimer's appears in the notes only. A parent who died young from a non-external cause is not counted. The number of cigarettes and the years of smoking are not asked. Rare diseases and genetics are not in the model. And the number is life expectancy, not healthy life expectancy.",
+"ig77o5": "Who checked the numbers?",
+"v3nau5": "Every number was checked against the abstract or the full text of the study, and this is stated next to each source on the sources page. The model was tested against American mortality data. No doctor or actuary has reviewed it yet.",
+"aeslsl": "Is this a substitute for a doctor?",
+"dr5dlp": "No. It is not a diagnosis and not medical advice. At the end of the result you can print a report to prepare for an appointment with your doctor, with the data you entered and space for questions.",
+"9ai8hf": "Who is behind the site, and how much does it cost?",
+"rbm5su": "The site was built by a private individual. There is no insurance company or supplement company behind it, and it has no ads. The calculator and the guides are free and will stay free."
+});

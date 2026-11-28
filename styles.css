@@ -546,3 +546,10 @@ a { color: var(--accent); }
 .video-play .ic { width: 40px; height: 40px; fill: currentColor; }
 .video-play:hover { filter: brightness(.97); }
 .video-frame { display: block; width: 100%; max-width: 340px; margin: 0 auto; aspect-ratio: 9 / 16; border: 0; border-radius: 14px; }
+
+/* שאלות נפוצות */
+.faq { display: grid; gap: 10px; margin: 18px 0; }
+.faq details { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 0 18px; }
+.faq summary { cursor: pointer; font-weight: 600; padding: 16px 0; }
+.faq details[open] summary { border-bottom: 1px solid var(--line); }
+.faq details p { margin: 12px 0 16px; line-height: 1.7; }

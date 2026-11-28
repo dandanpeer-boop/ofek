@@ -2327,3 +2327,35 @@ Object.assign(I18N.es, {
 Object.assign(I18N.es, {
 "1p0xmcd": "En nuestra comprobación con los datos estadounidenses de NHANES (unos 23.500 adultos, 10 años de seguimiento), el modelo distinguió bien entre personas de mayor y menor riesgo, pero cuando se introducían análisis de sangre y presión arterial predecía de media entre un 15 y un 20 por ciento más muertes de las observadas. Por eso añadimos una calibración: la razón combinada se multiplica por 0,75, de forma gradual según el número de factores clínicos introducidos (análisis de sangre y presión arterial). Sin ningún factor clínico no hay calibración, y a partir de cuatro es completa. La calibración se estimó con datos de 1999 a 2008 y se comprobó con datos que no se usaron para estimarla: NHANES 2009 a 2014 (unas 16.700 personas) y NHIS, una encuesta por cuestionario de unas 90.000 personas. En ambos, el número de muertes que esperaba el modelo fue cercano al observado, con una diferencia del 3 al 4 por ciento. Todos los datos son estadounidenses: la calibración no ha sido revisada por un actuario ni probada en población israelí. Aumenta la estimación entre uno y dos años para quien introdujo análisis de sangre o presión arterial, por lo que la estimación absoluta es menos segura que la comparación entre hábitos."
 });
+
+Object.assign(I18N.es, {
+"1o0k4pj": "Preguntas frecuentes",
+"w7uoby": "Preguntas frecuentes sobre la calculadora de esperanza de vida",
+"c28cv3": "Qué tan precisa es la calculadora, qué calcula, si tus datos se envían a algún sitio y qué no incluye. Respuestas breves con enlaces a las fuentes.",
+"1td37vg": "¿Qué calcula la calculadora?",
+"8namlv": "Una estimación estadística de la edad esperada para personas con un perfil como el tuyo: edad, sexo, país, hábitos y, si los introdujiste, medidas y análisis de sangre. El punto de partida es la tabla de mortalidad de la Organización Mundial de la Salud, y cada factor se traduce en una razón de riesgo de un estudio grande. Es una estimación para un grupo de personas parecidas, no un pronóstico para una persona concreta.",
+"1u5ed5a": "¿Qué tan precisa es la calculadora?",
+"2i8pz8": "Ninguna calculadora sabe cuándo morirá una persona. Lo que se puede comprobar es si las estimaciones son correctas para grupos grandes. Probamos el modelo con datos estadounidenses de más de 100.000 personas con seguimiento de mortalidad (NHANES y NHIS). En datos que no se usaron para calibrar el modelo, el número de muertes esperado por el modelo fue cercano al observado, con una diferencia del 3 al 4 por ciento, y el modelo distinguió entre personas de la misma edad mucho mejor que la edad y el sexo solos. Todos los datos son estadounidenses, y ningún actuario ha revisado todavía el modelo.",
+"176o7do": "¿Por qué se muestra un rango y no un solo número?",
+"1r5urgl": "Porque personas con exactamente el mismo perfil viven un número de años muy distinto. El rango muestra esa dispersión. No incluye la incertidumbre del propio modelo, por lo que la incertidumbre real es mayor.",
+"b679b2": "¿Por qué mi resultado es mayor que la esperanza de vida media publicada?",
+"y0sh4i": "La esperanza de vida que aparece en las noticias es al nacer. Quien ya llegó a los 40 o 60 años ha superado los riesgos de los años anteriores, por lo que su edad esperada es mayor. La calculadora parte de tu edad actual.",
+"nqldwc": "¿Se envían mis datos a algún sitio?",
+"13xhcz5": "No. El cálculo, y también la lectura de los archivos de análisis de sangre y del reloj, se hacen por completo en tu navegador. Si elegiste recordar tus datos, se guardan solo en este navegador y puedes borrarlos en cualquier momento. Para contar las visitas usamos Google Analytics, que recibe la dirección de la página y datos generales como el tipo de dispositivo, no lo que introdujiste. Puedes comprobarlo: una vez cargada la página, desconéctate de internet y la calculadora sigue funcionando.",
+"1mtxiqa": "¿Es adecuada la calculadora para israelíes?",
+"1j8hsdm": "El punto de partida es la tabla de mortalidad de la Organización Mundial de la Salud para Israel, y también hay tablas para otros países. Las razones de riesgo provienen de estudios grandes, la mayoría de países occidentales, y la comprobación con datos reales de mortalidad se hizo con datos estadounidenses. El modelo todavía no se ha probado en población israelí.",
+"12z93ws": "¿Vale la pena introducir análisis de sangre?",
+"t5ydyv": "Sí, si tienes análisis de los últimos dos años. Hacen la estimación más precisa y permiten calcular la edad biológica. Puedes subir el archivo de resultados, y se lee en tu navegador. Los valores con más de 24 meses no se incluyen.",
+"98hcf6": "¿Qué es la edad biológica?",
+"1a6s69a": "Una estimación de la edad del cuerpo a partir de nueve análisis de sangre rutinarios, con el método publicado por Levine y sus colegas en 2018 (PhenoAge). Una edad biológica mayor que la real se asocia con un mayor riesgo de muerte. Solo se calcula con análisis realizados en un plazo de 12 meses, y es una medida estadística, no un diagnóstico.",
+"14k49iw": "¿Cuántos años se pueden sumar cambiando hábitos?",
+"sr4ft2": "Para cada factor, la calculadora muestra cuántos años suma o resta a la estimación y qué se puede mejorar. La mayoría de los estudios son observacionales: muestran una asociación, y no siempre se puede saber cuánto de ella es causa y efecto. Por eso \"cuántos años ganarás\" es una estimación, no una promesa.",
+"1dttw6d": "¿Qué no se incluye en el cálculo?",
+"wioy0t": "Los antecedentes familiares de cáncer, diabetes o alzhéimer aparecen solo en las notas. No se cuenta a un progenitor que falleció joven por una causa no externa. No se pregunta el número de cigarrillos ni los años de consumo. Las enfermedades raras y la genética no están en el modelo. Y el número es la esperanza de vida, no la esperanza de vida saludable.",
+"ig77o5": "¿Quién revisó los números?",
+"v3nau5": "Cada número se comprobó con el resumen o el texto completo del estudio, y así se indica junto a cada fuente en la página de fuentes. El modelo se probó con datos de mortalidad estadounidenses. Todavía no lo ha revisado ningún médico ni actuario.",
+"aeslsl": "¿Sustituye esto al médico?",
+"dr5dlp": "No. No es un diagnóstico ni un consejo médico. Al final del resultado puedes imprimir un informe para preparar la consulta con tu médico, con los datos que introdujiste y espacio para preguntas.",
+"9ai8hf": "¿Quién está detrás del sitio y cuánto cuesta?",
+"rbm5su": "El sitio fue creado por una persona particular. No hay detrás ninguna aseguradora ni empresa de suplementos, y no tiene anuncios. La calculadora y las guías son gratuitas y seguirán siéndolo."
+});
