@@ -2323,3 +2323,7 @@ Object.assign(I18N.es, {
 "tpg37y": "Reproducir el vídeo",
 "s0mrbx": "Al reproducir se carga el reproductor de YouTube. No se envía nada hasta que hagas clic."
 });
+
+Object.assign(I18N.es, {
+"1p0xmcd": "En nuestra comprobación con los datos estadounidenses de NHANES (unos 23.500 adultos, 10 años de seguimiento), el modelo distinguió bien entre personas de mayor y menor riesgo, pero cuando se introducían análisis de sangre y presión arterial predecía de media entre un 15 y un 20 por ciento más muertes de las observadas. Por eso añadimos una calibración: la razón combinada se multiplica por 0,75, de forma gradual según el número de factores clínicos introducidos (análisis de sangre y presión arterial). Sin ningún factor clínico no hay calibración, y a partir de cuatro es completa. La calibración se estimó con datos de 1999 a 2008 y se comprobó con datos que no se usaron para estimarla: NHANES 2009 a 2014 (unas 16.700 personas) y NHIS, una encuesta por cuestionario de unas 90.000 personas. En ambos, el número de muertes que esperaba el modelo fue cercano al observado, con una diferencia del 3 al 4 por ciento. Todos los datos son estadounidenses: la calibración no ha sido revisada por un actuario ni probada en población israelí. Aumenta la estimación entre uno y dos años para quien introdujo análisis de sangre o presión arterial, por lo que la estimación absoluta es menos segura que la comparación entre hábitos."
+});

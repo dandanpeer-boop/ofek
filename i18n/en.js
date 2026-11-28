@@ -2325,3 +2325,7 @@ Object.assign(I18N.en, {
 "tpg37y": "Play the video",
 "s0mrbx": "Playing loads the player from YouTube. Nothing is sent until you click."
 });
+
+Object.assign(I18N.en, {
+"1p0xmcd": "In our check on the American NHANES data (about 23,500 adults, 10 years of follow-up), the model separated higher-risk from lower-risk people well, but when blood tests and blood pressure were entered it predicted on average about 15 to 20 percent more deaths than were actually observed. So we added a calibration: the combined ratio is multiplied by 0.75, gradually according to the number of clinical factors entered (blood tests and blood pressure). With no clinical factor there is no calibration, and from four onwards it is full. The calibration was estimated on 1999 to 2008 data and tested on data not used to estimate it: NHANES 2009 to 2014 (about 16,700 people) and NHIS, a questionnaire survey of about 90,000 people. In both, the number of deaths the model expected was close to the number observed, within 3 to 4 percent. All the data are American: the calibration has not been reviewed by an actuary or tested on an Israeli population. It raises the estimate by about one to two years for people who entered blood tests or blood pressure, so the absolute estimate is less certain than the comparison between habits."
+});

@@ -2323,3 +2323,7 @@ Object.assign(I18N.fr, {
 "tpg37y": "Lancer la vidéo",
 "s0mrbx": "La lecture charge le lecteur depuis YouTube. Rien n'est envoyé avant le clic."
 });
+
+Object.assign(I18N.fr, {
+"1p0xmcd": "Lors de notre vérification sur les données américaines NHANES (environ 23 500 adultes, 10 ans de suivi), le modèle distinguait bien les personnes à risque plus élevé de celles à risque plus faible, mais lorsque des analyses sanguines et la tension artérielle étaient saisies, il prédisait en moyenne 15 à 20 pour cent de décès de plus que ceux réellement observés. Nous avons donc ajouté un calibrage : le rapport combiné est multiplié par 0,75, progressivement selon le nombre de facteurs cliniques saisis (analyses sanguines et tension artérielle). Sans facteur clinique, il n'y a pas de calibrage, et à partir de quatre il est complet. Le calibrage a été estimé sur les données 1999 à 2008 et vérifié sur des données qui n'ont pas servi à l'estimer : NHANES 2009 à 2014 (environ 16 700 personnes) et NHIS, une enquête par questionnaire d'environ 90 000 personnes. Dans les deux cas, le nombre de décès attendu par le modèle était proche du nombre observé, à 3 à 4 pour cent près. Toutes les données sont américaines : le calibrage n'a pas été examiné par un actuaire ni testé sur une population israélienne. Il augmente l'estimation d'environ un à deux ans pour les personnes ayant saisi des analyses sanguines ou la tension artérielle, de sorte que l'estimation absolue est moins sûre que la comparaison entre habitudes."
+});

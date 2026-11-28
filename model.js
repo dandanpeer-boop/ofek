@@ -26,9 +26,12 @@ var LifeModel = (function () {
     activityOverlap: 0.5,   // משקל הפעילות כשהוזן גם VO2max (חפיפה; שיפוט)
     bmiMediation: 0.7,      // כשיש גם לחץ דם, סוכר ושומנים — חלק מהשפעת ה-BMI כבר נספר דרכם
     // כיול (החלטת דן, 25.11.2026; הצעה: research/proposals/2026-11-21-normalization-calibration.md): בתיקוף על NHANES (O/E=0.82) ה-HR המשולב
-    // מנבא יותר מוות מהנצפה. מכפילים את ה-HR המשולב ב-calK, בהדרגה לפי מספר הגורמים: אפס עד calFrom גורמים, מלא מ-calTo ומעלה.
-    // k נאמד באותם נתוני NHANES (אומדן בתוך המדגם), ולא נבדק על ידי אקטואר או על אוכלוסייה ישראלית.
-    calK: 0.75, calFrom: 2, calTo: 8
+    // מנבא יותר מוות מהנצפה. מכפילים את ה-HR המשולב ב-calK, בהדרגה לפי מספר הגורמים הקליניים (בדיקות דם ולחץ דם, calClin):
+    // אפס בלי גורם קליני, מלא מ-calClinTo ומעלה. (28.11.2026, החלטת דן: עד אז נספרו כל הגורמים, ובתיקוף על NHIS, שאלון בלבד,
+    // זה נתן O/E 1.09, כלומר אופטימיות. בגרסה הקלינית: NHANES 2009-14 O/E 1.04, NHIS 0.97; research/validation/RESULTS.md.)
+    // k נאמד על NHANES 1999-2008 ונבדק מחוץ למדגם על נתונים אמריקאיים בלבד; לא נבדק על ידי אקטואר או על אוכלוסייה ישראלית.
+    calK: 0.75, calClinTo: 4,
+    calClin: ['bioage', 'bp', 'chol', 'crp', 'kidney', 'tg', 'ggt', 'lpa', 'acr']
   };
 
   // ---------- 1. בסיס: לוח תמותה ----------
@@ -541,9 +544,11 @@ var LifeModel = (function () {
     };
   }
 
-  /** הסטת הכיול ביומן ה-HR: log(k) כפול רמפה לפי מספר הגורמים שהוזנו (כל הגורמים, לא רק אלה שבמסכה, כדי שפירוק השנים יישאר סכום מדויק) */
+  /** הסטת הכיול ביומן ה-HR: log(k) כפול רמפה לפי מספר הגורמים הקליניים שהוזנו (כל הגורמים, לא רק אלה שבמסכה, כדי שפירוק השנים יישאר סכום מדויק) */
   function calShift(factors) {
-    var ramp = clamp((factors.length - ASSUME.calFrom) / (ASSUME.calTo - ASSUME.calFrom), 0, 1);
+    var nClin = 0;
+    for (var i = 0; i < factors.length; i++) if (ASSUME.calClin.indexOf(factors[i].id) >= 0) nClin++;
+    var ramp = clamp(nClin / ASSUME.calClinTo, 0, 1);
     return Math.log(ASSUME.calK) * ramp;
   }
 
