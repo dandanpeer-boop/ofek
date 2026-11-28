@@ -38,6 +38,7 @@ var SiteRender = (function () {
     pill: '<path d="M10.5 20.5a4.95 4.95 0 0 1-7-7l9-9a4.95 4.95 0 0 1 7 7z"/><path d="M8.5 8.5l7 7"/>',
     arrow: '<path d="M15 6l-6 6 6 6"/>',
     check: '<path d="M5 12.5l4.5 4.5L19 7.5"/>',
+    play: '<path d="M8 5.5v13l11-6.5z"/>',
     lock: '<rect x="5" y="10.5" width="14" height="10" rx="2"/><path d="M8 10.5V8a4 4 0 0 1 8 0v2.5"/>',
     book: '<path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v15H6.5A2.5 2.5 0 0 0 4 20.5z"/><path d="M4 20.5A2.5 2.5 0 0 0 6.5 23H20"/>',
     calc: '<rect x="5" y="3" width="14" height="18" rx="2.5"/><path d="M8.5 7.5h7M8.5 12h1M12 12h1M15.5 12h0M8.5 16h1M12 16h1M15.5 16h0"/>',
@@ -222,9 +223,20 @@ var SiteRender = (function () {
       '</div></article>';
   }
 
+  /* ---------- וידאו (נטען רק בלחיצה, בלי בקשה ליוטיוב לפני כן) ---------- */
+  // מזהי YouTube (11 תווים). עברית = he; en משמש אנגלית, ספרדית וצרפתית. ריק = הבלוק לא מוצג בשפות האלה.
+  var VIDEOS = { he: 'WJw5Fs7ixhk', en: '' };
+  function videoHTML() {
+    var id = LANG === 'he' ? VIDEOS.he : VIDEOS.en; // לא מציגים סרטון בשפה אחרת מהעמוד
+    if (!/^[\w-]{11}$/.test(id || '')) return '';
+    return '<section class="video"><h2>' + L('הסבר קצר בווידאו') + '</h2>' +
+      '<button type="button" class="video-play" data-yt="' + id + '" aria-label="' + L('הפעלת הסרטון') + '">' + icon('play') + '<span>' + L('הפעלת הסרטון') + '</span></button>' +
+      '<p class="small muted">' + L('ההפעלה טוענת את הנגן מיוטיוב. עד הלחיצה לא נשלח דבר.') + '</p></section>';
+  }
+
   /* ---------- איך זה עובד ---------- */
   function about() {
-    return '<article class="page"><p class="eyebrow">' + L('על האתר') + '</p><h1>' + L('איך זה עובד') + '</h1>' +
+    return '<article class="page"><p class="eyebrow">' + L('על האתר') + '</p><h1>' + L('איך זה עובד') + '</h1>' + videoHTML() +
       '<section><h2>' + L('המדריכים') + '</h2><p>' + L('כל מדריך נשען על מחקרים מכתבי עת רפואיים ועל הנחיות של גופים כמו ארגון הבריאות העולמי. לכל מספר יש קישור למקור, והמספרים נבדקו מול התקציר של המחקר. כשמחקר רק מראה קשר ולא מוכיח סיבה (מחקר תצפיתי), זה כתוב.') + '</p></section>' +
       '<section><h2>' + L('המחשבון') + '</h2><p>' + L('נקודת ההתחלה היא טבלת התמותה של ארגון הבריאות העולמי לפי מדינה, גיל ומין. כל גורם סיכון, למשל עישון, מתורגם ליחס סיכונים: מספר ממחקר גדול שאומר בכמה הגורם מכפיל או מקטין את הסיכון למות בכל גיל. ההשפעה נחלשת בגיל מבוגר. גורמים שקשורים זה לזה נספרים במשקל קטן יותר, כדי לא לספור אותו דבר פעמיים. התוצאה מוצגת כטווח, כי אף אחד לא יכול לדעת תאריך.') + '</p></section>' +
       '<section><h2>' + L('מגבלות המודל') + '</h2><ul class="notes">' + '<li>' + L('המודל מחבר ממצאים ממחקרים נפרדים, ואין מאחוריו מחקר אחד שנבדק מול נתוני אמת. הוא אינו מודל מאומת.') + '</li>' + '<li>' + L('גורמים שקשורים זה לזה, כמו משקל, סוכר ולחץ דם, משפיעים בחלקם על אותו דבר. הטיפול בכך הוא קירוב, והוא עלול להגזים או להמעיט, בעיקר אצל מי שיש לו הרבה גורמי סיכון.') + '</li>' + '<li>' + L('טבלת התמותה משקפת את התמותה של היום, ולא שיפורים עתידיים ברפואה. לכן ההערכה לצעירים כנראה שמרנית, כלומר נמוכה מדי.') + '</li>' + '<li>' + L('הטווח המוצג מראה כמה אנשים עם אותו פרופיל יכולים להיות שונים זה מזה. הוא לא מראה את אי-הוודאות של המודל עצמו.') + '</li>' + '<li>' + L('רוב המחקרים הם תצפיתיים: הם מראים קשר, ולא תמיד אפשר לדעת כמה ממנו הוא סיבה ותוצאה. לכן "כמה שנים תרוויח" הוא הערכה, לא הבטחה.') + '</li>' + '<li>' + L('חלק גדול מהמחקרים נערכו במדינות מערביות. המודל לא מכיר מחלות נדירות, גנטיקה או סיכונים חריפים, כלומר פתאומיים.') + '</li>' + '<li>' + L('בבדיקה ראשונית שערכנו על נתוני NHANES האמריקאיים (כ-23,500 מבוגרים, מעקב של 10 שנים) המודל הבחין היטב בין אנשים בסיכון גבוה לנמוך, אבל נטה לנבא בממוצע כ-15 עד 20 אחוז יותר מקרי מוות ממה שנצפה בפועל. לכן הוספנו כיול: היחס המשולב מוכפל ב-0.75, בהדרגה לפי מספר הגורמים שהוזנו (עד שני גורמים אין כיול, ומשמונה גורמים ומעלה הכיול מלא). הכיול נאמד באותם נתונים, ולכן אינו בדיקה בלתי תלויה; הוא לא נבדק על ידי אקטואר ולא נעשה על אוכלוסייה ישראלית. הוא מעלה את ההערכה בכ-0.5 עד 1 שנה למי שהזין ארבעה גורמים, ובכ-2 שנים למי שהזין הרבה, ולכן ההערכה המוחלטת פחות בטוחה מההשוואה בין הרגלים.') + '</li>' + '</ul></section>' +
@@ -415,4 +427,21 @@ var SiteRender = (function () {
   function run() { if (busy) return; busy = true; try { fix(document.body); } finally { busy = false; } }
   run();
   new MutationObserver(function () { if (!busy) { busy = true; setTimeout(function () { busy = false; run(); }, 0); } }).observe(document.body, { childList: true, subtree: true, characterData: true });
+})();
+
+// נגן וידאו: נטען מ-youtube-nocookie רק אחרי לחיצה
+(function () {
+  if (typeof document === 'undefined') return;
+  document.addEventListener('click', function (e) {
+    var b = e.target.closest && e.target.closest('.video-play');
+    if (!b) return;
+    var f = document.createElement('iframe');
+    f.src = 'https://www.youtube-nocookie.com/embed/' + b.getAttribute('data-yt') + '?autoplay=1&rel=0';
+    f.title = b.getAttribute('aria-label') || 'video';
+    f.allow = 'autoplay; encrypted-media; picture-in-picture; fullscreen';
+    f.setAttribute('allowfullscreen', '');
+    f.referrerPolicy = 'strict-origin-when-cross-origin'; // יוטיוב דורש מקור (Referer), אחרת שגיאה 153
+    f.className = 'video-frame';
+    b.parentNode.replaceChild(f, b);
+  });
 })();

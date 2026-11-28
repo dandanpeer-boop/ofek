@@ -2317,3 +2317,9 @@ Object.assign(I18N.fr, {
 "9am1on": "Qui l'a vérifié",
 "nhn76n": "Chaque chiffre a été vérifié par rapport au résumé ou au texte intégral de l'étude, et cela est indiqué à côté de chaque source. Aucun médecin ni actuaire ne l'a encore examiné. Pour un recoupement, nous avons aussi utilisé plusieurs modèles d'intelligence artificielle, ce qui ne remplace pas une relecture humaine."
 });
+
+Object.assign(I18N.fr, {
+"16kyi38": "Explication vidéo courte",
+"tpg37y": "Lancer la vidéo",
+"s0mrbx": "La lecture charge le lecteur depuis YouTube. Rien n'est envoyé avant le clic."
+});

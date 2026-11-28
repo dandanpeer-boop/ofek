@@ -2317,3 +2317,9 @@ Object.assign(I18N.es, {
 "9am1on": "Quién lo revisó",
 "nhn76n": "Cada número se comprobó con el resumen o el texto completo del estudio, y así se indica junto a cada fuente. Todavía no lo ha revisado ningún médico ni actuario. Para una comprobación cruzada también usamos varios modelos de inteligencia artificial, lo cual no sustituye una revisión humana."
 });
+
+Object.assign(I18N.es, {
+"16kyi38": "Explicación breve en vídeo",
+"tpg37y": "Reproducir el vídeo",
+"s0mrbx": "Al reproducir se carga el reproductor de YouTube. No se envía nada hasta que hagas clic."
+});

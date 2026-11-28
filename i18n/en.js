@@ -2319,3 +2319,9 @@ Object.assign(I18N.en, {
 "9am1on": "Who checked it",
 "nhn76n": "Every number was checked against the abstract or the full text of the study, and this is stated next to each source. No doctor or actuary has reviewed it yet. For cross-checking we also used several artificial intelligence models, which is not a substitute for human review."
 });
+
+Object.assign(I18N.en, {
+"16kyi38": "Short video explanation",
+"tpg37y": "Play the video",
+"s0mrbx": "Playing loads the player from YouTube. Nothing is sent until you click."
+});
